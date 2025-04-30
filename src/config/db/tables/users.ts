@@ -1,7 +1,7 @@
 import { relations } from "drizzle-orm";
-import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
+import { pgTable, text, uuid, boolean } from "drizzle-orm/pg-core";
 
-import { postsTable } from "./posts";
+import { userSkinTypeTable } from "./user_skin_type";
 
 export const usersTable = pgTable('users', {
   id: uuid('id').primaryKey().defaultRandom(),
@@ -9,14 +9,13 @@ export const usersTable = pgTable('users', {
   lastName: text('lastName').notNull(),
   email: text('email').notNull().unique(),
   password: text('password').notNull(),
-  createdAt: timestamp().defaultNow(),
-  deletedAt: timestamp()
+  isAdmin: boolean('isAdmin').default(false).notNull()
 })
 
 // Indicamos las relaciones de nuestra tabla users con otras tablas, en este caso:
 // one user -> many posts
 export const usersTableRelations = relations(usersTable, ({ many }) => ({
-  posts: many(postsTable)
+  userSkinType: many(userSkinTypeTable)
 }));
 
 export type User = typeof usersTable.$inferSelect;
