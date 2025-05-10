@@ -1,10 +1,10 @@
 import { relations } from "drizzle-orm";
-import { pgTable, text, uuid } from "drizzle-orm/pg-core";
+import { pgTable, text, serial } from "drizzle-orm/pg-core";
 
 import { userSkinTypeTable } from "./user_skin_type";
 
 export const skinTypeTable = pgTable('skinType', {
-  id: uuid('id').primaryKey().defaultRandom(),
+  id: serial('id').primaryKey(),
   Name: text('Name').notNull(),
 })
 

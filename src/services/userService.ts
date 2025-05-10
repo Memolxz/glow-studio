@@ -1,4 +1,4 @@
-import { eq, isNull } from "drizzle-orm";
+import { eq } from "drizzle-orm";
 
 import { db } from "../config/db/db";
 import { UserInsert, User, usersTable } from "../config/db/tables/users";
@@ -9,16 +9,16 @@ export class UserService {
       const users = await db
         .select()
         .from(usersTable)
-        .where(isNull(usersTable.deletedAt));
+        .where(eq(usersTable.isAdmin, false));
 
       return users;
     } catch (error) {
       console.error(error);
-      throw new Error("Error al obtener usuarios. Mira los logs para más información.")
+      throw new Error("Error al obtener usuarios.")
     }
   }
-
-  async getUserById(userId: string) {
+ 
+  async getUserById(userId: number) {
     try {
       const users = await db
         .select()
@@ -29,22 +29,6 @@ export class UserService {
     } catch (error) {
       console.error(error);
       throw new Error(`Error al obtener usuario con id ${userId}. Mira los logs para más información.`)
-    }
-  }
-
-  async getUserProfileById(userId: string) {
-    try {
-      const userWithPosts = await db.query.usersTable.findFirst({
-        where: (users, { eq }) => eq(users.id, userId),
-        with: {
-          posts: true
-        }
-      })
-
-      return userWithPosts;
-    } catch (error) {
-      console.error(error);
-      throw new Error(`Error al obtener perfil de usuario con id ${userId}. Mira los logs para más información.`)
     }
   }
 
@@ -78,12 +62,13 @@ export class UserService {
     }
   }
 
-  async deleteUser(userId: string) {
+  // cambiar
+  async deleteUser(userId: number) {
     try {
       const user = await db
         .update(usersTable)
         .set({
-          deletedAt: new Date()
+          // deletedAt: new Date() ---- no va
         })
         .where(eq(usersTable.id, userId))
         .returning()

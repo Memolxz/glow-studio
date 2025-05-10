@@ -1,11 +1,11 @@
 import { relations } from "drizzle-orm";
-import { pgTable, uuid, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, uuid as serial, timestamp } from "drizzle-orm/pg-core";
 
 import { usersTable } from "./users";
 
 export const userToDeleteTable = pgTable('userToDelete', {
-  id: uuid('id').primaryKey().defaultRandom(),
-  userId: uuid('userId').references(() => usersTable.id).notNull(),
+  id: serial('id').primaryKey(),
+  userId: serial('userId').references(() => usersTable.id).notNull(),
   addedDate: timestamp().defaultNow()
 })
 
