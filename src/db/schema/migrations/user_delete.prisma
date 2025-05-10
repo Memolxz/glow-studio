@@ -1,0 +1,5 @@
+model UserToDelete {
+    id: Int     @id @default(autoincrement())
+    userId: Int     @id @default(autoincrement())
+    addedDate: DateTime 
+}
