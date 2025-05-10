@@ -6,6 +6,8 @@ const userService = new UserService();
 
 export const userRouter = Router()
 
+// Chequear todo esto
+
 userRouter.get('/', async (_, res) => {
   try {
     const users = await userService.getAllUsers();
@@ -18,7 +20,7 @@ userRouter.get('/', async (_, res) => {
 userRouter.get('/:id', async (req, res) => {
   try {
     const userIdToGet = req.params.id;
-    const user = await userService.getUserProfileById(userIdToGet);
+    const user = await userService.getUserById(userIdToGet);
     res.status(200).json({ ok: true, data: user })
   } catch (error) {
     res.status(500).json({ ok: false, error: (error as any).message })
