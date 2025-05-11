@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../../../node_modules/.prisma/client"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model skinType {
+  id   Int @id @default(autoincrement())
+  Name String
+
+  userSkinType userSkinType[]
+}
+
+model userToDelete {
+  id        Int    @id @default(autoincrement())
+  userId    Int
+  addedDate DateTime @default(now()) @db.Timestamp(3)
+
+  users     users     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "userToDelete_userId_users_id_fk")
+}
+model userSkinType {
+  id         Int @id @default(autoincrement())
+  userId     Int
+  skinTypeId Int
+  
+  skinType   skinType @relation(fields: [skinTypeId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "userSkinType_skinTypeId_skinType_id_fk")
+  users      users  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "userSkinType_userId_users_id_fk")
+}
+
+model users {
+  id           Int         @id @default(autoincrement())
+  firstName    String
+  lastName     String
+  email        String         @unique(map: "users_email_unique")
+  password     String
+  isAdmin      Boolean        @default(false)
+  
+  userSkinType userSkinType[]
+  userToDelete userToDelete[]
+}

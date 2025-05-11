@@ -1,82 +1,114 @@
-import { eq } from "drizzle-orm";
+import { users } from "@prisma/client";
 
-import { db } from "../config/db/db";
-import { UserInsert, User, usersTable } from "../config/db/tables/users";
+import { db } from "../db/db";
+
+interface CreateUserBody {
+  firstName: string
+  lastName: string
+  email: string
+  password: string
+}
+
+  // revisar todo
 
 export class UserService {
   async getAllUsers() {
     try {
-      const users = await db
-        .select()
-        .from(usersTable)
-        .where(eq(usersTable.isAdmin, false));
+      const users = await db.users.findMany({
+      })
 
       return users;
     } catch (error) {
       console.error(error);
-      throw new Error("Error al obtener usuarios.")
+      throw new Error("Error al obtener usuarios. Mira los logs para más información.")
     }
   }
- 
+
   async getUserById(userId: number) {
     try {
-      const users = await db
-        .select()
-        .from(usersTable)
-        .where(eq(usersTable.id, userId));
+      const user = await db.users.findFirst({
+        where: {
+          id: userId,
+        }
+      })
 
-      return users[0];
+      if (!user) {
+        throw new Error(`No se encontró el usuario con id ${userId}`)
+      }
+
+      return user;
     } catch (error) {
       console.error(error);
       throw new Error(`Error al obtener usuario con id ${userId}. Mira los logs para más información.`)
     }
   }
 
-  async createUser(userToCreate: UserInsert) {
+  async createUser(body: CreateUserBody) {
     try {
-      const user = await db
-        .insert(usersTable)
-        .values(userToCreate)
-        .returning();
+      const user = await db.users.create({
+        data: body
+      })
 
       return user;
     } catch (error) {
-      console.error("Error creando usuario: ", userToCreate)
+      console.error("Error creando usuario: ", body)
       console.error(error);
       throw new Error("Error al crear usuario. Mira los logs para más información.")
     }
   }
 
-  async updateUser(userToModify: User) {
+  async updateUser(body: users) {
     try {
-      const users = await db
-        .update(usersTable)
-        .set(userToModify)
-        .returning()
 
-      return users[0]
+      const existingUser = await db.users.findFirst({
+        where: {
+          id: body.id,
+        }
+      })
+
+      if (!existingUser) {
+        throw new Error(`No se encontró el usuario con id ${body.id}`)
+      }
+
+      const updatedUser = await db.users.update({
+        where: { id: body.id},
+        data: body
+      })
+
+      return updatedUser
     } catch (error) {
-      console.error("Error actualizando usuario: ", userToModify)
+      console.error("Error actualizando usuario: ", body)
       console.error(error);
-      throw new Error(`Error al actualizar el usuario con id ${userToModify.id}. Mira los logs para más información.`)
+      throw new Error(`Error al actualizar el usuario con id ${body.id}. Mira los logs para más información.`)
     }
   }
 
-  // cambiar
-  async deleteUser(userId: number) {
-    try {
-      const user = await db
-        .update(usersTable)
-        .set({
-          // deletedAt: new Date() ---- no va
-        })
-        .where(eq(usersTable.id, userId))
-        .returning()
+ // tenemos q hacer esto aun
 
-      return user[0];
-    } catch (error) {
-      console.error(error);
-      throw new Error(`Error al eliminar el usuario con id ${userId}. Mira los logs para más información.`)
-    }
-  }
+  // async deleteUser(userId: string) {
+  //   try {
+  //     const existingUser = await db.post.findFirst({
+  //       where: {
+  //         id: userId,
+  //         deletedAt: null
+  //       }
+  //     })
+
+  //     if (!existingUser) {
+  //       throw new Error(`No se encontró el posteo con id ${userId}`)
+  //     }
+
+  //     const deletedUser = await db.post.update({
+  //       where: { id: userId },
+  //       data: {
+  //         deletedAt: new Date()
+  //       }
+  //     })
+
+  //     return deletedUser;
+  //   } catch (error) {
+  //     console.error(error);
+  //     throw new Error(`Error al eliminar el usuario con id ${userId}. Mira los logs para más información.`)
+  //   }
+  // }
 }

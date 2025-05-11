@@ -1,0 +1,11 @@
+// model users {
+//   id           Int         @id @default(autoincrement())
+//   firstName    String
+//   lastName     String
+//   email        String         @unique(map: "users_email_unique")
+//   password     String
+//   isAdmin      Boolean        @default(false)
+  
+//   userSkinType userSkinType[]
+//   userToDelete userToDelete[]
+// }
