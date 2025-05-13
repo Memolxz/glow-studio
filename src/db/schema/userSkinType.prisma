@@ -1,8 +1,8 @@
-// model userSkinType {
-//   id         Int @id @default(autoincrement())
-//   userId     Int
-//   skinTypeId Int
+model userSkinType {
+  id         Int @id @default(autoincrement())
+  userId     Int
+  skinTypeId Int
 
-//   skinType   skinType @relation(fields: [skinTypeId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "userSkinType_skinTypeId_skinType_id_fk")
-//   users      users  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "userSkinType_userId_users_id_fk")
-// }
+  skinType   skinType @relation(fields: [skinTypeId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "userSkinType_skinTypeId_skinType_id_fk")
+  users      users  @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "userSkinType_userId_users_id_fk")
+}

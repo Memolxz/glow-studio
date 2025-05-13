@@ -23,6 +23,6 @@
     "typescript": "^5.8.3"
   },
   "prisma": {
-    "schema": "src/db/schema/schema.prisma"
+    "schema": "src/db/schema"
   }
 }
