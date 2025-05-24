@@ -1,7 +1,0 @@
-model userToDelete {
-  id        Int    @id @default(autoincrement())
-  userId    Int
-  addedDate DateTime @default(now()) @db.Timestamp(3)
-
-  users     users     @relation(fields: [userId], references: [id], onDelete: NoAction, onUpdate: NoAction, map: "userToDelete_userId_users_id_fk")
-}

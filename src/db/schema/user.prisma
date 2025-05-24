@@ -5,7 +5,7 @@ model users {
   email        String         @unique(map: "users_email_unique")
   password     String
   isAdmin      Boolean        @default(false)
+  deletedAt DateTime?
   
   userSkinType userSkinType[]
-  userToDelete userToDelete[]
 }

@@ -1,82 +1,12 @@
 import { Router } from "express"
 
-import { UserService } from "../services/userService"
+import { getAllUsers, getUserById, createUser, updateUser, patchUser, deleteUser } from "../controllers/userController";
 
-const userService = new UserService();
+export const userRouter = Router();
 
-export const userRouter = Router()
-
-// Chequear todo esto
-
-userRouter.get('/', async (_, res) => {
-  try {
-    const users = await userService.getAllUsers();
-    res.status(200).json({ ok: true, data: users })
-  } catch (error) {
-    res.status(500).json({ ok: false, error: (error as any).message })
-  }
-})
-
-userRouter.get('/:id', async (req, res) => {
-  try {
-    const userIdToGet = parseInt(req.params.id);
-    const user = await userService.getUserById(userIdToGet);
-    res.status(200).json({ ok: true, data: user })
-  } catch (error) {
-    res.status(500).json({ ok: false, error: (error as any).message })
-  }
-})
-
-userRouter.post('/', async (req, res) => {
-  try {
-    const userFromRequest = req.body;
-    const userCreated = await userService.createUser(userFromRequest);
-    res.status(201).json({ ok: true, data: userCreated });
-  } catch (error) {
-    res.status(500).json({ ok: false, error: (error as any).message })
-  }
-})
-
-userRouter.put('/:id', async (req, res) => {
-  try {
-    const userIdToModify = req.params.id;
-    const userBody = req.body;
-
-    const userModified = await userService.updateUser({ id: userIdToModify, ...userBody });
-
-    res.status(200).json({ ok: true, data: userModified });
-  } catch (error) {
-    res.status(500).json({ ok: false, error: (error as any).message })
-  }
-})
-
-userRouter.patch('/:id', async (req, res) => {
-  try {
-    const userIdToModify = parseInt(req.params.id);
-    const userBody = req.body;
-
-    const fullUser = await userService.getUserById(userIdToModify);
-
-    // Primero desestructuro todo el fullUser, luego desestructuro los atributos que me
-    // hayan pasado en el body para sobrescribir los primeros
-    const fullUserBody = { ...fullUser, ...userBody }
-
-    const userModified = await userService.updateUser(fullUserBody);
-
-    res.status(200).json({ ok: true, data: userModified });
-  } catch (error) {
-    res.status(500).json({ ok: false, error: (error as any).message })
-  }
-})
-
-userRouter.delete('/:id', async (req, res) => {
-  try {
-    const userIdToDelete = parseInt(req.params.id);
-
-    //await userService.deleteUser(userIdToDelete)
-
-    res.status(200).json({ ok: true })
-  } catch (error) {
-    res.status(500).json({ ok: false, error: (error as any).message })
-  }
-})
+userRouter.get("/", getAllUsers);
+userRouter.get('/:id', getUserById);
+userRouter.post('/', createUser);
+userRouter.put('/:id', updateUser);
+userRouter.patch('/:id', patchUser);
+userRouter.delete('/:id', deleteUser);

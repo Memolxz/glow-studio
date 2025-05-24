@@ -9,12 +9,13 @@ interface CreateUserBody {
   password: string
 }
 
-  // revisar todo
-
 export class UserService {
   async getAllUsers() {
     try {
       const users = await db.users.findMany({
+        where: {
+          deletedAt: null
+        }
       })
 
       return users;
@@ -29,6 +30,7 @@ export class UserService {
       const user = await db.users.findFirst({
         where: {
           id: userId,
+          deletedAt: null
         }
       })
 
@@ -63,6 +65,7 @@ export class UserService {
       const existingUser = await db.users.findFirst({
         where: {
           id: body.id,
+          deletedAt: null
         }
       })
 
@@ -83,32 +86,47 @@ export class UserService {
     }
   }
 
- // tenemos q hacer esto aun
+  async deleteUser(userId: number) {
+    try {
+      const existingUser = await db.users.findFirst({
+        where: {
+          id: userId,
+          deletedAt: null
+        }
+      })
 
-  // async deleteUser(userId: string) {
-  //   try {
-  //     const existingUser = await db.post.findFirst({
-  //       where: {
-  //         id: userId,
-  //         deletedAt: null
-  //       }
-  //     })
+      if (!existingUser) {
+        throw new Error(`No se encontró el posteo con id ${userId}`)
+      }
 
-  //     if (!existingUser) {
-  //       throw new Error(`No se encontró el posteo con id ${userId}`)
-  //     }
 
-  //     const deletedUser = await db.post.update({
-  //       where: { id: userId },
-  //       data: {
-  //         deletedAt: new Date()
-  //       }
-  //     })
 
-  //     return deletedUser;
-  //   } catch (error) {
-  //     console.error(error);
-  //     throw new Error(`Error al eliminar el usuario con id ${userId}. Mira los logs para más información.`)
-  //   }
-  // }
+      const deletedUser = await db.users.update({
+        where: { id: userId },
+        data: {
+          deletedAt: new Date()
+        }
+      })
+
+      return deletedUser;
+    } catch (error) {
+      console.error(error);
+      throw new Error(`Error al eliminar el usuario con id ${userId}. Mira los logs para más información.`)
+    }
+  }
+
+  async getDeletedUsers() {
+    try {
+      const users = await db.users.findMany({
+        where: {
+          deletedAt: {not: null}
+        }
+      })
+
+      return users;
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error al obtener usuarios. Mira los logs para más información.")
+    }
+  }
 }
