@@ -19,7 +19,7 @@ userRouter.get('/', async (_, res) => {
 
 userRouter.get('/:id', async (req, res) => {
   try {
-    const userIdToGet = req.params.id;
+    const userIdToGet = parseInt(req.params.id);
     const user = await userService.getUserById(userIdToGet);
     res.status(200).json({ ok: true, data: user })
   } catch (error) {
@@ -52,7 +52,7 @@ userRouter.put('/:id', async (req, res) => {
 
 userRouter.patch('/:id', async (req, res) => {
   try {
-    const userIdToModify = req.params.id;
+    const userIdToModify = parseInt(req.params.id);
     const userBody = req.body;
 
     const fullUser = await userService.getUserById(userIdToModify);
@@ -71,9 +71,9 @@ userRouter.patch('/:id', async (req, res) => {
 
 userRouter.delete('/:id', async (req, res) => {
   try {
-    const userIdToDelete = req.params.id;
+    const userIdToDelete = parseInt(req.params.id);
 
-    await userService.deleteUser(userIdToDelete)
+    //await userService.deleteUser(userIdToDelete)
 
     res.status(200).json({ ok: true })
   } catch (error) {
