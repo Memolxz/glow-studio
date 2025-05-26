@@ -55,7 +55,6 @@ export class SkinTypeService {
 
   async updateSkinType(body: skinType) {
     try {
-
       const existingSkinType = await db.skinType.findFirst({
         where: {
           id: body.id,
@@ -78,4 +77,19 @@ export class SkinTypeService {
       throw new Error(`Error al actualizar el tipo de piel con id ${body.id}. Mira los logs para más información.`)
     }
   }
+
+  async deleteSkinType(skinTypeId: number) {
+    try {
+      const deletedSkinType = await db.skinType.delete({
+        where: {
+          id: skinTypeId
+        }
+      })
+
+      return deletedSkinType;
+    } catch (error) {
+      console.error(error);
+      throw new Error(`Error al eliminar el tipo de piel con id ${skinTypeId}. Mira los logs para más información.`)
+    }
+  } 
 }

@@ -96,7 +96,7 @@ export class UserService {
       })
 
       if (!existingUser) {
-        throw new Error(`No se encontró el posteo con id ${userId}`)
+        throw new Error(`No se encontró el usuario con id ${userId}`)
       }
 
 
@@ -128,5 +128,25 @@ export class UserService {
       console.error(error);
       throw new Error("Error al obtener usuarios. Mira los logs para más información.")
     }
+  }
+
+  async assignSkinType(userId: number, skinTypeId: number) {
+    return await db.userSkinType.create({
+      data: { userId, skinTypeId }
+    });
+  }
+
+  async removeSkinType(userId: number, skinTypeId: number) {
+    return await db.userSkinType.deleteMany({
+      where: { userId, skinTypeId }
+    });
+  }
+
+  async getUserSkinTypes(userId: number) {
+    return await db.userSkinType.findMany({
+      where: { userId }
+      // include: { skinType: true }
+    });
+    //  return relations.map(rel => rel.skinType);
   }
 }
