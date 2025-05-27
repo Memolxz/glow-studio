@@ -1,3 +1,21 @@
+## Para correr el proyecto
+Para instalar las dependencias
+```
+pnpm install
+```
+Para traspilar el código a js
+```
+pnpm run build
+```
+Para levantar la API
+```
+pnpm run start
+```
+Para correr el proyecto en modo de desarrollo (ver log)
+```
+pnpm run serve
+```
+
 ## 🛠️ Comandos
 Comandos basicos de git\
 ```
@@ -8,10 +26,6 @@ git commit -m "mensaje"
 ```
 ```
 git push
-```
-Para instalar las dependencias:
-```
-pnpm install
 ```
 Comandos de Prisma
 ```
