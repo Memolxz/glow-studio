@@ -15,6 +15,10 @@ Para correr el proyecto en modo de desarrollo (ver log)
 ```
 pnpm run serve
 ```
+Para eliminar la carpeta dist (corte cuando terminas d correr el coso)
+```
+pnpm run clean
+```
 
 ## 🛠️ Comandos
 Comandos basicos de git\
