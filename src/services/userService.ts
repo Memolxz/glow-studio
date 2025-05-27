@@ -3,8 +3,7 @@ import { users } from "@prisma/client";
 import { db } from "../db/db";
 
 interface CreateUserBody {
-  firstName: string
-  lastName: string
+  name: string
   email: string
   password: string
 }
@@ -42,6 +41,26 @@ export class UserService {
     } catch (error) {
       console.error(error);
       throw new Error(`Error al obtener usuario con id ${userId}. Mira los logs para más información.`)
+    }
+  }
+
+  async getUserByEmail(email: string) {
+    try {
+      const user = await db.users.findFirst({
+        where: {
+          email,
+          deletedAt: null
+        }
+      })
+
+      if (!user) {
+        throw new Error(`No se encontró el usuario con email ${email}`)
+      }
+
+      return user;
+    } catch (error) {
+      console.error(error);
+      throw new Error(`Error al obtener usuario con email ${email}. Mira los logs para más información.`)
     }
   }
 
