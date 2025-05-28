@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 
-import { SkinTypeService } from "../services/skinTypeService";
+import { SkinTypeService } from "../services/skintype-service";
+import { UserService } from "../services/user-service";
 
 const skinTypeService = new SkinTypeService();
 
@@ -17,6 +18,19 @@ export const getSkinTypeById = async (req: Request, res: Response) => {
   try {
     const skinTypeIdToGet = parseInt(req.params.id);
     const skinType = await skinTypeService.getSkinTypeById(skinTypeIdToGet);
+    res.status(200).json({ ok: true, data: skinType });
+  } catch (error) {
+    res.status(500).json({ ok: false, error: (error as any).message });
+  }
+};
+
+export const addSkintype = async (req: Request, res: Response) => {
+  try {
+    const userIdToGet = parseInt(req.params.id);
+    const skinTypeIdToGet = parseInt(req.params.id);
+    const user = await UserService.addSkintype(userIdToGet, skinTypeIdToGet);
+    const skinType = await skinTypeService.getSkinTypeById(skinTypeIdToGet);
+    res.status(200).json({ ok: true, data: user });
     res.status(200).json({ ok: true, data: skinType });
   } catch (error) {
     res.status(500).json({ ok: false, error: (error as any).message });

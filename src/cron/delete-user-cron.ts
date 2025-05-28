@@ -1,5 +1,5 @@
 import cron from 'node-cron';
-import { deleteUsers } from '../services/userDelete';
+import { deleteUsers } from '../services/user-delete-service';
 
 // check this one out aswell
 

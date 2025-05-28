@@ -64,6 +64,19 @@ export class UserService {
     }
   }
 
+  async addSkintype(userId: number, skinTypeId: number) {
+    try {
+      const userSkinType = await db.userSkinType.create({
+        data: { userId, skinTypeId }
+      })
+
+      return userSkinType;
+    } catch (error) {
+      console.error(error);
+      throw new Error('')
+    }
+  }
+
   async createUser(body: CreateUserBody) {
     try {
       const user = await db.users.create({

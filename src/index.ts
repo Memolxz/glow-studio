@@ -2,12 +2,11 @@ import "dotenv/config"
 
 import express from 'express';
 
-import { userRouter } from './routers/userRouter';
+import { userRouter } from './routers/user-router';
 // import { userSkinTypeRouter } from './routers/userSkinTypeRouter';
 import { skinTypeRouter } from './routers/skinTypeRouter';
 import { registerRouter } from './routers/registerRouter';
 import loginRouter from './routers/login-router';
-
 const app = express()
 
 app.use(express.json())
