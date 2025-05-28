@@ -66,3 +66,15 @@ export const deleteUser = async (req: Request, res: Response) => {
     res.status(500).json({ ok: false, error: (error as any).message })
   }
 }
+
+export const restoreUser = async (req: Request, res: Response) => {
+  try {
+    const userIdToRestore = parseInt(req.params.id);
+    
+    await userService.restoreUser(userIdToRestore)
+    
+    res.status(200).json({ ok: true })
+  } catch (error) {
+    res.status(500).json({ ok: false, error: (error as any).message })
+  }
+}

@@ -1,6 +1,6 @@
 import { Router } from "express"
 
-import { getAllUsers, getUserById, updateUser, patchUser, deleteUser } from "../controllers/user-controller";
+import { getAllUsers, getUserById, updateUser, patchUser, deleteUser, restoreUser } from "../controllers/user-controller";
 
 export const userRouter = Router();
 
@@ -9,3 +9,4 @@ userRouter.get('/:id', getUserById);
 userRouter.put('/:id', updateUser);
 userRouter.patch('/:id', patchUser);
 userRouter.delete('/:id', deleteUser);
+userRouter.post('/restore/:id', restoreUser);

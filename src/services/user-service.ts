@@ -20,7 +20,7 @@ export class UserService {
       return users;
     } catch (error) {
       console.error(error);
-      throw new Error("Error al obtener usuarios. Mira los logs para más información.")
+      throw new Error("Error al obtener usuarios")
     }
   }
 
@@ -34,13 +34,13 @@ export class UserService {
       })
 
       if (!user) {
-        throw new Error(`No se encontró el usuario con id ${userId}`)
+        throw new Error(`usuario no existe`)
       }
 
       return user;
     } catch (error) {
       console.error(error);
-      throw new Error(`Error al obtener usuario con id ${userId}. Mira los logs para más información.`)
+      throw new Error(`Error al obtener usuario`)
     }
   }
 
@@ -54,13 +54,13 @@ export class UserService {
       })
 
       if (!user) {
-        throw new Error(`No se encontró el usuario con email ${email}`)
+        throw new Error(`usuario no existe`)
       }
 
       return user;
     } catch (error) {
       console.error(error);
-      throw new Error(`Error al obtener usuario con email ${email}. Mira los logs para más información.`)
+      throw new Error(`Error al obtener usuario`)
     }
   }
 
@@ -85,9 +85,9 @@ export class UserService {
 
       return user;
     } catch (error) {
-      console.error("Error creando usuario: ", body)
+      console.error("Error al crear usuario: ", body)
       console.error(error);
-      throw new Error("Error al crear usuario. Mira los logs para más información.")
+      throw new Error("Error al crear usuario")
     }
   }
 
@@ -102,7 +102,7 @@ export class UserService {
       })
 
       if (!existingUser) {
-        throw new Error(`No se encontró el usuario con id ${body.id}`)
+        throw new Error(`usuario no existe`)
       }
 
       const updatedUser = await db.users.update({
@@ -114,7 +114,7 @@ export class UserService {
     } catch (error) {
       console.error("Error actualizando usuario: ", body)
       console.error(error);
-      throw new Error(`Error al actualizar el usuario con id ${body.id}. Mira los logs para más información.`)
+      throw new Error(`Error al actualizar el usuario`)
     }
   }
 
@@ -128,7 +128,7 @@ export class UserService {
       })
 
       if (!existingUser) {
-        throw new Error(`No se encontró el usuario con id ${userId}`)
+        throw new Error(`usuario no existe`)
       }
 
 
@@ -143,22 +143,31 @@ export class UserService {
       return deletedUser;
     } catch (error) {
       console.error(error);
-      throw new Error(`Error al eliminar el usuario con id ${userId}. Mira los logs para más información.`)
+      throw new Error(`Error al eliminar el usuario`)
     }
   }
 
-  async getDeletedUsers() {
+  async restoreUser(userId: number) {
     try {
-      const users = await db.users.findMany({
+      const deletedUser = await db.users.findFirst({
         where: {
           deletedAt: {not: null}
         }
-      })
+      });
 
-      return users;
+      if (!deletedUser) {
+        throw new Error(`usuario eliminado no existe`);
+      }
+
+      return await db.users.update({
+        where: { id: userId },
+        data: { 
+          deletedAt: null 
+        },
+      });
     } catch (error) {
       console.error(error);
-      throw new Error("Error al obtener usuarios. Mira los logs para más información.")
+      throw new Error(`Error al restaurar el usuario`);
     }
   }
 
@@ -176,8 +185,8 @@ export class UserService {
 
   async getUserSkinTypes(userId: number) {
     return await db.userSkinType.findMany({
-      where: { userId }
-      // include: { skinType: true }
+      where: { userId },
+      //include: { skinType: true }
     });
     //  return relations.map(rel => rel.skinType);
   }
