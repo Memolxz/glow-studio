@@ -4,8 +4,8 @@ import express from 'express';
 
 import { userRouter } from './routers/user-router';
 // import { userSkinTypeRouter } from './routers/userSkinTypeRouter';
-import { skinTypeRouter } from './routers/skinTypeRouter';
-import { registerRouter } from './routers/registerRouter';
+import { skinTypeRouter } from './routers/skintype-router';
+import { registerRouter } from './routers/register-router';
 import loginRouter from './routers/login-router';
 const app = express()
 

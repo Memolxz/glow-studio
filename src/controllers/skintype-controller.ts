@@ -4,6 +4,7 @@ import { SkinTypeService } from "../services/skintype-service";
 import { UserService } from "../services/user-service";
 
 const skinTypeService = new SkinTypeService();
+const userService = new UserService();
 
 export const getAllSkinTypes = async (_: Request, res: Response) => {
   try {
@@ -28,7 +29,7 @@ export const addSkintype = async (req: Request, res: Response) => {
   try {
     const userIdToGet = parseInt(req.params.id);
     const skinTypeIdToGet = parseInt(req.params.id);
-    const user = await UserService.addSkintype(userIdToGet, skinTypeIdToGet);
+    const user = await userService.addSkintype(userIdToGet, skinTypeIdToGet);
     const skinType = await skinTypeService.getSkinTypeById(skinTypeIdToGet);
     res.status(200).json({ ok: true, data: user });
     res.status(200).json({ ok: true, data: skinType });
