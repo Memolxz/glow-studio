@@ -4,7 +4,8 @@
   "description": "Projecto API web para la materia Practicas Profecionalizantes",
   "main": "index.js",
   "scripts": {
-    "serve": "concurrently \"pnpm tsc -w\" \"node --watch dist/index.js\"",
+    "serve": "pnpm tsc -w",
+    "serveeee": "concurrently \"pnpm tsc -w\" \"node --watch dist/index.js\"",
     "build": "rimraf dist && pnpm tsc",
     "start": "node dist/index.js",
     "clean": "rimraf dist", 

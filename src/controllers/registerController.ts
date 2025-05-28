@@ -8,8 +8,8 @@ export const createUser = async (req: Request, res: Response) => {
   try {
     const userFromRequest = req.body;
     const userCreated = await userService.createUser(userFromRequest);
-    res.status(201).json({ ok: true, data: userCreated });
+    res.status(201).json({ data: userCreated });
   } catch (error) {
-    res.status(500).json({ ok: false, error: (error as any).message })
+    res.status(500).json({ error: (error as any).message })
   }
 }

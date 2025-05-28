@@ -1,0 +1,6 @@
+- middleware con express (chequear q es)
+- hacer q el login me devuelva el id qcy
+- hacer un restore users (corte eliminar el deletedAt)
+- hacer un get users by name o mail o alg corte para lo d restore 
+  (caso real q le pidan al admin q restores y el admin pueda ver la/s acc borradas)
+-

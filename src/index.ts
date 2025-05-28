@@ -6,6 +6,7 @@ import { userRouter } from './routers/userRouter';
 // import { userSkinTypeRouter } from './routers/userSkinTypeRouter';
 import { skinTypeRouter } from './routers/skinTypeRouter';
 import { registerRouter } from './routers/registerRouter';
+import loginRouter from './routers/login-router';
 
 const app = express()
 
@@ -14,6 +15,7 @@ app.use(express.json())
 app.use('/users', userRouter)
 app.use('/skinType', skinTypeRouter)
 app.use('/register', registerRouter)
+app.use('/login', loginRouter)
 
 // app.use('/userSkinType', userSkinTypeRouter)
 
