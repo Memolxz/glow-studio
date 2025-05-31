@@ -1,6 +1,20 @@
 - middleware con express (chequear q es)
-- hacer q el login me devuelva el id qcy
-- hacer un restore users (corte eliminar el deletedAt)
 - hacer un get users by name o mail o alg corte para lo d restore 
   (caso real q le pidan al admin q restores y el admin pueda ver la/s acc borradas)
--
+  - corte hacer un especie d get deleted usrs xq tdos los get q tenemos solo devuelven los no deleted
+- crear tabla relacion skin y ingredientes good good
+- hacer q el login me devuelva el id qcy
+
+
+
+
+- 1 sola pag d login (en ambas c logguean los admin y usrs)
+  - como solo se puede usar 1 mail x cuenta, la pag ya sabe q es admin
+  - dsp el front end c encarga d mostrar cada cosa x cuenta
+  - en admin tenes un boton para crear usr y crear admins
+    - esto no esta en usrs
+  - tdo c encarga el front end
+  - tener ya un admin en la db (corte hard coded)
+
+- iconos para el front
+  - https://lucide.dev/

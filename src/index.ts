@@ -5,13 +5,13 @@ import express from 'express';
 import { userRouter } from './routers/user-router';
 import { skinTypeRouter } from './routers/skintype-router';
 import { registerRouter } from './routers/register-router';
-import loginRouter from './routers/login-router';
+import { loginRouter } from './routers/login-router';
 const app = express()
 
 app.use(express.json())
 
 app.use('/users', userRouter)
-app.use('/skinType', skinTypeRouter)
+app.use('/skintype', skinTypeRouter)
 app.use('/register', registerRouter)
 app.use('/login', loginRouter)
 

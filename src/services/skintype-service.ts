@@ -3,7 +3,6 @@ import { skinType } from "@prisma/client";
 import { db } from "../db/db";
 
 interface CreateSkinTypeBody {
-  id: number
   name: string
 }
 

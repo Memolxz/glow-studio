@@ -4,3 +4,4 @@ cosas_a_ignorar
 
 .env
 .vscode/
+dist/

@@ -1,12 +1,12 @@
 import { Router } from "express"
 
-import { getAllUsers, getUserById, updateUser, patchUser, deleteUser, restoreUser } from "../controllers/user-controller";
+import { getAllUsers, getUserByEmail, updateUser, patchUser, deleteUser, restoreUser } from "../controllers/user-controller";
 
 export const userRouter = Router();
 
 userRouter.get("/", getAllUsers);
-userRouter.get('/:id', getUserById);
+userRouter.get('/:mail', getUserByEmail);
 userRouter.put('/:id', updateUser);
 userRouter.patch('/:id', patchUser);
 userRouter.delete('/:id', deleteUser);
-userRouter.post('/restore/:id', restoreUser);
+userRouter.patch('/restore/:id', restoreUser);

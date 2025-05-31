@@ -13,10 +13,10 @@ export const getAllUsers = async (_: Request, res: Response) => {
   }
 };
 
-export const getUserById = async (req: Request, res: Response) => {
+export const getUserByEmail = async (req: Request, res: Response) => {
   try {
-    const userIdToGet = parseInt(req.params.id);
-    const user = await userService.getUserById(userIdToGet);
+    const userMailToGet = req.params.mail;
+    const user = await userService.getUserByEmail(userMailToGet);
     res.status(200).json({ ok: true, data: user })
   } catch (error) {
     res.status(500).json({ ok: false, error: (error as any).message })

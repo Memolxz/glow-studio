@@ -15,16 +15,6 @@ export const getAllSkinTypes = async (_: Request, res: Response) => {
   }
 };
 
-export const getSkinTypeById = async (req: Request, res: Response) => {
-  try {
-    const skinTypeIdToGet = parseInt(req.params.id);
-    const skinType = await skinTypeService.getSkinTypeById(skinTypeIdToGet);
-    res.status(200).json({ ok: true, data: skinType });
-  } catch (error) {
-    res.status(500).json({ ok: false, error: (error as any).message });
-  }
-};
-
 export const addSkintype = async (req: Request, res: Response) => {
   try {
     const userIdToGet = parseInt(req.params.id);
