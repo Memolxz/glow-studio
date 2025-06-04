@@ -1,4 +1,5 @@
 import { users } from "@prisma/client";
+import { hash, compare } from 'bcrypt'
 
 import { db } from "../db/db";
 
@@ -80,7 +81,10 @@ export class UserService {
   async createUser(body: CreateUserBody) {
     try {
       const user = await db.users.create({
-        data: body
+        data: {
+          ...body,
+          password: await hash(body.password, 10)
+        }
       })
 
       return user;
@@ -189,5 +193,19 @@ export class UserService {
       include: { skinType: true }
     });
     return relations.map(rel => rel.skinType);
+  }
+
+  async checkPassword(email: string, passwordToCheck: string){
+    try{
+      const usuario = await this.getUserByEmail(email);
+      const isPassword = await compare(passwordToCheck, usuario.password); 
+
+      
+      return isPassword; 
+    }
+    catch(error){
+      console.error(error);
+      throw new Error(`Error al chequear contrasenia`);
+    }
   }
 }

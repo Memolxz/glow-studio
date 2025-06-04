@@ -14,7 +14,7 @@
 
 - IMPLEMENTAR LO D JSON WEB TOKEN
 
-
+- meter lo de controllers a router
 
 - 1 sola pag d login (en ambas c logguean los admin y usrs)
   - como solo se puede usar 1 mail x cuenta, la pag ya sabe q es admin

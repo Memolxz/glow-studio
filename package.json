@@ -4,11 +4,10 @@
   "description": "Projecto API web para la materia Practicas Profecionalizantes",
   "main": "index.js",
   "scripts": {
-    "serve": "pnpm tsc -w",
-    "serveeee": "concurrently \"pnpm tsc -w\" \"node --watch dist/index.js\"",
     "build": "rimraf dist && pnpm tsc",
     "start": "node dist/index.js",
-    "clean": "rimraf dist", 
+    "clean": "rimraf dist",
+    "dev": "tsx --watch src/index.ts",
     "db:migrate": "prisma migrate dev --schema src/db/schema",
     "db:generate": "prisma generate --no-engine --schema src/db/schema"
   },
@@ -24,11 +23,13 @@
   "private": true,
   "dependencies": {
     "@prisma/client": "^6.7.0",
+    "bcrypt": "^6.0.0",
     "dotenv": "^16.5.0",
     "express": "5.1.0",
     "node-cron": "^4.0.7"
   },
   "devDependencies": {
+    "@types/bcrypt": "^5.0.2",
     "@types/express": "^5.0.1",
     "@types/node": "^22.14.0",
     "concurrently": "^9.1.2",
