@@ -2,9 +2,17 @@
 - hacer un get users by name o mail o alg corte para lo d restore 
   (caso real q le pidan al admin q restores y el admin pueda ver la/s acc borradas)
   - corte hacer un especie d get deleted usrs xq tdos los get q tenemos solo devuelven los no deleted
-- crear tabla relacion skin y ingredientes good good
 - hacer q el login me devuelva el id qcy
 
+
+- crear tabla relacion skin y ingredientes good good
+- corte crear una tabla ingredientes y otra con la relacion entre skintype y los ingredientes buenos
+
+
+-un service (user probablemente) meter un get recomendations
+
+
+- IMPLEMENTAR LO D JSON WEB TOKEN
 
 
 

@@ -78,3 +78,27 @@ export const restoreUser = async (req: Request, res: Response) => {
     res.status(500).json({ ok: false, error: (error as any).message })
   }
 }
+
+export const addSkintype = async (req: Request, res: Response) => {
+  try {
+    const userIdToGet = parseInt(req.params.id);
+    const skinTypeIdToGet = parseInt(req.params.id);
+
+    await userService.addSkintype(userIdToGet, skinTypeIdToGet);
+
+    res.status(200).json({ ok: true });
+    res.status(200).json({ ok: true });
+  } catch (error) {
+    res.status(500).json({ ok: false, error: (error as any).message });
+  }
+};
+
+export const getUserSkinTypes = async (req: Request, res: Response) => {
+  try {
+    const userIdToGet = parseInt(req.params.id);
+    const user = await userService.getUserSkinTypes(userIdToGet);
+    res.status(200).json({ ok: true, data: user })
+  } catch (error) {
+    res.status(500).json({ ok: false, error: (error as any).message })
+  }
+};
