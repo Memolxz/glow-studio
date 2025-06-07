@@ -94,7 +94,7 @@ userRouter.post('/skintype/:id', async (req: Request, res: Response) => {
     const userIdToGet = parseInt(req.params.id);
     const skintypeId = req.body
 
-    await userService.addSkintype(userIdToGet, skintypeId);
+    await userService.assignSkinType(userIdToGet, skintypeId);
 
     res.status(200).json({ ok: true });
     res.status(200).json({ ok: true });

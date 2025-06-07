@@ -85,7 +85,7 @@ export class UserService {
     }
   }
 
-  async addSkintype(userId: number, skinTypeId: number) {
+  async assignSkinType(userId: number, skinTypeId: number) {
     try {
       const userSkinType = await db.userSkinType.create({
         data: { userId, skinTypeId }
@@ -100,6 +100,14 @@ export class UserService {
 
   async createUser(body: CreateUserBody) {
     try {
+      const existingUser = await db.users.findUnique({
+        where: { email: body.email }
+        });
+
+      if (existingUser) {
+        throw new Error(`usuario ya esta registrado`)
+      }
+
       const user = await db.users.create({
         data: {
           ...body,
@@ -195,16 +203,18 @@ export class UserService {
     }
   }
 
-  async assignSkinType(userId: number, skinTypeId: number) {
-    return await db.userSkinType.create({
-      data: { userId, skinTypeId }
-    });
-  }
-
   async removeSkinType(userId: number, skinTypeId: number) {
-    return await db.userSkinType.deleteMany({
-      where: { userId, skinTypeId }
-    });
+    try{
+      const removedSkinType = await db.userSkinType.deleteMany({
+        where: { userId, skinTypeId }
+      });
+
+      return removedSkinType;
+    }
+    catch(error){
+      console.error(error);
+      throw new Error(`Error al eliminar descartar tipo de piel`);
+    }
   }
 
   async getUserSkinTypes(userId: number) {
@@ -213,19 +223,5 @@ export class UserService {
       include: { skinType: true }
     });
     return relations.map(rel => rel.skinType);
-  }
-
-  async checkPassword(email: string, passwordToCheck: string){
-    try{
-      const usuario = await this.getUserByEmail(email);
-      const isPassword = await compare(passwordToCheck, usuario.password); 
-
-      
-      return isPassword; 
-    }
-    catch(error){
-      console.error(error);
-      throw new Error(`Error al chequear contrasenia`);
-    }
   }
 }

@@ -1,6 +1,8 @@
-- middleware con express (chequear q es)
+- middleware con express (para autenticacion, corte a q rutas podes acceder)
 
-- hacer q el login me devuelva un id qcy
+- chequear bien lo de los tokens
+  - expiration
+  - refresh tokens
 
 -un reccomendation servicemeter un get recomendations
 
