@@ -1,7 +1,6 @@
-model skinType {
+model ingredients {
   id   Int @id @default(autoincrement())
   name String
 
-  userSkinType userSkinType[]
   ingredientEffect ingredientEffect[]
 }

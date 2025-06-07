@@ -1,0 +1,15 @@
+model ingredientEffect {
+  ingredientId Int
+  skinTypeId Int
+  Effect Effects
+
+  @@id([ingredientId, skinTypeId])
+
+  ingredients ingredients @relation(fields: [ingredientId], references: [id])
+  skinType skinType @relation(fields: [skinTypeId], references: [id])
+}
+
+enum Effects {
+  GOOD
+  BAD
+}

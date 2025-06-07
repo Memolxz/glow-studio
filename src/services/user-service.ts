@@ -65,6 +65,26 @@ export class UserService {
     }
   }
 
+  async getDeletedUser(email: string) {
+    try {
+      const user = await db.users.findFirst({
+        where: {
+          email,
+          deletedAt: {not: null}
+        }
+      })
+
+      if (!user) {
+        throw new Error(`usuario no existe`)
+      }
+
+      return user;
+    } catch (error) {
+      console.error(error);
+      throw new Error(`Error al obtener usuario`)
+    }
+  }
+
   async addSkintype(userId: number, skinTypeId: number) {
     try {
       const userSkinType = await db.userSkinType.create({

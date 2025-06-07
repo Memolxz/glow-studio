@@ -25,6 +25,16 @@ userRouter.get('/:mail', async (req: Request, res: Response) => {
   }
 });
 
+userRouter.get('/deleted/:mail', async (req: Request, res: Response) => {
+  try {
+    const userMailToGet = req.params.mail;
+    const user = await userService.getDeletedUser(userMailToGet);
+    res.status(200).json({ ok: true, data: user })
+  } catch (error) {
+    res.status(500).json({ ok: false, error: (error as any).message })
+  }
+});
+
 userRouter.put('/:id', async (req: Request, res: Response) => {
   try {
     const userIdToModify = req.params.id;

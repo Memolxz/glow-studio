@@ -1,20 +1,12 @@
 - middleware con express (chequear q es)
-- hacer un get users by name o mail o alg corte para lo d restore 
-  (caso real q le pidan al admin q restores y el admin pueda ver la/s acc borradas)
-  - corte hacer un especie d get deleted usrs xq tdos los get q tenemos solo devuelven los no deleted
-- hacer q el login me devuelva el id qcy
 
+- hacer q el login me devuelva un id qcy
 
-- crear tabla relacion skin y ingredientes good good
-- corte crear una tabla ingredientes y otra con la relacion entre skintype y los ingredientes buenos
-
-
--un service (user probablemente) meter un get recomendations
+-un reccomendation servicemeter un get recomendations
 
 
 - IMPLEMENTAR LO D JSON WEB TOKEN
 
-- meter lo de controllers a router
 
 - 1 sola pag d login (en ambas c logguean los admin y usrs)
   - como solo se puede usar 1 mail x cuenta, la pag ya sabe q es admin
