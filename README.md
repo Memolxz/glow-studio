@@ -1,43 +1,11 @@
-## Para correr el proyecto
-Para instalar las dependencias
-```
-pnpm install
-```
-Para traspilar el código a js
-```
-pnpm run build
-```
-Para levantar la API
-```
-pnpm run start
-```
-Para correr el proyecto en modo de desarrollo (ver log)
-```
-pnpm run serve
-```
-Para eliminar la carpeta dist (corte cuando terminas d correr el coso)
-```
-pnpm run clean
-```
+## 🛠️ Proyecto en proceso
+Glow studio es un proyecto de desarrollo de una aplicación web que permite a los usuarios realizar consultas para obtener recomendaciones de productos de skin care de a cuerdo a sus condiciones de piel.
+La informacion del usuario se almacena en una base de datos (dentro de su cuenta), y este es capaz de iniciar sesion cuanto necesite y volver a ver sus recomendaciones.
 
-## 🛠️ Comandos
-Comandos basicos de git\
-```
-git add .
-```
-```
-git commit -m "mensaje"
-```
-```
-git push
-```
-Comandos de Prisma
-```
-pnpm prisma generate
-```
-```
-pnpm prisma migrate dev --name nombre-de-migracion
-```
-```
-pnpm prisma migrate status
-```
+## Tecnologías
+- Node.js
+- Express
+- Prisma
+- PostgreSQL
+- TypeScript
+- JWS
