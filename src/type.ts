@@ -1,4 +1,5 @@
 import { users } from "@prisma/client";
+import { Request } from 'express';
 
 declare global {
   namespace NodeJS {
@@ -10,7 +11,15 @@ declare global {
   }
   namespace Express {
     interface Request {
-      user?: Pick<users, 'id' | 'email'>
+      user?: Pick<users, 'id' | 'email' | 'isAdmin'>
     }
   }
+}
+
+export interface AuthenticatedRequest extends Request {
+  user: Pick<users, 'id' | 'email' | 'isAdmin'>;
+}
+
+export interface ErrorWithMessage {
+  message: string;
 }

@@ -7,4 +7,5 @@ model users {
   deletedAt DateTime?
   
   userSkinType userSkinType[]
+  recommendations recommendation[]
 }

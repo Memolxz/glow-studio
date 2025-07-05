@@ -29,5 +29,4 @@ export class AuthService {
       throw new Error(`error al autenticar`);
     }
   }
-  
 }

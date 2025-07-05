@@ -76,7 +76,6 @@ IngredientEffect
 model ProductCategory {
   id Int @id @default(autoincrement())
   name String // "serums", "cremas", "limpieza facial", etc.
-  description String?
   products Product[]
 }
 
@@ -85,12 +84,10 @@ model Product {
   name String
   brand String
   description String
-  usage_instructions String
   official_url String
   image_url String?
   price Decimal?
   categoryId Int
-  active Boolean @default(true)
   
   category ProductCategory @relation(fields: [categoryId], references: [id])
   productIngredients ProductIngredient[]
@@ -100,7 +97,6 @@ model Product {
 model ProductIngredient {
   productId Int
   ingredientId Int
-  concentration Decimal?
   
   product Product @relation(fields: [productId], references: [id])
   ingredient Ingredient @relation(fields: [ingredientId], references: [id])
@@ -113,7 +109,6 @@ model Recommendation {
   userId Int
   productId Int
   reason String // Why this product was recommended
-  confidence_score Decimal? // Algorithm confidence (0-1)
   created_at DateTime @default(now())
   
   user User @relation(fields: [userId], references: [id])

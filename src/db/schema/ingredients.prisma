@@ -3,4 +3,5 @@ model ingredients {
   name String
 
   ingredientEffect ingredientEffect[]
+  productIngredient productIngredient[]
 }

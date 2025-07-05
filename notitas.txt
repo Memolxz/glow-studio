@@ -1,13 +1,10 @@
-- middleware con express (para autenticacion, corte a q rutas podes acceder)
+-husky
 
 - chequear bien lo de los tokens
   - expiration
   - refresh tokens
 
 -un reccomendation servicemeter un get recomendations
-
-
-- IMPLEMENTAR LO D JSON WEB TOKEN
 
 
 - 1 sola pag d login (en ambas c logguean los admin y usrs)

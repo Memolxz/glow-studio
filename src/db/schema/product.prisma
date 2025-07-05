@@ -1,0 +1,48 @@
+enum productCategoryType {
+  SERUM
+  CREAM
+  CLEANSER
+  TONER
+  SUNSCREEN
+  MASK
+  MOISTURIZER
+  EXFOLIANT
+  ESSENCE
+  TREATMENT
+}
+
+model productCategory {
+  id          Int       @id @default(autoincrement())
+  name        productCategoryType    @unique
+  products    product[]
+}
+
+model product {
+  id                 Int                 @id @default(autoincrement())
+  name               String
+  brand              String
+  description        String
+  officialUrl        String
+  imageUrl           String?
+  price              Decimal?
+  categoryId         Int
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  
+  category           productCategory     @relation(fields: [categoryId], references: [id])
+  productIngredients productIngredient[]
+  recommendations    recommendation[]
+
+  @@index([categoryId])
+}
+
+model productIngredient {
+  productId     Int
+  ingredientId  Int
+  
+  product    product    @relation(fields: [productId], references: [id])
+  ingredient ingredients @relation(fields: [ingredientId], references: [id])
+  
+  @@id([productId, ingredientId])
+  @@index([ingredientId])
+} 
