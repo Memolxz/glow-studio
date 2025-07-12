@@ -1,4 +1,4 @@
-import { skinType } from "@prisma/client";
+import { skinType } from ".prisma/client";
 
 import { db } from "../db/db";
 

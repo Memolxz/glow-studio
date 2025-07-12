@@ -1,5 +1,5 @@
 import { db } from '../db/db';
-import { product, skinType } from '@prisma/client';
+import { product, skinType } from '.prisma/client';
 
 interface ProductRecommendation {
   product: product;

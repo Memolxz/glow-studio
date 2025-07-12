@@ -1,5 +1,5 @@
 import { db } from '../db/db';
-import { productCategory, productCategoryType } from '@prisma/client';
+import { productCategory, productCategoryType } from '.prisma/client';
 
 interface CreateCategoryDTO {
   name: productCategoryType;

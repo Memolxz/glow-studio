@@ -1,4 +1,4 @@
-import { product, Prisma } from '@prisma/client';
+import { product, Prisma } from '.prisma/client';
 import { db } from '../db/db';
 
 interface CreateProductDTO {

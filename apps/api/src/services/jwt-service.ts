@@ -1,5 +1,5 @@
 import { sign, verify } from "jsonwebtoken";
-import { users } from "@prisma/client";
+import { users } from ".prisma/client";
 
 import { db } from "../db/db";
 
