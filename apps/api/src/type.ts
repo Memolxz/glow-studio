@@ -11,13 +11,9 @@ declare global {
   }
   namespace Express {
     interface Request {
-      user?: Pick<users, 'id' | 'email' | 'isAdmin'>
+      user?: Pick<users, 'id' | 'email'>
     }
   }
-}
-
-export interface AuthenticatedRequest extends Request {
-  user: Pick<users, 'id' | 'email' | 'isAdmin'>;
 }
 
 export interface ErrorWithMessage {

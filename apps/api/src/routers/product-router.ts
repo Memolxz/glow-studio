@@ -1,8 +1,8 @@
 import express from 'express';
-import { jwtAuthMiddleware } from '../middleware/auth-middleware';
+import { jwtAuthMiddleware, isAdminMiddleware } from '../middleware/auth-middleware';
 import { ProductService } from '../services/product-service';
 import { RecommendationService } from '../services/recommendation-service';
-import { AuthenticatedRequest, ErrorWithMessage } from '../type';
+import { ErrorWithMessage } from '../type';
 
 const router = express.Router();
 const productService = new ProductService();
@@ -35,9 +35,9 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create product (admin only)
-router.post('/', jwtAuthMiddleware, async (req: AuthenticatedRequest, res) => {
+router.post('/', isAdminMiddleware, async (req, res) => {
   try {
-    const product = await productService.createProduct(req.user.id, req.body);
+    const product = await productService.createProduct(req.body);
     res.status(201).json(product);
   } catch (error) {
     const err = error as ErrorWithMessage;
@@ -50,10 +50,9 @@ router.post('/', jwtAuthMiddleware, async (req: AuthenticatedRequest, res) => {
 });
 
 // Update product (admin only)
-router.put('/:id', jwtAuthMiddleware, async (req: AuthenticatedRequest, res) => {
+router.put('/:id', isAdminMiddleware, async (req, res) => {
   try {
     const product = await productService.updateProduct(
-      req.user.id,
       parseInt(req.params.id),
       req.body
     );
@@ -69,9 +68,9 @@ router.put('/:id', jwtAuthMiddleware, async (req: AuthenticatedRequest, res) => 
 });
 
 // Delete product (admin only)
-router.delete('/:id', jwtAuthMiddleware, async (req: AuthenticatedRequest, res) => {
+router.delete('/:id', isAdminMiddleware, async (req, res) => {
   try {
-    await productService.deleteProduct(req.user.id, parseInt(req.params.id));
+    await productService.deleteProduct(parseInt(req.params.id));
     res.status(204).send();
   } catch (error) {
     const err = error as ErrorWithMessage;
@@ -84,8 +83,12 @@ router.delete('/:id', jwtAuthMiddleware, async (req: AuthenticatedRequest, res) 
 });
 
 // Get recommendations for user
-router.get('/recommendations/:userId', jwtAuthMiddleware, async (req: AuthenticatedRequest, res) => {
+router.get('/recommendations/:userId', jwtAuthMiddleware, async (req, res) => {
   try {
+    if (!req.user){
+      throw new Error('Not logged in');
+    }
+    
     const userId = parseInt(req.params.userId);
 
     // Users can only get their own recommendations

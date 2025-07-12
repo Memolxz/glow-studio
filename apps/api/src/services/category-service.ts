@@ -34,14 +34,8 @@ export class CategoryService {
     }
   }
 
-  async createCategory(userId: number, data: CreateCategoryDTO) {
+  async createCategory(data: CreateCategoryDTO) {
     try {
-      const user = await db.users.findUnique({ where: { id: userId } });
-
-      if (!user?.isAdmin) {
-        throw new Error("Acceso de administrador requerido");
-      }
-
       if (!Object.values(productCategoryType).includes(data.name)) {
         throw new Error("Tipo de categoría inválido");
       }
@@ -62,14 +56,8 @@ export class CategoryService {
     }
   }
 
-  async updateCategory(userId: number, categoryId: number, data: UpdateCategoryDTO) {
+  async updateCategory(categoryId: number, data: UpdateCategoryDTO) {
     try {
-      const user = await db.users.findUnique({ where: { id: userId } });
-
-      if (!user?.isAdmin) {
-        throw new Error("Acceso de administrador requerido");
-      }
-
       if (data.name && !Object.values(productCategoryType).includes(data.name)) {
         throw new Error("Tipo de categoría inválido");
       }
@@ -91,14 +79,8 @@ export class CategoryService {
     }
   }
 
-  async deleteCategory(userId: number, categoryId: number) {
+  async deleteCategory(categoryId: number) {
     try {
-      const user = await db.users.findUnique({ where: { id: userId } });
-
-      if (!user?.isAdmin) {
-        throw new Error("Acceso de administrador requerido");
-      }
-
       const category = await db.productCategory.findUnique({
         where: { id: categoryId },
         include: {

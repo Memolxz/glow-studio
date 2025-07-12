@@ -55,14 +55,8 @@ export class ProductService {
     }
   }
 
-  async createProduct(userId: number, data: CreateProductDTO) {
+  async createProduct(data: CreateProductDTO) {
     try {
-      const user = await db.users.findUnique({ where: { id: userId } });
-
-      if (!user?.isAdmin) {
-        throw new Error("Acceso de administrador requerido");
-      }
-
       const newProduct = await db.product.create({
         data: {
           name: data.name,
@@ -88,14 +82,8 @@ export class ProductService {
   }
 
   // chequear
-  async updateProduct(userId: number, productId: number, data: UpdateProductDTO) {
+  async updateProduct(productId: number, data: UpdateProductDTO) {
     try {
-      const user = await db.users.findUnique({ where: { id: userId } });
-
-      if (!user?.isAdmin) {
-        throw new Error("Acceso de administrador requerido");
-      }
-
       const updatedProduct = await db.product.update({
         where: { id: productId },
         data: {
@@ -128,14 +116,8 @@ export class ProductService {
     }
   }
 
-  async deleteProduct(userId: number, productId: number) {
+  async deleteProduct(productId: number) {
     try {
-      const user = await db.users.findUnique({ where: { id: userId } });
-
-      if (!user?.isAdmin) {
-        throw new Error("Acceso de administrador requerido");
-      }
-
       await db.product.delete({ where: { id: productId } });
     } catch (error) {
       console.error(error);

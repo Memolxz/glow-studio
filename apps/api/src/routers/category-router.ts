@@ -1,13 +1,12 @@
 import express, { Response, Request, RequestHandler } from 'express';
 import { CategoryService } from '../services/category-service';
-import { AuthenticatedRequest } from '../type';
-import { jwtAuthMiddleware } from '../middleware/auth-middleware';
+import { jwtAuthMiddleware, isAdminMiddleware } from '../middleware/auth-middleware';
 
 const router = express.Router();
 const categoryService = new CategoryService();
 
 // Get all categories
-router.get('/', (async (_: Request, res: Response) => {
+router.get('/',(async (_: Request, res: Response) => {
   try {
     const categories = await categoryService.getAllCategories();
     res.json(categories);
@@ -18,12 +17,16 @@ router.get('/', (async (_: Request, res: Response) => {
 }) as RequestHandler);
 
 // Create new category
-router.post('/', jwtAuthMiddleware, (async (req: AuthenticatedRequest, res: Response) => {
+router.post('/', isAdminMiddleware, (async (req, res: Response) => {
   try {
     const { name } = req.body;
+
+    if (!req.user){
+      throw new Error('Not logged in');
+    }
     
     // Validate that name is a valid category type
-    const newCategory = await categoryService.createCategory(req.user.id, { name });
+    const newCategory = await categoryService.createCategory(name);
     res.status(201).json(newCategory);
   } catch (error: any) {
     console.error(error);
@@ -38,12 +41,12 @@ router.post('/', jwtAuthMiddleware, (async (req: AuthenticatedRequest, res: Resp
 }) as RequestHandler);
 
 // Update category
-router.put('/:id', jwtAuthMiddleware, (async (req: AuthenticatedRequest, res: Response) => {
+router.put('/:id', isAdminMiddleware, (async (req, res: Response) => {
   try {
     const { name } = req.body;
     const categoryId = parseInt(req.params.id);
 
-    const updatedCategory = await categoryService.updateCategory(req.user.id, categoryId, { name });
+    const updatedCategory = await categoryService.updateCategory(categoryId,name);
     res.json(updatedCategory);
   } catch (error: any) {
     console.error(error);
@@ -58,10 +61,10 @@ router.put('/:id', jwtAuthMiddleware, (async (req: AuthenticatedRequest, res: Re
 }) as RequestHandler);
 
 // Delete category
-router.delete('/:id', jwtAuthMiddleware, (async (req: AuthenticatedRequest, res: Response) => {
+router.delete('/:id', isAdminMiddleware, (async (req, res: Response) => {
   try {
     const categoryId = parseInt(req.params.id);
-    await categoryService.deleteCategory(req.user.id, categoryId);
+    await categoryService.deleteCategory(categoryId);
     res.status(204).send();
   } catch (error: any) {
     console.error(error);

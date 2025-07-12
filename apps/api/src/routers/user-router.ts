@@ -1,12 +1,13 @@
 import { Router, Request, Response } from "express"
 import { UserService } from "../services/user-service";
+import { isAdminMiddleware } from "../middleware/auth-middleware";
 
 const userService = new UserService();
 
 
 export const userRouter = Router();
 
-userRouter.get("/", async (_: Request, res: Response) => {
+userRouter.get("/",isAdminMiddleware, async (_: Request, res: Response) => {
   try {
     const users = await userService.getAllUsers();
     res.status(200).json({ ok: true, data: users });
@@ -15,7 +16,7 @@ userRouter.get("/", async (_: Request, res: Response) => {
   }
 });
 
-userRouter.get('/:mail', async (req: Request, res: Response) => {
+userRouter.get('/:mail',isAdminMiddleware, async (req: Request, res: Response) => {
   try {
     const userMailToGet = req.params.mail;
     const user = await userService.getUserByEmail(userMailToGet);
@@ -25,7 +26,7 @@ userRouter.get('/:mail', async (req: Request, res: Response) => {
   }
 });
 
-userRouter.get('/deleted/:mail', async (req: Request, res: Response) => {
+userRouter.get('/deleted/:mail',isAdminMiddleware, async (req: Request, res: Response) => {
   try {
     const userMailToGet = req.params.mail;
     const user = await userService.getDeletedUser(userMailToGet);
@@ -35,7 +36,7 @@ userRouter.get('/deleted/:mail', async (req: Request, res: Response) => {
   }
 });
 
-userRouter.put('/:id', async (req: Request, res: Response) => {
+userRouter.put('/:id',isAdminMiddleware, async (req: Request, res: Response) => {
   try {
     const userIdToModify = req.params.id;
     const userBody = req.body;
@@ -48,7 +49,7 @@ userRouter.put('/:id', async (req: Request, res: Response) => {
   }
 });
 
-userRouter.patch('/:id', async (req: Request, res: Response) => {
+userRouter.patch('/:id',isAdminMiddleware, async (req: Request, res: Response) => {
   try {
     const userIdToModify = parseInt(req.params.id);
     const userBody = req.body;
@@ -65,7 +66,7 @@ userRouter.patch('/:id', async (req: Request, res: Response) => {
   }
 });
 
-userRouter.delete('/:id', async (req: Request, res: Response) => {
+userRouter.delete('/:id',isAdminMiddleware, async (req: Request, res: Response) => {
   try {
     const userIdToDelete = parseInt(req.params.id);
     
@@ -77,7 +78,7 @@ userRouter.delete('/:id', async (req: Request, res: Response) => {
   }
 });
 
-userRouter.patch('/restore/:id', async (req: Request, res: Response) => {
+userRouter.patch('/restore/:id',isAdminMiddleware, async (req: Request, res: Response) => {
   try {
     const userIdToRestore = parseInt(req.params.id);
     

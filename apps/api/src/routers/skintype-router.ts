@@ -1,5 +1,6 @@
 import { Router, Request, Response } from "express"
 import { SkinTypeService } from "../services/skintype-service";
+import { isAdminMiddleware } from "../middleware/auth-middleware";
 
 const skinTypeService = new SkinTypeService();
 
@@ -14,7 +15,7 @@ skinTypeRouter.get("/", async (_: Request, res: Response) => {
   }
 });
 
-skinTypeRouter.post('/', async (req: Request, res: Response) => {
+skinTypeRouter.post('/', isAdminMiddleware,async (req: Request, res: Response) => {
   try {
     const skinTypeFromRequest = req.body;
     const skinTypeCreated = await skinTypeService.createSkinType(skinTypeFromRequest);
@@ -24,7 +25,7 @@ skinTypeRouter.post('/', async (req: Request, res: Response) => {
   }
 });
 
-skinTypeRouter.put('/:id', async (req: Request, res: Response) => {
+skinTypeRouter.put('/:id',isAdminMiddleware, async (req: Request, res: Response) => {
   try {
     const skinTypeIdToModify = parseInt(req.params.id);
     const skinTypeBody = req.body;
@@ -37,7 +38,7 @@ skinTypeRouter.put('/:id', async (req: Request, res: Response) => {
   }
 });
 
-skinTypeRouter.patch('/:id', async (req: Request, res: Response) => {
+skinTypeRouter.patch('/:id',isAdminMiddleware, async (req: Request, res: Response) => {
   try {
     const skinTypeIdToModify = parseInt(req.params.id);
     const skinTypeBody = req.body;
@@ -54,7 +55,7 @@ skinTypeRouter.patch('/:id', async (req: Request, res: Response) => {
   }
 });
 
-skinTypeRouter.delete('/:id', async (req: Request, res: Response) => {
+skinTypeRouter.delete('/:id',isAdminMiddleware, async (req: Request, res: Response) => {
   try {
     const skinTypeIdToDelete = parseInt(req.params.id);
     
