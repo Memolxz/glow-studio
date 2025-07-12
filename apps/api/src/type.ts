@@ -1,4 +1,4 @@
-import { users } from "@prisma/client";
+import { users } from ".prisma/client";
 import { Request } from 'express';
 
 declare global {

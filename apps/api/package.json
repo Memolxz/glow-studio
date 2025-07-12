@@ -22,7 +22,7 @@
   "type": "commonjs",
   "private": true,
   "dependencies": {
-    "@prisma/client": "^6.7.0",
+    "@prisma/client": "^6.11.1",
     "bcrypt": "^6.0.0",
     "dotenv": "^16.5.0",
     "express": "5.1.0",
@@ -35,7 +35,7 @@
     "@types/jsonwebtoken": "^9.0.9",
     "@types/node": "^22.14.0",
     "concurrently": "^9.1.2",
-    "prisma": "^6.7.0",
+    "prisma": "^6.11.1",
     "rimraf": "^6.0.1",
     "tsx": "^4.19.3",
     "typescript": "^5.8.3"
