@@ -1,14 +1,30 @@
-export default function LoginForm({ onToggle }: { onToggle: () => void }) {
+export default function RegisterForm({ onToggle }: { onToggle: () => void }) {
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-transparent">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                 <h2 className="text-center text-3xl font-bold font-inter text-warmgray">
-                    INICIAR SESIÓN
+                    REGISTRATE
                 </h2>
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                 <form action="#" method="POST" className="space-y-6">
+                    <div>
+                        <input
+                            id="fullName"
+                            name="fullName"
+                            type="text"
+                            required
+                            autoComplete="name"
+                            placeholder="nombre completo"
+                            className="block w-full rounded-full bg-white px-10 py-3
+                            text-base text-warmgray font-inter
+                            border-0
+                            placeholder:text-warmgray
+                            focus:outline-none focus:ring-2 focus:ring-warmgray"
+                        />
+                    </div>
+
                     <div>
                         <input
                             id="email"
@@ -49,15 +65,15 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
                             hover:bg-warmgray hover:text-defaultbg transition
                             focus:outline-none focus:ring-2 focus:ring-warmgray"
                         >
-                            INICIAR
+                            CREAR CUENTA
                         </button>
                     </div>
                 </form>
 
                 <p className="mt-6 text-center text-sm font-inter text-warmgray">
-                    ¿No tenés cuenta?{' '}
+                    ¿Ya tenés una cuenta?{' '}
                     <button onClick={onToggle} className="font-bold font-inter text-warmgray hover:text-warmdarkgray">
-                        ¡Registrate!
+                        ¡Iniciá Sesión!
                     </button>
                 </p>
             </div>

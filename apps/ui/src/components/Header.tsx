@@ -1,18 +1,20 @@
-const Header = () => {
+export default function Header() {
     return (
-        <header className="flex justify-between items-center p-6 bg-white">
-        <nav className="flex gap-6 text-gray-500 text-sm">
-            <a href="#">PRODUCTOS</a>
-            <a href="#">RUTINA</a>
-            <a href="#">GUÍA</a>
-        </nav>
-        <h1 className="text-2xl font-bold text-gray-700">GLOW STUDIO</h1>
-        <nav className="flex gap-6 text-gray-500 text-sm">
-            <a href="#">CONTACTO</a>
-            <a href="#">PERFIL</a>
-        </nav>
-        </header>
-    )
-}
+        <header className="w-full bg-white">
+            <div className="max-w-6xl mx-auto mt-5 px-6 py-4 flex justify-between items-center text-sm text-warmgray font-medium">
+                <nav className="flex gap-6">
+                    <a href="#">PRODUCTOS</a>
+                    <a href="#">RUTINA</a>
+                    <a href="#">GUÍA</a>
+                </nav>
 
-export default Header;
+                <h1 className="text-lg font-bold tracking-wide">GLOW STUDIO</h1>
+
+                <nav className="flex gap-6">
+                    <a href="#">CONTACTO</a>
+                    <a href="#">PERFIL</a>
+                </nav>
+            </div>
+        </header>
+    );
+}
