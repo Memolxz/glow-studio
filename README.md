@@ -9,3 +9,6 @@ La informacion del usuario se almacena en una base de datos (dentro de su cuenta
 - PostgreSQL
 - TypeScript
 - JWS
+- Tailwind
+- React
+- Vite
