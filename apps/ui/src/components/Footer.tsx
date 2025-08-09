@@ -12,7 +12,7 @@ export default function Footer() {
 
             {/* Columna Derecha (más compacto) */}
             <div className="relative grid grid-cols-3 gap-x-6 gap-y-2 text-warmgray text-md font-medium ml-12">
-                <div className="flex justify-center rt items-center">
+                <div className="flex justify-center items-center">
                     <img src={img} alt="telefono" />
                     <p className="ml-3">11 1111-1111</p>
                 </div>
