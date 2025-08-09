@@ -1,5 +1,4 @@
 import Header from '../components/Header';
-import ContactForm from '../components/ContactUsForm';
 import Footer from '../components/Footer';
 import img from '../assets/imagen.png';
 
@@ -17,9 +16,6 @@ export default function ContactUs() {
                     />
                 </div>
             </div>
-
-            <ContactForm />
-
             <Footer />
     </div>
     );
