@@ -108,4 +108,4 @@ router.get('/recommendations/:userId', jwtAuthMiddleware, async (req, res) => {
   }
 });
 
-export default router; 
+export default router;

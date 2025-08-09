@@ -1,6 +1,6 @@
 import { verify } from "jsonwebtoken";
 import { NextFunction, Request, Response } from "express";
-import { users } from "@prisma/client";
+import { users } from ".prisma/client"; // ANTES ESTABA CON @
 
 export const jwtAuthMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;

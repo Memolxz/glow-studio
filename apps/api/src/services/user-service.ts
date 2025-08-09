@@ -4,8 +4,8 @@ import { hash, compare } from 'bcrypt'
 import { db } from "../db/db";
 
 interface CreateUserBody {
-  name: string
-  email: string
+  name: string,
+  email: string,
   password: string
 }
 

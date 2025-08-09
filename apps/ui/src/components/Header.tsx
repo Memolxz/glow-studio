@@ -1,7 +1,7 @@
 export default function Header() {
     return (
-        <header className="w-full bg-white">
-            <div className="max-w-6xl mx-auto mt-5 px-6 py-4 flex justify-between items-center text-sm text-warmgray font-medium">
+        <header className="w-full bg-transparent ">
+            <div className="max-w-6xl mx-auto mt-5 py-1 flex justify-between items-center text-sm text-warmgray font-medium">
                 <nav className="flex gap-6">
                     <a href="#">PRODUCTOS</a>
                     <a href="#">RUTINA</a>

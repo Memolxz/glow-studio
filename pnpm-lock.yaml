@@ -11,7 +11,7 @@ importers:
   apps/api:
     dependencies:
       '@prisma/client':
-        specifier: ^6.11.1
+        specifier: ^6.12.0
         version: 6.12.0(prisma@6.12.0(typescript@5.8.3))(typescript@5.8.3)
       bcrypt:
         specifier: ^6.0.0
@@ -45,7 +45,7 @@ importers:
         specifier: ^9.1.2
         version: 9.2.0
       prisma:
-        specifier: ^6.11.1
+        specifier: ^6.12.0
         version: 6.12.0(typescript@5.8.3)
       rimraf:
         specifier: ^6.0.1
