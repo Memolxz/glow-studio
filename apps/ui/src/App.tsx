@@ -10,13 +10,21 @@ import FQ from "./pages/FQ"
 export default function App() {
     return (
     <Routes>
-      <Route path="/" element={<AuthLayout />} />
+      <Route path="/register" element={<AuthLayout />} />
       <Route path="/contactus" element={<ContactUs />} />
-      <Route path="/home" element={<Home />} />
       <Route path="/products" element={<Products />} />
       <Route path="/profile" element={<Profile />} />
       <Route path="/routine" element={<Routine />} />
+      <Route path="/home" element={<Home />} />
       <Route path="/fq" element={<FQ />} />
     </Routes>
     );
 }
+
+/* 
+- mejorar header
+mejorar footer
+hacer pag faq
+sacar pag contact
+
+ */
