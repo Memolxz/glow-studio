@@ -8,7 +8,7 @@ export default function Header() {
                     <a href="#">GUÍA</a>
                 </nav>
 
-                <h1 className="text-lg font-bold tracking-wide">GLOW STUDIO</h1>
+                <h1 className="text-2xl font-bold tracking-wide">GLOW STUDIO</h1>
 
                 <nav className="flex gap-6">
                     <a href="#">CONTACTO</a>

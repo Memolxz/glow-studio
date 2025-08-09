@@ -3,9 +3,6 @@ import Footer from '../components/Footer';
 import img1 from '../assets/modelo2.png'
 import img2 from '../assets/modelo1.png'
 import img3 from '../assets/modelo3.png'
-import producto1 from '../assets/producto1.png'
-import producto2 from '../assets/producto2.png'
-import producto3 from '../assets/producto3.png'
 
 export default function Home() {
     return (
@@ -21,7 +18,7 @@ export default function Home() {
                     />
                 </div>
             </div>
-
+{/* 
             <div className="flex justify-between w-[90%] mt-4 mb-10">
                 <div className="relative flex flex-col items-center justify-center w-[300px] h-[300px] bg-[#F3F3F3] rounded-3xl shadow-md">
                     <span className="absolute top-4 right-4 text-xs text-gray-400 font-inter">limpieza</span>
@@ -58,7 +55,7 @@ export default function Home() {
                     </h3>
                     <p className="text-xs text-gray-400 font-inter mt-1">Oily skin</p>
                 </div>
-            </div>
+            </div> */}
 
 
             <div className="flex w-[90%] h-[450px] gap-6 bg-defaultbg rounded-3xl mb-5 shadow-md">

@@ -1,8 +1,9 @@
 export default function ContactForm() {
     return (
-        <section className="flex flex-col justify-center w-[90%] mx-auto bg-[#f5f5f5] rounded-3xl px-8 py-12 mt-16 mb-20 text-center shadow-md">
+        <section className="flex flex-col justify-center w-[90%] mx-auto bg-defaultbg
+                            rounded-3xl px-8 py-12 mt-16 mb-5 text-center shadow-md">
             <h2 className="text-2xl font-bold text-warmgray mb-2">CONTACTANOS</h2>
-            <p className="w-1/3 text-sm text-warmgray mb-8">
+            <p className="text-sm text-warmgray mb-8">
                 Descubrí cómo incorporar los productos a tu rutina, qué ingredientes buscar, y aprovechá al máximo cada momento de cuidado personal.
             </p>
 

@@ -21,6 +21,6 @@ export default function ContactUs() {
             <ContactForm />
 
             <Footer />
-        </div>
+    </div>
     );
 }
