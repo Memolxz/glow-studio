@@ -1,0 +1,19 @@
+-husky
+
+- chequear bien lo de los tokens
+  - expiration
+  - refresh tokens
+
+-un reccomendation servicemeter un get recomendations
+
+
+- 1 sola pag d login (en ambas c logguean los admin y usrs)
+  - como solo se puede usar 1 mail x cuenta, la pag ya sabe q es admin
+  - dsp el front end c encarga d mostrar cada cosa x cuenta
+  - en admin tenes un boton para crear usr y crear admins
+    - esto no esta en usrs
+  - tdo c encarga el front end
+  - tener ya un admin en la db (corte hard coded)
+
+- iconos para el front
+  - https://lucide.dev/

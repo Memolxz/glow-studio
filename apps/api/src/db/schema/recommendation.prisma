@@ -1,0 +1,13 @@
+model recommendation {
+  id              Int      @id @default(autoincrement())
+  userId          Int
+  productId       Int
+  reason          String
+  createdAt       DateTime @default(now())
+  
+  user    users   @relation(fields: [userId], references: [id])
+  product product @relation(fields: [productId], references: [id])
+
+  @@index([userId])
+  @@index([productId])
+} 

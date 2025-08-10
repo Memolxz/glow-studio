@@ -1,0 +1,7 @@
+model skinType {
+  id   Int @id @default(autoincrement())
+  name String
+
+  userSkinType userSkinType[]
+  ingredientEffect ingredientEffect[]
+}

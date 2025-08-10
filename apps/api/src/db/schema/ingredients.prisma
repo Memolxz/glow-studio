@@ -1,0 +1,7 @@
+model ingredients {
+  id   Int @id @default(autoincrement())
+  name String
+
+  ingredientEffect ingredientEffect[]
+  productIngredient productIngredient[]
+}
