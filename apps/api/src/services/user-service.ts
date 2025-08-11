@@ -220,8 +220,8 @@ export class UserService {
   async getUserSkinTypes(userId: number) {
     const relations = await db.userSkinType.findMany({
       where: { userId },
-      include: { skinType: true }
+      include: { skinType: true },
     });
-    return relations.map(rel => rel.skinType);
+    return relations;
   }
 }
