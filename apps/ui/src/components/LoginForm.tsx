@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 export default function LoginForm({ onToggle }: { onToggle: () => void }) {
+    const navigate = useNavigate();
+
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-transparent">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -8,7 +12,11 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form action="#" method="POST" className="space-y-6">
+                <form action="#" method="POST" className="space-y-6" 
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    navigate("/home");
+                }}>
                     <div>
                         <input
                             id="email"
