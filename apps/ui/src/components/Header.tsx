@@ -10,12 +10,14 @@ export default function Header() {
             <Link to={"/routine"} className="hover:text-gray-200 transition-colors">RUTINA</Link>
             </nav>
 
+
             <h1 className="flex-1 text-center text-2xl font-bold tracking-wide text-white">
             GLOW STUDIO
             </h1>
 
+
             <nav className="flex gap-8 flex-1 justify-end text-sm font-semibold text-white tracking-wide items-center">
-            <Link to={"/register"} className="border border-white text-sm py-1 px-5 rounded-full hover:bg-white hover:text-black transition-colors">
+            <Link to={"/register"} className="border border-white text-sm py-1 px-5 rounded-full hover:bg-white hover:text-[#676161] transition-colors">
                 LOG IN
             </Link>
             </nav>

@@ -1,22 +1,30 @@
-import {Phone} from "lucide-react"
+import phoneIcon from "../assets/celular.png";
+import instagramIcon from "../assets/instagram.png";
+import facebookIcon from "../assets/facebook.png";
+import tiktokIcon from "../assets/tiktok.png";
 
 export default function Footer() {
     return (
-        <footer className="relative flex w-[90%] overflow-hidden rounded-3xl mt-5 mb-10
-                    justify-start items-center bg-defaultbg h-[150px] shadow-md px-10">
+        <footer className="relative flex justify-between items-center w-[90%] rounded-3xl mt-5 mb-10 bg-defaultbg h-[165px] px-6">
 
-            {/* Columna Izquierda */}
-            <div className="text-warmgray font-bold text-3xl">
-                GLOW STUDIO
-            </div>
+        <div className="text-warmgray font-bold text-xl pl-10 mb-8">
+            GLOW STUDIO
+        </div>
 
-            {/* Columna Derecha (más compacto) */}
-            <div className="relative grid grid-cols-3 gap-x-6 gap-y-2 text-warmgray text-md font-medium ml-12">
-                <div className="flex justify-center items-center">
-                    <Phone className="w-5 h-5 text-warmgray" />
-                    <p className="ml-3">11 1111-1111</p>
-                </div>
+        <div className="flex gap-6 pr-6 mb-8">
+            <img src={phoneIcon} alt="Celular" className="w-12 h-12 cursor-pointer hover:opacity-70" />
+            <img src={instagramIcon} alt="Instagram" className="w-12 h-12 cursor-pointer hover:opacity-70" />
+            <img src={facebookIcon} alt="Facebook" className="w-12 h-12 cursor-pointer hover:opacity-70" />
+            <img src={tiktokIcon} alt="TikTok" className="w-12 h-12 cursor-pointer hover:opacity-70" />
+        </div>
+
+        <div className="absolute bottom-6 left-0 right-0 px-6">
+            <hr className="border-t border-warmgray -mb-2" />
+            <div className="text-center text-warmgray text-xs select-none mt-8 ">
+            &copy; 2025 Glow Studio. Todos los derechos reservados.
             </div>
+        </div>
         </footer>
     );
 }
+
