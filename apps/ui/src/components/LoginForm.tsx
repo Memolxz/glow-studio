@@ -2,7 +2,7 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-transparent">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                <h2 className="text-center text-3xl font-bold font-inter text-warmgray">
+                <h2 className="text-center text-3xl font-thin font-inter text-warmgray">
                     INICIAR SESIÓN
                 </h2>
             </div>

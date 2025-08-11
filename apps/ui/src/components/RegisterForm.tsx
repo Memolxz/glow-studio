@@ -2,12 +2,12 @@ export default function RegisterForm({ onToggle }: { onToggle: () => void }) {
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-transparent">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                <h2 className="text-center text-3xl font-bold font-inter text-warmgray">
+                <h2 className="text-center text-3xl font-thin font-inter text-warmgray">
                     REGISTRATE
                 </h2>
             </div>
 
-            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
                 <form action="#" method="POST" className="space-y-6">
                     <div>
                         <input

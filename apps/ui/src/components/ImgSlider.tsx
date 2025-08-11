@@ -6,7 +6,7 @@ export default function ImgSlider() {
             <img
                 src={img}
                 alt="login"
-                className="w-full h-full object-cover shadow-xl rounded-3xl"
+                className="w-full h-[450px] object-cover shadow-xl rounded-3xl"
             />
         </div>
     );

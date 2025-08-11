@@ -8,6 +8,8 @@ export default {
     extend: {
       fontFamily: {
         inter: ['inter', 'sans-serif'],
+        poppins: ['poppins', 'sans-serif'],
+        nunito: ['nunito', 'sans-serif'],
       },
       colors: {
         warmgray: '#9D9898',
