@@ -9,25 +9,14 @@ interface UpdateCategoryDTO {
   name?: productCategoryType;
 }
 
-interface CategoryWithProductCount extends productCategory {
-  productCount: number;
-}
-
 export class CategoryService {
-  async getAllCategories(): Promise<CategoryWithProductCount[]> {
+  async getAllCategories(): Promise<productCategory[]> {
     try {
       const categories = await db.productCategory.findMany({
-        include: {
-          products: {
-            select: { id: true }
-          }
-        }
+        include: { products: true }
       });
 
-      return categories.map(cat => ({
-        ...cat,
-        productCount: cat.products.length
-      }));
+      return categories;
     } catch (error) {
       console.error(error);
       throw new Error("Error al obtener categorías");

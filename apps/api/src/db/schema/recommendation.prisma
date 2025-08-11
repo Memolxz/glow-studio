@@ -2,7 +2,7 @@ model recommendation {
   id              Int      @id @default(autoincrement())
   userId          Int
   productId       Int
-  reason          String
+  reason          String?
   createdAt       DateTime @default(now())
   
   user    users   @relation(fields: [userId], references: [id])
