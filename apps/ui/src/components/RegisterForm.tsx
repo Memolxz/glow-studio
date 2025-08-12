@@ -15,7 +15,7 @@ export default function RegisterForm({ onToggle }: { onToggle: () => void }) {
                 <form action="#" method="POST" className="space-y-6" 
                 onSubmit={(e) => {
                     e.preventDefault();
-                    navigate("/home");
+                    navigate("/selection");
                 }}>
                     <div>
                         <input

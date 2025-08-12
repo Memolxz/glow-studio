@@ -6,6 +6,7 @@ import Profile from "./pages/Profile"
 import Routine from "./pages/Routine"
 import Home from "./pages/Home"
 import FQ from "./pages/FAQ"
+import RecommendationsPage from "./pages/Recommendations"
 
 export default function App() {
     return (
@@ -17,6 +18,7 @@ export default function App() {
       <Route path="/routine" element={<Routine />} />
       <Route path="/home" element={<Home />} />
       <Route path="/faq" element={<FQ />} />
+      <Route path="/recommendations" element={<RecommendationsPage />} />
     </Routes>
     );
 }

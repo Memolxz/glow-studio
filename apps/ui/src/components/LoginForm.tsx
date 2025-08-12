@@ -15,7 +15,7 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
                 <form action="#" method="POST" className="space-y-6" 
                 onSubmit={(e) => {
                     e.preventDefault();
-                    navigate("/home");
+                    navigate("/recommendations");
                 }}>
                     <div>
                         <input

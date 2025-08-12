@@ -33,7 +33,7 @@ export default function SkinSelection() {
         // if (!res.ok) throw new Error("Failed to submit selection");
 
         // navigate after success
-        navigate("/home");
+        navigate("/recommendations");
         } catch (error) {
         alert("Error sending selection, please try again.");
         console.error(error);
