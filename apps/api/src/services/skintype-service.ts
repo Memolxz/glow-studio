@@ -1,6 +1,9 @@
-import { skinType } from ".prisma/client";
-
 import { db } from "../db/db";
+
+type skinType = {
+    id: number;
+    name: string;
+}
 
 interface CreateSkinTypeBody {
   name: string

@@ -96,7 +96,7 @@ router.get('/recommendations/:userId', jwtAuthMiddleware, async (req, res) => {
       throw new Error('Access denied');
     }
 
-    const recommendations = await recommendationService.getRecommendationsForUser(userId);
+    const recommendations = await recommendationService.getRecommendations(userId);
     res.json(recommendations);
   } catch (error) {
     const err = error as ErrorWithMessage;

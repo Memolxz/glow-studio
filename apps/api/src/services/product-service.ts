@@ -1,4 +1,3 @@
-import { product, Prisma } from '.prisma/client';
 import { db } from '../db/db';
 
 interface CreateProductDTO {
@@ -64,7 +63,7 @@ export class ProductService {
           description: data.description,
           officialUrl: data.officialUrl,
           imageUrl: data.imageUrl,
-          price: data.price ? new Prisma.Decimal(data.price) : null,
+          price: data.price,
           categoryId: data.categoryId,
           productIngredients: {
             create: data.ingredients.map(ing => ({
@@ -92,7 +91,7 @@ export class ProductService {
           ...(data.description && { description: data.description }),
           ...(data.officialUrl && { officialUrl: data.officialUrl }),
           ...(data.imageUrl !== undefined && { imageUrl: data.imageUrl }),
-          ...(data.price !== undefined && { price: data.price ? new Prisma.Decimal(data.price) : null }),
+          ...(data.price !== undefined && { price: data.price }),
           ...(data.categoryId && { categoryId: data.categoryId }),
           ...(data.active !== undefined && { active: data.active }),
         }
@@ -104,7 +103,7 @@ export class ProductService {
           data: data.ingredients.map(ing => ({
             productId,
             ingredientId: ing.ingredientId,
-            concentration: ing.concentration ? new Prisma.Decimal(ing.concentration) : null
+            concentration: ing.concentration
           }))
         });
       }

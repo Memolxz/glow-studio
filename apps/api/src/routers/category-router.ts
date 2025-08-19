@@ -1,6 +1,6 @@
 import express, { Response, Request, RequestHandler } from 'express';
 import { CategoryService } from '../services/category-service';
-import { jwtAuthMiddleware, isAdminMiddleware } from '../middleware/auth-middleware';
+import { isAdminMiddleware } from '../middleware/auth-middleware';
 
 const router = express.Router();
 const categoryService = new CategoryService();

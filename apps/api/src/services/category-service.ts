@@ -1,8 +1,22 @@
 import { db } from '../db/db';
-import { productCategory, productCategoryType } from '.prisma/client';
+
+
+interface productCategoryType {
+    SERUM: 'SERUM',
+    CREAM: 'CREAM',
+    CLEANSER: 'CLEANSER',
+    TONER: 'TONER',
+    SUNSCREEN: 'SUNSCREEN',
+    MASK: 'MASK',
+    MOISTURIZER: 'MOISTURIZER',
+    EXFOLIANT: 'EXFOLIANT',
+    ESSENCE: 'ESSENCE',
+    TREATMENT: 'TREATMENT'
+};
+  
 
 interface CreateCategoryDTO {
-  name: productCategoryType;
+  name: string;
 }
 
 interface UpdateCategoryDTO {
@@ -10,7 +24,7 @@ interface UpdateCategoryDTO {
 }
 
 export class CategoryService {
-  async getAllCategories(): Promise<productCategory[]> {
+  async getAllCategories(){
     try {
       const categories = await db.productCategory.findMany({
         include: { products: true }
@@ -25,10 +39,6 @@ export class CategoryService {
 
   async createCategory(data: CreateCategoryDTO) {
     try {
-      if (!Object.values(productCategoryType).includes(data.name)) {
-        throw new Error("Tipo de categoría inválido");
-      }
-
       const newCategory = await db.productCategory.create({
         data: {
           name: data.name,
@@ -47,10 +57,6 @@ export class CategoryService {
 
   async updateCategory(categoryId: number, data: UpdateCategoryDTO) {
     try {
-      if (data.name && !Object.values(productCategoryType).includes(data.name)) {
-        throw new Error("Tipo de categoría inválido");
-      }
-
       const updatedCategory = await db.productCategory.update({
         where: { id: categoryId },
         data: {

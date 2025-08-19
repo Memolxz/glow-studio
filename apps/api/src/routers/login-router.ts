@@ -7,8 +7,6 @@ import { JwtService } from "../services/jwt-service";
 const authService = new AuthService();
 const jwtService = new JwtService();
 
-const userService = new UserService();
-
 export const loginRouter = Router();
 
 loginRouter.post('/', async (req: Request, res: Response) => {
