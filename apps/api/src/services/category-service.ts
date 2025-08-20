@@ -1,5 +1,5 @@
 import { db } from '../db/db';
-import { productCategory, productCategoryType } from '.prisma/client';
+import { productCategory, productCategoryType } from '@prisma/client';
 
 interface CreateCategoryDTO {
   name: productCategoryType;
@@ -10,7 +10,7 @@ interface UpdateCategoryDTO {
 }
 
 export class CategoryService {
-  async getAllCategories(): Promise<productCategory[]> {
+  async getAllCategories(){
     try {
       const categories = await db.productCategory.findMany({
         include: { products: true }

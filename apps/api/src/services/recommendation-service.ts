@@ -1,5 +1,5 @@
 import { db } from '../db/db';
-import { product, skinType } from '.prisma/client';
+import { product } from '@prisma/client';
 
 interface UserSkinType {
   skinTypeId: number;
@@ -16,7 +16,7 @@ type ProductWithRelations = product & {
 };
 
 export class RecommendationService {
-  private async calculateRecommendations(userId: number): Promise<product[]> {
+  private async calculateRecommendations(userId: number){
     const skinTypes: UserSkinType[] = await db.userSkinType.findMany({
       where: { userId },
       select: { skinTypeId: true },

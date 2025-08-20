@@ -1,5 +1,5 @@
-import { users } from ".prisma/client";
 import { hash, compare } from 'bcrypt'
+import { users } from '@prisma/client'
 
 import { db } from "../db/db";
 
