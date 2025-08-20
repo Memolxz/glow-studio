@@ -1,15 +1,7 @@
 import jwt from 'jsonwebtoken'
+import { users } from '@prisma/client'
 
 import { db } from "../db/db";
-
-type users = {
-    name: string;
-    id: number;
-    email: string;
-    password: string;
-    isAdmin: boolean;
-    deletedAt: Date | null;
-}
 
 export class JwtService {
   async generateJsonWebAccessToken(user: users) {

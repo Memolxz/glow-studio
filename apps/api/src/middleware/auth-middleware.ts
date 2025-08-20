@@ -1,14 +1,7 @@
 import jwt from 'jsonwebtoken'
 import { NextFunction, Request, Response } from "express";
+import { users } from '@prisma/client'
 
-type users = {
-    name: string;
-    id: number;
-    email: string;
-    password: string;
-    isAdmin: boolean;
-    deletedAt: Date | null;
-}
 
 
 export const jwtAuthMiddleware = async (req: Request, res: Response, next: NextFunction) => {
