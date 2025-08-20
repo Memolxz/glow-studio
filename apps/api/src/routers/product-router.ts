@@ -83,13 +83,13 @@ router.delete('/:id', isAdminMiddleware, async (req, res) => {
 });
 
 // Get recommendations for user
-router.get('/recommendations/:userId', jwtAuthMiddleware, async (req, res) => {
+router.get('/recommendations', jwtAuthMiddleware, async (req, res) => {
   try {
     if (!req.user){
       throw new Error('Not logged in');
     }
     
-    const userId = parseInt(req.params.userId);
+    const userId = req.user.id;
 
     // Users can only get their own recommendations
     if (req.user.id !== userId) {

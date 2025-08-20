@@ -1,5 +1,4 @@
 import { Router, Request, Response } from 'express';
-import { UserService } from '../services/user-service';
 
 import { AuthService } from "../services/auth-service";
 import { JwtService } from "../services/jwt-service";

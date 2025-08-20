@@ -1,4 +1,4 @@
-import { verify } from "jsonwebtoken";
+import jwt from 'jsonwebtoken'
 import { NextFunction, Request, Response } from "express";
 
 type users = {
@@ -21,7 +21,7 @@ export const jwtAuthMiddleware = async (req: Request, res: Response, next: NextF
   }
 
   try {
-    const decodedUser = verify(token, process.env.JWT_SECRET) as users;
+    const decodedUser = jwt.verify(token, process.env.JWT_SECRET) as users;
 
     if (!decodedUser.id || !decodedUser.email) {
       throw new Error("Token invalido!")
@@ -45,7 +45,7 @@ export const isAdminMiddleware = async (req: Request, res: Response, next: NextF
   }
 
   try {
-    const decodedUser = verify(token, process.env.JWT_SECRET) as users;
+    const decodedUser = jwt.verify(token, process.env.JWT_SECRET) as users;
 
     if (!decodedUser.id || !decodedUser.email) {
       throw new Error("Token invalido!")
