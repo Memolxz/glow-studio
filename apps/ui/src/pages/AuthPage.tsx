@@ -2,22 +2,28 @@ import { useState } from 'react';
 import ImgSlider from '../components/ImgSlider';
 import LoginForm from '../components/LoginForm';
 import RegisterForm from '../components/RegisterForm';
-import Footer from '../components/Footer';
 
 export default function AuthPage() {
     const [isLogin, setIsLogin] = useState(true);
 
     return (
         <div className="flex flex-col items-center bg-white min-h-screen">
-            <header className="w-full absolute top-14 left-0 z-50 bg-transparent">
-                <div className="max-w-[1100px] mx-auto py-3 flex items-center font-inter text-warmgray">
-                    <h1 className="flex-1 text-center text-4xl ml-6 font-bold tracking-wide text-inherit">
+                <div className="mt-10 mx-auto py-3 flex items-center font-inter text-warmgray">
+                    <h1 className="flex-1 text-center text-5xl font-bold tracking-wide text-inherit">
                     GLOW STUDIO
                     </h1>
+                    <div className="w-4 h-4 bg-warmgray rounded-full ml-4"></div>
+                    <h1 className="flex-1 text-center text-5xl ml-4 font-bold tracking-wide text-inherit">
+                    GLOW STUDIO
+                    </h1>
+                    <div className="w-4 h-4 bg-warmgray rounded-full ml-4"></div>
+                    <h1 className="flex-1 text-center text-5xl ml-4 font-bold tracking-wide text-inherit">
+                    GLOW STUDIO
+                    </h1>
+                    
                 </div>
-            </header>
             
-            <div className="relative flex w-[90%] h-[450px] overflow-hidden rounded-3xl mt-9 mb-4 bg-defaultbg">
+            <div className="relative flex w-[90%] h-[450px] overflow-hidden rounded-3xl mt-5 mb-4 bg-defaultbg">
                 <div
                     className={`absolute top-0 h-full w-1/2 transition-all duration-700 z-20 ${
                         isLogin ? 'left-0' : 'left-1/2'
@@ -35,7 +41,6 @@ export default function AuthPage() {
                     </div>
                 </div>
             </div>
-            <Footer />
         </div>
     );
 }

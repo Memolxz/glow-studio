@@ -30,8 +30,8 @@ const categories = [
 
 function ProductRecommendations({products}: {products: Product[]}) {
     return (
-        <div className="min-h-screen flex flex-col bg-defaultbg px-6 py-12">
-        <h1 className="text-4xl font-bold mb-8 text-center">
+        <div className="min-h-screen flex flex-col bg-white px-6 py-12">
+        <h1 className="text-4xl font-bold mb-8 text-center text-warmdarkgray">
             Recommended Products for You
         </h1>
 
@@ -44,19 +44,20 @@ function ProductRecommendations({products}: {products: Product[]}) {
 
             return (
             <div key={cat} className="mb-10">
-                <h2 className="text-2xl font-semibold capitalize mb-4">{cat}</h2>
-                <div className="flex gap-6 overflow-x-auto pb-4 scrollbar-hide">
+                <h2 className="text-2xl text-warmdarkgray font-semibold capitalize mb-4">{cat}</h2>
+                <div className="flex gap-6 overflow-x-auto scrollbar-hide">
                 {filtered.map((product) => (
                     <div
                     key={product.id}
-                    className="flex-shrink-0 w-40 rounded-xl border border-gray-200 bg-white shadow-sm hover:shadow-lg transition"
+                    className="flex-shrink-0 w-40 rounded-xl bg-defaultbg
+                                p-3 shadow-sm hover:shadow-lg transition"
                     >
                     <img
                         src={product.imageUrl}
                         alt={product.name}
                         className="w-full h-40 object-cover rounded-t-xl"
                     />
-                    <p className="text-center p-2 text-sm font-medium text-gray-700">
+                    <p className="text-center p-2 text-sm font-medium text-warmgray">
                         {product.name}
                     </p>
                     </div>

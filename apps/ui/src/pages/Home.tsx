@@ -5,6 +5,7 @@ import img2 from '../assets/modelo1.png';
 import img3 from '../assets/dior.jpg';
 import videoSrc from '../assets/video.mp4';
 import img4 from '../assets/modelo2.png';
+import { Link } from 'react-router-dom';
 
 export default function Home() {
     return (
@@ -28,15 +29,15 @@ export default function Home() {
                     <p className="mt-2 text-sm text-warmgray pr-5 font-inter">
                         Cada piel es única, y tu rutina también debería serlo. Nuestro sistema te ayuda a identificar tu tipo de piel y te recomienda productos específicos que se adaptan a tus necesidades.
                     </p>
-                    <button
+                    <Link to="/products"
                         type="submit"
                         className="w-[135px] mt-4 rounded-full bg-transparent px-5 py-2 border border-warmgray
-                        font-semibold text-warmgray text-sm font-inter
+                        font-semibold text-warmgray text-sm font-inter text-center
                         hover:bg-warmgray hover:text-defaultbg transition
                         focus:outline-none focus:ring-2 focus:ring-warmgray"
                     >
                         PRODUCTOS
-                    </button>
+                    </Link>
                 </div>
 
                 <div className="flex-1 overflow-hidden rounded-3xl">
@@ -48,7 +49,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className="flex w-[90%] h-[450px] rounded-3xl mt-5 mb-5 overflow-hidden bg-black">
+            <div className="flex w-[90%] h-[450px] rounded-3xl mt-5 mb-5 overflow-hidden bg-transparent">
                 <video
                     src={videoSrc}
                     className="w-full h-full object-cover"
@@ -75,15 +76,15 @@ export default function Home() {
                     <p className="mt-2 text-sm text-right text-warmgray pl-5 font-inter">
                         Descubrí cómo incorporar los productos a tu rutina, qué ingredientes buscar, y aprovechá al máximo cada momento de cuidado personal. Empezá a sentirte seguro con lo que tu piel necesita.
                     </p>
-                    <button
+                    <Link to="/routine"
                         type="submit"
                         className="w-[110px] mt-4 rounded-full bg-transparent px-4 py-2 border border-warmgray
-                        font-semibold text-warmgray text-sm font-inter
+                        font-semibold text-warmgray text-sm font-inter text-center
                         hover:bg-warmgray hover:text-defaultbg transition
                         focus:outline-none focus:ring-2 focus:ring-warmgray"
                     >
                         RUTINA
-                    </button>
+                    </Link>
                 </div>
             </div>
 

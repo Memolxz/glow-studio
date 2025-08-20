@@ -6,12 +6,12 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-transparent">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                <h2 className="text-center text-3xl font-thin font-inter text-warmgray">
-                    INICIAR SESIÓN
+                <h2 className="text-center text-3xl font-normal font-inter text-warmgray">
+                    Iniciar Sesión
                 </h2>
             </div>
 
-            <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <div className="mt-4 sm:mx-auto sm:w-full sm:max-w-sm">
                 <form action="#" method="POST" className="space-y-6" 
                 onSubmit={(e) => {
                     e.preventDefault();
@@ -24,7 +24,7 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
                             type="email"
                             required
                             autoComplete="email"
-                            placeholder="email"
+                            placeholder="Email"
                             className="block w-full rounded-full bg-white px-10 py-3
                             text-base text-warmgray font-inter
                             border-0
@@ -40,7 +40,7 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
                             type="password"
                             required
                             autoComplete="current-password"
-                            placeholder="contraseña"
+                            placeholder="Contraseña"
                             className="block w-full rounded-full bg-white px-10 py-3
                             text-base text-warmgray font-inter
                             border-0
@@ -57,7 +57,7 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
                             hover:bg-warmgray hover:text-defaultbg transition
                             focus:outline-none focus:ring-2 focus:ring-warmgray"
                         >
-                            INICIAR
+                            Iniciar
                         </button>
                     </div>
                 </form>

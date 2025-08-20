@@ -1,8 +1,6 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import img1 from '../assets/modelo6.png';
-import img2 from '../assets/modelo7.png';
-import img3 from '../assets/modelo8.png';
+import img from '../assets/modelo7.png';
 import RoutineLine from '../components/RoutineLine';
 
 export default function Routine() {
@@ -13,34 +11,14 @@ export default function Routine() {
             <div className="w-[90%] py-10 -mt-22">
                 <div className="w-full h-[450px] overflow-hidden rounded-3xl relative">
                     <img
-                        src={img2}
+                        src={img}
                         alt="Rhode"
                         className="w-full h-[500px] object-cover"
                     />
                 </div>
             </div>
 
-            <div className="flex w-[90%] h-[450px] gap-6 bg-defaultbg rounded-3xl mb-5 mt-5">
-                <div className="flex-1 overflow-hidden rounded-3xl">
-                    <img 
-                        src={img3}
-                        alt="Cuidado diario" 
-                        className="w-full h-full object-cover scale-105"
-                    />
-                </div>
-            </div>
-
             <RoutineLine />
-
-            <div className="flex w-[90%] h-[450px] gap-6 bg-defaultbg rounded-3xl mb-5 mt-5">
-                <div className="flex-1 overflow-hidden rounded-3xl">
-                    <img 
-                        src={img1}
-                        alt="Cuidado diario" 
-                        className="w-full h-full object-cover scale-105"
-                    />
-                </div>
-            </div>
 
             <div 
                 className="relative flex flex-col justify-center items-center w-[90%] h-[450px] rounded-3xl mb-5 mt-5 bg-cover bg-center overflow-hidden"
