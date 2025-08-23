@@ -34,6 +34,16 @@ router.get('/:id', async (req, res) => {
   }
 });
 
+// Get product by category
+router.get('/:category', async (req, res) => {
+  try {
+    const products = await productService.getProductsByCategory(req.params.category);
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch products by category' });
+  }
+});
+
 // Create product (admin only)
 router.post('/', isAdminMiddleware, async (req, res) => {
   try {

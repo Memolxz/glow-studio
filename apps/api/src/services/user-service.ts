@@ -85,19 +85,6 @@ export class UserService {
     }
   }
 
-  async assignSkinType(userId: number, skinTypeId: number) {
-    try {
-      const userSkinType = await db.userSkinType.create({
-        data: { userId, skinTypeId }
-      })
-
-      return userSkinType;
-    } catch (error) {
-      console.error(error);
-      throw new Error('')
-    }
-  }
-
   async createUser(body: CreateUserBody) {
     try {
       const existingUser = await db.users.findUnique({
@@ -200,6 +187,19 @@ export class UserService {
     } catch (error) {
       console.error(error);
       throw new Error(`Error al restaurar el usuario`);
+    }
+  }
+
+  async assignSkinType(userId: number, skinTypeId: number) {
+    try {
+      const userSkinType = await db.userSkinType.create({
+        data: { userId, skinTypeId }
+      })
+
+      return userSkinType;
+    } catch (error) {
+      console.error(error);
+      throw new Error('')
     }
   }
 

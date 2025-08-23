@@ -11,12 +11,6 @@ enum ProductCategoryType {
   TREATMENT
 }
 
-model ProductCategory {
-  id          Int       @id @default(autoincrement())
-  name        ProductCategoryType    @unique
-  products    Product[]
-}
-
 model Product {
   id                 Int                 @id @default(autoincrement())
   name               String
@@ -25,15 +19,12 @@ model Product {
   officialUrl        String
   imageUrl           String?
   price              Decimal?
-  categoryId         Int
+  category           ProductCategoryType
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
   
-  category           ProductCategory     @relation(fields: [categoryId], references: [id])
   productIngredients ProductIngredient[]
   recommendations    Recommendation[]
-
-  @@index([categoryId])
 }
 
 model ProductIngredient {
