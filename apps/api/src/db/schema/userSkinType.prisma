@@ -1,9 +1,9 @@
-model userSkinType {
+model UserSkinType {
   userId     Int
   skinTypeId Int
 
-  skinType   skinType @relation(fields: [skinTypeId], references: [id])
-  users      users    @relation(fields: [userId], references: [id])
+  skinType   SkinType @relation(fields: [skinTypeId], references: [id])
+  users      Users    @relation(fields: [userId], references: [id])
 
   @@id([userId, skinTypeId])
 }

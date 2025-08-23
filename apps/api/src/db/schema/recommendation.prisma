@@ -1,12 +1,12 @@
-model recommendation {
+model Recommendation {
   id              Int      @id @default(autoincrement())
   userId          Int
   productId       Int
-  reason          String?
+  // reason          ingredients           corte mostrar q ingredientes le hacen bien
   createdAt       DateTime @default(now())
   
-  user    users   @relation(fields: [userId], references: [id])
-  product product @relation(fields: [productId], references: [id])
+  user    Users   @relation(fields: [userId], references: [id])
+  product Product @relation(fields: [productId], references: [id])
 
   @@index([userId])
   @@index([productId])
