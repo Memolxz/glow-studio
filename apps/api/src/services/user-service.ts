@@ -217,6 +217,40 @@ export class UserService {
     }
   }
 
+  async updateSkinTypes(userId: number, skinTypeIds: number[]) {
+    try {
+      const currentSkinTypes = await db.userSkinType.findMany({
+        where: { userId },
+        select: { skinTypeId: true },
+      });
+      
+      const currentSkinTypeIds = currentSkinTypes.map(s => s.skinTypeId);
+      const toAdd = skinTypeIds.filter(id => !currentSkinTypeIds.includes(id));
+      const toRemove = currentSkinTypeIds.filter(id => !skinTypeIds.includes(id));
+
+      await db.userSkinType.deleteMany({
+        where: {
+          userId,
+          skinTypeId: { in: toRemove },
+        },
+      });
+      const created = await Promise.all(toAdd.map(id => 
+        db.userSkinType.create({
+          data: { userId, skinTypeId: id },
+        })
+      ));
+      await db.recommendation.deleteMany({
+        where: { userId }
+      });
+
+      return created;
+    } 
+    catch (error) {
+      console.error(error);
+      throw new Error(`Error al actualizar tipos de piel`);
+    }
+  }
+
   async getUserSkinTypes(userId: number) {
     const relations = await db.userSkinType.findMany({
       where: { userId },
