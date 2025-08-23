@@ -1,4 +1,5 @@
 import { db } from '../db/db';
+import { productCategoryType } from '@prisma/client';
 
 interface CreateProductDTO {
   name: string;
@@ -7,7 +8,7 @@ interface CreateProductDTO {
   officialUrl: string;
   imageUrl?: string;
   price?: number;
-  categoryId: number;
+  category: productCategoryType;
   ingredients: Array<{
     ingredientId: number;
     concentration?: number;
@@ -54,6 +55,28 @@ export class ProductService {
     }
   }
 
+  async getProductsByCategory(category: string) {
+    try {
+
+      if (!Object.values(productCategoryType).includes(category as productCategoryType)) {
+        throw new Error("Categoría inválida");
+      }
+
+      const products = await db.product.findMany({
+        where: { category },
+        include: {
+          category: true,
+          productIngredients: { include: { ingredient: true } }
+        }
+      });
+
+      return products;
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error al obtener productos por categoría");
+    }
+  }
+
   async createProduct(data: CreateProductDTO) {
     try {
       const newProduct = await db.product.create({
@@ -64,7 +87,7 @@ export class ProductService {
           officialUrl: data.officialUrl,
           imageUrl: data.imageUrl,
           price: data.price,
-          categoryId: data.categoryId,
+          category: data.category,
           productIngredients: {
             create: data.ingredients.map(ing => ({
               ingredientId: ing.ingredientId,
@@ -92,7 +115,7 @@ export class ProductService {
           ...(data.officialUrl && { officialUrl: data.officialUrl }),
           ...(data.imageUrl !== undefined && { imageUrl: data.imageUrl }),
           ...(data.price !== undefined && { price: data.price }),
-          ...(data.categoryId && { categoryId: data.categoryId }),
+          ...(data.category && { categoryId: data.category }),
           ...(data.active !== undefined && { active: data.active }),
         }
       });

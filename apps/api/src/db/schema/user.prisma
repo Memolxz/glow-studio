@@ -1,4 +1,4 @@
-model users {
+model Users {
   id           Int         @id @default(autoincrement())
   name         String
   email        String         @unique(map: "users_email_unique")
@@ -6,6 +6,6 @@ model users {
   isAdmin      Boolean        @default(false)
   deletedAt DateTime?
   
-  userSkinType userSkinType[]
-  recommendations recommendation[]
+  userSkinType UserSkinType[]
+  recommendations Recommendation[]
 }

@@ -1,4 +1,4 @@
-enum productCategoryType {
+enum ProductCategoryType {
   SERUM
   CREAM
   CLEANSER
@@ -11,13 +11,7 @@ enum productCategoryType {
   TREATMENT
 }
 
-model productCategory {
-  id          Int       @id @default(autoincrement())
-  name        productCategoryType    @unique
-  products    product[]
-}
-
-model product {
+model Product {
   id                 Int                 @id @default(autoincrement())
   name               String
   brand              String
@@ -25,23 +19,20 @@ model product {
   officialUrl        String
   imageUrl           String?
   price              Decimal?
-  categoryId         Int
+  category           ProductCategoryType
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
   
-  category           productCategory     @relation(fields: [categoryId], references: [id])
-  productIngredients productIngredient[]
-  recommendations    recommendation[]
-
-  @@index([categoryId])
+  productIngredients ProductIngredient[]
+  recommendations    Recommendation[]
 }
 
-model productIngredient {
+model ProductIngredient {
   productId     Int
   ingredientId  Int
   
-  product    product    @relation(fields: [productId], references: [id])
-  ingredient ingredients @relation(fields: [ingredientId], references: [id])
+  product    Product    @relation(fields: [productId], references: [id])
+  ingredient Ingredients @relation(fields: [ingredientId], references: [id])
   
   @@id([productId, ingredientId])
   @@index([ingredientId])

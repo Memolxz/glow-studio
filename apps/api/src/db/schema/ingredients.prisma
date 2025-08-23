@@ -1,7 +1,7 @@
-model ingredients {
+model Ingredients {
   id   Int @id @default(autoincrement())
   name String
 
-  ingredientEffect ingredientEffect[]
-  productIngredient productIngredient[]
+  ingredientEffect IngredientEffect[]
+  productIngredient ProductIngredient[]
 }
