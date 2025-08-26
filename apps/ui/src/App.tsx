@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import SkinSelection from "./pages/Selection"
 import AuthLayout from "./pages/AuthPage"
 import Products from "./pages/Products"
@@ -11,6 +11,7 @@ import RecommendationsPage from "./pages/Recommendations"
 export default function App() {
     return (
     <Routes>
+      <Route path="/" element={<Navigate to="/home" replace />} />
       <Route path="/selection" element={<SkinSelection />} />
       <Route path="/register" element={<AuthLayout />} />
       <Route path="/products" element={<Products />} />
