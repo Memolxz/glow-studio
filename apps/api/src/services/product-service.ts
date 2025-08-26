@@ -1,5 +1,5 @@
 import { db } from '../db/db';
-import { productCategoryType } from '@prisma/client';
+import { ProductCategoryType } from '@prisma/client';
 
 interface CreateProductDTO {
   name: string;
@@ -8,7 +8,7 @@ interface CreateProductDTO {
   officialUrl: string;
   imageUrl?: string;
   price?: number;
-  category: productCategoryType;
+  category: ProductCategoryType;
   ingredients: Array<{
     ingredientId: number;
     concentration?: number;
@@ -55,10 +55,10 @@ export class ProductService {
     }
   }
 
-  async getProductsByCategory(category: string) {
+  async getProductsByCategory(category: ProductCategoryType) {
     try {
 
-      if (!Object.values(productCategoryType).includes(category as productCategoryType)) {
+      if (!Object.values(ProductCategoryType).includes(category as ProductCategoryType)) {
         throw new Error("Categoría inválida");
       }
 

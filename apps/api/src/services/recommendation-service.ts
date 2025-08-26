@@ -1,11 +1,11 @@
 import { db } from '../db/db';
-import { product } from '@prisma/client';
+import { Product, ProductCategoryType } from '@prisma/client';
 
 interface UserSkinType {
   skinTypeId: number;
 }
 
-type ProductWithRelations = product & {
+type ProductWithRelations = Product & {
   productIngredients: Array<{
     ingredient: {
       ingredientEffect: Array<{
@@ -69,6 +69,29 @@ export class RecommendationService {
     try {
       const existing = await db.recommendation.findMany({
         where: { userId },
+        include: { product: true },
+      });
+
+      if (existing.length > 0) {
+        return existing;
+      }
+
+      return await this.refreshRecommendations(userId);
+    }
+    catch(error){
+      console.error(error);
+      throw new Error(`Error al obtener recomendaciones`);
+    }
+  }
+
+  async getRecommendationsByCategory(userId: number, category: ProductCategoryType) {
+    try {
+      const existing = await db.recommendation.findMany({
+        where: { userId,
+          product: {
+            category: category,
+          },
+        },
         include: { product: true },
       });
 

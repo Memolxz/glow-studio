@@ -1,10 +1,10 @@
 import jwt from 'jsonwebtoken'
-import { users } from '@prisma/client'
+import { Users } from '@prisma/client'
 
 import { db } from "../db/db";
 
 export class JwtService {
-  async generateJsonWebAccessToken(user: users) {
+  async generateJsonWebAccessToken(user: Users) {
     try {
       const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1hr' })
       return token;
@@ -14,7 +14,7 @@ export class JwtService {
     }
   }
 
-  async generateJsonWebRefreshToken(user: users) {
+  async generateJsonWebRefreshToken(user: Users) {
     try {
       const token = jwt.sign({ id: user.id }, process.env.JWT_REFRESH_SECRET, { expiresIn: '30d' })
       return token;

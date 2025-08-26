@@ -1,5 +1,5 @@
 import { hash, compare } from 'bcrypt'
-import { users } from '@prisma/client'
+import { Users } from '@prisma/client'
 
 import { db } from "../db/db";
 
@@ -110,7 +110,7 @@ export class UserService {
     }
   }
 
-  async updateUser(body: users) {
+  async updateUser(body: Users) {
     try {
 
       const existingUser = await db.users.findFirst({
