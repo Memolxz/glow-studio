@@ -1,4 +1,4 @@
-import { skinType } from ".prisma/client";
+import { SkinType } from "@prisma/client";
 
 import { db } from "../db/db";
 
@@ -52,7 +52,7 @@ export class SkinTypeService {
     }
   }
 
-  async updateSkinType(body: skinType) {
+  async updateSkinType(body: SkinType) {
     try {
       const existingSkinType = await db.skinType.findFirst({
         where: {

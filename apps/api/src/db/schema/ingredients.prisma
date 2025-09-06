@@ -4,4 +4,5 @@ model Ingredients {
 
   ingredientEffect IngredientEffect[]
   productIngredient ProductIngredient[]
+  recommendationIngredients RecommendationIngredient[]
 }

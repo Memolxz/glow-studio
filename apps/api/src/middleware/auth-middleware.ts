@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { NextFunction, Request, Response } from "express";
-import { users } from '@prisma/client'
+import { Users } from '@prisma/client'
 
 
 
@@ -14,7 +14,7 @@ export const jwtAuthMiddleware = async (req: Request, res: Response, next: NextF
   }
 
   try {
-    const decodedUser = jwt.verify(token, process.env.JWT_SECRET) as users;
+    const decodedUser = jwt.verify(token, process.env.JWT_SECRET) as Users;
 
     if (!decodedUser.id || !decodedUser.email) {
       throw new Error("Token invalido!")
@@ -38,7 +38,7 @@ export const isAdminMiddleware = async (req: Request, res: Response, next: NextF
   }
 
   try {
-    const decodedUser = jwt.verify(token, process.env.JWT_SECRET) as users;
+    const decodedUser = jwt.verify(token, process.env.JWT_SECRET) as Users;
 
     if (!decodedUser.id || !decodedUser.email) {
       throw new Error("Token invalido!")
