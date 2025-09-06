@@ -9,7 +9,7 @@ import exfoliant1 from "../assets/producto2.png";
 import essence1 from "../assets/producto3.png";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import img1 from "../assets/modelo5.jpg"
+import img1 from "../assets/modelo11.jpg"
 
 type Product = {
     id: number;
@@ -44,11 +44,11 @@ function ProductRecommendations({products}: {products: Product[]}) {
                         />
                     </div>
                 </div>
-            <h1 className="text-4xl font-bold mb-8 text-center text-darkblue">
+
+            <div className="items-start justify-start w-[90%]">
+            <h1 className="text-4xl font-bold mb-8 text-start text-darkblue">
                 Recommended Products for You
             </h1>
-
-            <div className="items-start justify-start ml-10 w-[90%]">
                 {categories.map((cat) => {
                     const filtered = products.filter(
                     (p) => p.category.toLowerCase() === cat
@@ -59,18 +59,19 @@ function ProductRecommendations({products}: {products: Product[]}) {
                     return (
                     <div key={cat} className="mb-10">
                         <h2 className="text-2xl text-darkblue font-semibold capitalize mb-4">{cat}</h2>
-                        <div className="flex items-center gap-6 scrollbar-hide rounded-2xl bg-white h-[150px]">
+                        <div className="flex gap-6 overflow-x-auto scrollbar-hide">
                             {filtered.map((product) => (
                             <div
                                 key={product.id}
-                                className="flex flex-col h-full rounded-xl p-3 shadow-sm hover:shadow-lg
-                                            bg-rectangles transition items-center justify-center">
+                                className="flex flex-col justify-between items-center 
+                                            w-[250px] h-[320px] p-6 rounded-2xl bg-rectangles 
+                                            shadow-sm hover:shadow-lg transition">
                                 <img
                                     src={product.imageUrl}
                                     alt={product.name}
-                                    className="w-auto h-[85%] object-cover rounded-t-xl"
+                                    className="w-auto h-[85%] object-contain rounded-t-xl"
                                 />
-                                <p className="text-center p-2 text-sm font-medium text-black">
+                                <p className="text-center p-2 text-sm font-semibold text-darkblue">
                                     {product.name}
                                 </p>
                             </div>
@@ -80,14 +81,50 @@ function ProductRecommendations({products}: {products: Product[]}) {
                     );
                 })}
             </div>
-            </div>
             <Footer />
+            </div>
         </div>
     );
 }
 
 export default function RecommendationsPage() {
     const products = [
+        { id: 1, name: "Hydrating Serum", imageUrl: serum1, category: "serum" },
+        { id: 2, name: "Gentle Toner", imageUrl: toner1, category: "toner" },
+        { id: 3, name: "Foaming Cleanser", imageUrl: cleanser1, category: "cleanser" },
+        { id: 4, name: "Soothing Lotion", imageUrl: lotion1, category: "lotion" },
+        { id: 5, name: "SPF 50 Sunscreen", imageUrl: sunscreen1, category: "sunscreen" },
+        { id: 6, name: "Hydrating Mask", imageUrl: mask1, category: "mask" },
+        { id: 7, name: "Moisturizing Cream", imageUrl: moisturizer1, category: "moisturizer" },
+        { id: 8, name: "Exfoliating Scrub", imageUrl: exfoliant1, category: "exfoliant" },
+        { id: 9, name: "Brightening Essence", imageUrl: essence1, category: "essence" },
+        { id: 1, name: "Hydrating Serum", imageUrl: serum1, category: "serum" },
+        { id: 2, name: "Gentle Toner", imageUrl: toner1, category: "toner" },
+        { id: 3, name: "Foaming Cleanser", imageUrl: cleanser1, category: "cleanser" },
+        { id: 4, name: "Soothing Lotion", imageUrl: lotion1, category: "lotion" },
+        { id: 5, name: "SPF 50 Sunscreen", imageUrl: sunscreen1, category: "sunscreen" },
+        { id: 6, name: "Hydrating Mask", imageUrl: mask1, category: "mask" },
+        { id: 7, name: "Moisturizing Cream", imageUrl: moisturizer1, category: "moisturizer" },
+        { id: 8, name: "Exfoliating Scrub", imageUrl: exfoliant1, category: "exfoliant" },
+        { id: 9, name: "Brightening Essence", imageUrl: essence1, category: "essence" },
+        { id: 1, name: "Hydrating Serum", imageUrl: serum1, category: "serum" },
+        { id: 2, name: "Gentle Toner", imageUrl: toner1, category: "toner" },
+        { id: 3, name: "Foaming Cleanser", imageUrl: cleanser1, category: "cleanser" },
+        { id: 4, name: "Soothing Lotion", imageUrl: lotion1, category: "lotion" },
+        { id: 5, name: "SPF 50 Sunscreen", imageUrl: sunscreen1, category: "sunscreen" },
+        { id: 6, name: "Hydrating Mask", imageUrl: mask1, category: "mask" },
+        { id: 7, name: "Moisturizing Cream", imageUrl: moisturizer1, category: "moisturizer" },
+        { id: 8, name: "Exfoliating Scrub", imageUrl: exfoliant1, category: "exfoliant" },
+        { id: 9, name: "Brightening Essence", imageUrl: essence1, category: "essence" },
+        { id: 1, name: "Hydrating Serum", imageUrl: serum1, category: "serum" },
+        { id: 2, name: "Gentle Toner", imageUrl: toner1, category: "toner" },
+        { id: 3, name: "Foaming Cleanser", imageUrl: cleanser1, category: "cleanser" },
+        { id: 4, name: "Soothing Lotion", imageUrl: lotion1, category: "lotion" },
+        { id: 5, name: "SPF 50 Sunscreen", imageUrl: sunscreen1, category: "sunscreen" },
+        { id: 6, name: "Hydrating Mask", imageUrl: mask1, category: "mask" },
+        { id: 7, name: "Moisturizing Cream", imageUrl: moisturizer1, category: "moisturizer" },
+        { id: 8, name: "Exfoliating Scrub", imageUrl: exfoliant1, category: "exfoliant" },
+        { id: 9, name: "Brightening Essence", imageUrl: essence1, category: "essence" },
         { id: 1, name: "Hydrating Serum", imageUrl: serum1, category: "serum" },
         { id: 2, name: "Gentle Toner", imageUrl: toner1, category: "toner" },
         { id: 3, name: "Foaming Cleanser", imageUrl: cleanser1, category: "cleanser" },

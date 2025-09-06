@@ -25,8 +25,8 @@ export default function RegisterForm({ onToggle }: { onToggle: () => void }) {
                             required
                             autoComplete="name"
                             placeholder="Nombre Completo"
-                            className="block w-full rounded-full bg-defaultbg px-10 py-3
-                            text-base text-rectangles font-inter
+                            className="block w-full rounded-full bg-white px-10 py-3
+                            text-base text-darkblue font-inter
                             border-0
                             placeholder:text-darkblue
                             focus:outline-none focus:ring-2 focus:ring-darkblue"
@@ -41,8 +41,8 @@ export default function RegisterForm({ onToggle }: { onToggle: () => void }) {
                             required
                             autoComplete="email"
                             placeholder="Email"
-                            className="block w-full rounded-full bg-defaultbg px-10 py-3
-                            text-base text-rectangles font-inter
+                            className="block w-full rounded-full bg-white px-10 py-3
+                            text-base text-darkblue font-inter
                             border-0
                             placeholder:text-darkblue
                             focus:outline-none focus:ring-2 focus:ring-darkblue"
@@ -57,8 +57,8 @@ export default function RegisterForm({ onToggle }: { onToggle: () => void }) {
                             required
                             autoComplete="current-password"
                             placeholder="Contraseña"
-                            className="block w-full rounded-full bg-defaultbg px-10 py-3
-                            text-base text-rectangles font-inter
+                            className="block w-full rounded-full bg-white px-10 py-3
+                            text-base text-darkblue font-inter
                             border-0
                             placeholder:text-darkblue
                             focus:outline-none focus:ring-2 focus:ring-darkblue"

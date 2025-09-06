@@ -5,9 +5,9 @@ import tiktokIcon from "../assets/tiktok.png";
 
 export default function Footer() {
     return (
-        <footer className="relative flex justify-between items-center w-[90%] rounded-3xl mt-5 mb-10 bg-defaultbg h-[165px] px-6">
+        <footer className="relative flex justify-between items-center w-[90%] rounded-3xl mt-5 mb-10 bg-rectangles h-[165px] px-6">
 
-        <div className="text-rectangles font-bold text-xl pl-10 mb-8">
+        <div className="text-darkblue font-bold text-xl pl-10 mb-8">
             GLOW STUDIO
         </div>
 
@@ -19,8 +19,8 @@ export default function Footer() {
         </div>
 
         <div className="absolute bottom-6 left-0 right-0 px-6">
-            <hr className="border-t border-rectangles -mb-2" />
-            <div className="text-center text-rectangles text-xs select-none mt-8 ">
+            <hr className="border-t border-darkblue -mb-2" />
+            <div className="text-center text-darkblue text-xs select-none mt-8 ">
             &copy; 2025 Glow Studio. Todos los derechos reservados.
             </div>
         </div>

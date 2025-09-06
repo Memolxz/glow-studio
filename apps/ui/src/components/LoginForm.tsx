@@ -25,7 +25,7 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
                             required
                             autoComplete="email"
                             placeholder="Email"
-                            className="block w-full rounded-full bg-defaultbg px-10 py-3
+                            className="block w-full rounded-full bg-white px-10 py-3
                             text-base text-darkblue font-inter
                             border-0
                             placeholder:text-darkblue
@@ -41,7 +41,7 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
                             required
                             autoComplete="current-password"
                             placeholder="Contraseña"
-                            className="block w-full rounded-full bg-defaultbg px-10 py-3
+                            className="block w-full rounded-full bg-white px-10 py-3
                             text-base text-darkblue font-inter
                             border-0
                             placeholder:text-darkblue
