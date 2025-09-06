@@ -5,7 +5,7 @@ import RoutineLine from '../components/RoutineLine';
 
 export default function Routine() {
     return (
-        <div className="flex flex-col items-center bg-white min-h-screen relative font-inter">
+        <div className="flex flex-col items-center bg-defaultbg min-h-screen relative font-inter">
             <Header />
 
             <div className="w-[90%] py-10 -mt-22">
@@ -34,7 +34,7 @@ export default function Routine() {
                     type="submit"
                     className="w-24 mt-6 rounded-full bg-transparent px-6 py-2 border border-white
                             font-semibold text-white text-sm font-inter
-                            hover:bg-white hover:text-[#676161] transition-colors
+                            hover:bg-defaultbg hover:text-[#676161] transition-colors
                             focus:outline-none focus:ring-2 focus:ring-white z-10"
                 >
                     PERFIL

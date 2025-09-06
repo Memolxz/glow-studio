@@ -42,7 +42,7 @@ export default function SkinSelection() {
 
     return (
         <div className="min-h-screen flex flex-col items-center bg-defaultbg font-inter py-16">
-        <h1 className="text-4xl font-bold text-warmdarkgray mb-12 text-center">
+        <h1 className="text-4xl font-bold text-darkblue mb-12 text-center">
             Choose Your Skin Condition(s)
         </h1>
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mb-12">
@@ -58,14 +58,14 @@ export default function SkinSelection() {
                 />
                 <label
                 htmlFor={`skin-${type.label}`}
-                className="flex flex-col items-center justify-center w-40 h-40 border border-gray-200 bg-white rounded-xl shadow-sm 
+                className="flex flex-col items-center justify-center w-40 h-40 border border-gray-200 bg-defaultbg rounded-xl shadow-sm 
                             hover:shadow-lg cursor-pointer transition 
                             peer-checked:border-blue-600 peer-checked:bg-defaultbg peer-checked:shadow-md"
                 >
-                <p className="text-center text-sm font-medium text-warmdarkgray">
+                <p className="text-center text-sm font-medium text-darkblue">
                     {type.label}
                 </p>
-                <p className="mt-1 text-center text-xs text-warmgray">{type.desc}</p>
+                <p className="mt-1 text-center text-xs text-rectangles">{type.desc}</p>
                 </label>
             </div>
             ))}
@@ -77,8 +77,8 @@ export default function SkinSelection() {
             className={`rounded-full px-4 py-2 border-2 text-base font-semibold font-inter
             ${
                 selected.length === 0
-                ? "border-warmgray text-warmgray cursor-not-allowed bg-transparent"
-                : "border-warmgray text-warmgray hover:bg-warmgray hover:text-defaultbg cursor-pointer transition"
+                ? "border-rectangles text-rectangles cursor-not-allowed bg-transparent"
+                : "border-rectangles text-rectangles hover:bg-rectangles hover:text-defaultbg cursor-pointer transition"
             }`}
         >
             Continue

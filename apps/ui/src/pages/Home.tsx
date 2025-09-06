@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 
 export default function Home() {
     return (
-        <div className="flex flex-col items-center bg-white min-h-screen relative font-inter">
+        <div className="flex flex-col items-center bg-defaultbg relative font-inter">
             <Header />
 
             <div className="w-[90%] py-10 -mt-22">
@@ -23,19 +23,19 @@ export default function Home() {
             </div>
 
 
-            <div className="flex w-[90%]  sm:h-[300px] md:h-[400px] lg:h-[450px] bg-defaultbg rounded-3xl mb-5">
+            <div className="flex w-[90%]  sm:h-[300px] md:h-[400px] lg:h-[450px] bg-[#E5B3AB] rounded-3xl mb-5">
                 <div className="flex-1 p-14 flex flex-col justify-end">
-                    <h2 className="text-2xl sm:text-xl font-bold text-warmgray font-inter">RECORRE LO DESTACADO</h2>
-                    <p className="mt-2 text-sm text-warmgray font-inter 
-                                    max-w-[90%] sm:max-w-[220px] text-left">
+                    <h2 className="text-2xl sm:text-xl font-bold text-rectangles font-inter">RECORRE LO DESTACADO</h2>
+                    <p className="mt-2 text-sm text-rectangles font-inter 
+                                    max-w-[90%] text-left">
                         Cada piel es única, y tu rutina también debería serlo. Nuestro sistema te ayuda a identificar tu tipo de piel y te recomienda productos específicos que se adaptan a tus necesidades.
                     </p>
                     <Link to="/products"
                         type="submit"
-                        className="w-[135px] mt-4 rounded-full bg-transparent px-5 py-2 border border-warmgray
-                        font-semibold text-warmgray text-sm font-inter text-center
-                        hover:bg-warmgray hover:text-defaultbg transition
-                        focus:outline-none focus:ring-2 focus:ring-warmgray"
+                        className="w-[135px] mt-4 rounded-full bg-transparent px-5 py-2 border border-rectangles
+                        font-semibold text-rectangles text-sm font-inter text-center
+                        hover:bg-rectangles hover:text-defaultbg transition
+                        focus:outline-none focus:ring-2 focus:ring-rectangles"
                     >
                         PRODUCTOS
                     </Link>
@@ -73,22 +73,23 @@ export default function Home() {
                 </div>
 
                 <div className="flex-1 p-14 flex flex-col 
-                justify-end lg:items-end md:items-end 
-                sm:justify-center sm:items-center">
-                    <h2 className="text-2xl font-bold text-warmgray 
+                lg:justify-end lg:items-end md:justify-end md:items-end 
+                sm:justify-center sm:items-center xs:i">
+                    <h2 className="text-2xl font-bold text-rectangles 
                                 lg:text-right md:text-right sm:text-center font-inter">
                         CUIDADO DIARIO
                     </h2>
-                    <p className="mt-2 text-sm text-warmgray pl-5 font-inter 
+                    <p className="mt-2 text-sm text-rectangles pl-5 font-inter 
                                 lg:text-right md:text-right sm:text-center lg:w-[75%] md:w-[100%] sm:w-[60%] xs:w-[40%]">
-                        Descubrí cómo incorporar los productos a tu rutina, qué ingredientes buscar, y aprovechá al máximo cada momento de cuidado personal. Empezá a sentirte seguro con lo que tu piel necesita.
+                        Descubrí cómo incorporar los productos a tu rutina, qué ingredientes buscar, y aprovechá al máximo cada momento de cuidado personal. 
+                        Empezá a sentirte seguro con lo que tu piel necesita.
                     </p>
                     <Link to="/routine"
                         type="submit"
-                        className="w-full mt-4 rounded-full bg-transparent px-4 py-2 border border-warmgray
-                                font-semibold text-warmgray text-sm font-inter text-center
-                                hover:bg-warmgray hover:text-defaultbg transition
-                                focus:outline-none focus:ring-2 focus:ring-warmgray">
+                        className="w-[135px] mt-4 rounded-full bg-transparent px-4 py-2 border border-rectangles
+                                font-semibold text-rectangles text-sm font-inter text-center
+                                hover:bg-rectangles hover:text-defaultbg transition
+                                focus:outline-none focus:ring-2 focus:ring-rectangles">
                         RUTINA
                     </Link>
                 </div>
@@ -109,7 +110,7 @@ export default function Home() {
                     type="submit"
                     className="w-24 mt-6 rounded-full bg-transparent px-6 py-2 border border-white
                             font-semibold text-white text-sm font-inter
-                            hover:bg-white hover:text-[#676161] transition-colors
+                            hover:bg-defaultbg hover:text-[#676161] transition-colors
                             focus:outline-none focus:ring-2 focus:ring-white z-10"
                 >
                     PERFIL

@@ -4,7 +4,7 @@ import img from '../assets/imagen.png';
 
 export default function ContactUs() {
     return (
-        <div className="flex flex-col justify-center items-center bg-white min-h-screen">
+        <div className="flex flex-col justify-center items-center bg-defaultbg min-h-screen">
             <Header />
 
             <div className="w-[90%] mt-6">

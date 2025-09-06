@@ -7,14 +7,15 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        inter: ['inter', 'sans-serif'],
-        poppins: ['poppins', 'sans-serif'],
-        nunito: ['nunito', 'sans-serif'],
+        inter: ['inter'],
+        poppins: ['poppins'],
+        nunito: ['nunito'],
       },
       colors: {
-        warmgray: '#9D9898',
-        warmdarkgray: '#6E6969',
-        defaultbg: '#F3F3F3',
+        rectangles: '#C4DFDF',
+        hovertext: '#182225',
+        darkblue: '#375358',
+        defaultbg: '#FFFFFF',
       }
     },
   },

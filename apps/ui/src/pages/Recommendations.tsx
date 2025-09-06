@@ -1,13 +1,15 @@
-import serum1 from "../assets/serum1.png";
-import toner1 from "../assets/toner1.png";
-import cleanser1 from "../assets/cleanser1.png";
-import lotion1 from "../assets/lotion1.png";
-import sunscreen1 from "../assets/sunscreen1.png";
-import mask1 from "../assets/mask1.png";
-import moisturizer1 from "../assets/moisturizer1.png";
-import exfoliant1 from "../assets/exfoliant1.png";
-import essence1 from "../assets/essence1.png";
+import serum1 from "../assets/producto1.png";
+import toner1 from "../assets/producto2.png";
+import cleanser1 from "../assets/producto3.png";
+import lotion1 from "../assets/producto1.png";
+import sunscreen1 from "../assets/producto2.png";
+import mask1 from "../assets/producto3.png";
+import moisturizer1 from "../assets/producto1.png";
+import exfoliant1 from "../assets/producto2.png";
+import essence1 from "../assets/producto3.png";
 import Footer from "../components/Footer";
+import Header from "../components/Header";
+import img1 from "../assets/modelo5.jpg"
 
 type Product = {
     id: number;
@@ -30,43 +32,56 @@ const categories = [
 
 function ProductRecommendations({products}: {products: Product[]}) {
     return (
-        <div className="min-h-screen flex flex-col bg-white px-6 py-12">
-        <h1 className="text-4xl font-bold mb-8 text-center text-warmdarkgray">
-            Recommended Products for You
-        </h1>
-
-        {categories.map((cat) => {
-            const filtered = products.filter(
-            (p) => p.category.toLowerCase() === cat
-            );
-
-            if (filtered.length === 0) return null;
-
-            return (
-            <div key={cat} className="mb-10">
-                <h2 className="text-2xl text-warmdarkgray font-semibold capitalize mb-4">{cat}</h2>
-                <div className="flex gap-6 overflow-x-auto scrollbar-hide">
-                {filtered.map((product) => (
-                    <div
-                    key={product.id}
-                    className="flex-shrink-0 w-40 rounded-xl bg-defaultbg
-                                p-3 shadow-sm hover:shadow-lg transition"
-                    >
-                    <img
-                        src={product.imageUrl}
-                        alt={product.name}
-                        className="w-full h-40 object-cover rounded-t-xl"
-                    />
-                    <p className="text-center p-2 text-sm font-medium text-warmgray">
-                        {product.name}
-                    </p>
+        <div className="bg-white relative font-inter">
+            <div className="flex flex-col items-center">
+                <Header />
+                <div className="w-[90%] py-10 -mt-22">
+                    <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
+                        <img
+                            src={img1}
+                            alt="Rhode"
+                            className="w-full object-cover"
+                        />
                     </div>
-                ))}
                 </div>
+            <h1 className="text-4xl font-bold mb-8 text-center text-darkblue">
+                Recommended Products for You
+            </h1>
+
+            <div className="items-start justify-start ml-10 w-[90%]">
+                {categories.map((cat) => {
+                    const filtered = products.filter(
+                    (p) => p.category.toLowerCase() === cat
+                    );
+
+                    if (filtered.length === 0) return null;
+
+                    return (
+                    <div key={cat} className="mb-10">
+                        <h2 className="text-2xl text-darkblue font-semibold capitalize mb-4">{cat}</h2>
+                        <div className="flex items-center gap-6 scrollbar-hide rounded-2xl bg-white h-[150px]">
+                            {filtered.map((product) => (
+                            <div
+                                key={product.id}
+                                className="flex flex-col h-full rounded-xl p-3 shadow-sm hover:shadow-lg
+                                            bg-rectangles transition items-center justify-center">
+                                <img
+                                    src={product.imageUrl}
+                                    alt={product.name}
+                                    className="w-auto h-[85%] object-cover rounded-t-xl"
+                                />
+                                <p className="text-center p-2 text-sm font-medium text-black">
+                                    {product.name}
+                                </p>
+                            </div>
+                            ))}
+                        </div>
+                    </div>
+                    );
+                })}
             </div>
-            );
-        })}
-        <Footer />
+            </div>
+            <Footer />
         </div>
     );
 }

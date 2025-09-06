@@ -11,7 +11,7 @@ export default function FAQ() {
     ];
 
     return (
-        <div className="min-h-screen flex flex-col items-center bg-white">
+        <div className="min-h-screen flex flex-col items-center bg-defaultbg">
         <div
             className="w-full h-[450px] bg-cover bg-center relative flex flex-col items-center justify-center"
             style={{
@@ -27,7 +27,7 @@ export default function FAQ() {
                 {items.map((item, idx) => (
                 <div
                     key={idx}
-                    className="flex flex-col items-center justify-center w-40 h-40 border border-gray-200 bg-white rounded-xl shadow-sm hover:shadow-lg cursor-pointer transition"
+                    className="flex flex-col items-center justify-center w-40 h-40 border border-gray-200 bg-defaultbg rounded-xl shadow-sm hover:shadow-lg cursor-pointer transition"
                 >
                     <div className="text-4xl">{item.icon}</div>
                     <p className="mt-4 text-center text-sm font-medium text-gray-700">

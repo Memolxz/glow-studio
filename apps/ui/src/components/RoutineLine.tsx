@@ -33,10 +33,10 @@ const RoutineData = [
 
 export default function RoutineLine() {
   return (
-    <section className="relative w-full flex justify-center py-16 bg-white">
+    <section className="relative w-full flex justify-center py-16 bg-defaultbg">
       <div className="w-full max-w-4xl relative">
         {/* Línea vertical */}
-        <div className="absolute left-1/2 top-0 h-full w-[2px] bg-warmgray transform -translate-x-1/2"></div>
+        <div className="absolute left-1/2 top-0 h-full w-[2px] bg-rectangles transform -translate-x-1/2"></div>
 
         <div className="flex flex-col gap-16">
           {RoutineData.map((item, index) => {
@@ -49,11 +49,11 @@ export default function RoutineLine() {
                 }`}
               >
                 {/* Punto central */}
-                <div className="absolute left-1/2 w-4 h-4 bg-warmgray rounded-full transform -translate-x-1/2 z-10"></div>
+                <div className="absolute left-1/2 w-4 h-4 bg-rectangles rounded-full transform -translate-x-1/2 z-10"></div>
 
                 {/* Barra Horizontal */}
                 <div
-                  className={`absolute top-18 h-[2px] bg-warmgray ${
+                  className={`absolute top-18 h-[2px] bg-rectangles ${
                     isLeft
                       ? "right-1/2 w-[25%] origin-left"
                       : "left-1/2 w-[25%] origin-right"
@@ -67,9 +67,9 @@ export default function RoutineLine() {
 
                 {/* Caja de contenido */}
                 <div
-                  className={`bg-white shadow-lg border border-gray-200 rounded-xl p-6 w-72 transition-transform hover:scale-105 text-center z-10`}
+                  className={`bg-defaultbg shadow-lg border border-gray-200 rounded-xl p-6 w-72 transition-transform hover:scale-105 text-center z-10`}
                 >
-                  <h3 className="text-lg font-bold text-warmgray">{item.title}</h3>
+                  <h3 className="text-lg font-bold text-rectangles">{item.title}</h3>
                   <p className="text-gray-600 text-sm mt-2">{item.description}</p>
                 </div>
               </div>
