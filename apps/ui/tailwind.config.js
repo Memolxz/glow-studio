@@ -15,7 +15,7 @@ export default {
         rectangles: '#C4DFDF',
         hovertext: '#182225',
         darkblue: '#375358',
-        defaultbg: '#FFFFFF',
+        background: '#F8FFFF',
       }
     },
   },

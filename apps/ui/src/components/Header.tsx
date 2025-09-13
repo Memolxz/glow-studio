@@ -10,7 +10,7 @@ export default function Header() {
             <Link to={"/routine"} className="hover:text-gray-200 transition-colors">RUTINA</Link>
             </nav>
 
-            <Link to="/home" className="flex-1 text-center text-2xl font-bold tracking-wide text-white">
+            <Link to="/home" className="flex-1 text-center text-4xl font-bold tracking-wide text-white">
             GLOW STUDIO
             </Link>
 

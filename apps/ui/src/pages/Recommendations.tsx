@@ -35,14 +35,7 @@ function ProductRecommendations({products}: {products: Product[]}) {
         <div className="bg-white relative font-inter">
             <div className="flex flex-col items-center">
                 <Header />
-                <div className="w-[90%] py-10 -mt-22">
-                    <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
-                        <img
-                            src={img1}
-                            alt="Rhode"
-                            className="w-full object-cover"
-                        />
-                    </div>
+                <div className="w-[90%] py-10 mt-12 mb-5 rounded-3xl relative bg-rectangles">
                 </div>
 
             <div className="items-start justify-start w-[90%]">
@@ -64,7 +57,7 @@ function ProductRecommendations({products}: {products: Product[]}) {
                             <div
                                 key={product.id}
                                 className="flex flex-col justify-between items-center 
-                                            w-[250px] h-[320px] p-6 rounded-2xl bg-rectangles 
+                                            w-[250px] h-[320px] p-6 rounded-2xl bg-[#d7eaea] 
                                             shadow-sm hover:shadow-lg transition">
                                 <img
                                     src={product.imageUrl}

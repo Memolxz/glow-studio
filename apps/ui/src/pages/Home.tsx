@@ -23,19 +23,19 @@ export default function Home() {
             </div>
 
 
-            <div className="flex w-[90%]  sm:h-[300px] md:h-[400px] lg:h-[450px] bg-[#E5B3AB] rounded-3xl mb-5">
+            <div className="flex w-[90%]  sm:h-[300px] md:h-[400px] lg:h-[450px] bg-rectangles rounded-3xl mb-5">
                 <div className="flex-1 p-14 flex flex-col justify-end">
-                    <h2 className="text-2xl sm:text-xl font-bold text-rectangles font-inter">RECORRE LO DESTACADO</h2>
-                    <p className="mt-2 text-sm text-rectangles font-inter 
+                    <h2 className="text-2xl sm:text-xl font-bold text-darkblue font-inter">RECORRE LO DESTACADO</h2>
+                    <p className="mt-2 text-sm text-darkblue font-inter 
                                     max-w-[90%] text-left">
                         Cada piel es única, y tu rutina también debería serlo. Nuestro sistema te ayuda a identificar tu tipo de piel y te recomienda productos específicos que se adaptan a tus necesidades.
                     </p>
                     <Link to="/products"
                         type="submit"
-                        className="w-[135px] mt-4 rounded-full bg-transparent px-5 py-2 border border-rectangles
-                        font-semibold text-rectangles text-sm font-inter text-center
-                        hover:bg-rectangles hover:text-defaultbg transition
-                        focus:outline-none focus:ring-2 focus:ring-rectangles"
+                        className="w-[135px] mt-4 rounded-full bg-transparent px-5 py-2 border border-darkblue
+                        font-semibold text-darkblue text-sm font-inter text-center
+                        hover:bg-darkblue hover:text-rectangles transition
+                        focus:outline-none focus:ring-2 focus:ring-darkblue"
                     >
                         PRODUCTOS
                     </Link>
@@ -62,7 +62,7 @@ export default function Home() {
             </div>
 
 
-            <div className="lg:flex md:flex sm:flex-none w-[90%] sm:h-auto md:h-[400px] lg:h-[450px] gap-6 bg-defaultbg
+            <div className="lg:flex md:flex sm:flex-none w-[90%] sm:h-auto md:h-[400px] lg:h-[450px] gap-6 bg-rectangles
                             rounded-3xl mb-5 mt-5">
                 <div className="flex-1 overflow-hidden rounded-3xl">
                     <img 
@@ -72,24 +72,24 @@ export default function Home() {
                     />
                 </div>
 
-                <div className="flex-1 p-14 flex flex-col 
+                <div className="flex-1 p-14 flex flex-col bg-rectangles rounded-3xl
                 lg:justify-end lg:items-end md:justify-end md:items-end 
                 sm:justify-center sm:items-center xs:i">
-                    <h2 className="text-2xl font-bold text-rectangles 
+                    <h2 className="text-2xl font-bold text-darkblue 
                                 lg:text-right md:text-right sm:text-center font-inter">
                         CUIDADO DIARIO
                     </h2>
-                    <p className="mt-2 text-sm text-rectangles pl-5 font-inter 
+                    <p className="mt-2 text-sm text-darkblue pl-5 font-inter 
                                 lg:text-right md:text-right sm:text-center lg:w-[75%] md:w-[100%] sm:w-[60%] xs:w-[40%]">
                         Descubrí cómo incorporar los productos a tu rutina, qué ingredientes buscar, y aprovechá al máximo cada momento de cuidado personal. 
                         Empezá a sentirte seguro con lo que tu piel necesita.
                     </p>
                     <Link to="/routine"
                         type="submit"
-                        className="w-[135px] mt-4 rounded-full bg-transparent px-4 py-2 border border-rectangles
-                                font-semibold text-rectangles text-sm font-inter text-center
-                                hover:bg-rectangles hover:text-defaultbg transition
-                                focus:outline-none focus:ring-2 focus:ring-rectangles">
+                        className="w-[135px] mt-4 rounded-full bg-transparent px-4 py-2 border border-darkblue
+                                font-semibold text-darkblue text-sm font-inter text-center
+                                hover:bg-darkblue hover:text-rectangles transition
+                                focus:outline-none focus:ring-2 focus:ring-darkblue">
                         RUTINA
                     </Link>
                 </div>
