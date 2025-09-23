@@ -24,8 +24,11 @@ export class ProductService {
     try {
       const products = await db.product.findMany({
         include: {
-          category: true,
-          productIngredients: { include: { ingredient: true } }
+          productIngredients: { 
+            include: { 
+              ingredient: true 
+            } 
+          }
         }
       });
 
@@ -41,8 +44,11 @@ export class ProductService {
       const product = await db.product.findUnique({
         where: { id },
         include: {
-          category: true,
-          productIngredients: { include: { ingredient: true } }
+          productIngredients: { 
+            include: { 
+              ingredient: true 
+            } 
+          }
         }
       });
 
@@ -55,18 +61,23 @@ export class ProductService {
     }
   }
 
-  async getProductsByCategory(category: ProductCategoryType) {
+  async getProductsByCategory(category: string) {
     try {
+      // Convert string to ProductCategoryType enum
+      const categoryEnum = category.toUpperCase() as ProductCategoryType;
 
-      if (!Object.values(ProductCategoryType).includes(category as ProductCategoryType)) {
+      if (!Object.values(ProductCategoryType).includes(categoryEnum)) {
         throw new Error("Categoría inválida");
       }
 
       const products = await db.product.findMany({
-        where: { category },
+        where: { category: categoryEnum },
         include: {
-          category: true,
-          productIngredients: { include: { ingredient: true } }
+          productIngredients: { 
+            include: { 
+              ingredient: true 
+            } 
+          }
         }
       });
 
@@ -93,6 +104,13 @@ export class ProductService {
               ingredientId: ing.ingredientId,
             }))
           }
+        },
+        include: {
+          productIngredients: { 
+            include: { 
+              ingredient: true 
+            } 
+          }
         }
       });
 
@@ -103,7 +121,6 @@ export class ProductService {
     }
   }
 
-  // chequear
   async updateProduct(productId: number, data: UpdateProductDTO) {
     try {
       const updatedProduct = await db.product.update({
@@ -115,18 +132,24 @@ export class ProductService {
           ...(data.officialUrl && { officialUrl: data.officialUrl }),
           ...(data.imageUrl !== undefined && { imageUrl: data.imageUrl }),
           ...(data.price !== undefined && { price: data.price }),
-          ...(data.category && { categoryId: data.category }),
-          ...(data.active !== undefined && { active: data.active }),
+          ...(data.category && { category: data.category }), // Fixed: use category instead of categoryId
+        },
+        include: {
+          productIngredients: { 
+            include: { 
+              ingredient: true 
+            } 
+          }
         }
       });
 
+      // Handle ingredients update
       if (data.ingredients) {
         await db.productIngredient.deleteMany({ where: { productId } });
         await db.productIngredient.createMany({
           data: data.ingredients.map(ing => ({
             productId,
             ingredientId: ing.ingredientId,
-            concentration: ing.concentration
           }))
         });
       }

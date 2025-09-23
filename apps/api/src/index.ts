@@ -7,6 +7,7 @@ import { skinTypeRouter } from './routers/skintype-router';
 import { registerRouter } from './routers/register-router';
 import { loginRouter } from './routers/login-router';
 import productRouter from './routers/product-router';
+import "./cron/delete-user-cron";
 
 const app = express()
 app.use(express.json());
