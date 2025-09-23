@@ -9,7 +9,6 @@ import exfoliant1 from "../assets/producto2.png";
 import essence1 from "../assets/producto3.png";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import img1 from "../assets/modelo11.jpg"
 
 type Product = {
     id: number;
