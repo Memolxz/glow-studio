@@ -67,13 +67,13 @@ export default function SkinSelection() {
                     <label
                     htmlFor={`skin-${type.label}`}
                     className="flex flex-col items-center justify-center w-40 h-40 border border-gray-200 bg-white rounded-xl shadow-sm 
-                                hover:shadow-lg cursor-pointer transition-transform hover:scale-105 z-10 
+                                hover:shadow-lg cursor-pointer transition-transform hover:scale-105 z-10
                                 peer-checked:bg-gray-300 peer-checked:border-gray-300"
                     >
                     <p className="text-center text-md font-inter font-semibold text-darkblue">
                         {type.label}
                     </p>
-                    <p className="mt-1 text-center font-inter text-xs text-darkblue w-[95%]">{type.desc}</p>
+                    <p className="mt-1 text-center font-inter text-xs text-darkblue w-[85%]">{type.desc}</p>
                     </label>
                 </div>
                 ))}
