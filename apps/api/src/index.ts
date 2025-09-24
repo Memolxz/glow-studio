@@ -1,15 +1,22 @@
 import "dotenv/config"
-
+import cors from 'cors';
 import express from 'express';
 
 import { userRouter } from './routers/user-router';
 import { skinTypeRouter } from './routers/skintype-router';
 import { registerRouter } from './routers/register-router';
 import { loginRouter } from './routers/login-router';
-import productRouter from './routers/product-router';
+import { productRouter } from './routers/product-router';
 import "./cron/delete-user-cron";
 
 const app = express()
+
+// CORS configuration
+app.use(cors({
+  origin: 'http://localhost:5173', // React app URL
+  credentials: true
+}));
+
 app.use(express.json());
 
 app.use('/users', userRouter);

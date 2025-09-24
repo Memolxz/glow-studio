@@ -2,8 +2,6 @@ import jwt from 'jsonwebtoken'
 import { NextFunction, Request, Response } from "express";
 import { Users } from '@prisma/client'
 
-
-
 export const jwtAuthMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;
   const token = authHeader?.split(' ')[1];
@@ -48,6 +46,8 @@ export const isAdminMiddleware = async (req: Request, res: Response, next: NextF
 
     if (decodedUser.isAdmin) {
       next();
+    } else {
+      res.status(403).json({ error: "Acceso denegado: No eres administrador." });
     }
   } catch (error) {
     res.status(403).json({ error: (error as Error).message })
