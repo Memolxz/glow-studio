@@ -12,7 +12,7 @@ export default function Home() {
         <div className="flex flex-col items-center bg-defaultbg relative font-inter">
             <Header />
 
-            <div className="w-[90%] py-10 -mt-22">
+            <div className="w-[90%] py-10">
                 <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
                     <img
                         src={img1}
