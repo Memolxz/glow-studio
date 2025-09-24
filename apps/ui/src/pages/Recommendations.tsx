@@ -11,6 +11,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import img1 from "../assets/modelo11.jpg";
 
+
 type Product = {
     id: number;
     name: string;
