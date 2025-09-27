@@ -22,8 +22,6 @@ loginRouter.post('/', async (req: Request, res: Response) => {
     const refreshToken = await jwtService.generateJsonWebRefreshToken(user);
     res.status(201).json({ ok: true, data: { accessToken, refreshToken } }); 
 
-    // res.status(201).json({mensaje: 'Login sucsessful'})
-
   } catch (error) {
     console.error('Error en el login:', error);
     res.status(500).json({ mensaje: 'Error en el servidor al procesar el login' });

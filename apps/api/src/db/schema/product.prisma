@@ -1,13 +1,11 @@
 enum ProductCategoryType {
   SERUM
-  CREAM
   CLEANSER
   TONER
   SUNSCREEN
   MASK
   MOISTURIZER
   EXFOLIANT
-  ESSENCE
   TREATMENT
 }
 
