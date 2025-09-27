@@ -4,7 +4,6 @@ import { isAdminMiddleware } from "../middleware/auth-middleware";
 
 const userService = new UserService();
 
-
 export const userRouter = Router();
 
 userRouter.get("/",isAdminMiddleware, async (_: Request, res: Response) => {
@@ -93,11 +92,10 @@ userRouter.patch('/restore/:id',isAdminMiddleware, async (req: Request, res: Res
 userRouter.post('/skintype/:id', async (req: Request, res: Response) => {
   try {
     const userIdToGet = parseInt(req.params.id);
-    const skintypeId = req.body
+    const { skinTypeId } = req.body;
 
-    await userService.assignSkinType(userIdToGet, skintypeId);
+    await userService.assignSkinType(userIdToGet, skinTypeId);
 
-    res.status(200).json({ ok: true });
     res.status(200).json({ ok: true });
   } catch (error) {
     res.status(500).json({ ok: false, error: (error as any).message });

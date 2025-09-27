@@ -2,14 +2,12 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 interface RegisterResponse {
+  ok: boolean;
   data?: {
-    id: number;
-    name: string;
-    email: string;
-    isAdmin: boolean;
-    deletedAt: null;
+    accessToken: string;
+    refreshToken: string;
   };
-  error?: string;
+  mensaje?: string;
 }
 
 export default function RegisterForm({ onToggle }: { onToggle: () => void }) {
@@ -25,8 +23,8 @@ export default function RegisterForm({ onToggle }: { onToggle: () => void }) {
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({
-        ...prev,
-        [name]: value
+            ...prev,
+            [name]: value
         }));
     };
 
@@ -36,27 +34,29 @@ export default function RegisterForm({ onToggle }: { onToggle: () => void }) {
         setError("");
 
         try {
-        const response = await fetch("http://localhost:8000/register", {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-        });
+            const response = await fetch("http://localhost:8000/register", {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
 
         const data: RegisterResponse = await response.json();
 
-        if (response.ok && data.data) {
-            // Registration successful, navigate to skin selection
+        if (response.ok && data.ok && data.data) {
+            localStorage.setItem("accessToken", data.data.accessToken);
+            localStorage.setItem("refreshToken", data.data.refreshToken);
+            
             navigate("/selection");
         } else {
-            setError(data.error || "Error al crear la cuenta");
+            setError(data.mensaje || "Error al crear la cuenta");
         }
         } catch (error) {
-        console.error("Register error:", error);
-        setError("Error de conexión. Intenta nuevamente.");
+            console.error("Register error:", error);
+            setError("Error de conexión. Intenta nuevamente.");
         } finally {
-        setLoading(false);
+            setLoading(false);
         }
     };
 
@@ -87,7 +87,6 @@ export default function RegisterForm({ onToggle }: { onToggle: () => void }) {
                             focus:outline-none focus:ring-2 focus:ring-darkblue"
                         />
                     </div>
-
                     <div>
                         <input
                             id="email"
@@ -105,7 +104,6 @@ export default function RegisterForm({ onToggle }: { onToggle: () => void }) {
                             focus:outline-none focus:ring-2 focus:ring-darkblue"
                         />
                     </div>
-
                     <div>
                         <input
                             id="password"

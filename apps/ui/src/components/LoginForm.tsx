@@ -22,8 +22,8 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData(prev => ({
-        ...prev,
-        [name]: value
+            ...prev,
+            [name]: value
         }));
     };
 
@@ -32,31 +32,29 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
         setLoading(true);
         setError("");
         try {
-        const response = await fetch("http://localhost:8000/login", {
-            method: "POST",
-            headers: {
-            "Content-Type": "application/json",
-            },
-            body: JSON.stringify(formData),
-        });
+            const response = await fetch("http://localhost:8000/login", {
+                method: "POST",
+                headers: {
+                "Content-Type": "application/json",
+                },
+                body: JSON.stringify(formData),
+            });
 
         const data: LoginResponse = await response.json();
 
         if (response.ok && data.ok && data.data) {
-            // Store tokens in localStorage
             localStorage.setItem("accessToken", data.data.accessToken);
             localStorage.setItem("refreshToken", data.data.refreshToken);
             
-            // Navigate to home page
             navigate("/home");
         } else {
             setError(data.mensaje || "Error al iniciar sesión");
         }
         } catch (error) {
-        console.error("Login error:", error);
-        setError("Error de conexión. Intenta nuevamente.");
+            console.error("Login error:", error);
+            setError("Error de conexión. Intenta nuevamente.");
         } finally {
-        setLoading(false);
+            setLoading(false);
         }
     };
 
