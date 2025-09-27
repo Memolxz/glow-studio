@@ -1,7 +1,64 @@
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+interface LoginResponse {
+  ok: boolean;
+  data?: {
+    accessToken: string;
+    refreshToken: string;
+  };
+  mensaje?: string;
+}
 
 export default function LoginForm({ onToggle }: { onToggle: () => void }) {
     const navigate = useNavigate();
+    const [formData, setFormData] = useState({
+        email: "",
+        password: "",
+    });
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+
+    const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+        ...prev,
+        [name]: value
+        }));
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setError("");
+        try {
+        const response = await fetch("http://localhost:8000/login", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+            },
+            body: JSON.stringify(formData),
+        });
+
+        const data: LoginResponse = await response.json();
+
+        if (response.ok && data.ok && data.data) {
+            // Store tokens in localStorage
+            localStorage.setItem("accessToken", data.data.accessToken);
+            localStorage.setItem("refreshToken", data.data.refreshToken);
+            
+            // Navigate to home page
+            navigate("/home");
+        } else {
+            setError(data.mensaje || "Error al iniciar sesión");
+        }
+        } catch (error) {
+        console.error("Login error:", error);
+        setError("Error de conexión. Intenta nuevamente.");
+        } finally {
+        setLoading(false);
+        }
+    };
 
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-transparent">
@@ -12,11 +69,7 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
             </div>
 
             <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form action="#" method="POST" className="space-y-6" 
-                onSubmit={(e) => {
-                    e.preventDefault();
-                    navigate("/home");
-                }}>
+                <form className="space-y-6" onSubmit={handleSubmit}>
                     <div>
                         <input
                             id="email"
@@ -25,6 +78,8 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
                             required
                             autoComplete="email"
                             placeholder="Email"
+                            value={formData.email}
+                            onChange={handleInputChange}
                             className="block w-full rounded-full bg-white px-10 py-3
                             text-base text-darkblue font-inter
                             border-0
@@ -41,6 +96,8 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
                             required
                             autoComplete="current-password"
                             placeholder="Contraseña"
+                            value={formData.password}
+                            onChange={handleInputChange}
                             className="block w-full rounded-full bg-white px-10 py-3
                             text-base text-darkblue font-inter
                             border-0
@@ -49,15 +106,22 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
                         />
                     </div>
 
+                    {error && (
+                        <div className="text-red-600 text-sm text-center">
+                        {error}
+                        </div>
+                    )}
+
                     <div className="flex justify-center">
                         <button
                             type="submit"
+                            disabled={loading}
                             className="w-1/2 rounded-full bg-transparent px-4 py-2 border-2 border-darkblue
                             text-base font-semibold text-darkblue font-inter
                             hover:bg-darkblue hover:text-white transition
                             focus:outline-none focus:ring-2 focus:ring-darkblue"
                         >
-                            Iniciar
+                            {loading ? "Iniciando..." : "Iniciar"}
                         </button>
                     </div>
                 </form>
