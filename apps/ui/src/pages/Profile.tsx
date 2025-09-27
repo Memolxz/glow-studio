@@ -76,10 +76,10 @@ export default function Home() {
                         </div>
                         <Link to="/recommendations"
                             type="submit"
-                            className="flex w-10 h-10 rounded-full bg-transparent border-2 border-darkblue
+                            className="flex w-10 h-10 rounded-full bg-transparent border-2 border-darkblue text-darkblue mr-3
                                     hover:bg-darkblue hover:text-rectangles transition items-center justify-center
                                     focus:outline-none focus:ring-2 focus:ring-darkblue">
-                        <Plus className='text-inherit w-7 h-7 text-darkblue hover:text-rectangles'></Plus>
+                        <Plus className='text-inherit w-7 h-7 hover:text-rectangles'></Plus>
                         </Link>
                     </div>
                 </div>
