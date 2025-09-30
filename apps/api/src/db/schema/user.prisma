@@ -8,4 +8,5 @@ model Users {
   
   userSkinType UserSkinType[]
   recommendations Recommendation[]
+  productComments ProductComment[]
 }
