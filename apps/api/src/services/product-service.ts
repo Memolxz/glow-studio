@@ -5,6 +5,7 @@ interface CreateProductDTO {
   name: string;
   brand: string;
   description: string;
+  rating?: number;
   officialUrl: string;
   imageUrl?: string;
   price?: number;
@@ -12,6 +13,11 @@ interface CreateProductDTO {
   ingredients: Array<{
     ingredientId: number;
     concentration?: number;
+  }>;
+  comments?: Array<{
+    userId: number;
+    content: string;
+    rating: number;
   }>;
 }
 
@@ -28,7 +34,8 @@ export class ProductService {
             include: { 
               ingredient: true 
             } 
-          }
+          },
+          productComments: true
         }
       });
 
@@ -48,7 +55,8 @@ export class ProductService {
             include: { 
               ingredient: true 
             } 
-          }
+          },
+          productComments: true
         }
       });
 
@@ -77,7 +85,8 @@ export class ProductService {
             include: { 
               ingredient: true 
             } 
-          }
+          },
+          productComments: true
         }
       });
 
@@ -110,7 +119,8 @@ export class ProductService {
             include: { 
               ingredient: true 
             } 
-          }
+          },
+          productComments: true
         }
       });
 
@@ -129,6 +139,7 @@ export class ProductService {
           ...(data.name && { name: data.name }),
           ...(data.brand && { brand: data.brand }),
           ...(data.description && { description: data.description }),
+          ...(data.rating !== undefined && { rating: data.rating }),
           ...(data.officialUrl && { officialUrl: data.officialUrl }),
           ...(data.imageUrl !== undefined && { imageUrl: data.imageUrl }),
           ...(data.price !== undefined && { price: data.price }),
@@ -139,7 +150,8 @@ export class ProductService {
             include: { 
               ingredient: true 
             } 
-          }
+          },
+          productComments: true
         }
       });
 
