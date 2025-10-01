@@ -14,6 +14,7 @@ model Product {
   name               String
   brand              String
   description        String
+  rating             Float?
   officialUrl        String
   imageUrl           String?
   price              Decimal?
@@ -21,6 +22,7 @@ model Product {
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
   
+  productComments  ProductComment[]
   productIngredients ProductIngredient[]
   recommendations    Recommendation[]
 }
@@ -35,3 +37,18 @@ model ProductIngredient {
   @@id([productId, ingredientId])
   @@index([ingredientId])
 } 
+
+model ProductComment {
+  id        Int      @id @default(autoincrement())
+  productId Int
+  userId    Int
+  content   String
+  rating    Float      // Assuming rating is an integer value, e.g., 1-5
+  createdAt DateTime @default(now())
+  
+  product Product @relation(fields: [productId], references: [id])
+  user    Users    @relation(fields: [userId], references: [id])
+  
+  @@index([productId])
+  @@index([userId])
+}
