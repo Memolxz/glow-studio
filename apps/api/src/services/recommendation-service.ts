@@ -87,7 +87,8 @@ export class RecommendationService {
   async getRecommendationsByCategory(userId: number, category: ProductCategoryType) {
     try {
       const existing = await db.recommendation.findMany({
-        where: { userId,
+        where: { 
+          userId,
           product: {
             category: category,
           },
@@ -99,16 +100,22 @@ export class RecommendationService {
         return existing;
       }
 
-      return await this.refreshRecommendations(userId);
+      // If no existing recommendations for this category, calculate and filter
+      const allRecommendations = await this.refreshRecommendations(userId);
+      return allRecommendations.filter(rec => rec.product.category === category);
     }
     catch(error){
       console.error(error);
-      throw new Error(`Error al obtener recomendaciones`);
+      throw new Error(`Error al obtener recomendaciones por categoría`);
     }
   }
 
   async refreshRecommendations(userId: number) {
     try {
+      await db.recommendation.deleteMany({
+        where: { userId }
+      });
+
       const recommendedProducts = await this.calculateRecommendations(userId);
 
       const saved = await Promise.all(
