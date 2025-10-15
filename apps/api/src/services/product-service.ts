@@ -181,4 +181,26 @@ export class ProductService {
       throw new Error("Error al eliminar el producto");
     }
   }
+
+  async getBestRatedProducts(limit: number) {
+    try {
+      const products = await db.product.findMany({ 
+        orderBy: { rating: 'desc' },
+        take: limit,
+        include: { 
+          productIngredients: { 
+            include: { 
+              ingredient: true
+            } 
+          },
+          productComments: true 
+        }
+      }); 
+      
+      return products;
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error al obtener los productos mejor valorados");
+    }
+  }
 }
