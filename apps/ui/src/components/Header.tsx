@@ -32,6 +32,13 @@ export default function Header() {
                     </button>
                 </div>
                 <Link
+                    to={"/recommendations"}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="hover:text-hovertext ml-3 text-xl transition-transform hover:scale-105 origin-left"
+                >
+                    Recomendaciones
+                </Link>
+                <Link
                     to={"/products"}
                     onClick={() => setIsMenuOpen(false)}
                     className="hover:text-hovertext ml-3 text-xl transition-transform hover:scale-105 origin-left"
@@ -44,13 +51,6 @@ export default function Header() {
                     className="hover:text-hovertext ml-3 text-xl transition-transform hover:scale-105 origin-left"
                 >
                     Rutina
-                </Link>
-                <Link
-                    to={"/recommendations"}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="hover:text-hovertext ml-3 text-xl transition-transform hover:scale-105 origin-left"
-                >
-                    Recomendaciones
                 </Link>
                 <Link
                     to={"/FAQ"}
