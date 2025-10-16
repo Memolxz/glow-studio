@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import { Star } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import img1 from '../assets/modelo4.jpg';
@@ -7,7 +9,83 @@ import videoSrc from '../assets/video.mp4';
 import img4 from '../assets/modelo2.png';
 import { Link } from 'react-router-dom';
 
+type Product = {
+  id: number;
+  name: string;
+  brand: string;
+  rating: number | null;
+  imageUrl: string | null;
+  price: string | null;
+  category: string;
+};
+
+const categoryDisplayNames: Record<string, string> = {
+  SERUM: "Sérum",
+  CLEANSER: "Limpiador",
+  TONER: "Tonificador",
+  SUNSCREEN: "Protector Solar",
+  MASK: "Mascarilla",
+  MOISTURIZER: "Hidratante",
+  EXFOLIANT: "Exfoliante",
+  TREATMENT: "Tratamiento",
+};
+
 export default function Home() {
+    const [topProducts, setTopProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetchTopProducts();
+    }, []);
+
+    const fetchTopProducts = async () => {
+        try {
+            const response = await fetch("http://localhost:8000/products");
+            
+            if (response.ok) {
+                const data = await response.json();
+                // Sort by rating and get top 3
+                const sorted = data
+                    .filter((p: Product) => p.rating !== null)
+                    .sort((a: Product, b: Product) => (b.rating || 0) - (a.rating || 0))
+                    .slice(0, 3);
+                setTopProducts(sorted);
+            }
+        } catch (err) {
+            console.error("Error fetching top products:", err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const renderStars = (rating: number) => {
+        const stars = [];
+        const fullStars = Math.floor(rating);
+        const hasHalfStar = rating % 1 >= 0.5;
+
+        for (let i = 0; i < fullStars; i++) {
+            stars.push(<Star key={`full-${i}`} className="h-4 w-4 text-darkblue fill-current" />);
+        }
+
+        if (hasHalfStar) {
+            stars.push(
+                <div key="half" className="relative h-4 w-4">
+                    <Star className="absolute h-4 w-4 text-darkblue" />
+                    <div className="absolute h-4 w-4 overflow-hidden" style={{ width: '50%' }}>
+                        <Star className="h-4 w-4 text-darkblue fill-current" />
+                    </div>
+                </div>
+            );
+        }
+
+        const emptyStars = 5 - Math.ceil(rating);
+        for (let i = 0; i < emptyStars; i++) {
+            stars.push(<Star key={`empty-${i}`} className="h-4 w-4 text-darkblue" />);
+        }
+
+        return stars;
+    };
+
     return (
         <div className="flex flex-col items-center bg-defaultbg relative font-inter">
             <Header />
@@ -22,6 +100,71 @@ export default function Home() {
                 </div>
             </div>
 
+            {/* Top Rated Products Section */}
+            {!loading && topProducts.length > 0 && (
+                <div className="w-[90%] bg-rectangles rounded-3xl mb-5 p-10">
+                    <h2 className="text-3xl font-bold text-darkblue mb-6">Productos Mejor Valorados</h2>
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {topProducts.map((product, index) => (
+                            <Link
+                                key={product.id}
+                                to={`/product/${product.id}`}
+                                className="relative flex flex-col items-center bg-[#d7eaea] rounded-2xl p-6 hover:shadow-xl transition-all group"
+                            >
+                                {/* Ranking Badge */}
+                                <div className="absolute top-3 left-3 bg-darkblue text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg z-10">
+                                    {index + 1}
+                                </div>
+                                
+                                <img
+                                    src={product.imageUrl || "/placeholder.png"}
+                                    alt={product.name}
+                                    className="w-full h-48 object-contain rounded-xl mb-4 group-hover:scale-105 transition-transform"
+                                    onError={(e) => {
+                                        e.currentTarget.src = "/placeholder.png";
+                                    }}
+                                />
+                                
+                                <h3 className="text-darkblue font-bold text-lg text-center mb-2 line-clamp-2">
+                                    {product.name}
+                                </h3>
+                                
+                                <p className="text-darkblue/60 text-sm mb-2">{product.brand}</p>
+                                
+                                <p className="text-xs text-darkblue/50 mb-3">
+                                    {categoryDisplayNames[product.category] || product.category}
+                                </p>
+                                
+                                {product.rating && (
+                                    <div className="flex items-center gap-2 mb-2">
+                                        <div className="flex">
+                                            {renderStars(product.rating)}
+                                        </div>
+                                        <span className="text-darkblue font-semibold text-sm">
+                                            {product.rating.toFixed(1)}
+                                        </span>
+                                    </div>
+                                )}
+                                
+                                {product.price && (
+                                    <p className="text-darkblue font-bold text-lg">
+                                        $ {parseFloat(product.price).toLocaleString('es-AR')}
+                                    </p>
+                                )}
+                            </Link>
+                        ))}
+                    </div>
+                    
+                    <div className="flex justify-center mt-8">
+                        <Link
+                            to="/products"
+                            className="px-8 py-3 bg-darkblue text-white rounded-full hover:bg-hovertext transition font-semibold"
+                        >
+                            Ver Todos los Productos
+                        </Link>
+                    </div>
+                </div>
+            )}
 
             <div className="flex w-[90%]  sm:h-[300px] md:h-[400px] lg:h-[450px] bg-rectangles rounded-3xl mb-5">
                 <div className="flex-1 p-14 flex flex-col justify-end">
