@@ -1,28 +1,15 @@
 import { db } from '../db/db';
 import { ProductCategoryType } from '@prisma/client';
 
-interface CreateProductDTO {
-  name: string;
-  brand: string;
-  description: string;
-  rating?: number;
-  officialUrl: string;
-  imageUrl?: string;
-  price?: number;
-  category: ProductCategoryType;
-  ingredients: Array<{
-    ingredientId: number;
-    concentration?: number;
-  }>;
-  comments?: Array<{
-    userId: number;
-    content: string;
-    rating: number;
-  }>;
-}
-
-interface UpdateProductDTO extends Partial<CreateProductDTO> {
-  active?: boolean;
+interface ProductFilter {
+  categories?: ProductCategoryType[];
+  minRating?: number;
+  maxRating?: number;
+  minPrice?: number;
+  maxPrice?: number;
+  skinTypeIds?: number[];
+  skip?: number;
+  take?: number;
 }
 
 export class ProductService {
@@ -43,6 +30,78 @@ export class ProductService {
     } catch (error) {
       console.error(error);
       throw new Error("Error al obtener productos");
+    }
+  }
+
+  async filterProducts(filters: ProductFilter) {
+    try {
+      const where: any = {};
+
+      // Filter by categories
+      if (filters.categories && filters.categories.length > 0) {
+        where.category = { in: filters.categories };
+      }
+
+      // Filter by rating range
+      if (filters.minRating !== undefined || filters.maxRating !== undefined) {
+        where.rating = {};
+        if (filters.minRating !== undefined) where.rating.gte = filters.minRating;
+        if (filters.maxRating !== undefined) where.rating.lte = filters.maxRating;
+      }
+
+      // Filter by price range
+      if (filters.minPrice !== undefined || filters.maxPrice !== undefined) {
+        where.price = {};
+        if (filters.minPrice !== undefined) where.price.gte = filters.minPrice;
+        if (filters.maxPrice !== undefined) where.price.lte = filters.maxPrice;
+      }
+
+      let products = await db.product.findMany({
+        where,
+        include: {
+          productIngredients: { 
+            include: { 
+              ingredient: {
+                include: {
+                  ingredientEffect: true
+                }
+              }
+            } 
+          },
+          productComments: true
+        },
+        skip: filters.skip || 0,
+        take: filters.take || 50,
+        orderBy: { createdAt: 'desc' }
+      });
+
+      // Filter by skin types (if product ingredients are good for those skin types)
+      if (filters.skinTypeIds && filters.skinTypeIds.length > 0) {
+        products = products.filter(product => {
+          // Check if product has ingredients with GOOD effects for the selected skin types
+          const hasGoodIngredientsForSkinType = product.productIngredients.some(pi => {
+            return pi.ingredient.ingredientEffect.some(effect => 
+              effect.Effect === 'GOOD' && 
+              filters.skinTypeIds!.includes(effect.skinTypeId)
+            );
+          });
+
+          // Check if product has NO BAD ingredients for the selected skin types
+          const hasBadIngredientsForSkinType = product.productIngredients.some(pi => {
+            return pi.ingredient.ingredientEffect.some(effect => 
+              effect.Effect === 'BAD' && 
+              filters.skinTypeIds!.includes(effect.skinTypeId)
+            );
+          });
+
+          return hasGoodIngredientsForSkinType && !hasBadIngredientsForSkinType;
+        });
+      }
+
+      return products;
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error al filtrar productos");
     }
   }
 
@@ -71,7 +130,6 @@ export class ProductService {
 
   async getProductsByCategory(category: string) {
     try {
-      // Convert string to ProductCategoryType enum
       const categoryEnum = category.toUpperCase() as ProductCategoryType;
 
       if (!Object.values(ProductCategoryType).includes(categoryEnum)) {
@@ -97,7 +155,7 @@ export class ProductService {
     }
   }
 
-  async createProduct(data: CreateProductDTO) {
+  async createProduct(data: any) {
     try {
       const newProduct = await db.product.create({
         data: {
@@ -109,7 +167,7 @@ export class ProductService {
           price: data.price,
           category: data.category,
           productIngredients: {
-            create: data.ingredients.map(ing => ({
+            create: data.ingredients.map((ing: any) => ({
               ingredientId: ing.ingredientId,
             }))
           }
@@ -131,7 +189,7 @@ export class ProductService {
     }
   }
 
-  async updateProduct(productId: number, data: UpdateProductDTO) {
+  async updateProduct(productId: number, data: any) {
     try {
       const updatedProduct = await db.product.update({
         where: { id: productId },
@@ -143,7 +201,7 @@ export class ProductService {
           ...(data.officialUrl && { officialUrl: data.officialUrl }),
           ...(data.imageUrl !== undefined && { imageUrl: data.imageUrl }),
           ...(data.price !== undefined && { price: data.price }),
-          ...(data.category && { category: data.category }), // Fixed: use category instead of categoryId
+          ...(data.category && { category: data.category }),
         },
         include: {
           productIngredients: { 
@@ -155,11 +213,10 @@ export class ProductService {
         }
       });
 
-      // Handle ingredients update
       if (data.ingredients) {
         await db.productIngredient.deleteMany({ where: { productId } });
         await db.productIngredient.createMany({
-          data: data.ingredients.map(ing => ({
+          data: data.ingredients.map((ing: any) => ({
             productId,
             ingredientId: ing.ingredientId,
           }))
@@ -179,6 +236,28 @@ export class ProductService {
     } catch (error) {
       console.error(error);
       throw new Error("Error al eliminar el producto");
+    }
+  }
+
+  async getBestRatedProducts(limit: number) {
+    try {
+      const products = await db.product.findMany({ 
+        orderBy: { rating: 'desc' },
+        take: limit,
+        include: { 
+          productIngredients: { 
+            include: { 
+              ingredient: true
+            } 
+          },
+          productComments: true 
+        }
+      }); 
+      
+      return products;
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error al obtener los productos mejor valorados");
     }
   }
 }

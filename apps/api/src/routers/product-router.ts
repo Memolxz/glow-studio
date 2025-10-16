@@ -3,6 +3,7 @@ import { jwtAuthMiddleware, isAdminMiddleware } from '../middleware/auth-middlew
 import { ProductService } from '../services/product-service';
 import { RecommendationService } from '../services/recommendation-service';
 import { ErrorWithMessage } from '../type';
+import { db } from '../db/db';
 
 const productService = new ProductService();
 const recommendationService = new RecommendationService();
@@ -18,7 +19,6 @@ productRouter.get('/recommendations', jwtAuthMiddleware, async (req, res) => {
     
     const userId = req.user.id;
 
-    // Users can only get their own recommendations
     if (req.user.id !== userId) {
       throw new Error('Access denied');
     }
@@ -35,11 +35,81 @@ productRouter.get('/recommendations', jwtAuthMiddleware, async (req, res) => {
   }
 });
 
-// Get all products (with optional filters)
+// Filter products with all options
+productRouter.get('/filter', async (req, res) => {
+  try {
+    const { 
+      categories,
+      minRating,
+      maxRating,
+      minPrice,
+      maxPrice,
+      skinTypes,
+      skip,
+      take
+    } = req.query;
+
+    const filters: any = {};
+
+    if (categories) {
+      const categoryArray = Array.isArray(categories) 
+        ? categories.map((c: any) => (c as string).toUpperCase())
+        : [(categories as string).toUpperCase()];
+      filters.categories = categoryArray;
+    }
+
+    if (minRating !== undefined) {
+      filters.minRating = parseFloat(minRating as string);
+    }
+
+    if (maxRating !== undefined) {
+      filters.maxRating = parseFloat(maxRating as string);
+    }
+
+    if (minPrice !== undefined) {
+      filters.minPrice = parseFloat(minPrice as string);
+    }
+
+    if (maxPrice !== undefined) {
+      filters.maxPrice = parseFloat(maxPrice as string);
+    }
+
+    if (skinTypes) {
+      const skinTypeArray = Array.isArray(skinTypes) 
+        ? skinTypes.map(Number)
+        : [Number(skinTypes)];
+      filters.skinTypeIds = skinTypeArray;
+    }
+
+    if (skip !== undefined) {
+      filters.skip = parseInt(skip as string);
+    }
+
+    if (take !== undefined) {
+      filters.take = parseInt(take as string);
+    }
+
+    const products = await productService.filterProducts(filters);
+    
+    res.json({
+      ok: true,
+      data: products,
+      count: products.length
+    });
+  } catch (error) {
+    const err = error as ErrorWithMessage;
+    console.error(err.message);
+    res.status(500).json({ 
+      ok: false,
+      error: 'Failed to filter products' 
+    });
+  }
+});
+
+// Get all products
 productRouter.get('/', async (_, res) => {
   try {
     const products = await productService.getAllProducts();
-    
     res.json(products);
   } catch (error) {
     res.status(500).json({ error: 'Failed to fetch products' });
@@ -68,6 +138,97 @@ productRouter.get('/:id', async (req, res) => {
     } else {
       res.status(500).json({ error: 'Failed to fetch product' });
     }
+  }
+});
+
+// Add comment/review to product
+productRouter.post('/:id/comments', jwtAuthMiddleware, async (req, res) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ error: 'Not authenticated' });
+    }
+
+    const { content, rating } = req.body;
+    const productId = parseInt(req.params.id);
+
+    if (!content || rating === undefined) {
+      return res.status(400).json({ error: 'Content and rating are required' });
+    }
+
+    if (rating < 1 || rating > 5) {
+      return res.status(400).json({ error: 'Rating must be between 1 and 5' });
+    }
+
+    const comment = await db.productComment.create({
+      data: {
+        productId,
+        userId: req.user.id,
+        content,
+        rating,
+      },
+      include: {
+        user: {
+          select: { id: true, name: true, email: true }
+        }
+      }
+    });
+
+    res.status(201).json({ ok: true, data: comment });
+  } catch (error) {
+    const err = error as ErrorWithMessage;
+    console.error(err.message);
+    res.status(500).json({ ok: false, error: 'Failed to add comment' });
+  }
+});
+
+// Get comments for product
+productRouter.get('/:id/comments', async (req, res) => {
+  try {
+    const productId = parseInt(req.params.id);
+
+    const comments = await db.productComment.findMany({
+      where: { productId },
+      include: {
+        user: {
+          select: { id: true, name: true, email: true }
+        }
+      },
+      orderBy: { createdAt: 'desc' }
+    });
+
+    res.json({ ok: true, data: comments });
+  } catch (error) {
+    res.status(500).json({ ok: false, error: 'Failed to fetch comments' });
+  }
+});
+
+productRouter.delete('/comments/:commentId', jwtAuthMiddleware, async (req, res) => {
+  try {
+    if (!req.user) {
+      return res.status(401).json({ error: 'Not authenticated' });
+    }
+
+    const commentId = parseInt(req.params.commentId);
+
+    const comment = await db.productComment.findUnique({
+      where: { id: commentId }
+    });
+
+    if (!comment) {
+      return res.status(404).json({ error: 'Comment not found' });
+    }
+
+    if (comment.userId !== req.user.id && !req.user.isAdmin) {
+      return res.status(403).json({ error: 'Not authorized to delete this comment' });
+    }
+
+    await db.productComment.delete({
+      where: { id: commentId }
+    });
+
+    res.status(204).send();
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to delete comment' });
   }
 });
 

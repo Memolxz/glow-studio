@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 
 import { AuthService } from "../services/auth-service";
 import { JwtService } from "../services/jwt-service";
+import { ErrorWithMessage } from '../type';
 
 const authService = new AuthService();
 const jwtService = new JwtService();
@@ -31,11 +32,30 @@ loginRouter.post('/', async (req: Request, res: Response) => {
 loginRouter.post('/refresh-token', async (req: Request, res: Response) => {
   try {
     const { refreshToken } = req.body;
-    const { accessToken: newAccessToken } = await jwtService.generateJsonWebAccessTokenFromRefreshToken(refreshToken);
-    res.status(201).json({ ok: true, data: { accessToken: newAccessToken } });
-  } catch (error) {
-    res.status(500).json({ ok: false, error: (error as any).message })
-  }
-})
 
+    if (!refreshToken) {
+      return res.status(400).json({ 
+        ok: false, 
+        error: 'Refresh token es requerido' 
+      });
+    }
+
+    const result = await jwtService.generateJsonWebAccessTokenFromRefreshToken(refreshToken);
+    
+    res.status(200).json({ 
+      ok: true, 
+      data: { 
+        accessToken: result.accessToken 
+      } 
+    });
+
+  } catch (error) {
+    const err = error as ErrorWithMessage;
+    console.error('Error al refrescar token:', err);
+    res.status(401).json({ 
+      ok: false, 
+      error: err.message || 'Error al refrescar token' 
+    });
+  }
+});
 export default loginRouter;
