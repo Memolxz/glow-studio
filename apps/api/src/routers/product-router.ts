@@ -35,6 +35,22 @@ productRouter.get('/recommendations', jwtAuthMiddleware, async (req, res) => {
   }
 });
 
+// Get top rated products
+productRouter.get('/top-rated', async (req, res) => {
+  try {
+    const limit = req.query.limit ? parseInt(req.query.limit as string) : 3;
+    const products = await productService.getBestRatedProducts(limit);
+    res.json({ ok: true, data: products });
+  } catch (error) {
+    const err = error as ErrorWithMessage;
+    console.error(err.message);
+    res.status(500).json({ 
+      ok: false,
+      error: 'Failed to fetch top rated products' 
+    });
+  }
+});
+
 // Filter products with all options
 productRouter.get('/filter', async (req, res) => {
   try {
@@ -173,6 +189,19 @@ productRouter.post('/:id/comments', jwtAuthMiddleware, async (req, res) => {
       }
     });
 
+    // Update product average rating
+    const comments = await db.productComment.findMany({
+      where: { productId },
+      select: { rating: true }
+    });
+
+    const avgRating = comments.reduce((sum, c) => sum + c.rating, 0) / comments.length;
+    
+    await db.product.update({
+      where: { id: productId },
+      data: { rating: avgRating }
+    });
+
     res.status(201).json({ ok: true, data: comment });
   } catch (error) {
     const err = error as ErrorWithMessage;
@@ -222,9 +251,30 @@ productRouter.delete('/comments/:commentId', jwtAuthMiddleware, async (req, res)
       return res.status(403).json({ error: 'Not authorized to delete this comment' });
     }
 
+    const productId = comment.productId;
+
     await db.productComment.delete({
       where: { id: commentId }
     });
+
+    // Recalculate product average rating
+    const remainingComments = await db.productComment.findMany({
+      where: { productId },
+      select: { rating: true }
+    });
+
+    if (remainingComments.length > 0) {
+      const avgRating = remainingComments.reduce((sum, c) => sum + c.rating, 0) / remainingComments.length;
+      await db.product.update({
+        where: { id: productId },
+        data: { rating: avgRating }
+      });
+    } else {
+      await db.product.update({
+        where: { id: productId },
+        data: { rating: null }
+      });
+    }
 
     res.status(204).send();
   } catch (error) {
