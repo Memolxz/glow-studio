@@ -9,9 +9,8 @@ function Title() {
     const [isFiltersOpen, setIsFiltersOpen] = useState(false);
     const filtersRef = useRef<HTMLDivElement | null>(null);
     const toggleRef = useRef<HTMLButtonElement | null>(null);
-    const [price, setPrice] = useState(20000); // precio inicial
+    const [price, setPrice] = useState(20000);
 
-    // Cierra al hacer click fuera
     useEffect(() => {
         function handleClickOutside(e: MouseEvent) {
         const target = e.target as Node;
@@ -30,7 +29,7 @@ function Title() {
     }, [isFiltersOpen]);
     return(
     <div className="flex flex-col items-center justify-center w-full">
-        <div className="flex flex-row items-center justify-center w-[90%]">
+        <div className="flex flex-row items-center justify-center w-full">
             <div className="flex flex-col items-start justify-start w-2/3">
                 <h1 className="text-4xl font-bold text-start text-darkblue">Productos</h1>
                 <p className="text-xl font-normal text-start text-darkblue/60">Descubre los productos que ofrecemos.</p>
@@ -101,7 +100,7 @@ function Title() {
             </div>
         </div>
 
-        <div className="border-b border-darkblue/60 my-5 w-[90%]"></div>
+        <div className="border-b border-darkblue/60 my-5 w-full"></div>
     </div>
     );
 }
@@ -218,16 +217,17 @@ export default function Products() {
                             <img src={img1} alt="Rhode" className="w-full object-cover" />
                         </div>
                     </div>
-                    <Title />
-                    <div className="flex items-center justify-center bg-defaultbg w-full">
-                        <div className="text-center">
-                        <div className="text-xl font-semibold text-darkblue mb-4">
-                            Cargando productos...
-                        </div>
-                        <div className="w-8 h-8 border-4 border-darkblue border-t-transparent rounded-full animate-spin mx-auto"></div>
+                    <div className="w-[90%]">
+                        <Title />
+                        <div className="flex items-center justify-center bg-defaultbg w-full">
+                            <div className="text-center">
+                            <div className="text-xl font-semibold text-darkblue mb-4">
+                                Cargando productos...
+                            </div>
+                            <div className="w-8 h-8 border-4 border-darkblue border-t-transparent rounded-full animate-spin mx-auto"></div>
+                            </div>
                         </div>
                     </div>
-
                     <Footer />
                 </div>
             </div>
@@ -245,16 +245,17 @@ export default function Products() {
                             <img src={img1} alt="Rhode" className="w-full object-cover" />
                         </div>
                     </div>
-                    <Title />
-                    <div className="flex items-center justify-center bg-defaultbg">
-                    <div className="text-center">
-                        <div className="text-xl font-semibold text-red-600 mb-4">{error}</div>
-                        <button
-                            onClick={fetchProducts}
-                            className="px-6 py-2 bg-darkblue text-white rounded-full hover:bg-hovertext transition"
-                        >
-                            Reintentar
-                        </button>
+                    <div className="w-[90%]">
+                        <Title />
+                        <div className="flex items-center justify-center bg-defaultbg">
+                        <div className="text-center">
+                            <div className="text-xl font-semibold text-red-600 mb-4">{error}</div>
+                                <button
+                                    onClick={fetchProducts}
+                                    className="px-6 py-2 bg-darkblue text-white rounded-full hover:bg-hovertext transition">
+                                    Reintentar
+                                </button>
+                            </div>
                         </div>
                     </div>
 
@@ -270,9 +271,9 @@ export default function Products() {
         
         <div className="flex flex-col items-center">
             <div className="w-[90%] py-10 mt-22">
-            <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
-                <img src={img1} alt="Products Banner" className="w-full h-full object-cover" />
-            </div>
+                <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
+                    <img src={img1} alt="Products Banner" className="w-full h-full object-cover" />
+                </div>
             </div>
 
             <div className="items-start justify-start w-[90%] mb-10">
@@ -285,8 +286,7 @@ export default function Products() {
                 </div>
                 <button
                 onClick={() => setShowFilters(!showFilters)}
-                className="flex flex-row items-center justify-center w-48 h-10 bg-darkblue hover:bg-hovertext text-white rounded-2xl"
-                >
+                className="flex flex-row items-center justify-center w-48 h-10 bg-darkblue hover:bg-hovertext text-white rounded-2xl">
                 <h1 className="text-lg font-semibold text-start mr-2">Mostrar Filtros</h1>
                 <SlidersHorizontal className="h-6 w-6" />
                 </button>
@@ -295,98 +295,92 @@ export default function Products() {
             {/* Filters Modal */}
             {showFilters && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-                <div className="bg-rectangles rounded-3xl p-8 max-w-2xl w-[90%] max-h-[80vh] overflow-y-auto relative">
-                    <button
-                    onClick={() => setShowFilters(false)}
-                    className="absolute top-4 right-4 text-darkblue hover:text-hovertext"
-                    >
-                    <X size={24} />
-                    </button>
+                    <div className="bg-rectangles rounded-3xl p-8 max-w-2xl w-[90%] max-h-[80vh] overflow-y-auto relative">
+                        <button
+                        onClick={() => setShowFilters(false)}
+                        className="absolute top-4 right-4 text-darkblue hover:text-hovertext">
+                        <X size={24} />
+                        </button>
 
-                    <h2 className="text-2xl font-bold text-darkblue mb-6">Filtros</h2>
+                        <h2 className="text-2xl font-bold text-darkblue mb-6">Filtros</h2>
 
-                    {/* Categories */}
-                    <div className="mb-6">
-                    <h3 className="text-lg font-semibold text-darkblue mb-3">Categorías</h3>
-                    <div className="grid grid-cols-2 gap-3">
-                        {Object.entries(categoryDisplayNames).map(([key, value]) => (
-                        <label key={key} className="flex items-center space-x-2 cursor-pointer">
-                            <input
-                            type="checkbox"
-                            checked={selectedCategories.includes(key)}
-                            onChange={() => toggleCategory(key)}
-                            className="w-4 h-4 text-darkblue rounded"
-                            />
-                            <span className="text-darkblue">{value}</span>
-                        </label>
-                        ))}
-                    </div>
-                    </div>
+                        {/* Categories */}
+                        <div className="mb-6">
+                            <h3 className="text-lg font-semibold text-darkblue mb-3">Categorías</h3>
+                            <div className="grid grid-cols-2 gap-3">
+                                {Object.entries(categoryDisplayNames).map(([key, value]) => (
+                                <label key={key} className="flex items-center space-x-2 cursor-pointer">
+                                    <input
+                                    type="checkbox"
+                                    checked={selectedCategories.includes(key)}
+                                    onChange={() => toggleCategory(key)}
+                                    className="w-4 h-4 text-darkblue rounded"/>
+                                    <span className="text-darkblue">{value}</span>
+                                </label>
+                                ))}
+                            </div>
+                        </div>
 
-                    {/* Rating */}
-                    <div className="mb-6">
-                    <h3 className="text-lg font-semibold text-darkblue mb-3">Calificación</h3>
-                    <div className="flex gap-4">
-                        <input
-                        type="number"
-                        placeholder="Min"
-                        min="0"
-                        max="5"
-                        step="0.5"
-                        value={minRating ?? ''}
-                        onChange={(e) => setMinRating(e.target.value ? Number(e.target.value) : undefined)}
-                        className="flex-1 px-4 py-2 rounded-full border border-darkblue focus:outline-none focus:ring-2 focus:ring-darkblue"
-                        />
-                        <input
-                        type="number"
-                        placeholder="Max"
-                        min="0"
-                        max="5"
-                        step="0.5"
-                        value={maxRating ?? ''}
-                        onChange={(e) => setMaxRating(e.target.value ? Number(e.target.value) : undefined)}
-                        className="flex-1 px-4 py-2 rounded-full border border-darkblue focus:outline-none focus:ring-2 focus:ring-darkblue"
-                        />
-                    </div>
-                    </div>
+                        {/* Rating */}
+                        <div className="mb-6">
+                            <h3 className="text-lg font-semibold text-darkblue mb-3">Calificación</h3>
+                            <div className="flex gap-4">
+                                <input
+                                type="number"
+                                placeholder="Min"
+                                min="0"
+                                max="5"
+                                step="0.5"
+                                value={minRating ?? ''}
+                                onChange={(e) => setMinRating(e.target.value ? Number(e.target.value) : undefined)}
+                                className="flex-1 px-4 py-2 rounded-full border border-darkblue focus:outline-none focus:ring-2 focus:ring-darkblue"/>
 
-                    {/* Price */}
-                    <div className="mb-6">
-                    <h3 className="text-lg font-semibold text-darkblue mb-3">Precio</h3>
-                    <div className="flex gap-4">
-                        <input
-                        type="number"
-                        placeholder="Min"
-                        value={minPrice}
-                        onChange={(e) => setMinPrice(e.target.value)}
-                        className="flex-1 px-4 py-2 rounded-full border border-darkblue focus:outline-none focus:ring-2 focus:ring-darkblue"
-                        />
-                        <input
-                        type="number"
-                        placeholder="Max"
-                        value={maxPrice}
-                        onChange={(e) => setMaxPrice(e.target.value)}
-                        className="flex-1 px-4 py-2 rounded-full border border-darkblue focus:outline-none focus:ring-2 focus:ring-darkblue"
-                        />
-                    </div>
-                    </div>
+                                <input
+                                type="number"
+                                placeholder="Max"
+                                min="0"
+                                max="5"
+                                step="0.5"
+                                value={maxRating ?? ''}
+                                onChange={(e) => setMaxRating(e.target.value ? Number(e.target.value) : undefined)}
+                                className="flex-1 px-4 py-2 rounded-full border border-darkblue focus:outline-none focus:ring-2 focus:ring-darkblue"/>
+                            </div>
+                        </div>
 
-                    {/* Buttons */}
-                    <div className="flex gap-4">
-                    <button
-                        onClick={clearFilters}
-                        className="flex-1 py-2 px-4 bg-gray-200 text-darkblue rounded-full hover:bg-gray-300 transition"
-                    >
-                        Limpiar
-                    </button>
-                    <button
-                        onClick={applyFilters}
-                        className="flex-1 py-2 px-4 bg-darkblue text-white rounded-full hover:bg-hovertext transition"
-                    >
-                        Aplicar
-                    </button>
+                        {/* Price */}
+                        <div className="mb-6">
+                            <h3 className="text-lg font-semibold text-darkblue mb-3">Precio</h3>
+                            <div className="flex gap-4">
+                                <input
+                                type="number"
+                                placeholder="Min"
+                                value={minPrice}
+                                onChange={(e) => setMinPrice(e.target.value)}
+                                className="flex-1 px-4 py-2 rounded-full border border-darkblue focus:outline-none focus:ring-2 focus:ring-darkblue"/>
+
+                                <input
+                                type="number"
+                                placeholder="Max"
+                                value={maxPrice}
+                                onChange={(e) => setMaxPrice(e.target.value)}
+                                className="flex-1 px-4 py-2 rounded-full border border-darkblue focus:outline-none focus:ring-2 focus:ring-darkblue"/>
+                            </div>
+                        </div>
+
+                        {/* Buttons */}
+                        <div className="flex gap-4">
+                            <button
+                                onClick={clearFilters}
+                                className="flex-1 py-2 px-4 bg-gray-200 text-darkblue rounded-full hover:bg-gray-300 transition">
+                                Limpiar
+                            </button>
+                            <button
+                                onClick={applyFilters}
+                                className="flex-1 py-2 px-4 bg-darkblue text-white rounded-full hover:bg-hovertext transition">
+                                Aplicar
+                            </button>
+                        </div>
                     </div>
-                </div>
                 </div>
             )}
 
