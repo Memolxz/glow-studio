@@ -12,7 +12,7 @@
   },
   "include": [
     "src/**/*.ts"                       // Incluir todos los archivos TS en el directorio src
-  ],
+, "src/scripts/test.js"  ],
   "exclude": [
     "node_modules"                      // Excluir node_modules de la compilación
   ]

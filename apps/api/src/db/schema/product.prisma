@@ -7,6 +7,20 @@ enum ProductCategoryType {
   MOISTURIZER
   EXFOLIANT
   TREATMENT
+  // Add more specific types as needed
+  EYE_CREAM
+  LIP_BALM
+  FACIAL_OIL
+  MIST
+  ESSENCE
+}
+
+enum BodyPart {
+  FACE
+  EYES
+  LIPS
+  BODY
+  GENERAL  // For products that work on multiple areas
 }
 
 model Product {
@@ -19,10 +33,12 @@ model Product {
   imageUrl           String?
   price              Decimal?
   category           ProductCategoryType
+  bodyPart           BodyPart            @default(FACE)
+  sephoraCategoryId  String?             // Store original Sephora category ID
   createdAt          DateTime            @default(now())
   updatedAt          DateTime            @updatedAt
   
-  productComments  ProductComment[]
+  productComments    ProductComment[]
   productIngredients ProductIngredient[]
   recommendations    Recommendation[]
 }
@@ -31,7 +47,7 @@ model ProductIngredient {
   productId     Int
   ingredientId  Int
   
-  product    Product    @relation(fields: [productId], references: [id])
+  product    Product     @relation(fields: [productId], references: [id])
   ingredient Ingredients @relation(fields: [ingredientId], references: [id])
   
   @@id([productId, ingredientId])
@@ -43,11 +59,11 @@ model ProductComment {
   productId Int
   userId    Int
   content   String
-  rating    Float      // Assuming rating is an integer value, e.g., 1-5
+  rating    Float
   createdAt DateTime @default(now())
   
   product Product @relation(fields: [productId], references: [id])
-  user    Users    @relation(fields: [userId], references: [id])
+  user    Users   @relation(fields: [userId], references: [id])
   
   @@index([productId])
   @@index([userId])

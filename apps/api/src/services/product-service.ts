@@ -1,8 +1,9 @@
 import { db } from '../db/db';
-import { ProductCategoryType } from '@prisma/client';
+import { ProductCategoryType, BodyPart } from '@prisma/client';
 
 interface ProductFilter {
   categories?: ProductCategoryType[];
+  bodyParts?: BodyPart[];  // New filter
   minRating?: number;
   maxRating?: number;
   minPrice?: number;
@@ -42,6 +43,11 @@ export class ProductService {
         where.category = { in: filters.categories };
       }
 
+      // Filter by body parts (NEW)
+      if (filters.bodyParts && filters.bodyParts.length > 0) {
+        where.bodyPart = { in: filters.bodyParts };
+      }
+
       // Filter by rating range
       if (filters.minRating !== undefined || filters.maxRating !== undefined) {
         where.rating = {};
@@ -75,10 +81,9 @@ export class ProductService {
         orderBy: { createdAt: 'desc' }
       });
 
-      // Filter by skin types (if product ingredients are good for those skin types)
+      // Filter by skin types
       if (filters.skinTypeIds && filters.skinTypeIds.length > 0) {
         products = products.filter(product => {
-          // Check if product has ingredients with GOOD effects for the selected skin types
           const hasGoodIngredientsForSkinType = product.productIngredients.some(pi => {
             return pi.ingredient.ingredientEffect.some(effect => 
               effect.Effect === 'GOOD' && 
@@ -86,7 +91,6 @@ export class ProductService {
             );
           });
 
-          // Check if product has NO BAD ingredients for the selected skin types
           const hasBadIngredientsForSkinType = product.productIngredients.some(pi => {
             return pi.ingredient.ingredientEffect.some(effect => 
               effect.Effect === 'BAD' && 
@@ -102,6 +106,28 @@ export class ProductService {
     } catch (error) {
       console.error(error);
       throw new Error("Error al filtrar productos");
+    }
+  }
+
+  // Method to get products by body part
+  async getProductsByBodyPart(bodyPart: BodyPart) {
+    try {
+      const products = await db.product.findMany({
+        where: { bodyPart },
+        include: {
+          productIngredients: { 
+            include: { 
+              ingredient: true 
+            } 
+          },
+          productComments: true
+        }
+      });
+
+      return products;
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error al obtener productos por parte del cuerpo");
     }
   }
 
