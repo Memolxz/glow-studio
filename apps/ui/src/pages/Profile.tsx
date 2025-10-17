@@ -5,46 +5,46 @@ import { useState, useEffect } from "react";
 
 // Types
 type User = {
-  id: number;
-  name: string;
-  email: string;
-  isAdmin: boolean;
+    id: number;
+    name: string;
+    email: string;
+    isAdmin: boolean;
 };
 
 type SkinType = {
-  id: number;
-  name: string;
-  description: string;
+    id: number;
+    name: string;
+    description: string;
 };
 
 type UserSkinType = {
-  userId: number;
-  skinTypeId: number;
-  skinType: SkinType;
+    userId: number;
+    skinTypeId: number;
+    skinType: SkinType;
 };
 
 type Product = {
-  id: number;
-  name: string;
-  brand: string;
-  imageUrl: string | null;
-  category: string;
+    id: number;
+    name: string;
+    brand: string;
+    imageUrl: string | null;
+    category: string;
 };
 
 type Recommendation = {
-  id: number;
-  product: Product;
+    id: number;
+    product: Product;
 };
 
 const categoryDisplayNames: Record<string, string> = {
-  SERUM: "Sérum",
-  CLEANSER: "Limpiador",
-  TONER: "Tonificador",
-  SUNSCREEN: "Protector Solar",
-  MASK: "Mascarilla",
-  MOISTURIZER: "Hidratante",
-  EXFOLIANT: "Exfoliante",
-  TREATMENT: "Tratamiento",
+    SERUM: "Sérum",
+    CLEANSER: "Limpiador",
+    TONER: "Tonificador",
+    SUNSCREEN: "Protector Solar",
+    MASK: "Mascarilla",
+    MOISTURIZER: "Hidratante",
+    EXFOLIANT: "Exfoliante",
+    TREATMENT: "Tratamiento",
 };
 
 export default function Home() {
@@ -199,8 +199,7 @@ export default function Home() {
             <div className="bg-white rounded-3xl p-8 max-w-md w-[90%] relative">
                 <button
                 onClick={() => setShowDeleteConfirm(false)}
-                className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
-                >
+                className="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
                 <X size={24} />
                 </button>
                 <h3 className="text-2xl font-bold text-[#2C5F5F] mb-4">
@@ -231,11 +230,11 @@ export default function Home() {
 
         <div className="flex flex-col w-[90%] bg-rectangles rounded-3xl mb-5 mt-10 p-10">
                 <div className="flex flex-row">
-                    <div className="flex-1 px-14 flex flex-col justify-end mt-10 w-1/2">
-                        <h2 className="text-3xl font-bold text-darkblue font-inter">{user?.name}</h2>
-                        <div className='bg-darkblue w-60 h-1 border-rectangles border mt-1'></div>
+                    <div className="flex-1 px-14 flex flex-col justify-end mt-16 w-1/2">
+                        <h2 className="text-4xl font-bold text-darkblue font-inter">Valentina Carera</h2>
+                        <p className="text-md text-darkblue/60 font-inter">{user?.email}</p>
 
-                        <h3 className="mt-5 text-2xl text-darkblue font-inter font-bold text-left">
+                        <h3 className="mt-5 text-xl text-darkblue font-inter font-bold text-left">
                             Características
                         </h3>
                         {userSkinTypes.length > 0 ? (
@@ -270,6 +269,9 @@ export default function Home() {
                             Eliminar Cuenta
                         </button>
                     </div>
+                </div>
+                <div className='w-full flex flex-col justify-cneter items-center'>
+                    <div className='w-[90%] border-darkblue border-b mt-10'/>
                 </div>
 
                 {/* Recommended Products */}        

@@ -15,7 +15,7 @@ userRouter.get("/",isAdminMiddleware, async (_: Request, res: Response) => {
   }
 });
 
-userRouter.get('/:mail',isAdminMiddleware, async (req: Request, res: Response) => {
+userRouter.get('/:mail', async (req: Request, res: Response) => {
   try {
     const userMailToGet = req.params.mail;
     const user = await userService.getUserByEmail(userMailToGet);

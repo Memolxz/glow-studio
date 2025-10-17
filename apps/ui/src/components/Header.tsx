@@ -115,8 +115,7 @@ export default function Header() {
                     <div className="relative">
                         <button
                             onClick={() => setIsOptionsOpen(!isOptionsOpen)}
-                            className="flex items-center justify-center border-2 h-10 w-10 border-white rounded-full hover:border-darkblue hover:bg-white hover:text-darkblue hover:scale-105 transition-transform z-30"
-                        >
+                            className="flex items-center justify-center border-2 h-10 w-10 border-white rounded-full hover:border-darkblue hover:bg-transparent hover:text-darkblue hover:scale-105 transition-transform z-30">
                             <UserRoundIcon className="scale-150" strokeWidth={1.5}/>
                         </button>
 
@@ -161,7 +160,6 @@ export default function Header() {
             </nav>
         </div>
 
-        {/* sinceramente esto esta pa sacarlo y q c haga log out cuando tocas log out, no doble verificacion */}
         {isOptionSignOutOpen && (
             <div className="flex flex-row justify-center items-center w-[80%] mx-auto py-3 mt-16">
                 <div className="absolute top-full mt-2 w-1/3 bg-background rounded-2xl shadow-lg flex flex-col text-start z-30 origin-top">
