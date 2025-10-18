@@ -247,7 +247,7 @@ export default function Home() {
         <div className="flex flex-col w-[90%] bg-rectangles rounded-3xl mb-5 mt-10 p-10">
                 <div className="flex flex-row">
                     <div className="flex-1 px-14 flex flex-col justify-end mt-16 w-1/2">
-                        <h2 className="text-4xl font-bold text-darkblue font-inter">Valentina Carera</h2>
+                        <h2 className="text-4xl font-bold text-darkblue font-inter">{user?.name}</h2>
                         <p className="text-md text-darkblue/60 font-inter">{user?.email}</p>
 
                         <h3 className="mt-5 text-xl text-darkblue font-inter font-bold text-left">
