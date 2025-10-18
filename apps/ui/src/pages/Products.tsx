@@ -8,17 +8,17 @@ import { Link } from "react-router-dom";
 function Title() {
     return (
         <div className="flex flex-col items-center justify-center w-full">
-        <div className="flex flex-row items-center justify-center w-full">
-            <div className="flex flex-col items-start justify-start w-2/3">
-            <h1 className="text-4xl font-bold text-start text-darkblue">
-                Productos
-            </h1>
-            <p className="text-xl font-normal text-start text-darkblue/60">
-                Descubre los productos que ofrecemos.
-            </p>
+            <div className="flex flex-row items-center justify-center w-full">
+                <div className="flex flex-col items-start justify-start w-2/3">
+                    <h1 className="text-4xl font-bold text-start text-darkblue">
+                        Productos
+                    </h1>
+                    <p className="text-xl font-normal text-start text-darkblue/60">
+                        Descubre los productos que ofrecemos.
+                    </p>
+                </div>
             </div>
-        </div>
-        <div className="border-b border-darkblue/60 my-5 w-full"></div>
+            <div className="border-b border-darkblue/60 my-5 w-full"></div>
         </div>
     );
 }
@@ -123,19 +123,19 @@ export default function Products() {
     // Estado de carga
     if (loading) {
         return (
-        <div className="bg-white relative font-inter">
+        <div className="bg-white relative font-inter flex flex-col justify-center items-center">
             <Header />
             <div className="w-[90%] py-10 -mt-22 mx-auto">
-            <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
-                <img src={img1} alt="Banner" className="w-full object-cover" />
-            </div>
-            <Title />
-            <div className="flex flex-col items-center justify-center py-10">
-                <div className="text-xl font-semibold text-darkblue mb-4">
-                Cargando productos...
+                <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
+                    <img src={img1} alt="Banner" className="w-full object-cover" />
                 </div>
-                <div className="w-8 h-8 border-4 border-darkblue border-t-transparent rounded-full animate-spin"></div>
-            </div>
+                <Title />
+                <div className="flex flex-col items-between justify-start py-10">
+                    <div className="text-xl font-semibold text-darkblue mb-4">
+                    Cargando productos...
+                    </div>
+                    <div className="w-8 h-8 border-4 border-darkblue border-t-transparent rounded-full animate-spin"></div>
+                </div>
             </div>
             <Footer />
         </div>
@@ -147,22 +147,22 @@ export default function Products() {
         return (
         <div className="bg-white relative font-inter">
             <Header />
-            <div className="w-[90%] py-10 -mt-22 mx-auto">
-            <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
-                <img src={img1} alt="Banner" className="w-full object-cover" />
+            <div className="w-[90%] -mt-22 mx-auto">
+                <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
+                    <img src={img1} alt="Banner" className="w-full object-cover" />
+                </div>
+                <Title />
+                <div className="flex flex-col items-center justify-center py-10">
+                    <div className="text-xl font-semibold text-red-600 mb-4">{error}</div>
+                    <button
+                    onClick={fetchProducts}
+                    className="px-6 py-2 bg-darkblue text-white rounded-full hover:bg-hovertext transition"
+                    >
+                    Reintentar
+                    </button>
+                </div>
+                <Footer />
             </div>
-            <Title />
-            <div className="flex flex-col items-center justify-center py-10">
-                <div className="text-xl font-semibold text-red-600 mb-4">{error}</div>
-                <button
-                onClick={fetchProducts}
-                className="px-6 py-2 bg-darkblue text-white rounded-full hover:bg-hovertext transition"
-                >
-                Reintentar
-                </button>
-            </div>
-            </div>
-            <Footer />
         </div>
         );
     }
@@ -171,7 +171,7 @@ export default function Products() {
     return (
         <div className="bg-defaultbg relative font-inter min-h-screen">
         <Header />
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center justify-center">
             <div className="w-[90%] py-10 mt-22">
             <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
                 <img src={img1} alt="Products Banner" className="w-full h-full object-cover" />
@@ -318,7 +318,7 @@ export default function Products() {
                 <Link
                     key={product.id}
                     to={`/product/${product.id}`}
-                    className="flex flex-col justify-between items-center h-[380px] p-6 rounded-2xl bg-[#d7eaea] shadow-sm hover:shadow-lg transition group"
+                    className="relative flex flex-col justify-between items-center h-96 p-6 rounded-2xl bg-[#d7eaea] shadow-sm hover:shadow-lg transition group"
                 >
                     <img
                     src={product.imageUrl || "/placeholder.png"}
@@ -328,24 +328,28 @@ export default function Products() {
                         e.currentTarget.src = "/placeholder.png";
                     }}
                     />
-                    <p className="text-center p-2 text-sm font-semibold text-darkblue mt-2 hover:text-hovertext line-clamp-2">
+                    <p className="text-center p-2 text-sm font-semibold text-darkblue hover:text-hovertext">
                     {product.name}
                     </p>
-                    <p className="text-xs text-gray-600">{product.brand}</p>
+                    <p className="text-sm text-gray-600">{product.brand}</p>
                     <div className="flex flex-row justify-center items-center w-full mt-2">
                     {product.rating && (
-                        <div className="flex flex-row justify-center items-center mr-5">
-                        <Star className="h-4 w-4 text-darkblue fill-current mr-2" />
+                        <div className="flex flex-row justify-center items-center">
+                        <Star className="h-4 w-4 text-darkblue fill-current mr-1" strokeWidth={1} />
                         <p className="text-darkblue font-semibold text-md">
                             {product.rating.toFixed(1)}
                         </p>
                         </div>
                     )}
+                    <div className="h-1 w-1 bg-darkblue rounded-full mx-2"></div>
                     {product.price && (
                         <p className="text-darkblue font-semibold text-md">
                         $ {parseFloat(product.price).toLocaleString("es-AR")}
                         </p>
                     )}
+                    <div className="absolute top-5 right-5 bg-darkblue/60 text-white font-semibold px-3 h-8 flex items-center rounded-2xl">
+                        <p>{categoryDisplayNames[product.category] || product.category}</p>
+                    </div>
                     </div>
                 </Link>
                 ))}

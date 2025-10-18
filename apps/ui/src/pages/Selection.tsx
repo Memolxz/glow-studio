@@ -1,21 +1,25 @@
 import { useState, useEffect } from "react";
+import { Check } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import Header from "../components/Header";
+import img1 from "../assets/modelo2.png"
+import Footer from "../components/Footer";
 
 interface SkinType {
-  id: number;
-  name: string;
-  description: string;
+    id: number;
+    name: string;
+    description: string;
 }
 
 interface SkinTypeResponse {
-  ok: boolean;
-  data?: SkinType[];
-  error?: string;
+    ok: boolean;
+    data?: SkinType[];
+    error?: string;
 }
 
 interface UserSkinTypeResponse {
-  ok: boolean;
-  error?: string;
+    ok: boolean;
+    error?: string;
 }
 
 export default function SkinSelection() {
@@ -141,21 +145,31 @@ export default function SkinSelection() {
     }
 
     return (
-        <div className="min-h-screen flex flex-col items-center bg-background">
-        <div
-            className="w-full h-[450px] bg-cover bg-center relative flex flex-col items-center justify-center"
-            style={{
-            backgroundImage: "url('/images/selection-banner.jpg')"
-            }}
-        >
-            <div className="absolute inset-0 bg-black/20"></div>
+        <div className="min-h-screen flex flex-col items-center bg-background relative font-inter">
+            <Header />
+            <div className="w-[90%] py-10 -mt-22 mx-auto">
+                <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
+                    <img src={img1} alt="Banner" className="w-full object-cover" />
+                </div>
 
-            <h1 className="relative z-10 text-5xl mt-48 mb-20 font-bold font-inter text-center text-white">
-            Elegí tu(s) tipo(s) de piel
-            </h1>
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-6 mb-12 w-[72%] z-10">
+                <div className="flex flex-col items-start justify-center w-full mt-10">
+                    <div className="flex flex-row items-center justify-start w-full">
+                        <div className="flex flex-col items-start justify-start w-2/3">
+                        <h1 className="text-4xl font-bold text-start text-darkblue">
+                            Seleccioná tus Tipos de Piel
+                        </h1>
+                        <p className="text-xl font-normal text-start text-darkblue/60">
+                            Seleccioná lo o los tipos de piel que tenés.
+                        </p>
+                        </div>
+                    </div>
+                    <div className="border-b border-darkblue/60 my-5 w-full"></div>
+                </div>
+            </div>
+        <div className="w-full relative flex flex-col items-center justify-center">
+            <div className="grid grid-cols-2 gap-6 mb-12 w-[90%] z-10">
                 {skinTypes.map((skinType) => (
-                <div key={skinType.id}>
+                <div key={skinType.id} className="relative">
                     <input
                         type="checkbox"
                         id={`skin-${skinType.id}`}
@@ -164,20 +178,27 @@ export default function SkinSelection() {
                         onChange={() => toggleSelect(skinType.id)}
                         disabled={submitting}
                     />
+
                     <label
                         htmlFor={`skin-${skinType.id}`}
-                        className="flex flex-col items-center justify-center w-40 h-40 border border-gray-200 bg-white rounded-xl shadow-sm 
-                                hover:shadow-lg cursor-pointer transition-transform hover:scale-105 z-10
-                                peer-checked:bg-gray-300 peer-checked:border-gray-300
-                                disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                        <p className="text-center text-md font-inter font-semibold text-darkblue mb-2">
+                        className="flex flex-col items-start justify-center origin-center
+                                w-full h-40 border border-rectangles bg-white rounded-xl z-10 p-7 transform-gpu
+                                cursor-pointer transition-transform
+                                hover:bg-[#E2EFEF] peer-checked:bg-[#E2EFEF] peer-checked:origin-center
+                                disabled:opacity-50 disabled:cursor-not-allowed">
+                        <p className="text-start text-2xl font-inter font-semibold text-darkblue mb-2">
                         {skinType.name}
                         </p>
-                        <p className="text-center font-inter text-xs text-darkblue w-[85%] leading-tight">
+
+                        <p className="text-start font-inter text-md text-darkblue w-[85%] leading-tight">
                         {formatDescription(skinType.description)}
                         </p>
                     </label>
+
+                    {/* Ícono de tilde */}
+                    <div className="absolute top-5 right-5 bg-darkblue rounded-full p-1 hidden peer-checked:flex">
+                        <Check className="w-5 h-5 text-white" />
+                    </div>
                 </div>
                 ))}
             </div>
@@ -202,6 +223,7 @@ export default function SkinSelection() {
                 )}
             </button>
         </div>
+            <Footer />
         </div>
     );
 }
