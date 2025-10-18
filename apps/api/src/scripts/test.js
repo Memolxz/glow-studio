@@ -4,7 +4,7 @@ const options = {
 	method: 'GET',
 	hostname: 'real-time-sephora-api.p.rapidapi.com',
 	port: null,
-	path: '/category-data?categoryId=cat1600040',
+	path: '/product-details?productId=P517959&language=en-US',
 	headers: {
 		'x-rapidapi-key': 'f5c682003amsh16d150f7c21c9f9p1ece6ajsn327731becf08',
 		'x-rapidapi-host': 'real-time-sephora-api.p.rapidapi.com'

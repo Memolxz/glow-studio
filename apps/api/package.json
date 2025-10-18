@@ -9,7 +9,9 @@
     "clean": "rimraf dist",
     "dev": "tsx --watch src/index.ts",
     "db:migrate": "prisma migrate dev --schema src/db/schema",
-    "db:generate": "prisma generate --no-engine --schema src/db/schema"
+    "db:generate": "prisma generate --no-engine --schema src/db/schema",
+    "import:test": "node src/scripts/import-sephora-with-ingredients.js specific cat60097",
+    "import:with-ingredients": "node src/scripts/import-sephora-with-ingredients.js"
   },
   "repository": {
     "type": "git",
