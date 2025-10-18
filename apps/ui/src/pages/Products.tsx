@@ -324,16 +324,19 @@ export default function Products() {
                 <Link
                     key={product.id}
                     to={`/product/${product.id}`}
-                    className="relative flex flex-col group justify-between items-center h-96 p-6 rounded-2xl bg-[#d7eaea] shadow-sm hover:shadow-lg transition group"
+                    className="relative flex flex-col group justify-between items-center h-96 p-6 rounded-2xl bg-[#d7eae] shadow-sm hover:shadow-lg transition group"
                 >
-                    <img
-                    src={product.imageUrl || "/placeholder.png"}
-                    alt={product.name}
-                    className="w-auto h-[60%] object-contain rounded-t-xl group-hover:scale-105 transition-transform duration-300"
-                    onError={(e) => {
-                        e.currentTarget.src = "/placeholder.png";
-                    }}
-                    />
+                    <div className="bg-white ">
+                        <img
+                        src={product.imageUrl || "/placeholder.png"}
+                        alt={product.name}
+                        className="w-auto h-[60%] object-contain rounded-t-xl group-hover:scale-105 transition-transform duration-300"
+                        onError={(e) => {
+                            e.currentTarget.src = "/placeholder.png";
+                        }}/>
+
+                    </div>
+                    
                     <p className="text-center p-2 text-sm font-semibold text-darkblue group-hover:text-hovertext">
                     {product.name}
                     </p>

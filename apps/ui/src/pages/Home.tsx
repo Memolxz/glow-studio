@@ -109,7 +109,7 @@ export default function Home() {
                             <Link
                                 key={product.id}
                                 to={`/product/${product.id}`}
-                                className="relative flex flex-col items-center group bg-[#d7eaea] rounded-2xl p-6 hover:shadow-xl transition-all group"
+                                className="relative flex flex-col items-center group bg-white rounded-2xl p-6 hover:shadow-xl transition-all group"
                             >
                                 {/* Ranking Badge */}
                                 <div className="absolute top-3 left-3 bg-darkblue text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg z-10">

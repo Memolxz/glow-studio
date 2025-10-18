@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import Header from "../components/Header"
+import Footer from "../components/Footer"
 
 // Types
 type Product = {
@@ -228,7 +230,7 @@ export default function RecommendationsPage() {
   return (
     <div className="bg-white min-h-screen">
       <div className="flex flex-col items-center">
-        {/* Header placeholder - you can import your Header component */}
+        <Header />
         <div className="w-full h-16 bg-[#2C5F5F]"></div>
 
         {/* Hero Image */}
@@ -267,7 +269,7 @@ export default function RecommendationsPage() {
           })}
         </div>
 
-        {/* Footer placeholder - you can import your Footer component */}
+        <Footer />
         <div className="w-full h-32 bg-[#2C5F5F]"></div>
       </div>
     </div>
