@@ -6,7 +6,7 @@ import { db } from "../db/db";
 export class JwtService {
   async generateJsonWebAccessToken(user: Users) {
     try {
-      const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1hr' })
+      const token = jwt.sign({ id: user.id, email: user.email, name: user.name, isAdmin: user.isAdmin }, process.env.JWT_SECRET, { expiresIn: '1hr' })
       return token;
     } catch (error) {
       console.error(error);
