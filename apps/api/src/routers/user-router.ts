@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express"
 import { UserService } from "../services/user-service";
-import { isAdminMiddleware } from "../middleware/auth-middleware";
+import { jwtAuthMiddleware, isAdminMiddleware } from "../middleware/auth-middleware";
 
 const userService = new UserService();
 
@@ -109,5 +109,23 @@ userRouter.get('/skintype/:id', async (req: Request, res: Response) => {
     res.status(200).json({ ok: true, data: user })
   } catch (error) {
     res.status(500).json({ ok: false, error: (error as any).message })
+  }
+});
+
+// Add this route to get user by ID (not just by email)
+userRouter.get('/:id', jwtAuthMiddleware, async (req: Request, res: Response) => {
+  try {
+    const userId = parseInt(req.params.id);
+    
+    // Ensure users can only access their own profile (unless admin)
+    if (req.user && req.user.id !== userId && !req.user.isAdmin) {
+      res.status(403).json({ ok: false, error: "Acceso denegado" });
+      return;
+    }
+    
+    const user = await userService.getUserById(userId);
+    res.status(200).json({ ok: true, data: user });
+  } catch (error) {
+    res.status(500).json({ ok: false, error: (error as any).message });
   }
 });

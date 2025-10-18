@@ -56,80 +56,96 @@ export default function Home() {
     const [error, setError] = useState("");
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
-    // Get user data from token
-    const getUserFromToken = (): User | null => {
+    // Get user ID from token
+    const getUserIdFromToken = (): number | null => {
         const token = localStorage.getItem("accessToken");
         if (!token) return null;
 
         try {
-        const payload = JSON.parse(atob(token.split('.')[1]));
-        return {
-            id: payload.id,
-            email: payload.email,
-            name: payload.name || "",
-            isAdmin: payload.isAdmin || false,
-        };
+            const payload = JSON.parse(atob(token.split('.')[1]));
+            return payload.id || null;
         } catch (error) {
-        console.error("Error decoding token:", error);
-        return null;
+            console.error("Error decoding token:", error);
+            return null;
         }
     };
 
     useEffect(() => {
         const fetchUserData = async () => {
-        try {
-            const token = localStorage.getItem("accessToken");
-            const userData = getUserFromToken();
+            try {
+                const token = localStorage.getItem("accessToken");
+                const userId = getUserIdFromToken();
 
-            if (!token || !userData) {
-            window.location.href = "/register";
-            return;
+                if (!token || !userId) {
+                    window.location.href = "/register";
+                    return;
+                }
+
+                // Fetch full user data by ID
+                const userResponse = await fetch(
+                    `http://localhost:8000/users/${userId}`,
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+
+                if (userResponse.ok) {
+                    const userData = await userResponse.json();
+                    if (userData.ok && userData.data) {
+                        setUser(userData.data);
+                    }
+                } else if (userResponse.status === 401) {
+                    // Token expired or invalid
+                    localStorage.removeItem("accessToken");
+                    localStorage.removeItem("refreshToken");
+                    window.location.href = "/register";
+                    return;
+                }
+
+                // Fetch user's skin types
+                const skinTypesResponse = await fetch(
+                    `http://localhost:8000/users/skintype/${userId}`,
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+
+                if (skinTypesResponse.ok) {
+                    const skinTypesData = await skinTypesResponse.json();
+                    setUserSkinTypes(skinTypesData.ok ? skinTypesData.data : []);
+                }
+
+                // Fetch recommendations
+                const recsResponse = await fetch(
+                    "http://localhost:8000/products/recommendations",
+                    {
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+
+                if (recsResponse.ok) {
+                    const recsData = await recsResponse.json();
+                    setRecommendations(recsData.slice(0, 6)); // Show first 6
+                }
+            } catch (err) {
+                console.error("Error fetching user data:", err);
+                setError("Error al cargar datos del perfil");
+            } finally {
+                setLoading(false);
             }
-
-            setUser(userData);
-
-            // Fetch user's skin types
-            const skinTypesResponse = await fetch(
-            `http://localhost:8000/users/skintype/${userData.id}`,
-            {
-                headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-                },
-            }
-            );
-
-            if (skinTypesResponse.ok) {
-            const skinTypesData = await skinTypesResponse.json();
-            setUserSkinTypes(skinTypesData.ok ? skinTypesData.data : []);
-            }
-
-            // Fetch recommendations
-            const recsResponse = await fetch(
-            "http://localhost:8000/products/recommendations",
-            {
-                headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${token}`,
-                },
-            }
-            );
-
-            if (recsResponse.ok) {
-            const recsData = await recsResponse.json();
-            setRecommendations(recsData.slice(0, 6)); // Show first 6
-            }
-        } catch (err) {
-            console.error("Error fetching user data:", err);
-            setError("Error al cargar datos del perfil");
-        } finally {
-            setLoading(false);
-        }
         };
 
         fetchUserData();
     }, []);
-
     const handleDeleteAccount = async () => {
         if (!user) return;
 
