@@ -147,27 +147,27 @@ export default function SkinSelection() {
     return (
         <div className="min-h-screen flex flex-col items-center bg-background relative font-inter">
             <Header />
-            <div className="w-[90%] py-10 -mt-22 mx-auto">
+            <div className="w-[90%] mt-10 mx-auto">
                 <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
                     <img src={img1} alt="Banner" className="w-full object-cover" />
                 </div>
 
                 <div className="flex flex-col items-start justify-center w-full mt-10">
                     <div className="flex flex-row items-center justify-start w-full">
-                        <div className="flex flex-col items-start justify-start w-2/3">
-                        <h1 className="text-4xl font-bold text-start text-darkblue">
-                            Seleccioná tus Tipos de Piel
-                        </h1>
-                        <p className="text-xl font-normal text-start text-darkblue/60">
-                            Seleccioná lo o los tipos de piel que tenés.
-                        </p>
+                        <div className="flex flex-col items-start justify-start w-full">
+                            <h1 className="text-4xl font-bold text-start text-darkblue">
+                                Seleccioná tus Tipos de Piel
+                            </h1>
+                            <p className="text-xl font-normal text-start text-darkblue/60">
+                                Podés elegir uno o varios según tu tipo de piel.
+                            </p>
                         </div>
                     </div>
                     <div className="border-b border-darkblue/60 my-5 w-full"></div>
                 </div>
             </div>
         <div className="w-full relative flex flex-col items-center justify-center">
-            <div className="grid grid-cols-2 gap-6 mb-12 w-[90%] z-10">
+            <div className="grid grid-cols-2 gap-6 w-[90%] z-10">
                 {skinTypes.map((skinType) => (
                 <div key={skinType.id} className="relative">
                     <input
@@ -206,7 +206,7 @@ export default function SkinSelection() {
             <button
                 disabled={selected.length === 0 || submitting}
                 onClick={handleContinue}
-                className={`rounded-full px-4 py-2 border-2 text-base font-semibold font-inter
+                className={`rounded-full px-4 py-2 border-2 text-base font-semibold font-inter my-5
                 ${
                     selected.length === 0 || submitting
                     ? "border-darkblue text-darkblue cursor-not-allowed bg-white"

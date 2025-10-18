@@ -102,19 +102,24 @@ export default function Home() {
 
             {/* Top Rated Products Section */}
             {!loading && topProducts.length > 0 && (
-                <div className="w-[90%] bg-rectangles rounded-3xl mb-5 p-10">
+                <div className="w-[90%] bg-rectangles rounded-3xl mb-10 p-10">
                     <h2 className="text-3xl font-bold text-darkblue mb-6">Productos Mejor Valorados</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {topProducts.map((product, index) => (
                             <Link
                                 key={product.id}
                                 to={`/product/${product.id}`}
-                                className="relative flex flex-col items-center bg-[#d7eaea] rounded-2xl p-6 hover:shadow-xl transition-all group"
+                                className="relative flex flex-col items-center group bg-[#d7eaea] rounded-2xl p-6 hover:shadow-xl transition-all group"
                             >
                                 {/* Ranking Badge */}
                                 <div className="absolute top-3 left-3 bg-darkblue text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg z-10">
                                     {index + 1}
                                 </div>
+
+                                <div className="absolute top-5 right-5 bg-darkblue/60 text-white font-semibold px-3 h-8 flex items-center rounded-2xl z-10">
+                                    <p>{categoryDisplayNames[product.category] || product.category}</p>
+                                </div>
+
                                 
                                 <img
                                     src={product.imageUrl || "/placeholder.png"}
@@ -124,42 +129,42 @@ export default function Home() {
                                         e.currentTarget.src = "/placeholder.png";
                                     }}
                                 />
-                                
-                                <h3 className="text-darkblue font-bold text-lg text-center mb-2 line-clamp-2">
+
+                                <p className="text-center p-2 text-sm font-semibold text-darkblue group-hover:text-hovertext">
                                     {product.name}
-                                </h3>
-                                
-                                <p className="text-darkblue/60 text-sm mb-2">{product.brand}</p>
-                                
-                                <p className="text-xs text-darkblue/50 mb-3">
-                                    {categoryDisplayNames[product.category] || product.category}
                                 </p>
-                                
-                                {product.rating && (
-                                    <div className="flex items-center gap-2 mb-2">
-                                        <div className="flex">
-                                            {renderStars(product.rating)}
-                                        </div>
-                                        <span className="text-darkblue font-semibold text-sm">
+                                <p className="text-sm text-darkblue/60">{product.brand}</p>
+
+                                <div className="flex flex-row justify-center items-center w-full mt-2">
+                                    {product.rating && (
+                                        <div className="flex flex-row justify-center items-center">
+                                        <Star className="h-4 w-4 text-darkblue fill-current mr-1" strokeWidth={1} />
+                                        <p className="text-darkblue font-semibold text-md">
                                             {product.rating.toFixed(1)}
-                                        </span>
+                                        </p>
+                                        </div>
+                                    )}
+                                    <div className="h-1 w-1 bg-darkblue rounded-full mx-2"></div>
+                                    {product.price && (
+                                        <p className="text-darkblue font-semibold text-md">
+                                        $ {parseFloat(product.price).toLocaleString("es-AR")}
+                                        </p>
+                                    )}
+                                    <div className="absolute top-5 right-5 bg-darkblue/60 text-white font-semibold px-3 h-8 flex items-center rounded-2xl">
+                                        <p>{categoryDisplayNames[product.category] || product.category}</p>
                                     </div>
-                                )}
-                                
-                                {product.price && (
-                                    <p className="text-darkblue font-bold text-lg">
-                                        $ {parseFloat(product.price).toLocaleString('es-AR')}
-                                    </p>
-                                )}
+                                </div>
                             </Link>
                         ))}
                     </div>
                     
-                    <div className="flex justify-center mt-8">
+                    <div className="flex justify-center mt-5">
                         <Link
                             to="/products"
-                            className="px-8 py-3 bg-darkblue text-white rounded-full hover:bg-hovertext transition font-semibold"
-                        >
+                            className="rounded-full bg-transparent px-4 py-2 border border-darkblue
+                                font-semibold text-darkblue text-sm font-inter text-center
+                                hover:bg-darkblue hover:text-rectangles transition
+                                focus:outline-none focus:ring-2 focus:ring-darkblue">
                             Ver Todos los Productos
                         </Link>
                     </div>
