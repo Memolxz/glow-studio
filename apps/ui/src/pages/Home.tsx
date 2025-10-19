@@ -3,11 +3,9 @@ import { Star } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import img1 from '../assets/modelo4.jpg';
-import img2 from '../assets/modelo1.png';
-import img3 from '../assets/dior.jpg';
 import videoSrc from '../assets/video.mp4';
-import img4 from '../assets/modelo2.png';
 import { Link } from 'react-router-dom';
+import RoutineLine from '../components/RoutineLine';
 
 type Product = {
   id: number;
@@ -87,7 +85,7 @@ export default function Home() {
     };
 
     return (
-        <div className="flex flex-col items-center bg-defaultbg relative font-inter">
+        <div className="flex flex-col items-center bg-background relative font-inter">
             <Header />
 
             <div className="w-[90%] py-10">
@@ -162,7 +160,7 @@ export default function Home() {
                         <Link
                             to="/products"
                             className="rounded-full bg-transparent px-4 py-2 border border-darkblue
-                                font-semibold text-darkblue text-sm font-inter text-center
+                                font-semibold text-darkblue text-md font-inter text-center
                                 hover:bg-darkblue hover:text-rectangles transition
                                 focus:outline-none focus:ring-2 focus:ring-darkblue">
                             Ver Todos los Productos
@@ -171,6 +169,20 @@ export default function Home() {
                 </div>
             )}
 
+            <div className="flex flex-col items-center justify-center w-[90%] my-10">
+                <div className="flex flex-row items-center justify-center w-full mb-6">
+                    <div className="flex flex-col items-center justify-start">
+                        <h1 className="text-4xl font-bold text-start text-darkblue">
+                            ¿No sabés cómo armar tu rutina?
+                        </h1>
+                        <p className="text-xl font-normal text-start text-darkblue/60 my-2">
+                            Estos son los pasos que no te pueden faltar.
+                        </p>
+                        </div>
+                    </div>
+                <RoutineLine />
+            </div>
+{/* 
             <div className="flex w-[90%]  sm:h-[300px] md:h-[400px] lg:h-[450px] bg-rectangles rounded-3xl mb-5">
                 <div className="flex-1 p-14 flex flex-col justify-end">
                     <h2 className="text-2xl sm:text-xl font-bold text-darkblue font-inter">RECORRE LO DESTACADO</h2>
@@ -196,7 +208,7 @@ export default function Home() {
                         className="w-full h-full object-cover scale-105"
                     />
                 </div>
-            </div>
+            </div> */}
 
             <div className="flex w-[90%]  sm:h-[300px] md:h-[400px] lg:h-[450px] rounded-3xl mt-5 mb-5 overflow-hidden bg-transparent">
                 <video
@@ -210,6 +222,7 @@ export default function Home() {
             </div>
 
 
+{/* 
             <div className="lg:flex md:flex sm:flex-none w-[90%] sm:h-auto md:h-[400px] lg:h-[450px] gap-6 bg-rectangles
                             rounded-3xl mb-5 mt-5">
                 <div className="flex-1 overflow-hidden rounded-3xl">
@@ -219,6 +232,8 @@ export default function Home() {
                         className="w-full h-full object-cover scale-105"
                     />
                 </div>
+
+
 
                 <div className="flex-1 p-14 flex flex-col bg-rectangles rounded-3xl
                 lg:justify-end lg:items-end md:justify-end md:items-end 
@@ -242,9 +257,9 @@ export default function Home() {
                     </Link>
                 </div>
 
-            </div>
+            </div> */}
 
-            <div 
+            {/* <div 
                 className="relative flex p-6 flex-col justify-center items-center w-[90%] sm:h-auto md:h-[400px] lg:h-[450px] rounded-3xl mb-5 mt-5 bg-cover bg-center overflow-hidden"
                 style={{ backgroundImage: `url(${img4})` }}
             >
@@ -263,7 +278,7 @@ export default function Home() {
                 >
                     PERFIL
                 </button>
-            </div>
+            </div> */}
 
             <Footer />
         </div>

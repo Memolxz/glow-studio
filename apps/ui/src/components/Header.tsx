@@ -161,35 +161,32 @@ export default function Header() {
         </div>
 
         {isOptionSignOutOpen && (
-            <div className="flex flex-row justify-center items-center w-[80%] mx-auto py-3 mt-16">
-                <div className="absolute top-full mt-2 w-1/3 bg-background rounded-2xl shadow-lg flex flex-col text-start z-30 origin-top">
-                    <h1 className="m-2 text-center font-inter text-xl">¿Estás seguro que querés cerrar sesión?</h1>
-                    <div className="flex w-full items-center border-t border-gray-500 rounded-full"/>
-                    <div className="flex flex-row justify-center items-center">
+            <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                <div className="bg-white rounded-3xl p-8 max-w-md w-[90%] relative">
+                    <button
+                    onClick={() => {setIsOptionSignOutOpen(!isOptionSignOutOpen)}}
+                    className="absolute top-4 right-4">
+                    <X size={30} className="absolute top-4 right-4 text-darkblue hover:hovertext"/>
+                    </button>
+                    <h1 className="text-2xl font-bold text-darkblue mb-2">¿Cerrar Sesión?</h1>
+                    <p className="text-darkblue/60 mb-6">
+                        ¿Estas seguro que querés cerrar sesión?
+                    </p>
+                    <div className="flex gap-4">
                         <button
                             onClick={handleLogout}
-                            className="w-1/2 flex flex-row text-darkblue justify-center items-center hover:text-hovertext text-xl text-center
-                                        transition-transform hover:scale-105 origin-center py-3">
-                            <p>Aceptar</p>
+                            className="flex-1 py-2 px-4 bg-red-900 text-white rounded-full hover:bg-red-800 transition disabled:opacity-50">
+                                Aceptar
                         </button>
-                        <div className="h-10 border-l border-gray-500 rounded-full" />
                         <button
-                            onClick={() => {
-                                setIsOptionSignOutOpen(!isOptionSignOutOpen);
-                                setIsOptionsOpen(!isOptionsOpen);
-                                }}
-                            className="w-1/2 flex flex-row text-red-800 hover:text-red-900 text-xl text-center justify-center items-center
-                                        transition-transform hover:scale-105 origin-center">
-                            <p>Cancelar</p>
+                            onClick={() => {setIsOptionSignOutOpen(!isOptionSignOutOpen)}}
+                            className="flex-1 py-2 px-4 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition">
+                                Cancelar
                         </button>
                     </div>
                 </div>
             </div>
             )}
-            {isOptionSignOutOpen && (
-                <div
-                    className="fixed inset-0 bg-black bg-opacity-50 z-10"
-                ></div>)}
         </header>
     );
 }

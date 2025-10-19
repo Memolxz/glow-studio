@@ -4,7 +4,6 @@ import AuthLayout from "./pages/AuthPage"
 import Products from "./pages/Products"
 import Product from "./pages/Product"
 import Profile from "./pages/Profile"
-import Routine from "./pages/Routine"
 import Home from "./pages/Home"
 import FQ from "./pages/FAQ"
 import RecommendationsPage from "./pages/Recommendations"
@@ -17,7 +16,6 @@ export default function App() {
           <Route path="/register" element={<AuthLayout /> } />
           <Route path="/products" element={<Products />} />
           <Route path="/product/:id" element={<Product />} />
-          <Route path="/routine" element={<Routine />} />
           <Route path="/home" element={<Home />} />
           <Route path="/faq" element={<FQ />} />
 

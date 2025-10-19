@@ -123,7 +123,7 @@ export default function Products() {
     // Estado de carga
     if (loading) {
         return (
-        <div className="bg-white relative font-inter flex flex-col justify-center items-center">
+        <div className="bg-background relative font-inter flex flex-col justify-center items-center">
             <Header />
                 <div className="w-[90%] py-10 mt-22">
                         <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
@@ -148,7 +148,7 @@ export default function Products() {
     // Estado de error
     if (error) {
         return (
-        <div className="bg-defaultbg relative font-inter min-h-screen">
+        <div className="bg-background relative font-inter min-h-screen">
             <Header />
             <div className="flex flex-col items-center justify-center">
                 <div className="w-[90%] py-10 mt-22">
@@ -175,7 +175,7 @@ export default function Products() {
 
     // Vista principal
     return (
-        <div className="bg-defaultbg relative font-inter min-h-screen">
+        <div className="bg-background relative font-inter min-h-screen">
         <Header />
         <div className="flex flex-col items-center justify-center">
             <div className="w-[90%] py-10 mt-22">
@@ -324,19 +324,16 @@ export default function Products() {
                 <Link
                     key={product.id}
                     to={`/product/${product.id}`}
-                    className="relative flex flex-col group justify-between items-center h-96 p-6 rounded-2xl bg-[#d7eae] shadow-sm hover:shadow-lg transition group"
+                    className="relative flex flex-col group justify-between items-center h-96 p-6 rounded-2xl bg-[#E2EFEF] shadow-sm hover:shadow-lg transition group"
                 >
-                    <div className="bg-white ">
-                        <img
-                        src={product.imageUrl || "/placeholder.png"}
-                        alt={product.name}
-                        className="w-auto h-[60%] object-contain rounded-t-xl group-hover:scale-105 transition-transform duration-300"
-                        onError={(e) => {
-                            e.currentTarget.src = "/placeholder.png";
-                        }}/>
-
-                    </div>
-                    
+                    <img
+                    src={product.imageUrl || "/placeholder.png"}
+                    alt={product.name}
+                    className="w-auto h-[60%] object-contain rounded-t-xl group-hover:scale-105 transition-transform duration-300"
+                    onError={(e) => {
+                        e.currentTarget.src = "/placeholder.png";
+                    }}
+                    />
                     <p className="text-center p-2 text-sm font-semibold text-darkblue group-hover:text-hovertext">
                     {product.name}
                     </p>
@@ -372,7 +369,6 @@ export default function Products() {
                 </div>
             )}
             </div>
-
             <Footer />
         </div>
         </div>

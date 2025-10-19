@@ -1,7 +1,9 @@
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useState, useEffect } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 import Header from "../components/Header"
 import Footer from "../components/Footer"
+import img from "../assets/modelo11.jpg"
+import { Link } from "react-router-dom";
 
 // Types
 type Product = {
@@ -51,7 +53,7 @@ const categoryOrder = [
 
 function ProductCarousel({ products }: { products: Product[] }) {
   const [index, setIndex] = useState(0);
-  const visible = 5;
+  const visible = 4;
 
   const next = () => {
     if (index < products.length - visible) setIndex(index + 1);
@@ -69,7 +71,7 @@ function ProductCarousel({ products }: { products: Product[] }) {
       {index > 0 && (
         <button
           onClick={prev}
-          className="absolute left-0 top-1/2 -translate-y-1/2 bg-[#2C5F5F] text-white rounded-full p-2 shadow-md hover:bg-[#1a3d3d] transition z-10"
+          className="absolute left-0 top-1/2 -translate-y-1/2 bg-darkblue text-white rounded-full p-2 shadow-md hover:bg-hovertext transition z-10"
         >
           <ChevronLeft size={24} strokeWidth={3} />
         </button>
@@ -78,27 +80,45 @@ function ProductCarousel({ products }: { products: Product[] }) {
       {/* Visible Container */}
       <div className="overflow-hidden w-full">
         <div
-          className="flex transition-transform duration-500 ease-in-out"
+        className="flex transition-transform duration-500 ease-in-out"
           style={{ transform: `translateX(-${index * (100 / visible)}%)` }}
         >
-          {products.map((product) => (
-            <div key={product.id} className="flex-shrink-0 w-1/5 px-2">
-              <div className="flex flex-col justify-between items-center h-[320px] p-6 rounded-2xl bg-[#d7eaea] shadow-sm hover:shadow-lg transition cursor-pointer">
-                <img
-                  src={product.imageUrl || "/placeholder.png"}
-                  alt={product.name}
-                  className="w-auto h-[85%] object-contain rounded-t-xl"
-                  onError={(e) => {
-                    e.currentTarget.src = "/placeholder.png";
-                  }}
-                />
-                <div className="text-center">
-                  <p className="text-sm font-semibold text-[#2C5F5F]">
-                    {product.name}
-                  </p>
-                  <p className="text-xs text-gray-600">{product.brand}</p>
-                </div>
-              </div>
+        {products.map((product) => (
+            <div key={product.id} className="flex-shrink-0 w-1/4 px-2">
+				<Link
+					key={product.id}
+					to={`/product/${product.id}`} className="flex flex-col justify-between items-center h-96 p-6 rounded-2xl bg-[#d7eaea] shadow-sm hover:shadow-lg transition cursor-pointer">
+					<img
+					src={product.imageUrl || "/placeholder.png"}
+					alt={product.name}
+					className="w-auto h-[85%] object-contain rounded-t-xl"
+					onError={(e) => {
+						e.currentTarget.src = "/placeholder.png";
+					}}
+					/>
+					<div className="text-center">
+					<p className="text-center p-2 text-sm font-semibold text-darkblue group-hover:text-hovertext">
+						{product.name}
+					</p>
+					<p className="text-sm text-darkblue/60">{product.brand}</p>
+					<div className="flex flex-row justify-center items-center w-full mt-2">
+							{product.rating && (
+								<div className="flex flex-row justify-center items-center">
+								<Star className="h-4 w-4 text-darkblue fill-current mr-1" strokeWidth={1} />
+								<p className="text-darkblue font-semibold text-md">
+									{product.rating.toFixed(1)}
+								</p>
+								</div>
+							)}
+							<div className="h-1 w-1 bg-darkblue rounded-full mx-2"></div>
+							{product.price && (
+								<p className="text-darkblue font-semibold text-md">
+								$ {parseFloat(product.price).toLocaleString("es-AR")}
+								</p>
+							)}
+						</div>
+					</div>
+				</Link>
             </div>
           ))}
         </div>
@@ -108,7 +128,7 @@ function ProductCarousel({ products }: { products: Product[] }) {
       {index < products.length - visible && (
         <button
           onClick={next}
-          className="absolute right-0 top-1/2 -translate-y-1/2 bg-[#2C5F5F] text-white rounded-full p-2 shadow-md hover:bg-[#1a3d3d] transition z-10"
+          className="absolute right-0 top-1/2 -translate-y-1/2 bg-darkblue text-white rounded-full p-2 shadow-md hover:bg-hovertext transition z-10"
         >
           <ChevronRight size={24} strokeWidth={3} />
         </button>
@@ -179,10 +199,10 @@ export default function RecommendationsPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
         <div className="text-center">
-          <div className="text-xl font-semibold text-[#2C5F5F] mb-4">
+          <div className="text-xl font-semibold text-darkblue mb-4">
             Cargando recomendaciones...
           </div>
-          <div className="w-8 h-8 border-4 border-[#2C5F5F] border-t-transparent rounded-full animate-spin mx-auto"></div>
+          <div className="w-8 h-8 border-4 border-darkblue border-t-transparent rounded-full animate-spin mx-auto"></div>
         </div>
       </div>
     );
@@ -197,7 +217,7 @@ export default function RecommendationsPage() {
           </div>
           <button
             onClick={() => window.location.reload()}
-            className="px-6 py-2 bg-[#2C5F5F] text-white rounded-full hover:bg-[#1a3d3d] transition"
+            className="px-6 py-2 bg-darkblue text-white rounded-full hover:bg-hovertext transition"
           >
             Reintentar
           </button>
@@ -210,7 +230,7 @@ export default function RecommendationsPage() {
     return (
       <div className="min-h-screen flex items-center justify-center bg-white">
         <div className="text-center">
-          <div className="text-xl font-semibold text-[#2C5F5F] mb-4">
+          <div className="text-xl font-semibold text-darkblue mb-4">
             No hay recomendaciones disponibles
           </div>
           <p className="text-gray-600 mb-6">
@@ -218,7 +238,7 @@ export default function RecommendationsPage() {
           </p>
           <a
             href="/selection"
-            className="px-6 py-2 bg-[#2C5F5F] text-white rounded-full hover:bg-[#1a3d3d] transition inline-block"
+            className="px-6 py-2 bg-darkblue text-white rounded-full hover:bg-hovertext transition inline-block"
           >
             Seleccionar Tipos de Piel
           </a>
@@ -228,50 +248,44 @@ export default function RecommendationsPage() {
   }
 
   return (
+
     <div className="bg-white min-h-screen">
-      <div className="flex flex-col items-center">
-        <Header />
-        <div className="w-full h-16 bg-[#2C5F5F]"></div>
+      <div className="flex flex-col items-center bg-background min-h-screen relative font-inter">
+            <Header />
 
-        {/* Hero Image */}
-        <div className="w-[90%] py-10">
-          <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
-            <img 
-              src="/images/modelo11.jpg" 
-              alt="Hero" 
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                e.currentTarget.src = "/placeholder.png";
-              }}
-            />
-          </div>
+            <div className="w-[90%] py-10 mt-22">
+                <div className="w-full h-[450px] overflow-hidden rounded-3xl relative">
+                    <img
+                        src={img}
+                        alt="Rhode"
+                        className="w-full h-[500px] object-cover"
+                    />
+                </div>
+            </div>
+            {/* Recommendations */}
+            <div className="items-start justify-start w-[90%]">
+              <h1 className="text-4xl font-bold mb-8 text-start text-darkblue">
+                Productos Recomendados Para Vos
+              </h1>
+
+              {categoryOrder.map((category) => {
+                const products = productsByCategory[category];
+                
+                if (!products || products.length === 0) return null;
+
+                return (
+                  <div key={category} className="mb-5">
+                    <h2 className="text-3xl ml-2 text-darkblue font-semibold mb-4">
+                      {categoryDisplayNames[category] || category}
+                    </h2>
+                    <ProductCarousel products={products} />
+                  </div>
+                );
+              })}
+            </div>
+
+            <Footer />
         </div>
-
-        {/* Recommendations */}
-        <div className="items-start justify-start w-[90%] mb-20">
-          <h1 className="text-4xl font-bold mb-8 text-start text-[#2C5F5F]">
-            Productos Recomendados Para Vos
-          </h1>
-
-          {categoryOrder.map((category) => {
-            const products = productsByCategory[category];
-            
-            if (!products || products.length === 0) return null;
-
-            return (
-              <div key={category} className="mb-10">
-                <h2 className="text-2xl text-[#2C5F5F] font-semibold mb-4">
-                  {categoryDisplayNames[category] || category}
-                </h2>
-                <ProductCarousel products={products} />
-              </div>
-            );
-          })}
-        </div>
-
-        <Footer />
-        <div className="w-full h-32 bg-[#2C5F5F]"></div>
-      </div>
     </div>
   );
 }

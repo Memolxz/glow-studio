@@ -1,7 +1,8 @@
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { Plus, X } from 'lucide-react';
+import { UserRound, X, Mail, Droplet, Trash2 } from 'lucide-react';
 import { useState, useEffect } from "react";
+import { Link } from 'react-router-dom';
 
 // Types
 type User = {
@@ -191,67 +192,89 @@ export default function Home() {
 
 
     return (
-        <div className="flex flex-col items-center bg-defaultbg relative font-inter">
+        <div className="flex flex-col items-center bg-background relative font-inter">
             <Header />
+        <div className="flex w-[90%] bg-rectangles rounded-3xl my-10 h-24"></div>
+            
 
         {/* Delete Confirmation Modal */}
         {showDeleteConfirm && (
             <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-3xl p-8 max-w-md w-[90%] relative">
-                <button
-                onClick={() => setShowDeleteConfirm(false)}
-                className="absolute top-4 right-4 text-gray-500 hover:text-gray-700">
-                <X size={24} />
-                </button>
-                <h3 className="text-2xl font-bold text-[#2C5F5F] mb-4">
-                ¿Eliminar Cuenta?
-                </h3>
-                <p className="text-gray-600 mb-6">
-                Esta acción eliminará permanentemente tu cuenta y todos tus datos.
-                ¿Estás seguro?
-                </p>
-                <div className="flex gap-4">
-                <button
+                <div className="bg-white rounded-3xl p-8 max-w-md w-[90%] relative">
+                    <button
                     onClick={() => setShowDeleteConfirm(false)}
-                    className="flex-1 py-2 px-4 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition"
-                >
-                    Cancelar
-                </button>
-                <button
-                    onClick={handleDeleteAccount}
-                    disabled={deleting}
-                    className="flex-1 py-2 px-4 bg-red-900 text-white rounded-full hover:bg-red-800 transition disabled:opacity-50"
-                >
-                    {deleting ? "Eliminando..." : "Eliminar"}
-                </button>
+                    className="absolute top-4 right-4">
+                    <X size={30} className="absolute top-4 right-4 text-darkblue hover:hovertext"/>
+                    </button>
+                    <h3 className="text-2xl font-bold text-darkblue mb-2">
+                    ¿Eliminar Cuenta?
+                    </h3>
+                    <p className="text-darkblue/60 mb-6">
+                    Esta acción eliminará tu cuenta y todos tus datos en 30 días.
+                    ¿Estás seguro?
+                    </p>
+                    <div className="flex gap-4">
+                        <button
+                            onClick={() => setShowDeleteConfirm(false)}
+                            className="flex-1 py-2 px-4 bg-gray-200 text-gray-700 rounded-full hover:bg-gray-300 transition"
+                        >
+                            Cancelar
+                        </button>
+                        <button
+                            onClick={handleDeleteAccount}
+                            disabled={deleting}
+                            className="flex-1 py-2 px-4 bg-red-900 text-white rounded-full hover:bg-red-800 transition disabled:opacity-50"
+                        >
+                            {deleting ? "Eliminando..." : "Eliminar"}
+                        </button>
+                    </div>
                 </div>
-            </div>
             </div>
         )}
 
-        <div className="flex flex-col w-[90%] bg-rectangles rounded-3xl mb-5 mt-10 p-10">
-                <div className="flex flex-row">
-                    <div className="flex-1 px-14 flex flex-col justify-end mt-16 w-1/2">
-                        <h2 className="text-4xl font-bold text-darkblue font-inter">{user?.name}</h2>
-                        <p className="text-md text-darkblue/60 font-inter">{user?.email}</p>
+        <div className="flex flex-col w-[90%] bg-rectangles rounded-3xl mb-10 px-10 py-10">
+            <div className="flex flex-row">
+                <div className="flex-1 flex flex-col justify-end mt-2 w-full">
+                    <div className='w-full flex flex-row mb-10'>
+                        <div className='bg-darkblue rounded-full h-16 w-16 text-white flex justify-center items-center mr-5'>
+                            <UserRound className='h-9 w-9' strokeWidth={1.5}/>
+                        </div>
+                        <div className='flex flex-col'>
+                            <h2 className="text-4xl font-bold text-darkblue font-inter">{user?.name}</h2>
+                            <div className='w-full flex flex-row justify-start items-center'>
+                                <Mail className="h-4 w-4 text-darkblue/60 mr-1" />
+                                <p className="text-md text-darkblue/60 font-inter">{user?.email}</p>
+                            </div>
+                            
+                        </div>
+                    </div>
 
-                        <h3 className="mt-5 text-xl text-darkblue font-inter font-bold text-left">
-                            Características
-                        </h3>
-                        {userSkinTypes.length > 0 ? (
-                        userSkinTypes.map((ust) => (
-                            <p
-                            key={ust.skinTypeId}
-                            className="ml-5 mt-2 text-md text-darkblue font-inter font-bold text-left"
-                            >
-                            {ust.skinType.name}
-                            </p>
-                        ))
-                        ) : (
-                        <p className="ml-5 mt-2 text-md text-gray-500 text-left italic">
-                            No has seleccionado tipos de piel
-                        </p>
-                        )}
+                    <div className='bg-[#E2EFEF] w-full rounded-2xl p-7 pl-9'>
+                        <div className='w-full flex flex-row justify-start items-center mb-5'>
+                            <Droplet className="text-darkblue h-7 w-7" strokeWidth={1.5}/>
+                            <h3 className="text-2xl text-darkblue font-inter font-bold text-left">
+                                Tipos de Piel
+                            </h3>
+                        </div>
+                        <div className='w-full flex flex-row justify-start items-center mb-5'>
+                            {userSkinTypes.length > 0 ? (
+                                userSkinTypes.map((ust) => (
+                                    <div className='mr-4 bg-darkblue rounded-full text-white flex justify-center items-center'>
+                                        <p
+                                            key={ust.skinTypeId}
+                                            className="text-md font-inter font-bold p-2 mx-2"
+                                            >
+                                            {ust.skinType.name}
+                                        </p>
+                                    </div>
+                                    
+                                ))
+                                ) : (
+                                <p className="ml-5 mt-2 text-md text-gray-500 text-left italic">
+                                    No has seleccionado tipos de piel
+                                </p>
+                                )}
+                        </div>
 
                         <a
                         href="/selection"
@@ -259,60 +282,48 @@ export default function Home() {
                         >
                         Actualizar tipos de piel
                         </a>
-
-                    </div>
-                    <div className="flex-1 px-14 flex flex-col justify-end mt-10 w-1/2 items-end">
-                        <button
-                            onClick={() => setShowDeleteConfirm(true)}
-                            className="flex w-1/3 h-8 rounded-full bg-transparent border-2 border-red-900 text-red-900 mr-3
-                                    hover:bg-red-900 hover:text-rectangles transition items-center justify-center
-                                    focus:outline-none focus:ring-2 focus:ring-red-900">
-                            Eliminar Cuenta
-                        </button>
                     </div>
                 </div>
-                <div className='w-full flex flex-col justify-cneter items-center'>
-                    <div className='w-[90%] border-darkblue border-b mt-10'/>
-                </div>
+            </div>
+        </div>
 
+        <div className="flex flex-col w-[90%] bg-rectangles rounded-3xl mb-5 px-10">
                 {/* Recommended Products */}        
                 <div className="flex flex-col">
-                    <div className="flex-1 flex-col px-6 ml-8 flex justify-end mt-10">
-                        <h2 className="text-2xl text-darkblue font-inter font-bold text-left">Productos más recomendados</h2>
-                        <div className="flex gap-2 overflow-x-auto scrollbar-hide mt-5 items-center">
+                    <div className="flex-1 flex-col py-12 flex justify-end">
+                        <div className='flex justify-between items-center w-full'>
+                            <h2 className="text-4xl text-darkblue font-inter font-bold text-left">Productos Recomendados</h2>
+                            <Link to={"/recommendations"} className="rounded-full bg-darkblue px-4 py-2
+                                font-semibold text-white text-md font-inter text-center
+                                hover:bg-hovertext transition w-36">Ver Más</Link>
+                        </div>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 overflow-x-auto mt-5 items-center">
                             {recommendations.length > 0 ? (
                                 <>
                                 {recommendations.map((rec) => (
-                                    <div
+                                    <Link to={`/product/${rec.product.id}`}
                                     key={rec.id}
-                                    className="flex flex-col justify-center items-center 
-                                                w-[250px] h-[320px] p-6 rounded-2xl bg-transparent"
+                                    className="relative h-full flex flex-col items-center group bg-white rounded-2xl p-6 hover:shadow-xl transition-all group"
                                     >
                                     <img
                                         src={rec.product.imageUrl || "/placeholder.png"}
                                         alt={rec.product.name}
-                                        className="w-auto h-[85%] object-contain rounded-t-xl"
+                                        className="w-full h-48 object-contain rounded-xl mb-4 group-hover:scale-105 transition-transform"
                                         onError={(e) => {
                                         e.currentTarget.src = "/placeholder.png";
                                         }}
                                     />
-                                    <p className="text-center p-2 text-sm font-semibold mt-3 text-[#2C5F5F]">
-                                        {categoryDisplayNames[rec.product.category] ||
-                                        rec.product.category}
+                                    <div className="absolute top-5 right-5 bg-darkblue/60 text-white font-semibold px-3 h-8 flex items-center rounded-2xl z-10">
+                                        <p>{categoryDisplayNames[rec.product.category] || rec.product.category}</p>
+                                    </div>
+                                    <p className="text-center p-2 text-sm font-semibold text-darkblue group-hover:text-hovertext">
+                                        {rec.product.name}
                                     </p>
-                                    <p className="text-center text-xs text-gray-600">
+                                    <p className="text-sm text-darkblue/60">
                                         {rec.product.brand}
                                     </p>
-                                    </div>
+                                    </Link>
                                 ))}
-                                <a
-                                    href="/recommendations"
-                                    className="flex w-10 h-10 rounded-full bg-transparent border-2 border-[#2C5F5F] text-[#2C5F5F] mr-3
-                                            hover:bg-[#2C5F5F] hover:text-white transition items-center justify-center
-                                            focus:outline-none focus:ring-2 focus:ring-[#2C5F5F]"
-                                >
-                                    <Plus className="text-inherit w-7 h-7" />
-                                </a>
                                 </>
                             ) : (
                                 <div className="flex flex-col items-center justify-center w-full py-10">
@@ -321,7 +332,7 @@ export default function Home() {
                                 </p>
                                 <a
                                     href="/selection"
-                                    className="px-6 py-2 bg-[#2C5F5F] text-white rounded-full hover:bg-[#1a3d3d] transition"
+                                    className="px-6 py-2 bg-darkblue text-white rounded-full hover:bg-hovertext transition"
                                 >
                                     Seleccionar Tipos de Piel
                                 </a>
@@ -330,6 +341,23 @@ export default function Home() {
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div className='bg-red-100 w-[90%] rounded-2xl px-10 py-7 my-5'>
+                <div className='w-full flex flex-col justify-start items-start mb-5 ml-2'>
+                    <div className='bg-red-200 rounded-full h-16 w-16 flex justify-center items-center'>
+                        <Trash2 className="text-red-900 h-9 w-9" strokeWidth={1.5}/>
+                    </div>
+                    <h3 className="text-4xl text-red-900 font-inter font-bold text-start mt-2">Zona de Peligro</h3>
+                    <p className="text-xl text-red-900/60 font-inter text-start mt-2">Al eliminar tu cuenta tenés 30 días para recuperarla en caso de que te arrepientas.</p>
+                </div>
+                <button
+                    onClick={() => setShowDeleteConfirm(true)}
+                    className="w-full flex rounded-full bg-red-900 text-white
+                            hover:bg-red-800 transition items-center justify-center
+                            py-2 font-semibold text-md font-inter text-center mt-5">
+                    Eliminar Cuenta
+                </button>
             </div>
             <Footer />
         </div>
