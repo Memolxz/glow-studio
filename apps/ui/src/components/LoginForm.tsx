@@ -61,7 +61,7 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
     return (
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-transparent">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                <h2 className="text-center text-3xl font-bold font-inter text-darkblue">
+                <h2 className="text-center text-3xl font-bold font-geist text-darkblue">
                     Iniciar Sesión
                 </h2>
             </div>
@@ -79,7 +79,7 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
                             value={formData.email}
                             onChange={handleInputChange}
                             className="block w-full rounded-full bg-white px-10 py-3
-                            text-base text-darkblue font-inter
+                            text-base text-darkblue font-geist
                             border-0
                             placeholder:text-darkblue
                             focus:outline-none focus:ring-2 focus:ring-darkblue"
@@ -97,7 +97,7 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
                             value={formData.password}
                             onChange={handleInputChange}
                             className="block w-full rounded-full bg-white px-10 py-3
-                            text-base text-darkblue font-inter
+                            text-base text-darkblue font-geist
                             border-0
                             placeholder:text-darkblue
                             focus:outline-none focus:ring-2 focus:ring-darkblue"
@@ -115,7 +115,7 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
                             type="submit"
                             disabled={loading}
                             className="w-1/2 rounded-full bg-transparent px-4 py-2 border-2 border-darkblue
-                            text-base font-semibold text-darkblue font-inter
+                            text-base font-semibold text-darkblue font-geist
                             hover:bg-darkblue hover:text-white transition
                             focus:outline-none focus:ring-2 focus:ring-darkblue"
                         >
@@ -124,9 +124,9 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
                     </div>
                 </form>
 
-                <p className="mt-6 text-center text-sm font-inter text-darkblue">
+                <p className="mt-6 text-center text-sm font-geist text-darkblue">
                     ¿No tenés cuenta?{' '}
-                    <button onClick={onToggle} className="font-bold font-inter text-darkblue hover:text-hovertext">
+                    <button onClick={onToggle} className="font-bold font-geist text-darkblue hover:text-hovertext">
                         ¡Registrate!
                     </button>
                 </p>

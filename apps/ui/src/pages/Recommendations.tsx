@@ -250,7 +250,7 @@ export default function RecommendationsPage() {
   return (
 
     <div className="bg-white min-h-screen">
-      <div className="flex flex-col items-center bg-background min-h-screen relative font-inter">
+      <div className="flex flex-col items-center bg-background min-h-screen relative font-geist">
             <Header />
 
             <div className="w-[90%] py-10 mt-22">

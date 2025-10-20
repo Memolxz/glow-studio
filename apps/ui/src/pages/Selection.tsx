@@ -145,7 +145,7 @@ export default function SkinSelection() {
     }
 
     return (
-        <div className="min-h-screen flex flex-col items-center bg-background relative font-inter">
+        <div className="min-h-screen flex flex-col items-center bg-background relative font-geist">
             <Header />
             <div className="w-[90%] mt-10 mx-auto">
                 <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
@@ -186,11 +186,11 @@ export default function SkinSelection() {
                                 cursor-pointer transition-transform
                                 hover:bg-[#E2EFEF] peer-checked:bg-[#E2EFEF] peer-checked:origin-center
                                 disabled:opacity-50 disabled:cursor-not-allowed">
-                        <p className="text-start text-2xl font-inter font-semibold text-darkblue mb-2">
+                        <p className="text-start text-2xl font-geist font-semibold text-darkblue mb-2">
                         {skinType.name}
                         </p>
 
-                        <p className="text-start font-inter text-md text-darkblue w-[85%] leading-tight">
+                        <p className="text-start font-geist text-md text-darkblue w-[85%] leading-tight">
                         {formatDescription(skinType.description)}
                         </p>
                     </label>
@@ -206,7 +206,7 @@ export default function SkinSelection() {
             <button
                 disabled={selected.length === 0 || submitting}
                 onClick={handleContinue}
-                className={`rounded-full px-4 py-2 border-2 text-base font-semibold font-inter my-5
+                className={`rounded-full px-4 py-2 border-2 text-base font-semibold font-geist my-5
                 ${
                     selected.length === 0 || submitting
                     ? "border-darkblue text-darkblue cursor-not-allowed bg-white"

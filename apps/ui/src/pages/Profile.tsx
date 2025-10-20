@@ -193,7 +193,7 @@ export default function Home() {
 
 
     return (
-        <div className="flex flex-col items-center bg-background relative font-inter">
+        <div className="flex flex-col items-center bg-background relative font-geist">
             <Header />
             <div className="w-[90%] pt-10 pb-5">
                 <div className="w-full h-24 overflow-hidden rounded-3xl relative">
@@ -250,10 +250,10 @@ export default function Home() {
                             <UserRound className='h-9 w-9' strokeWidth={1.5}/>
                         </div>
                         <div className='flex flex-col'>
-                            <h2 className="text-4xl font-bold text-darkblue font-inter">{user?.name}</h2>
+                            <h2 className="text-4xl font-bold text-darkblue font-geist">{user?.name}</h2>
                             <div className='w-full flex flex-row justify-start items-center'>
                                 <Mail className="h-4 w-4 text-darkblue/60 mr-1" />
-                                <p className="text-md text-darkblue/60 font-inter">{user?.email}</p>
+                                <p className="text-md text-darkblue/60 font-geist">{user?.email}</p>
                             </div>
                         </div>
                     </div>
@@ -261,7 +261,7 @@ export default function Home() {
                     <div className='bg-[#E2EFEF] w-full rounded-2xl p-7 pl-9'>
                         <div className='w-full flex flex-row justify-start items-center mb-5'>
                             <Droplet className="text-darkblue h-7 w-7" strokeWidth={1.5}/>
-                            <h3 className="text-2xl text-darkblue font-inter font-bold text-left">
+                            <h3 className="text-2xl text-darkblue font-geist font-bold text-left">
                                 Tipos de Piel
                             </h3>
                         </div>
@@ -271,7 +271,7 @@ export default function Home() {
                                     <div className='mr-4 bg-darkblue rounded-full text-white flex justify-center items-center'>
                                         <p
                                             key={ust.skinTypeId}
-                                            className="text-md font-inter font-bold p-2 mx-2"
+                                            className="text-md font-geist font-bold p-2 mx-2"
                                             >
                                             {ust.skinType.name}
                                         </p>
@@ -301,9 +301,9 @@ export default function Home() {
                 <div className="flex flex-col">
                     <div className="flex-1 flex-col py-12 flex justify-end">
                         <div className='flex justify-between items-center w-full'>
-                            <h2 className="text-4xl text-darkblue font-inter font-bold text-left">Productos Recomendados</h2>
+                            <h2 className="text-4xl text-darkblue font-geist font-bold text-left">Productos Recomendados</h2>
                             <Link to={"/recommendations"} className="rounded-full bg-darkblue px-4 py-2
-                                font-semibold text-white text-md font-inter text-center
+                                font-semibold text-white text-md font-geist text-center
                                 hover:bg-hovertext transition w-36">Ver Más</Link>
                         </div>
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 overflow-x-auto mt-5 items-center">
@@ -357,14 +357,14 @@ export default function Home() {
                     <div className='bg-red-200 rounded-full h-16 w-16 flex justify-center items-center'>
                         <Trash2 className="text-red-900 h-9 w-9" strokeWidth={1.5}/>
                     </div>
-                    <h3 className="text-4xl text-red-900 font-inter font-bold text-start mt-2">Zona de Peligro</h3>
-                    <p className="text-xl text-red-900/60 font-inter text-start mt-2">Al eliminar tu cuenta tenés 30 días para recuperarla en caso de que te arrepientas.</p>
+                    <h3 className="text-4xl text-red-900 font-geist font-bold text-start mt-2">Zona de Peligro</h3>
+                    <p className="text-xl text-red-900/60 font-geist text-start mt-2">Al eliminar tu cuenta tenés 30 días para recuperarla en caso de que te arrepientas.</p>
                 </div>
                 <button
                     onClick={() => setShowDeleteConfirm(true)}
                     className="w-full flex rounded-full bg-red-900 text-white
                             hover:bg-red-800 transition items-center justify-center
-                            py-2 font-semibold text-md font-inter text-center mt-5">
+                            py-2 font-semibold text-md font-geist text-center mt-5">
                     Eliminar Cuenta
                 </button>
             </div>

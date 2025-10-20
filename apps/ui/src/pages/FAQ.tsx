@@ -54,7 +54,7 @@ const questions = [
     };
 
     return (
-        <div className="flex flex-col items-center bg-background relative font-inter">
+        <div className="flex flex-col items-center bg-background relative font-geist">
         <Header />
 
         {/* Header visual superior */}

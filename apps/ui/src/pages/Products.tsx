@@ -123,7 +123,7 @@ export default function Products() {
     // Estado de carga
     if (loading) {
         return (
-        <div className="bg-background relative font-inter flex flex-col justify-center items-center">
+        <div className="bg-background relative font-geist flex flex-col justify-center items-center">
             <Header />
                 <div className="w-[90%] py-10 mt-22">
                         <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
@@ -148,7 +148,7 @@ export default function Products() {
     // Estado de error
     if (error) {
         return (
-        <div className="bg-background relative font-inter min-h-screen">
+        <div className="bg-background relative font-geist min-h-screen">
             <Header />
             <div className="flex flex-col items-center justify-center">
                 <div className="w-[90%] py-10 mt-22">
@@ -175,7 +175,7 @@ export default function Products() {
 
     // Vista principal
     return (
-        <div className="bg-background relative font-inter min-h-screen">
+        <div className="bg-background relative font-geist min-h-screen">
         <Header />
         <div className="flex flex-col items-center justify-center">
             <div className="w-[90%] py-10 mt-22">

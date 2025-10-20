@@ -10,6 +10,8 @@ export default {
         inter: ['inter'],
         poppins: ['poppins'],
         nunito: ['nunito'],
+        geist: ['"Geist"', 'sans-serif'],
+        geistmono: ['"Geist Mono"', 'monospace'],
       },
       colors: {
         rectangles: '#C4DFDF',

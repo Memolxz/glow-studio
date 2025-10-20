@@ -235,7 +235,7 @@ export default function Product() {
   }
 
   return(
-    <div className="flex flex-col justify-center items-center bg-background w-full">
+    <div className="flex flex-col justify-center font-geist items-center bg-background w-full">
       <Header />
       <div className="flex w-[90%] bg-rectangles rounded-3xl my-10 h-24"></div>
 

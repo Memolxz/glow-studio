@@ -87,7 +87,7 @@ export default function Home() {
     }; */
 
     return (
-        <div className="flex flex-col items-center bg-background relative font-inter">
+        <div className="flex flex-col items-center bg-background relative font-geist">
             <Header />
 
             <div className="w-[90%] pt-10 pb-5">
@@ -176,15 +176,16 @@ export default function Home() {
 
             <div className="flex w-[90%] sm:h-[300px] md:h-[400px] lg:h-[450px] bg-rectangles rounded-3xl my-5">
                 <div className="w-1/2 p-14 flex flex-col justify-end">
-                    <h2 className="text-2xl sm:text-xl font-bold text-darkblue font-inter">RECORRE LO DESTACADO</h2>
-                    <p className="mt-2 text-sm text-darkblue font-inter 
+                    <h2 className="text-2xl sm:text-xl font-bold text-darkblue font-geist">RECORRE LO DESTACADO</h2>
+                    <p className="mt-2 text-sm text-darkblue font-geist 
                                     max-w-[90%] text-left">
                         Cada piel es única, y tu rutina también debería serlo. Nuestro sistema te ayuda a identificar tu tipo de piel y te recomienda productos específicos que se adaptan a tus necesidades.
                     </p>
+
                     <Link to="/products"
                         type="submit"
                         className="w-[135px] mt-4 rounded-full px-5 py-2 bg-darkblue
-                        font-semibold text-white text-sm font-inter text-center
+                        font-semibold text-white text-sm font-geist text-center
                         hover:bg-hovertext transition"
                     >
                         PRODUCTOS
@@ -213,10 +214,10 @@ export default function Home() {
                                 lg:justify-end lg:items-end md:justify-end md:items-end 
                                 sm:justify-center sm:items-center">
                     <h2 className="text-2xl font-bold text-darkblue
-                                lg:text-right md:text-right sm:text-center font-inter">
+                                lg:text-right md:text-right sm:text-center font-geist">
                         PREGUNTAS FRECUENTES
                     </h2>
-                    <p className="mt-2 text-sm text-darkblue pl-5 font-inter 
+                    <p className="mt-2 text-sm text-darkblue pl-5 font-geist 
                                 lg:text-right md:text-right sm:text-center lg:w-[75%] md:w-[100%] sm:w-[60%] xs:w-[40%]">
                         Respondemos las dudas más comunes sobre el cuidado de la piel, 
                         el uso de nuestros productos y cómo sacarles el máximo provecho.  
@@ -225,7 +226,7 @@ export default function Home() {
                     <Link to="/faq"
                         type="submit"
                         className="w-[135px] mt-4 rounded-full px-4 py-2
-                                font-semibold text-white bg-darkblue text-sm font-inter text-center
+                                font-semibold text-white bg-darkblue text-sm font-geist text-center
                                 hover:bg-hovertext transition
                                 ">
                         PREGUNTAS
@@ -253,14 +254,14 @@ export default function Home() {
             >
                 <div className="absolute inset-0 bg-black/20"></div>
 
-                <h2 className="text-2xl font-bold text-white mb-2 z-10 font-inter">SÉ TU MEJOR VERSIÓN</h2>
-                <p className="mt-2 text-sm text-white text-center lg:w-[35%] md:w-[50%] sm:w-[70%] z-10 font-inter">
+                <h2 className="text-2xl font-bold text-white mb-2 z-10 font-geist">SÉ TU MEJOR VERSIÓN</h2>
+                <p className="mt-2 text-sm text-white text-center lg:w-[35%] md:w-[50%] sm:w-[70%] z-10 font-geist">
                     Tu piel habla de vos, y dedicarte un momento para conocerla es el primer paso para cuidarte. En tu perfil vas a poder guardar tus preferencias, seguir tu progreso y tener siempre a mano los productos y rutinas.
                 </p>
                 <button
                     type="submit"
                     className="w-24 mt-6 rounded-full bg-transparent px-6 py-2 border border-white
-                            font-semibold text-white text-sm font-inter
+                            font-semibold text-white text-sm font-geist
                             hover:bg-defaultbg hover:text-[#676161] transition-colors
                             focus:outline-none focus:ring-2 focus:ring-white z-10"
                 >

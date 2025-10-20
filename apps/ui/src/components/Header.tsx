@@ -41,7 +41,7 @@ export default function Header() {
 
     return (
         <header className="w-full absolute top-14 z-50 bg-transparent">
-        <div className="w-[80%] mx-auto py-3 flex items-center font-inter">
+        <div className="w-[80%] mx-auto py-3 flex items-center font-geist">
             <div className="flex-1">
             <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -98,7 +98,7 @@ export default function Header() {
             </div>
             <Link
             to="/home"
-            className="flex-1 text-center text-4xl font-bold tracking-wide text-white"
+            className="flex-1 text-center text-4xl font-bold tracking-wide font-inter text-white"
             >
             GLOW STUDIO
             </Link>

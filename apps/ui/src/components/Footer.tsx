@@ -16,8 +16,8 @@ export default function Footer() {
     ];
 
     return (
-        <footer className="relative flex justify-between items-center w-[90%] rounded-3xl mt-5 mb-10 bg-rectangles h-[165px] px-6">
-        <div className="text-darkblue font-bold text-2xl pl-10 mb-8">
+        <footer className="relative flex justify-between font-geist items-center w-[90%] rounded-3xl mt-5 mb-10 bg-rectangles h-[165px] px-6">
+        <div className="text-darkblue font-bold font-inter text-2xl pl-10 mb-8">
             GLOW STUDIO
         </div>
 
