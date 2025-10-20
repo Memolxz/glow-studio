@@ -245,7 +245,6 @@ export default function Home() {
                                 <Mail className="h-4 w-4 text-darkblue/60 mr-1" />
                                 <p className="text-md text-darkblue/60 font-inter">{user?.email}</p>
                             </div>
-                            
                         </div>
                     </div>
 

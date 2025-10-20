@@ -91,7 +91,7 @@ function ProductCarousel({ products }: { products: Product[] }) {
 					<img
 					src={product.imageUrl || "/placeholder.png"}
 					alt={product.name}
-					className="w-auto h-[85%] object-contain rounded-t-xl"
+					className="w-auto h-[60%] object-contain rounded-t-xl group-hover:scale-105 transition-transform duration-300"
 					onError={(e) => {
 						e.currentTarget.src = "/placeholder.png";
 					}}

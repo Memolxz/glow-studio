@@ -3,6 +3,7 @@ import { Star } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import img1 from '../assets/modelo4.jpg';
+import img3 from '../assets/dior.jpg';
 import videoSrc from '../assets/video.mp4';
 import { Link } from 'react-router-dom';
 import RoutineLine from '../components/RoutineLine';
@@ -155,34 +156,20 @@ export default function Home() {
                             </Link>
                         ))}
                     </div>
-                    
-                    <div className="flex justify-center mt-5">
-                        <Link
-                            to="/products"
-                            className="rounded-full bg-transparent px-4 py-2 border border-darkblue
-                                font-semibold text-darkblue text-md font-inter text-center
-                                hover:bg-darkblue hover:text-rectangles transition
-                                focus:outline-none focus:ring-2 focus:ring-darkblue">
-                            Ver Todos los Productos
-                        </Link>
-                    </div>
                 </div>
             )}
 
-            <div className="flex flex-col items-center justify-center w-[90%] my-10">
-                <div className="flex flex-row items-center justify-center w-full mb-6">
-                    <div className="flex flex-col items-center justify-start">
-                        <h1 className="text-4xl font-bold text-start text-darkblue">
-                            ¿No sabés cómo armar tu rutina?
-                        </h1>
-                        <p className="text-xl font-normal text-start text-darkblue/60 my-2">
-                            Estos son los pasos que no te pueden faltar.
-                        </p>
-                        </div>
-                    </div>
-                <RoutineLine />
+            <div className="flex w-[90%]  sm:h-[300px] md:h-[400px] lg:h-[450px] rounded-3xl mt-5 mb-5 overflow-hidden bg-transparent">
+                <video
+                    src={videoSrc}
+                    className="w-full object-cover"
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                />
             </div>
-{/* 
+
             <div className="flex w-[90%]  sm:h-[300px] md:h-[400px] lg:h-[450px] bg-rectangles rounded-3xl mb-5">
                 <div className="flex-1 p-14 flex flex-col justify-end">
                     <h2 className="text-2xl sm:text-xl font-bold text-darkblue font-inter">RECORRE LO DESTACADO</h2>
@@ -208,19 +195,22 @@ export default function Home() {
                         className="w-full h-full object-cover scale-105"
                     />
                 </div>
-            </div> */}
-
-            <div className="flex w-[90%]  sm:h-[300px] md:h-[400px] lg:h-[450px] rounded-3xl mt-5 mb-5 overflow-hidden bg-transparent">
-                <video
-                    src={videoSrc}
-                    className="w-full object-cover"
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                />
             </div>
 
+
+            <div className="flex flex-col items-center justify-center w-[90%] my-10">
+                <div className="flex flex-row items-center justify-center w-full mb-6">
+                    <div className="flex flex-col items-center justify-start">
+                        <h1 className="text-5xl font-bold text-center text-darkblue">
+                            ¿No sabés cómo armar tu rutina?
+                        </h1>
+                        <p className="text-xl font-normal text-start text-darkblue/60 my-2">
+                            Estos son los pasos que no te pueden faltar.
+                        </p>
+                        </div>
+                    </div>
+                <RoutineLine />
+            </div>
 
 {/* 
             <div className="lg:flex md:flex sm:flex-none w-[90%] sm:h-auto md:h-[400px] lg:h-[450px] gap-6 bg-rectangles

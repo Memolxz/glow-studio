@@ -16,3 +16,30 @@
     opacity: 1;
   }
 }
+
+/* 🎨 Scrollbar global personalizado */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #E2EFEF; /* Color del fondo */
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #16324F; /* Color del “thumb” (la parte que se mueve) */
+  border-radius: 9999px;
+  border: 2px solid #E2EFEF; /* Deja un borde del color del track */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #0e2235; /* Color más oscuro al pasar el mouse */
+}
+
+/* Para Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #16324F #E2EFEF;
+}

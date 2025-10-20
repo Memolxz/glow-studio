@@ -82,13 +82,6 @@ export default function Header() {
                     Productos
                 </Link>
                 <Link
-                    to={"/routine"}
-                    onClick={() => setIsMenuOpen(false)}
-                    className="hover:text-hovertext ml-3 text-xl transition-transform hover:scale-105 origin-left"
-                >
-                    Rutina
-                </Link>
-                <Link
                     to={"/FAQ"}
                     onClick={() => setIsMenuOpen(false)}
                     className="hover:text-hovertext ml-3 text-xl transition-transform hover:scale-105 origin-left"

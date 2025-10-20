@@ -9,5 +9,8 @@
     "scripts": {
         "dev": "pnpm run dev",
         "clean": "rm -rf node_modules/ pnpm-lock.lock"
+    },
+    "dependencies": {
+        "tailwind-scrollbar": "^4.0.2"
     }
 }

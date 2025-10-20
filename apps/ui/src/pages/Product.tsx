@@ -1,4 +1,4 @@
-import { Star, SquareArrowOutUpRight, ChevronLeft, MessageCircle, UserRound, StarHalf, Trash2  } from "lucide-react"
+import { Star, SquareArrowOutUpRight, ChevronLeft, MessageCircle, UserRound, StarHalf, Trash2, FlaskConical  } from "lucide-react"
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
@@ -237,24 +237,27 @@ export default function Product() {
   return(
     <div className="flex flex-col justify-center items-center bg-background w-full">
       <Header />
+      <div className="flex w-[90%] bg-rectangles rounded-3xl my-10 h-24"></div>
 
       {/* Product Details Section */}
-      <div className="flex flex-row justify-center items-center bg-rectangles w-[90%] rounded-3xl h-full mt-10">
-        <div className="flex flex-col justify-center items-center bg-[#E2EFEF] w-1/2 h-full rounded-2xl p-10 relative">
+      <div className="relative flex flex-row justify-between items-between bg-rectangles w-[90%] rounded-3xl h-full mb-10 border border-rectangles">
+        {/* Imagen */}
+        <div className="flex flex-col justify-center items-center bg-white w-1/2 rounded-3xl p-10 relative">
           <Link to="/products">
-            <ChevronLeft className="absolute top-5 left-5 text-darkblue h-10 w-10 z-10"/>
+            <ChevronLeft className="absolute top-5 left-5 text-darkblue h-10 w-10 z-10" />
           </Link>
           <div className="absolute top-5 right-5 bg-darkblue/60 text-white font-semibold px-3 h-8 flex items-center rounded-2xl">
             <p>{categoryDisplayNames[product.category] || product.category}</p>
           </div>
-          <img
-            src={product.imageUrl || "/placeholder.png"}
-            alt={product.name}
-            className="h-[350px] object-contain rounded-2xl"
-            onError={(e) => {
-              e.currentTarget.src = "/placeholder.png";
-            }}
-          />
+
+          <div className="flex justify-center items-center h-[400px] w-full">
+            <img
+              src={product.imageUrl || "/placeholder.png"}
+              alt={product.name}
+              className="max-h-full max-w-full object-contain rounded-2xl"
+              onError={(e) => { e.currentTarget.src = "/placeholder.png"; }}
+            />
+          </div>
         </div>
 
         <div className="flex flex-col items-start bg-transparent w-1/2 p-10">
@@ -287,24 +290,36 @@ export default function Product() {
 
       {/* Ingredients Section */}
       {product.productIngredients && product.productIngredients.length > 0 && (
-        <div className="flex flex-col justify-start items-start bg-rectangles w-[90%] rounded-3xl p-8 mb-10">
-          <h2 className="text-darkblue font-semibold text-2xl mb-5">Ingredientes</h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 w-full">
-            {product.productIngredients.map((pi, index) => (
-              <div
-                key={index}
-                className="bg-[#E2EFEF] rounded-xl px-4 py-3 text-darkblue text-center font-medium hover:bg-[#d0e0e0] transition"
-              >
-                {pi.ingredient.name}
-              </div>
-            ))}
+        <div className="flex flex-col justify-start items-start bg-rectangles w-[90%] rounded-3xl p-8">
+          <div className="w-full flex flex-row justify-start items-center mb-5">
+            <FlaskConical className="text-darkblue h-8 w-8 mr-2" strokeWidth={1.5}/>
+            <h2 className="text-darkblue font-semibold text-4xl">Ingredientes</h2>
+          </div>
+
+          <div className="w-full border-t border-darkblue/60 mb-5"></div>
+
+          {/* Contenedor con scroll */}
+          <div className="w-full max-h-[300px] overflow-y-auto pr-2 
+                scrollbar-thin scrollbar-thumb-darkblue/50 scrollbar-track-[#E2EFEF]/30
+                hover:scrollbar-thumb-darkblue/70 transition-colors">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 w-full">
+              {product.productIngredients.map((pi, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-3xl px-4 py-3 text-darkblue text-center text-sm font-medium hover:bg-[#E2EFEF] transition"
+                >
+                  {pi.ingredient.name}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}
 
+
       {/* Comments Section */}
-      <div className="flex flex-col justify-center items-center bg-rectangles w-[90%] rounded-3xl h-full mt-10 pb-5">
-        <div className="flex flex-row justify-center items-center w-[95%] py-5">
+      <div className="flex flex-col justify-center items-center bg-rectangles w-[90%] rounded-3xl h-full mt-10 mb-5 p-10">
+        <div className="flex flex-row justify-center items-center w-full pb-5">
           <div className="flex flex-row justify-start items-start w-1/2">
             <h1 className="text-darkblue font-semibold text-start text-2xl">Comentarios ({comments.length})</h1>
           </div>
@@ -320,36 +335,40 @@ export default function Product() {
               className="text-darkblue hover:text-hovertext transition"
               title={user ? "Agregar comentario" : "Inicia sesión para comentar"}
             ></button>
-            <MessageCircle className="text-darkblue h-8 w-8"/>
+            <MessageCircle className="text-darkblue h-8 w-8" />
           </div>
         </div>
 
-        <div className="border-b border-darkblue/60 w-[95%] mb-5"></div>
+        <div className="border-b border-darkblue/60 w-full mb-5"></div>
 
         {/* Comment Form */}
         {showCommentForm && (
-          <form onSubmit={handleSubmitComment} className="bg-[#E2EFEF] rounded-2xl p-5 w-[90%] my-3">
-            <h3 className="text-darkblue font-bold text-lg mb-3">Agregar Comentario</h3>
+          <form onSubmit={handleSubmitComment} className="bg-[#E2EFEF] rounded-2xl p-5 w-full">
+            <div className="w-full flex flex-row justify-between items-center">
+              <h3 className="text-darkblue font-bold text-lg mb-3">Agregar Comentario</h3>
+              <div className="flex items-center gap-4 mb-3">
+                <label className="text-darkblue font-semibold">Calificación:</label>
+                <select
+                  value={newRating}
+                  onChange={(e) => setNewRating(Number(e.target.value))}
+                  className="px-4 py-2 rounded-full border border-darkblue focus:outline-none focus:ring-2 focus:ring-darkblue"
+                >
+                  {[1, 2, 3, 4, 5].map((rating) => (
+                    <option key={rating} value={rating}>{rating} {rating === 1 ? 'estrella' : 'estrellas'}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
             <textarea
               value={newComment}
               onChange={(e) => setNewComment(e.target.value)}
               placeholder="Escribe tu comentario..."
               required
-              className="w-full p-3 rounded-xl border border-darkblue focus:outline-none focus:ring-2 focus:ring-darkblue mb-3"
+              className="w-full p-3 rounded-xl border border-darkblue focus:outline-none focus:ring-2 focus:ring-darkblue mb-3 scrollbar-thin scrollbar-thumb-darkblue/50 scrollbar-track-[#E2EFEF]/30
+                hover:scrollbar-thumb-darkblue/70 transition-colors"
               rows={4}
             />
-            <div className="flex items-center gap-4 mb-3">
-              <label className="text-darkblue font-semibold">Calificación:</label>
-              <select
-                value={newRating}
-                onChange={(e) => setNewRating(Number(e.target.value))}
-                className="px-4 py-2 rounded-full border border-darkblue focus:outline-none focus:ring-2 focus:ring-darkblue"
-              >
-                {[1, 2, 3, 4, 5].map((rating) => (
-                  <option key={rating} value={rating}>{rating} {rating === 1 ? 'estrella' : 'estrellas'}</option>
-                ))}
-              </select>
-            </div>
+            
             <div className="flex gap-3">
               <button
                 type="button"
