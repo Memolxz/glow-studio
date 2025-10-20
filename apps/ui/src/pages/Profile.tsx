@@ -3,6 +3,7 @@ import Footer from '../components/Footer';
 import { UserRound, X, Mail, Droplet, Trash2 } from 'lucide-react';
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
+import img1 from '../assets/fondo.png'
 
 // Types
 type User = {
@@ -194,7 +195,16 @@ export default function Home() {
     return (
         <div className="flex flex-col items-center bg-background relative font-inter">
             <Header />
-        <div className="flex w-[90%] bg-rectangles rounded-3xl my-10 h-24"></div>
+            <div className="w-[90%] pt-10 pb-5">
+                <div className="w-full h-24 overflow-hidden rounded-3xl relative">
+                    <img
+                        src={img1}
+                        alt="Rhode"
+                        className="w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/20"></div>
+                </div>
+            </div>
             
 
         {/* Delete Confirmation Modal */}

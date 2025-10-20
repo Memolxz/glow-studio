@@ -2,6 +2,7 @@ import Header from "../components/Header"
 import Footer from "../components/Footer"
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
+import img1 from '../assets/fondo.png'
 
 export default function FAQ() {
 const questions = [
@@ -57,7 +58,16 @@ const questions = [
         <Header />
 
         {/* Header visual superior */}
-        <div className="flex w-[90%] bg-rectangles rounded-3xl my-10 h-24"></div>
+            <div className="w-[90%] pt-10 pb-5">
+                <div className="w-full h-24 overflow-hidden rounded-3xl relative">
+                    <img
+                        src={img1}
+                        alt="Rhode"
+                        className="w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black/20"></div>
+                </div>
+            </div>
 
         {/* Título principal */}
         <div className="flex flex-col w-1/2 bg-background justify-center items-center text-center mb-10">

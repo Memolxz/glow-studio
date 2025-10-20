@@ -299,7 +299,7 @@ export default function Product() {
           <div className="w-full border-t border-darkblue/60 mb-5"></div>
 
           {/* Contenedor con scroll */}
-          <div className="w-full max-h-[300px] overflow-y-auto pr-2 
+          <div className="w-full max-h-[225px] overflow-y-auto pr-2 
                 scrollbar-thin scrollbar-thumb-darkblue/50 scrollbar-track-[#E2EFEF]/30
                 hover:scrollbar-thumb-darkblue/70 transition-colors">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 w-full">

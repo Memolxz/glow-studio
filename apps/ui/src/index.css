@@ -17,29 +17,31 @@
   }
 }
 
-/* 🎨 Scrollbar global personalizado */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #E2EFEF; /* Color del fondo */
+  background: #E2EFEF;
+  opacity: 30%;
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #16324F; /* Color del “thumb” (la parte que se mueve) */
+  background-color: #375358;
+  opacity: 50%;
   border-radius: 9999px;
-  border: 2px solid #E2EFEF; /* Deja un borde del color del track */
+  border: 2px solid #E2EFEF;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #0e2235; /* Color más oscuro al pasar el mouse */
+  background-color: #375358;
+  opacity: 70%;
 }
 
-/* Para Firefox */
 * {
   scrollbar-width: thin;
-  scrollbar-color: #16324F #E2EFEF;
+  scrollbar-color: #375358 #E2EFEF;
 }
+

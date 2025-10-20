@@ -86,39 +86,39 @@ function ProductCarousel({ products }: { products: Product[] }) {
         {products.map((product) => (
             <div key={product.id} className="flex-shrink-0 w-1/4 px-2">
 				<Link
-					key={product.id}
-					to={`/product/${product.id}`} className="flex flex-col justify-between items-center h-96 p-6 rounded-2xl bg-[#d7eaea] shadow-sm hover:shadow-lg transition cursor-pointer">
-					<img
-					src={product.imageUrl || "/placeholder.png"}
-					alt={product.name}
-					className="w-auto h-[60%] object-contain rounded-t-xl group-hover:scale-105 transition-transform duration-300"
-					onError={(e) => {
-						e.currentTarget.src = "/placeholder.png";
-					}}
-					/>
-					<div className="text-center">
-					<p className="text-center p-2 text-sm font-semibold text-darkblue group-hover:text-hovertext">
-						{product.name}
-					</p>
-					<p className="text-sm text-darkblue/60">{product.brand}</p>
-					<div className="flex flex-row justify-center items-center w-full mt-2">
-							{product.rating && (
-								<div className="flex flex-row justify-center items-center">
-								<Star className="h-4 w-4 text-darkblue fill-current mr-1" strokeWidth={1} />
-								<p className="text-darkblue font-semibold text-md">
-									{product.rating.toFixed(1)}
-								</p>
-								</div>
-							)}
-							<div className="h-1 w-1 bg-darkblue rounded-full mx-2"></div>
-							{product.price && (
-								<p className="text-darkblue font-semibold text-md">
-								$ {parseFloat(product.price).toLocaleString("es-AR")}
-								</p>
-							)}
-						</div>
-					</div>
-				</Link>
+          key={product.id}
+          to={`/product/${product.id}`}
+          className="relative flex flex-col group justify-between items-center h-96 p-6 rounded-2xl bg-[#E2EFEF] shadow-sm hover:shadow-lg transition group">
+          <img
+          src={product.imageUrl || "/placeholder.png"}
+          alt={product.name}
+          className="w-auto h-[60%] object-contain rounded-t-xl group-hover:scale-105 transition-transform duration-300"
+          onError={(e) => {
+              e.currentTarget.src = "/placeholder.png";}}/>
+          <p className="text-center p-2 text-sm font-semibold text-darkblue group-hover:text-hovertext">
+          {product.name}
+          </p>
+          <p className="text-sm text-darkblue/60">{product.brand}</p>
+          <div className="flex flex-row justify-center items-center w-full mt-2">
+              {product.rating && (
+                  <div className="flex flex-row justify-center items-center">
+                  <Star className="h-4 w-4 text-darkblue fill-current mr-1" strokeWidth={1} />
+                  <p className="text-darkblue font-semibold text-md">
+                      {product.rating.toFixed(1)}
+                  </p>
+                  </div>
+              )}
+              <div className="h-1 w-1 bg-darkblue rounded-full mx-2"></div>
+              {product.price && (
+                  <p className="text-darkblue font-semibold text-md">
+                  $ {parseFloat(product.price).toLocaleString("es-AR")}
+                  </p>
+              )}
+              <div className="absolute top-5 right-5 bg-darkblue/60 text-white font-semibold px-3 h-8 flex items-center rounded-2xl">
+                  <p>{categoryDisplayNames[product.category] || product.category}</p>
+              </div>
+          </div>
+      </Link>
             </div>
           ))}
         </div>

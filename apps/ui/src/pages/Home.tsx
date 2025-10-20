@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Star } from 'lucide-react';
+import { Star, Trophy } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import img1 from '../assets/modelo4.jpg';
+import img2 from '../assets/modelo1.png';
 import img3 from '../assets/dior.jpg';
 import videoSrc from '../assets/video.mp4';
 import { Link } from 'react-router-dom';
@@ -57,7 +58,7 @@ export default function Home() {
         }
     };
 
-    const renderStars = (rating: number) => {
+    /* const renderStars = (rating: number) => {
         const stars = [];
         const fullStars = Math.floor(rating);
         const hasHalfStar = rating % 1 >= 0.5;
@@ -83,13 +84,13 @@ export default function Home() {
         }
 
         return stars;
-    };
+    }; */
 
     return (
         <div className="flex flex-col items-center bg-background relative font-inter">
             <Header />
 
-            <div className="w-[90%] py-10">
+            <div className="w-[90%] pt-10 pb-5">
                 <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
                     <img
                         src={img1}
@@ -101,8 +102,11 @@ export default function Home() {
 
             {/* Top Rated Products Section */}
             {!loading && topProducts.length > 0 && (
-                <div className="w-[90%] bg-rectangles rounded-3xl mb-10 p-10">
-                    <h2 className="text-3xl font-bold text-darkblue mb-6">Productos Mejor Valorados</h2>
+                <div className="w-[90%] bg-rectangles rounded-3xl my-5 p-10">
+                    <div className="w-full flex flex-row justify-start items-center mb-5">
+                        <Trophy className="text-darkblue h-8 w-8 mr-2"/>
+                        <h2 className="text-3xl font-bold text-darkblue">Productos Mejor Valorados</h2>
+                    </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         {topProducts.map((product, index) => (
                             <Link
@@ -159,7 +163,7 @@ export default function Home() {
                 </div>
             )}
 
-            <div className="flex w-[90%]  sm:h-[300px] md:h-[400px] lg:h-[450px] rounded-3xl mt-5 mb-5 overflow-hidden bg-transparent">
+            <div className="flex w-[90%]  sm:h-[300px] md:h-[400px] lg:h-[450px] rounded-3xl my-5 overflow-hidden bg-transparent">
                 <video
                     src={videoSrc}
                     className="w-full object-cover"
@@ -170,8 +174,8 @@ export default function Home() {
                 />
             </div>
 
-            <div className="flex w-[90%]  sm:h-[300px] md:h-[400px] lg:h-[450px] bg-rectangles rounded-3xl mb-5">
-                <div className="flex-1 p-14 flex flex-col justify-end">
+            <div className="flex w-[90%] sm:h-[300px] md:h-[400px] lg:h-[450px] bg-rectangles rounded-3xl my-5">
+                <div className="w-1/2 p-14 flex flex-col justify-end">
                     <h2 className="text-2xl sm:text-xl font-bold text-darkblue font-inter">RECORRE LO DESTACADO</h2>
                     <p className="mt-2 text-sm text-darkblue font-inter 
                                     max-w-[90%] text-left">
@@ -179,16 +183,15 @@ export default function Home() {
                     </p>
                     <Link to="/products"
                         type="submit"
-                        className="w-[135px] mt-4 rounded-full bg-transparent px-5 py-2 border border-darkblue
-                        font-semibold text-darkblue text-sm font-inter text-center
-                        hover:bg-darkblue hover:text-rectangles transition
-                        focus:outline-none focus:ring-2 focus:ring-darkblue"
+                        className="w-[135px] mt-4 rounded-full px-5 py-2 bg-darkblue
+                        font-semibold text-white text-sm font-inter text-center
+                        hover:bg-hovertext transition"
                     >
                         PRODUCTOS
                     </Link>
                 </div>
 
-                <div className="flex-1 overflow-hidden rounded-3xl">
+                <div className="flex-1 w-1/2 overflow-hidden rounded-3xl">
                     <img 
                         src={img3}
                         alt="Dior" 
@@ -197,6 +200,38 @@ export default function Home() {
                 </div>
             </div>
 
+            <div className="lg:flex md:flex sm:flex-none w-[90%] sm:h-auto md:h-[400px] lg:h-[450px] gap-6 bg-rectangles
+                            rounded-3xl mb-5 mt-5">
+                <div className="w-1/2 overflow-hidden rounded-3xl">
+                    <img 
+                        src={img2}
+                        alt="Cuidado diario" 
+                        className="w-full h-full object-cover scale-105"
+                    />
+                </div>
+                <div className="w-1/2 p-14 flex flex-col bg-rectangles rounded-3xl
+                                lg:justify-end lg:items-end md:justify-end md:items-end 
+                                sm:justify-center sm:items-center">
+                    <h2 className="text-2xl font-bold text-darkblue
+                                lg:text-right md:text-right sm:text-center font-inter">
+                        PREGUNTAS FRECUENTES
+                    </h2>
+                    <p className="mt-2 text-sm text-darkblue pl-5 font-inter 
+                                lg:text-right md:text-right sm:text-center lg:w-[75%] md:w-[100%] sm:w-[60%] xs:w-[40%]">
+                        Respondemos las dudas más comunes sobre el cuidado de la piel, 
+                        el uso de nuestros productos y cómo sacarles el máximo provecho.  
+                        Encontrá la respuesta que buscás en un solo lugar.
+                    </p>
+                    <Link to="/faq"
+                        type="submit"
+                        className="w-[135px] mt-4 rounded-full px-4 py-2
+                                font-semibold text-white bg-darkblue text-sm font-inter text-center
+                                hover:bg-hovertext transition
+                                ">
+                        PREGUNTAS
+                    </Link>
+                </div>
+            </div>
 
             <div className="flex flex-col items-center justify-center w-[90%] my-10">
                 <div className="flex flex-row items-center justify-center w-full mb-6">
@@ -211,43 +246,6 @@ export default function Home() {
                     </div>
                 <RoutineLine />
             </div>
-
-{/* 
-            <div className="lg:flex md:flex sm:flex-none w-[90%] sm:h-auto md:h-[400px] lg:h-[450px] gap-6 bg-rectangles
-                            rounded-3xl mb-5 mt-5">
-                <div className="flex-1 overflow-hidden rounded-3xl">
-                    <img 
-                        src={img2}
-                        alt="Cuidado diario" 
-                        className="w-full h-full object-cover scale-105"
-                    />
-                </div>
-
-
-
-                <div className="flex-1 p-14 flex flex-col bg-rectangles rounded-3xl
-                lg:justify-end lg:items-end md:justify-end md:items-end 
-                sm:justify-center sm:items-center xs:i">
-                    <h2 className="text-2xl font-bold text-darkblue 
-                                lg:text-right md:text-right sm:text-center font-inter">
-                        CUIDADO DIARIO
-                    </h2>
-                    <p className="mt-2 text-sm text-darkblue pl-5 font-inter 
-                                lg:text-right md:text-right sm:text-center lg:w-[75%] md:w-[100%] sm:w-[60%] xs:w-[40%]">
-                        Descubrí cómo incorporar los productos a tu rutina, qué ingredientes buscar, y aprovechá al máximo cada momento de cuidado personal. 
-                        Empezá a sentirte seguro con lo que tu piel necesita.
-                    </p>
-                    <Link to="/routine"
-                        type="submit"
-                        className="w-[135px] mt-4 rounded-full bg-transparent px-4 py-2 border border-darkblue
-                                font-semibold text-darkblue text-sm font-inter text-center
-                                hover:bg-darkblue hover:text-rectangles transition
-                                focus:outline-none focus:ring-2 focus:ring-darkblue">
-                        RUTINA
-                    </Link>
-                </div>
-
-            </div> */}
 
             {/* <div 
                 className="relative flex p-6 flex-col justify-center items-center w-[90%] sm:h-auto md:h-[400px] lg:h-[450px] rounded-3xl mb-5 mt-5 bg-cover bg-center overflow-hidden"
