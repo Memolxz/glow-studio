@@ -1,4 +1,4 @@
-import { Star, SquareArrowOutUpRight, ChevronLeft, MessageCircle, UserRound, StarHalf, Trash2, FlaskConical  } from "lucide-react"
+import { Star, SquareArrowOutUpRight, ChevronLeft, MessageCircle, UserRound, StarHalf, Trash2, FlaskConical, Plus  } from "lucide-react"
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
@@ -110,7 +110,7 @@ export default function Product() {
   const fetchProduct = async () => {
     try {
       const response = await fetch(`http://localhost:8000/products/${id}`);
-     
+    
       if (!response.ok) {
         throw new Error("Producto no encontrado");
       }
@@ -325,7 +325,6 @@ export default function Product() {
               <span className="ml-2 text-darkblue font-semibold">({product.rating.toFixed(1)})</span>
             </div>
           )}
-         
           <div className="flex flex-row items-center">
             {product.price && (
               <p className="text-darkblue font-semibold text-2xl">
@@ -400,7 +399,18 @@ export default function Product() {
               className="text-darkblue hover:text-hovertext transition"
               title={user ? "Agregar comentario" : "Inicia sesión para comentar"}
             ></button>
-            <MessageCircle className="text-darkblue h-8 w-8" />
+            <button 
+            onClick={() => {
+                if (!user) {
+                  navigate("/register");
+                } else {
+                  setShowCommentForm(!showCommentForm);
+                }
+              }}
+            className="relative bg-darkblue hover:bg-hovertext h-10 w-10 flex justify-center items-center">
+              <MessageCircle className="absolute top-0 left-0 text-white h-8 w-8" />
+              <Plus className="absolute top-0 left-0 text-white h-5 w-5" />
+            </button>
           </div>
         </div>
 

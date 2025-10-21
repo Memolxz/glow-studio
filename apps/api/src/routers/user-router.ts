@@ -65,7 +65,7 @@ userRouter.patch('/:id',isAdminMiddleware, async (req: Request, res: Response) =
   }
 });
 
-userRouter.delete('/:id',isAdminMiddleware, async (req: Request, res: Response) => {
+userRouter.delete('/:id', async (req: Request, res: Response) => {
   try {
     const userIdToDelete = parseInt(req.params.id);
     

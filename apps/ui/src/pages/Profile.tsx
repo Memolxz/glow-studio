@@ -172,6 +172,7 @@ export default function Home() {
         setError("Error al eliminar la cuenta");
         setDeleting(false);
         }
+        setShowDeleteConfirm(false)
     };
 
 
