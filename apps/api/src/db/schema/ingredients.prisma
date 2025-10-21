@@ -1,8 +1,7 @@
 model Ingredients {
-  id   Int @id @default(autoincrement())
-  name String
-
-  ingredientEffect IngredientEffect[]
-  productIngredient ProductIngredient[]
+  id                        Int                        @id @default(autoincrement())
+  name                      String
+  ingredientEffect          IngredientEffect[]
+  productIngredient         ProductIngredient[]
   recommendationIngredients RecommendationIngredient[]
 }

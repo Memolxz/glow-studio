@@ -1,12 +1,11 @@
 model IngredientEffect {
   ingredientId Int
-  skinTypeId Int
-  Effect Effects
+  skinTypeId   Int
+  Effect       Effects
+  ingredients  Ingredients @relation(fields: [ingredientId], references: [id])
+  skinType     SkinType    @relation(fields: [skinTypeId], references: [id])
 
   @@id([ingredientId, skinTypeId])
-
-  ingredients Ingredients @relation(fields: [ingredientId], references: [id])
-  skinType SkinType @relation(fields: [skinTypeId], references: [id])
 }
 
 enum Effects {

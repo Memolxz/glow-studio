@@ -1,3 +1,46 @@
+model Product {
+  id                 Int                 @id @default(autoincrement())
+  name               String
+  brand              String
+  description        String
+  officialUrl        String
+  imageUrl           String?
+  price              Decimal?
+  category           ProductCategoryType
+  createdAt          DateTime            @default(now())
+  updatedAt          DateTime            @updatedAt
+  rating             Float?
+  bodyPart           BodyPart            @default(FACE)
+  sephoraCategoryId  String?
+  productComments    ProductComment[]
+  productIngredients ProductIngredient[]
+  recommendations    Recommendation[]
+}
+
+model ProductIngredient {
+  productId    Int
+  ingredientId Int
+  ingredient   Ingredients @relation(fields: [ingredientId], references: [id])
+  product      Product     @relation(fields: [productId], references: [id])
+
+  @@id([productId, ingredientId])
+  @@index([ingredientId])
+}
+
+model ProductComment {
+  id        Int      @id @default(autoincrement())
+  productId Int
+  userId    Int
+  content   String
+  rating    Float
+  createdAt DateTime @default(now())
+  product   Product  @relation(fields: [productId], references: [id])
+  user      Users    @relation(fields: [userId], references: [id])
+
+  @@index([productId])
+  @@index([userId])
+}
+
 enum ProductCategoryType {
   SERUM
   CLEANSER
@@ -7,9 +50,7 @@ enum ProductCategoryType {
   MOISTURIZER
   EXFOLIANT
   TREATMENT
-  // Add more specific types as needed
   EYE_CREAM
-  LIP_BALM
   FACIAL_OIL
   MIST
   ESSENCE
@@ -18,53 +59,6 @@ enum ProductCategoryType {
 enum BodyPart {
   FACE
   EYES
-  LIPS
   BODY
-  GENERAL  // For products that work on multiple areas
-}
-
-model Product {
-  id                 Int                 @id @default(autoincrement())
-  name               String
-  brand              String
-  description        String
-  rating             Float?
-  officialUrl        String
-  imageUrl           String?
-  price              Decimal?
-  category           ProductCategoryType
-  bodyPart           BodyPart            @default(FACE)
-  sephoraCategoryId  String?             // Store original Sephora category ID
-  createdAt          DateTime            @default(now())
-  updatedAt          DateTime            @updatedAt
-  
-  productComments    ProductComment[]
-  productIngredients ProductIngredient[]
-  recommendations    Recommendation[]
-}
-
-model ProductIngredient {
-  productId     Int
-  ingredientId  Int
-  
-  product    Product     @relation(fields: [productId], references: [id])
-  ingredient Ingredients @relation(fields: [ingredientId], references: [id])
-  
-  @@id([productId, ingredientId])
-  @@index([ingredientId])
-} 
-
-model ProductComment {
-  id        Int      @id @default(autoincrement())
-  productId Int
-  userId    Int
-  content   String
-  rating    Float
-  createdAt DateTime @default(now())
-  
-  product Product @relation(fields: [productId], references: [id])
-  user    Users   @relation(fields: [userId], references: [id])
-  
-  @@index([productId])
-  @@index([userId])
+  GENERAL
 }

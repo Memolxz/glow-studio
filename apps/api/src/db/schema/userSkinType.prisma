@@ -1,7 +1,6 @@
 model UserSkinType {
   userId     Int
   skinTypeId Int
-
   skinType   SkinType @relation(fields: [skinTypeId], references: [id])
   users      Users    @relation(fields: [userId], references: [id])
 

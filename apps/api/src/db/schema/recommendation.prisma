@@ -1,26 +1,26 @@
 model Recommendation {
-  id              Int      @id @default(autoincrement())
-  userId          Int
-  productId       Int
-  createdAt       DateTime @default(now())
-  
-  user    Users   @relation(fields: [userId], references: [id])
-  product Product @relation(fields: [productId], references: [id])
+  id                        Int                        @id @default(autoincrement())
+  userId                    Int
+  productId                 Int
+  createdAt                 DateTime                   @default(now())
+
+  product                   Product                    @relation(fields: [productId], references: [id])
+  user                      Users                      @relation(fields: [userId], references: [id])
   recommendationIngredients RecommendationIngredient[]
 
   @@index([userId])
   @@index([productId])
-} 
+}
 
 model RecommendationIngredient {
   recommendationId Int
-  ingredientId Int
-  
-  recommendation Recommendation @relation(fields: [recommendationId], references: [id])
-  ingredient     Ingredients     @relation(fields: [ingredientId], references: [id])
+  ingredientId     Int
 
-  @@index([recommendationId])
-  @@index([ingredientId])
+  ingredient       Ingredients    @relation(fields: [ingredientId], references: [id])
+  recommendation   Recommendation @relation(fields: [recommendationId], references: [id])
 
   @@id([recommendationId, ingredientId])
+  
+  @@index([recommendationId])
+  @@index([ingredientId])
 }

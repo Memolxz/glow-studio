@@ -1,2 +1,0 @@
--- AlterTable
-ALTER TABLE "recommendation" ALTER COLUMN "reason" DROP NOT NULL;
