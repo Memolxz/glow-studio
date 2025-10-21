@@ -27,6 +27,7 @@ type Product = {
   imageUrl: string | null;
   price: string | null;
   category: string;
+  bodyPart: string;
   productIngredients: ProductIngredient[];
 };
 
@@ -45,14 +46,25 @@ type Comment = {
 
 
 const categoryDisplayNames: Record<string, string> = {
-  SERUM: "Sérum",
-  CLEANSER: "Limpiador",
-  TONER: "Tonificador",
-  SUNSCREEN: "Protector Solar",
-  MASK: "Mascarilla",
-  MOISTURIZER: "Hidratante",
-  EXFOLIANT: "Exfoliante",
-  TREATMENT: "Tratamiento",
+    SERUM: "Sérum",
+    CLEANSER: "Limpiador",
+    TONER: "Tonificador",
+    SUNSCREEN: "Protector Solar",
+    MASK: "Mascarilla",
+    MOISTURIZER: "Hidratante",
+    EXFOLIANT: "Exfoliante",
+    TREATMENT: "Tratamiento",
+    EYE_CREAM: "Crema de Ojos",
+    FACIAL_OIL: "Aceite Facial",
+    MIST: "Bruma",
+    ESSENCE: "Esencia",
+};
+
+const bodyPartDisplayNames: Record<string, string> = {
+    FACE: "Rostro",
+    EYES: "Ojos",
+    BODY: "Cuerpo",
+    GENERAL: "General",
 };
 
 
@@ -284,6 +296,9 @@ export default function Product() {
           <Link to="/products">
             <ChevronLeft className="absolute top-5 left-5 text-darkblue h-10 w-10 z-10" />
           </Link>
+          <div className="absolute top-5 left-20 bg-darkblue/60 text-white font-semibold px-3 h-8 flex items-center rounded-2xl">
+            <p>{bodyPartDisplayNames[product.bodyPart] || product.bodyPart}</p>
+          </div>
           <div className="absolute top-5 right-5 bg-darkblue/60 text-white font-semibold px-3 h-8 flex items-center rounded-2xl">
             <p>{categoryDisplayNames[product.category] || product.category}</p>
           </div>

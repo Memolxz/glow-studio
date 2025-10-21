@@ -35,6 +35,7 @@ type Product = {
     imageUrl: string | null;
     price: string | null;
     category: string;
+    bodyPart: string;
 };
 
 
@@ -48,8 +49,17 @@ const categoryDisplayNames: Record<string, string> = {
     EXFOLIANT: "Exfoliante",
     TREATMENT: "Tratamiento",
     EYE_CREAM: "Crema de Ojos",
+    FACIAL_OIL: "Aceite Facial",
+    MIST: "Bruma",
+    ESSENCE: "Esencia",
 };
 
+const bodyPartDisplayNames: Record<string, string> = {
+    FACE: "Rostro",
+    EYES: "Ojos",
+    BODY: "Cuerpo",
+    GENERAL: "General",
+};
 
 export default function Products() {
 
@@ -63,6 +73,7 @@ export default function Products() {
 
     // Filtros
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+    const [selectedBodyParts, setSelectedBodyParts] = useState<string[]>([]);
     const [minRating, setMinRating] = useState<number | undefined>();
     const [maxRating, setMaxRating] = useState<number | undefined>();
     const [minPrice, setMinPrice] = useState<string>("0");
@@ -108,6 +119,8 @@ export default function Products() {
             const params = new URLSearchParams();
             if (selectedCategories.length > 0)
             selectedCategories.forEach((cat) => params.append("categories", cat));
+            if (selectedBodyParts.length > 0)
+            selectedBodyParts.forEach((bp) => params.append("bodyParts", bp));
             if (minRating !== undefined)
             params.append("minRating", minRating.toString());
             if (maxRating !== undefined)
@@ -131,10 +144,9 @@ export default function Products() {
 };
 
 
-
-
     const clearFilters = () => {
         setSelectedCategories([]);
+        setSelectedBodyParts([]);
         setMinRating(undefined);
         setMaxRating(undefined);
         setMinPrice("0");
@@ -151,11 +163,21 @@ export default function Products() {
         );
     };
 
+    const toggleBodyPart = (bodyPart: string) => {
+        setSelectedBodyParts((prev) =>
+        prev.includes(bodyPart)
+            ? prev.filter((bp) => bp !== bodyPart)
+            : [...prev, bodyPart]
+        );
+    };
 
     const removeFilter = (type: string, value?: string) => {
         switch (type) {
             case "category":
             setSelectedCategories((prev) => prev.filter((c) => c !== value));
+            break;
+            case "bodyPart":
+            setSelectedBodyParts((prev) => prev.filter((bp) => bp !== value));
             break;
             case "minRating":
             setMinRating(undefined);
@@ -278,7 +300,6 @@ export default function Products() {
                         Filtros
                         </h2>
 
-
                         {/* Categorías */}
                         <div className="mb-6">
                         <h3 className="text-xl font-semibold text-darkblue mb-3">
@@ -294,6 +315,29 @@ export default function Products() {
                                 type="checkbox"
                                 checked={selectedCategories.includes(key)}
                                 onChange={() => toggleCategory(key)}
+                                className="w-4 h-4 text-darkblue rounded"
+                                />
+                                <span className="text-darkblue">{value}</span>
+                            </label>
+                            ))}
+                        </div>
+                        </div>
+
+                        {/* Partes del cuerpo */}
+                        <div className="mb-6">
+                        <h3 className="text-xl font-semibold text-darkblue mb-3">
+                            Partes del cuerpo
+                        </h3>
+                        <div className="grid grid-cols-2 gap-3">
+                            {Object.entries(bodyPartDisplayNames).map(([key, value]) => (
+                            <label
+                                key={key}
+                                className="flex items-center space-x-2 cursor-pointer"
+                            >
+                                <input
+                                type="checkbox"
+                                checked={selectedBodyParts.includes(key)}
+                                onChange={() => toggleBodyPart(key)}
                                 className="w-4 h-4 text-darkblue rounded"
                                 />
                                 <span className="text-darkblue">{value}</span>

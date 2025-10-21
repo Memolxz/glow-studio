@@ -16,6 +16,7 @@ type Product = {
   imageUrl: string | null;
   price: string | null;
   category: string;
+  bodyPart: string;
   createdAt: string;
   updatedAt: string;
 };
@@ -30,14 +31,18 @@ type Recommendation = {
 
 // Category mapping from backend enum to display names
 const categoryDisplayNames: Record<string, string> = {
-  SERUM: "Sérum",
-  CLEANSER: "Limpiador",
-  TONER: "Tonificador",
-  SUNSCREEN: "Protector Solar",
-  MASK: "Mascarilla",
-  MOISTURIZER: "Hidratante",
-  EXFOLIANT: "Exfoliante",
-  TREATMENT: "Tratamiento",
+    SERUM: "Sérum",
+    CLEANSER: "Limpiador",
+    TONER: "Tonificador",
+    SUNSCREEN: "Protector Solar",
+    MASK: "Mascarilla",
+    MOISTURIZER: "Hidratante",
+    EXFOLIANT: "Exfoliante",
+    TREATMENT: "Tratamiento",
+    EYE_CREAM: "Crema de Ojos",
+    FACIAL_OIL: "Aceite Facial",
+    MIST: "Bruma",
+    ESSENCE: "Esencia",
 };
 
 const categoryOrder = [
@@ -47,8 +52,12 @@ const categoryOrder = [
   "SERUM",
   "TREATMENT",
   "MOISTURIZER",
+  "EYE_CREAM",
   "SUNSCREEN",
   "MASK",
+  "FACIAL_OIL",
+  "MIST",
+  "ESSENCE",
 ];
 
 function ProductCarousel({ products }: { products: Product[] }) {
