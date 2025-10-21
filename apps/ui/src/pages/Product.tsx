@@ -407,9 +407,9 @@ export default function Product() {
                   setShowCommentForm(!showCommentForm);
                 }
               }}
-            className="relative flex h-10 w-10 items-center justify-center">
-              <MessageCircle className="absolute top-1 left-1 text-darkblue hover:text-hovertext h-8 w-8 transition" />
-              <Plus className="absolute top-2.5 left-2.5 text-darkblue hover:text-hovertext h-5 w-5 transition" />
+            className="relative group flex h-10 w-10 items-center justify-center">
+              <MessageCircle className="absolute top-1 left-1 text-darkblue group-hover:text-hovertext h-8 w-8 transition" />
+              <Plus className="absolute top-2.5 left-2.5 text-darkblue group-hover:text-hovertext h-5 w-5 transition" />
             </button>
           </div>
         </div>
@@ -445,7 +445,6 @@ export default function Product() {
                 hover:scrollbar-thumb-darkblue/70 transition-colors"
               rows={4}
             />
-           
             <div className="flex gap-3">
               <button
                 type="button"
@@ -485,7 +484,6 @@ export default function Product() {
                   </p>
                 </div>
               </div>
-             
               <div className="flex items-center gap-3">
                 <div className="flex flex-row">
                   {renderStars(comment.rating)}
