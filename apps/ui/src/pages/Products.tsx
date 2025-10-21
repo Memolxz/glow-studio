@@ -289,7 +289,7 @@ export default function Products() {
             {/* Modal de filtros */}
             {showFilters && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowFilters(false)}>
-                    <div className="bg-rectangles rounded-3xl p-8 max-w-2xl w-[90%] overflow-y-auto relative" onClick={(e) => e.stopPropagation()}>
+                    <div className="bg-rectangles rounded-s-2xl p-8 max-w-2xl w-[90%] overflow-y-auto relative max-h-[550px] scrollbar-h-" onClick={(e) => e.stopPropagation()}>
                         <button
                         onClick={() => setShowFilters(false)}
                         className="absolute top-8 right-8 text-darkblue hover:text-hovertext"
