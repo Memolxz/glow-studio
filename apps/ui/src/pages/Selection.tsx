@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Check } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
-import img1 from "../assets/modelo2.png"
+import img1 from "../assets/modelo14.jpg"
 import Footer from "../components/Footer";
 
 interface SkinType {
