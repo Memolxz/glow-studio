@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import img1 from '../assets/fondo.png'
 
-
 // Types
 type User = {
     id: number;
@@ -14,20 +13,17 @@ type User = {
     isAdmin: boolean;
 };
 
-
 type SkinType = {
     id: number;
     name: string;
     description: string;
 };
 
-
 type UserSkinType = {
     userId: number;
     skinTypeId: number;
     skinType: SkinType;
 };
-
 
 type Product = {
     id: number;
@@ -37,12 +33,10 @@ type Product = {
     category: string;
 };
 
-
 type Recommendation = {
     id: number;
     product: Product;
 };
-
 
 const categoryDisplayNames: Record<string, string> = {
     SERUM: "Sérum",
@@ -64,14 +58,11 @@ export default function Home() {
     const [deleting, setDeleting] = useState(false);
     const [error, setError] = useState("");
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-   
-
 
     // Get user data from token
     const getUserFromToken = (): User | null => {
         const token = localStorage.getItem("accessToken");
         if (!token) return null;
-
 
         try {
         const payload = JSON.parse(atob(token.split('.')[1]));

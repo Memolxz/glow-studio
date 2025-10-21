@@ -28,6 +28,23 @@ export const RequireAuth = ({ children }: { children: ReactNode }) => {
   return <>{children}</>;
 };
 
+export const IsAdminUser = ({ children }: { children: ReactNode }) => {
+  const token = localStorage.getItem("accessToken");
+  if (!token) return false;
+
+  try {
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    if (payload.isAdmin === true) {
+      return <>{children}</>;
+    }
+    else {
+      return <Navigate to="/home" replace />;
+    }
+  } catch (error) {
+    return <>{children}</>;
+  }
+};
+
 export const RequireGuest = ({ children }: { children: ReactNode }) => {
   const authenticated = isAuthenticated();
   

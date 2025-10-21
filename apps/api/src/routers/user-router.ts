@@ -6,7 +6,7 @@ const userService = new UserService();
 
 export const userRouter = Router();
 
-userRouter.get("/",isAdminMiddleware, async (_: Request, res: Response) => {
+userRouter.get("/", async (_: Request, res: Response) => {
   try {
     const users = await userService.getAllUsers();
     res.status(200).json({ ok: true, data: users });

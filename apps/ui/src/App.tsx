@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { RequireAuth, RequireGuest } from './components/ProtectedRoute';
+import { RequireAuth, IsAdminUser } from './components/ProtectedRoute';
 import RecommendationsPage from "./pages/Recommendations"
 import SkinSelection from "./pages/Selection"
 import AuthLayout from "./pages/AuthPage"
@@ -23,7 +23,7 @@ export default function App() {
 
 
           {/* Protected Routes */}
-          <Route path="/users" element={<RequireAuth><Users /></RequireAuth>} />
+          <Route path="/users" element={<RequireAuth><IsAdminUser><Users /></IsAdminUser></RequireAuth>} />
           <Route path="/profile" element={<RequireAuth><Profile /></RequireAuth>} />
           <Route path="/selection" element={<RequireAuth><SkinSelection /></RequireAuth>} />
           <Route path="/recommendations" element={<RequireAuth><RecommendationsPage /></RequireAuth>} />
