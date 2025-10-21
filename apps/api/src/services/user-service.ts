@@ -12,7 +12,11 @@ interface CreateUserBody {
 export class UserService {
   async getAllUsers() {
     try {
-      const users = await db.users.findMany()
+      const users = await db.users.findMany({
+        where: {
+          deletedAt: null
+        }
+      })
 
       return users;
     } catch (error) {
@@ -146,7 +150,12 @@ export class UserService {
         throw new Error(`usuario no existe`)
       }
 
-
+      await db.productComment.updateMany({
+        where: { userId },
+        data: {
+          userId: null
+        }
+      });
 
       const deletedUser = await db.users.update({
         where: { id: userId },
@@ -188,9 +197,17 @@ export class UserService {
 
   async assignSkinType(userId: number, skinTypeId: number) {
     try {
+      await db.userSkinType.deleteMany({
+        where: { userId },
+      });
+
       const userSkinType = await db.userSkinType.create({
         data: { userId, skinTypeId }
       })
+
+      await db.recommendation.deleteMany({
+        where: { userId }
+      });
 
       return userSkinType;
     } catch (error) {

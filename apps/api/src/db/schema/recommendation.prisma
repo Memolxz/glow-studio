@@ -5,7 +5,7 @@ model Recommendation {
   createdAt                 DateTime                   @default(now())
 
   product                   Product                    @relation(fields: [productId], references: [id])
-  user                      Users                      @relation(fields: [userId], references: [id])
+  user                      Users                      @relation(fields: [userId], references: [id], onDelete: Cascade)
   recommendationIngredients RecommendationIngredient[]
 
   @@index([userId])
@@ -17,7 +17,7 @@ model RecommendationIngredient {
   ingredientId     Int
 
   ingredient       Ingredients    @relation(fields: [ingredientId], references: [id])
-  recommendation   Recommendation @relation(fields: [recommendationId], references: [id])
+  recommendation   Recommendation @relation(fields: [recommendationId], references: [id], onDelete: Cascade)
 
   @@id([recommendationId, ingredientId])
   

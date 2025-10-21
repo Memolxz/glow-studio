@@ -20,7 +20,7 @@ model Product {
 model ProductIngredient {
   productId    Int
   ingredientId Int
-  ingredient   Ingredients @relation(fields: [ingredientId], references: [id])
+  ingredient   Ingredients @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
   product      Product     @relation(fields: [productId], references: [id])
 
   @@id([productId, ingredientId])
@@ -30,12 +30,12 @@ model ProductIngredient {
 model ProductComment {
   id        Int      @id @default(autoincrement())
   productId Int
-  userId    Int
+  userId    Int?
   content   String
   rating    Float
   createdAt DateTime @default(now())
-  product   Product  @relation(fields: [productId], references: [id])
-  user      Users    @relation(fields: [userId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user      Users?    @relation(fields: [userId], references: [id])
 
   @@index([productId])
   @@index([userId])
