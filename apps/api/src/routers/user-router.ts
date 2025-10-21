@@ -15,6 +15,15 @@ userRouter.get("/", isAdminMiddleware, async (_: Request, res: Response) => {
   }
 });
 
+userRouter.get('/deleted', async (req: Request, res: Response) => {
+  try {
+    const users = await userService.getDeletedUsers();
+    res.status(200).json({ ok: true, data: users });
+  } catch (error) {
+    res.status(500).json({ ok: false, error: (error as any).message });
+  }
+});
+
 userRouter.get('/:mail', async (req: Request, res: Response) => {
   try {
     const userMailToGet = req.params.mail;
@@ -25,7 +34,7 @@ userRouter.get('/:mail', async (req: Request, res: Response) => {
   }
 });
 
-userRouter.get('/deleted/:mail',isAdminMiddleware, async (req: Request, res: Response) => {
+userRouter.get('/restore/:mail',isAdminMiddleware, async (req: Request, res: Response) => {
   try {
     const userMailToGet = req.params.mail;
     const user = await userService.getDeletedUser(userMailToGet);
@@ -125,15 +134,6 @@ userRouter.get('/:id', jwtAuthMiddleware, async (req: Request, res: Response) =>
     
     const user = await userService.getUserById(userId);
     res.status(200).json({ ok: true, data: user });
-  } catch (error) {
-    res.status(500).json({ ok: false, error: (error as any).message });
-  }
-});
-
-userRouter.get('/deleted', async (req: Request, res: Response) => {
-  try {
-    const users = await userService.getDeletedUsers();
-    res.status(200).json({ ok: true, data: users });
   } catch (error) {
     res.status(500).json({ ok: false, error: (error as any).message });
   }

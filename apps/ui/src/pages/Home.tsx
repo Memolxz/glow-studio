@@ -63,40 +63,6 @@ export default function Home() {
         }
     };
 
-
-    /* const renderStars = (rating: number) => {
-        const stars = [];
-        const fullStars = Math.floor(rating);
-        const hasHalfStar = rating % 1 >= 0.5;
-
-
-        for (let i = 0; i < fullStars; i++) {
-            stars.push(<Star key={`full-${i}`} className="h-4 w-4 text-darkblue fill-current" />);
-        }
-
-
-        if (hasHalfStar) {
-            stars.push(
-                <div key="half" className="relative h-4 w-4">
-                    <Star className="absolute h-4 w-4 text-darkblue" />
-                    <div className="absolute h-4 w-4 overflow-hidden" style={{ width: '50%' }}>
-                        <Star className="h-4 w-4 text-darkblue fill-current" />
-                    </div>
-                </div>
-            );
-        }
-
-
-        const emptyStars = 5 - Math.ceil(rating);
-        for (let i = 0; i < emptyStars; i++) {
-            stars.push(<Star key={`empty-${i}`} className="h-4 w-4 text-darkblue" />);
-        }
-
-
-        return stars;
-    }; */
-
-
     return (
         <div className="flex flex-col items-center bg-background relative font-geist">
             <Header />

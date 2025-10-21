@@ -49,13 +49,32 @@ export default function Users() {
 
   const fetchUsers = async () => {
     try {
-      const response = await fetch("http://localhost:8000/users");
+      const token = localStorage.getItem("accessToken");
+        
+      if (!token) {
+        window.location.href = "/register";
+        return;
+      }
+
+      const response = await fetch("http://localhost:8000/users", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          },
+        });;
       if (!response.ok) throw new Error("Error al cargar usuarios");
       const result = await response.json();
       if (!result.ok) throw new Error("Error en la respuesta del servidor");
       setUsers(result.data.filter((u: User) => !u.deletedAt));
 
-      const response2 = await fetch("http://localhost:8000/users/deleted");
+      const response2 = await fetch("http://localhost:8000/users/deleted", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          },
+        });;;
       if (!response2.ok) throw new Error("Error al cargar usuarios eliminados");
       const result2 = await response2.json();
       if (!result2.ok) throw new Error("Error en la respuesta del servidor");
@@ -71,7 +90,20 @@ export default function Users() {
     if (userSkinTypes[userId]) return;
 
     try {
-      const response = await fetch(`http://localhost:8000/users/skintype/${userId}`);
+      const token = localStorage.getItem("accessToken");
+        
+      if (!token) {
+        window.location.href = "/register";
+        return;
+      }
+
+      const response = await fetch(`http://localhost:8000/users/skintype/${userId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${token}`,
+          },
+        });;;
       if (!response.ok) throw new Error("Error al cargar tipos de piel");
       const result = await response.json();
       setUserSkinTypes((prev) => ({ ...prev, [userId]: result.ok ? result.data : [] }));
