@@ -271,4 +271,19 @@ export class UserService {
     });
     return relations;
   }
+
+  async getDeletedUsers() {
+    try {
+      const users = await db.users.findMany({
+        where: {
+          deletedAt: { not: null }
+        }
+      });
+
+      return users;
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error al obtener usuarios eliminados");
+    }
+  }
 }

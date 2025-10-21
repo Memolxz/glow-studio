@@ -36,7 +36,7 @@ type Comment = {
   content: string;
   rating: number;
   createdAt: string;
-  user: {
+  user?: {
     id: number;
     name: string;
     email: string;
@@ -450,7 +450,7 @@ export default function Product() {
                   <UserRound className="h-7 w-7 text-white" />
                 </div>
                 <div className="flex flex-col ml-5">
-                  <h1 className="text-start font-bold text-darkblue text-xl">{comment.user.name}</h1>
+                  <h1 className="text-start font-bold text-darkblue text-xl">{comment.user?.name || "Usuario eliminado"}</h1>
                   <p className="text-start text-darkblue/60 font-normal text-sm">
                     {new Date(comment.createdAt).toLocaleDateString('es-AR', {
                       year: 'numeric',
@@ -465,7 +465,7 @@ export default function Product() {
                 <div className="flex flex-row">
                   {renderStars(comment.rating)}
                 </div>
-                {(user?.id === comment.user.id || user?.isAdmin) && (
+                {(user?.id === comment.user?.id || user?.isAdmin) && (
                   <button
                     onClick={() => handleDeleteComment(comment.id)}
                     className="text-red-600 hover:text-red-800 transition"

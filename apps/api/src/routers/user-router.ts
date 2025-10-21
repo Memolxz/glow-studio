@@ -129,3 +129,12 @@ userRouter.get('/:id', jwtAuthMiddleware, async (req: Request, res: Response) =>
     res.status(500).json({ ok: false, error: (error as any).message });
   }
 });
+
+userRouter.get('/deleted', async (req: Request, res: Response) => {
+  try {
+    const users = await userService.getDeletedUsers();
+    res.status(200).json({ ok: true, data: users });
+  } catch (error) {
+    res.status(500).json({ ok: false, error: (error as any).message });
+  }
+});

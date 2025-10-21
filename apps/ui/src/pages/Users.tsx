@@ -54,7 +54,12 @@ export default function Users() {
       const result = await response.json();
       if (!result.ok) throw new Error("Error en la respuesta del servidor");
       setUsers(result.data.filter((u: User) => !u.deletedAt));
-      setDeletedUsers(result.data.filter((u: User) => u.deletedAt));
+
+      const response2 = await fetch("http://localhost:8000/users/deleted");
+      if (!response2.ok) throw new Error("Error al cargar usuarios eliminados");
+      const result2 = await response2.json();
+      if (!result2.ok) throw new Error("Error en la respuesta del servidor");
+      setDeletedUsers(result2.data);
     } catch (err) {
       console.error("Error fetching users:", err);
       setError("Error al cargar usuarios");
