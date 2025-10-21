@@ -12,11 +12,7 @@ interface CreateUserBody {
 export class UserService {
   async getAllUsers() {
     try {
-      const users = await db.users.findMany({
-        where: {
-          deletedAt: null
-        }
-      })
+      const users = await db.users.findMany()
 
       return users;
     } catch (error) {

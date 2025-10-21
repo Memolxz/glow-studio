@@ -294,7 +294,6 @@ export default function Home() {
                                             {ust.skinType.name}
                                         </p>
                                     </div>
-                                   
                                 ))
                                 ) : (
                                 <p className="ml-5 mt-2 text-md text-gray-500 text-left italic">
