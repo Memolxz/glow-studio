@@ -6,6 +6,7 @@ import { Menu, X, UserRoundIcon, LogOut } from "lucide-react";
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
+    const [isAdmin, setIsAdmin] = useState(false);
     const [isOptionSignOutOpen, setIsOptionSignOutOpen] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const navigate = useNavigate();
@@ -23,16 +24,17 @@ export default function Header() {
             return;
         }
 
-
         try {
             const payload = JSON.parse(atob(token.split('.')[1]));
+            if (payload.isAdmin === true) {
+            setIsAdmin(true);
+            }
             const currentTime = Date.now() / 1000;
             setIsAuthenticated(payload.exp > currentTime);
         } catch (error) {
             setIsAuthenticated(false);
         }
     };
-
 
     const handleLogout = () => {
         localStorage.removeItem("accessToken");
@@ -42,8 +44,6 @@ export default function Header() {
         setIsOptionsOpen(false);
         navigate("/register");
     };
-
-
 
 
     return (
@@ -83,6 +83,15 @@ export default function Header() {
                     </Link>
                 )}
 
+                {isAdmin && (
+                    <Link
+                        to={"/stats"}
+                        onClick={() => setIsMenuOpen(false)}
+                        className="hover:text-hovertext ml-3 text-xl transition-transform hover:scale-105 origin-left"
+                    >
+                        Estadisticas
+                    </Link>
+                )}
 
                 <Link
                     to={"/products"}
@@ -91,6 +100,18 @@ export default function Header() {
                 >
                     Productos
                 </Link>
+
+                {isAdmin && (
+                    <Link
+                        to={"/users"}
+                        onClick={() => setIsMenuOpen(false)}
+                        className="hover:text-hovertext ml-3 text-xl transition-transform hover:scale-105 origin-left"
+                    >
+                        Usuarios
+                    </Link>
+                )}
+
+
                 <Link
                     to={"/FAQ"}
                     onClick={() => setIsMenuOpen(false)}

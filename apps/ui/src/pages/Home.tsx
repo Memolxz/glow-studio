@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 import img1 from '../assets/modelo4.jpg';
 import img2 from '../assets/modelo1.png';
 import img3 from '../assets/dior.jpg';
-import videoSrc from '../assets/video.mp4';
+import videoSrc from '../assets/video_glowstudio.mp4';
 import { Link } from 'react-router-dom';
 import RoutineLine from '../components/RoutineLine';
 

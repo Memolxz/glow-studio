@@ -7,6 +7,7 @@ import Products from "./pages/Products"
 import Profile from "./pages/Profile"
 import Product from "./pages/Product"
 import Users from "./pages/Users"
+import Stats from "./pages/Stats"
 import Home from "./pages/Home"
 import FQ from "./pages/FAQ"
 
@@ -23,10 +24,11 @@ export default function App() {
 
 
           {/* Protected Routes */}
-          <Route path="/users" element={<RequireAuth><IsAdminUser><Users /></IsAdminUser></RequireAuth>} />
           <Route path="/profile" element={<RequireAuth><Profile /></RequireAuth>} />
           <Route path="/selection" element={<RequireAuth><SkinSelection /></RequireAuth>} />
           <Route path="/recommendations" element={<RequireAuth><RecommendationsPage /></RequireAuth>} />
+          <Route path="/users" element={<RequireAuth><IsAdminUser><Users /></IsAdminUser></RequireAuth>} />
+          <Route path="/stats" element={<RequireAuth><IsAdminUser><Stats /></IsAdminUser></RequireAuth>} />
 
 
           {/* <Route path="/profile" element={<Profile />} />
