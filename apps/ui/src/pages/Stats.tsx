@@ -32,11 +32,13 @@ const categoryDisplayNames: Record<string, string> = {
 
 export default function Stats() {
     const [topProducts, setTopProducts] = useState<Product[]>([]);
+    const [bottomProducts, setBottomProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
 
 
     useEffect(() => {
         fetchTopProducts();
+        fetchBottomProducts();
     }, []);
 
 
@@ -59,38 +61,24 @@ export default function Stats() {
         }
     };
 
-    /* const renderStars = (rating: number) => {
-        const stars = [];
-        const fullStars = Math.floor(rating);
-        const hasHalfStar = rating % 1 >= 0.5;
-
-
-        for (let i = 0; i < fullStars; i++) {
-            stars.push(<Star key={`full-${i}`} className="h-4 w-4 text-darkblue fill-current" />);
+    const fetchBottomProducts = async () => {
+        try {
+            const response = await fetch("http://localhost:8000/products");
+            if (response.ok) {
+                const data = await response.json();
+                // Sort by rating and get top 3
+                const sorted = data
+                    .filter((p: Product) => p.rating !== null)
+                    .sort((a: Product, b: Product) => (a.rating || 0) - (b.rating || 0))
+                    .slice(0, 3);
+                setBottomProducts(sorted);
+            }
+        } catch (err) {
+            console.error("Error fetching top products:", err);
+        } finally {
+            setLoading(false);
         }
-
-
-        if (hasHalfStar) {
-            stars.push(
-                <div key="half" className="relative h-4 w-4">
-                    <Star className="absolute h-4 w-4 text-darkblue" />
-                    <div className="absolute h-4 w-4 overflow-hidden" style={{ width: '50%' }}>
-                        <Star className="h-4 w-4 text-darkblue fill-current" />
-                    </div>
-                </div>
-            );
-        }
-
-
-        const emptyStars = 5 - Math.ceil(rating);
-        for (let i = 0; i < emptyStars; i++) {
-            stars.push(<Star key={`empty-${i}`} className="h-4 w-4 text-darkblue" />);
-        }
-
-
-        return stars;
-    }; */
-
+    };
 
     return (
         <div className="flex flex-col items-center bg-background relative font-geist">
@@ -104,13 +92,6 @@ export default function Stats() {
                         alt="Rhode"
                         className="w-full object-cover"
                     />
-                </div>
-            </div>
-
-            <div className="w-[90%] bg-rectangles rounded-3xl my-5 p-10">
-                <div className="w-full flex flex-row justify-start items-center mb-5">
-                    <Trophy className="text-darkblue h-8 w-8 mr-3"/>
-                    <h2 className="text-3xl font-bold text-darkblue">Tipos de Piel Más Usados</h2>
                 </div>
             </div>
 
@@ -184,8 +165,69 @@ export default function Stats() {
                     <Trophy className="text-darkblue h-8 w-8 mr-3"/>
                     <h2 className="text-3xl font-bold text-darkblue">Productos Menos Valorados</h2>
                 </div>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        {bottomProducts.map((product, index) => (
+                            <Link
+                                key={product.id}
+                                to={`/product/${product.id}`}
+                                className="relative flex flex-col items-center group bg-white rounded-2xl p-6 hover:shadow-xl transition-all group"
+                            >
+                                {/* Ranking Badge */}
+                                <div className="absolute top-3 left-3 bg-darkblue text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-lg z-10">
+                                    {index + 1}
+                                </div>
+
+
+                                <div className="absolute top-5 right-5 bg-darkblue/60 text-white font-semibold px-3 h-8 flex items-center rounded-2xl z-10">
+                                    <p>{categoryDisplayNames[product.category] || product.category}</p>
+                                </div>
+
+                                <img
+                                    src={product.imageUrl || "/placeholder.png"}
+                                    alt={product.name}
+                                    className="w-full h-48 object-contain rounded-xl mb-4 group-hover:scale-105 transition-transform"
+                                    onError={(e) => {
+                                        e.currentTarget.src = "/placeholder.png";
+                                    }}
+                                />
+
+
+                                <p className="text-center p-2 text-sm font-semibold text-darkblue group-hover:text-hovertext">
+                                    {product.name}
+                                </p>
+                                <p className="text-sm text-darkblue/60">{product.brand}</p>
+
+
+                                <div className="flex flex-row justify-center items-center w-full mt-2">
+                                    {product.rating && (
+                                        <div className="flex flex-row justify-center items-center">
+                                        <Star className="h-4 w-4 text-darkblue fill-current mr-1" strokeWidth={1} />
+                                        <p className="text-darkblue font-semibold text-md">
+                                            {product.rating.toFixed(1)}
+                                        </p>
+                                        </div>
+                                    )}
+                                    <div className="h-1 w-1 bg-darkblue rounded-full mx-2"></div>
+                                    {product.price && (
+                                        <p className="text-darkblue font-semibold text-md">
+                                        $ {parseFloat(product.price).toLocaleString("es-AR")}
+                                        </p>
+                                    )}
+                                    <div className="absolute top-5 right-5 bg-darkblue/60 text-white font-semibold px-3 h-8 flex items-center rounded-2xl">
+                                        <p>{categoryDisplayNames[product.category] || product.category}</p>
+                                    </div>
+                                </div>
+                            </Link>
+                        ))}
+                    </div>
             </div>
 
+            <div className="w-[90%] bg-rectangles rounded-3xl my-5 p-10">
+                <div className="w-full flex flex-row justify-start items-center mb-5">
+                    <Trophy className="text-darkblue h-8 w-8 mr-3"/>
+                    <h2 className="text-3xl font-bold text-darkblue">Tipos de Piel Más Usados</h2>
+                </div>
+            </div>
 
             <div className="w-[90%] bg-rectangles rounded-3xl my-5 p-10">
                 <div className="w-full flex flex-row justify-start items-center mb-5">
