@@ -47,7 +47,6 @@ export default function Home() {
     const fetchTopProducts = async () => {
         try {
             const response = await fetch("http://localhost:8000/products");
-           
             if (response.ok) {
                 const data = await response.json();
                 // Sort by rating and get top 3
@@ -239,7 +238,7 @@ export default function Home() {
                         PREGUNTAS FRECUENTES
                     </h2>
                     <p className="mt-2 text-sm text-darkblue pl-5 font-geist
-                                lg:text-right md:text-right sm:text-center lg:w-[75%] md:w-[100%] sm:w-[60%] xs:w-[40%]">
+                                lg:text-right md:text-right sm:text-center">
                         Respondemos las dudas más comunes sobre el cuidado de la piel,
                         el uso de nuestros productos y cómo sacarles el máximo provecho.  
                         Encontrá la respuesta que buscás en un solo lugar.
