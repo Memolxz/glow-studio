@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import img1 from '../assets/fondo.png'
 
+
 // Types
 type User = {
     id: number;
@@ -13,17 +14,20 @@ type User = {
     isAdmin: boolean;
 };
 
+
 type SkinType = {
     id: number;
     name: string;
     description: string;
 };
 
+
 type UserSkinType = {
     userId: number;
     skinTypeId: number;
     skinType: SkinType;
 };
+
 
 type Product = {
     id: number;
@@ -33,10 +37,12 @@ type Product = {
     category: string;
 };
 
+
 type Recommendation = {
     id: number;
     product: Product;
 };
+
 
 const categoryDisplayNames: Record<string, string> = {
     SERUM: "Sérum",
@@ -49,6 +55,7 @@ const categoryDisplayNames: Record<string, string> = {
     TREATMENT: "Tratamiento",
 };
 
+
 export default function Home() {
     const [user, setUser] = useState<User | null>(null);
     const [userSkinTypes, setUserSkinTypes] = useState<UserSkinType[]>([]);
@@ -57,12 +64,14 @@ export default function Home() {
     const [deleting, setDeleting] = useState(false);
     const [error, setError] = useState("");
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
-    
+   
+
 
     // Get user data from token
     const getUserFromToken = (): User | null => {
         const token = localStorage.getItem("accessToken");
         if (!token) return null;
+
 
         try {
         const payload = JSON.parse(atob(token.split('.')[1]));
@@ -78,18 +87,22 @@ export default function Home() {
         }
     };
 
+
     useEffect(() => {
         const fetchUserData = async () => {
         try {
             const token = localStorage.getItem("accessToken");
             const userData = getUserFromToken();
 
+
             if (!token || !userData) {
             window.location.href = "/register";
             return;
             }
 
+
             setUser(userData);
+
 
             // Fetch user's skin types
             const skinTypesResponse = await fetch(
@@ -102,10 +115,12 @@ export default function Home() {
             }
             );
 
+
             if (skinTypesResponse.ok) {
             const skinTypesData = await skinTypesResponse.json();
             setUserSkinTypes(skinTypesData.ok ? skinTypesData.data : []);
             }
+
 
             // Fetch recommendations
             const recsResponse = await fetch(
@@ -117,6 +132,7 @@ export default function Home() {
                 },
             }
             );
+
 
             if (recsResponse.ok) {
             const recsData = await recsResponse.json();
@@ -130,15 +146,19 @@ export default function Home() {
         }
         };
 
+
         fetchUserData();
     }, []);
+
 
     const handleDeleteAccount = async () => {
         if (!user) return;
 
+
         setDeleting(true);
         try {
         const token = localStorage.getItem("accessToken");
+
 
         const response = await fetch(`http://localhost:8000/users/${user.id}`, {
             method: "DELETE",
@@ -147,6 +167,7 @@ export default function Home() {
             Authorization: `Bearer ${token}`,
             },
         });
+
 
         if (response.ok) {
             localStorage.removeItem("accessToken");
@@ -162,6 +183,7 @@ export default function Home() {
         }
     };
 
+
     if (loading) {
         return (
         <div className="min-h-screen flex items-center justify-center bg-defaultbg">
@@ -174,6 +196,7 @@ export default function Home() {
         </div>
         );
     }
+
 
     if (error && !user) {
         return (
@@ -192,20 +215,22 @@ export default function Home() {
     }
 
 
+
+
     return (
         <div className="flex flex-col items-center bg-background relative font-geist">
             <Header />
-            <div className="w-[90%] pt-10 pb-5">
+            <div className="w-[90%] pt-10 pb-10">
                 <div className="w-full h-24 overflow-hidden rounded-3xl relative">
                     <img
                         src={img1}
-                        alt="Rhode"
+                        alt="Agua Header"
                         className="w-full object-cover"
                     />
                     <div className="absolute inset-0 bg-black/20"></div>
                 </div>
             </div>
-            
+
 
         {/* Delete Confirmation Modal */}
         {showDeleteConfirm && (
@@ -242,6 +267,7 @@ export default function Home() {
             </div>
         )}
 
+
         <div className="flex flex-col w-[90%] bg-rectangles rounded-3xl mb-10 px-10 py-10">
             <div className="flex flex-row">
                 <div className="flex-1 flex flex-col justify-end mt-2 w-full">
@@ -257,6 +283,7 @@ export default function Home() {
                             </div>
                         </div>
                     </div>
+
 
                     <div className='bg-[#E2EFEF] w-full rounded-2xl p-7 pl-9'>
                         <div className='w-full flex flex-row justify-start items-center mb-5'>
@@ -276,7 +303,7 @@ export default function Home() {
                                             {ust.skinType.name}
                                         </p>
                                     </div>
-                                    
+                                   
                                 ))
                                 ) : (
                                 <p className="ml-5 mt-2 text-md text-gray-500 text-left italic">
@@ -284,6 +311,7 @@ export default function Home() {
                                 </p>
                                 )}
                         </div>
+
 
                         <a
                         href="/selection"
@@ -295,6 +323,7 @@ export default function Home() {
                 </div>
             </div>
         </div>
+
 
         <div className="flex flex-col w-[90%] bg-rectangles rounded-3xl mb-5 px-10">
                 {/* Recommended Products */}        
@@ -352,6 +381,7 @@ export default function Home() {
                 </div>
             </div>
 
+
             <div className='bg-red-100 w-[90%] rounded-2xl px-10 py-7 my-5'>
                 <div className='w-full flex flex-col justify-start items-start mb-5 ml-2'>
                     <div className='bg-red-200 rounded-full h-16 w-16 flex justify-center items-center'>
@@ -372,3 +402,4 @@ export default function Home() {
         </div>
     );
 }
+

@@ -3,15 +3,19 @@ import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import img1 from '../assets/fondo.png'
+
 
 type Ingredient = {
   id: number;
   name: string;
 };
 
+
 type ProductIngredient = {
   ingredient: Ingredient;
 };
+
 
 type Product = {
   id: number;
@@ -26,6 +30,7 @@ type Product = {
   productIngredients: ProductIngredient[];
 };
 
+
 type Comment = {
   id: number;
   content: string;
@@ -38,6 +43,7 @@ type Comment = {
   };
 };
 
+
 const categoryDisplayNames: Record<string, string> = {
   SERUM: "Sérum",
   CLEANSER: "Limpiador",
@@ -49,6 +55,7 @@ const categoryDisplayNames: Record<string, string> = {
   TREATMENT: "Tratamiento",
 };
 
+
 export default function Product() {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -57,12 +64,13 @@ export default function Product() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [user, setUser] = useState<{ id: number; isAdmin: boolean } | null>(null);
-  
+ 
   // Comment form
   const [showCommentForm, setShowCommentForm] = useState(false);
   const [newComment, setNewComment] = useState("");
   const [newRating, setNewRating] = useState(5);
   const [submitting, setSubmitting] = useState(false);
+
 
   useEffect(() => {
     if (id) {
@@ -72,9 +80,11 @@ export default function Product() {
     }
   }, [id]);
 
+
   const getUserFromToken = () => {
     const token = localStorage.getItem("accessToken");
     if (!token) return;
+
 
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
@@ -84,13 +94,15 @@ export default function Product() {
     }
   };
 
+
   const fetchProduct = async () => {
     try {
       const response = await fetch(`http://localhost:8000/products/${id}`);
-      
+     
       if (!response.ok) {
         throw new Error("Producto no encontrado");
       }
+
 
       const data = await response.json();
       setProduct(data);
@@ -102,10 +114,11 @@ export default function Product() {
     }
   };
 
+
   const fetchComments = async () => {
     try {
       const response = await fetch(`http://localhost:8000/products/${id}/comments`);
-      
+     
       if (response.ok) {
         const data = await response.json();
         setComments(data.ok ? data.data : []);
@@ -115,14 +128,16 @@ export default function Product() {
     }
   };
 
+
   const handleSubmitComment = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+   
     const token = localStorage.getItem("accessToken");
     if (!token) {
       navigate("/register");
       return;
     }
+
 
     setSubmitting(true);
     try {
@@ -137,6 +152,7 @@ export default function Product() {
           rating: newRating,
         }),
       });
+
 
       if (response.ok) {
         setNewComment("");
@@ -156,11 +172,14 @@ export default function Product() {
     }
   };
 
+
   const handleDeleteComment = async (commentId: number) => {
     const token = localStorage.getItem("accessToken");
     if (!token) return;
 
+
     if (!confirm("¿Estás seguro de eliminar este comentario?")) return;
+
 
     try {
       const response = await fetch(`http://localhost:8000/products/comments/${commentId}`, {
@@ -169,6 +188,7 @@ export default function Product() {
           "Authorization": `Bearer ${token}`,
         },
       });
+
 
       if (response.ok) {
         fetchComments();
@@ -179,14 +199,17 @@ export default function Product() {
     }
   };
 
+
   const renderStars = (rating: number) => {
     const stars = [];
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.5;
 
+
     for (let i = 0; i < fullStars; i++) {
       stars.push(<Star key={`full-${i}`} className="h-5 w-5 text-darkblue fill-current" />);
     }
+
 
     if (hasHalfStar) {
       stars.push(
@@ -197,13 +220,16 @@ export default function Product() {
       );
     }
 
+
     const emptyStars = 5 - Math.ceil(rating);
     for (let i = 0; i < emptyStars; i++) {
       stars.push(<Star key={`empty-${i}`} className="h-5 w-5 text-darkblue" />);
     }
 
+
     return stars;
   };
+
 
   if (loading) {
     return (
@@ -217,6 +243,7 @@ export default function Product() {
       </div>
     );
   }
+
 
   if (error || !product) {
     return (
@@ -234,10 +261,21 @@ export default function Product() {
     );
   }
 
+
   return(
     <div className="flex flex-col justify-center font-geist items-center bg-background w-full">
       <Header />
-      <div className="flex w-[90%] bg-rectangles rounded-3xl my-10 h-24"></div>
+      <div className="w-[90%] pt-10 pb-10">
+          <div className="w-full h-24 overflow-hidden rounded-3xl relative">
+              <img
+                  src={img1}
+                  alt="Agua Header"
+                  className="w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/20"></div>
+          </div>
+      </div>
+
 
       {/* Product Details Section */}
       <div className="relative flex flex-row justify-between items-between bg-rectangles w-[90%] rounded-3xl h-full mb-10 border border-rectangles">
@@ -250,6 +288,7 @@ export default function Product() {
             <p>{categoryDisplayNames[product.category] || product.category}</p>
           </div>
 
+
           <div className="flex justify-center items-center h-[400px] w-full">
             <img
               src={product.imageUrl || "/placeholder.png"}
@@ -259,6 +298,7 @@ export default function Product() {
             />
           </div>
         </div>
+
 
         <div className="flex flex-col items-start bg-transparent w-1/2 p-10">
           <h1 className="text-start font-bold text-darkblue text-3xl">{product.name}</h1>
@@ -270,12 +310,17 @@ export default function Product() {
               <span className="ml-2 text-darkblue font-semibold">({product.rating.toFixed(1)})</span>
             </div>
           )}
-          
-          {product.price && (
-            <p className="text-darkblue font-semibold text-2xl">
-              $ {parseFloat(product.price).toLocaleString('es-AR')}
-            </p>
-          )}
+         
+          <div className="flex flex-row items-center">
+            {product.price && (
+              <p className="text-darkblue font-semibold text-2xl">
+                $ {parseFloat(product.price).toLocaleString('es-AR')}
+              </p>
+            )}
+            <p className="text-darkblue font-normal text-sm ml-1">USD</p>
+          </div>
+
+
           <a
             href={product.officialUrl}
             target="_blank"
@@ -288,6 +333,7 @@ export default function Product() {
         </div>
       </div>
 
+
       {/* Ingredients Section */}
       {product.productIngredients && product.productIngredients.length > 0 && (
         <div className="flex flex-col justify-start items-start bg-rectangles w-[90%] rounded-3xl p-8">
@@ -296,10 +342,12 @@ export default function Product() {
             <h2 className="text-darkblue font-semibold text-4xl">Ingredientes</h2>
           </div>
 
+
           <div className="w-full border-t border-darkblue/60 mb-5"></div>
 
+
           {/* Contenedor con scroll */}
-          <div className="w-full max-h-[225px] overflow-y-auto pr-2 
+          <div className="w-full max-h-[225px] overflow-y-auto pr-2
                 scrollbar-thin scrollbar-thumb-darkblue/50 scrollbar-track-[#E2EFEF]/30
                 hover:scrollbar-thumb-darkblue/70 transition-colors">
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 w-full">
@@ -315,6 +363,8 @@ export default function Product() {
           </div>
         </div>
       )}
+
+
 
 
       {/* Comments Section */}
@@ -339,7 +389,9 @@ export default function Product() {
           </div>
         </div>
 
+
         <div className="border-b border-darkblue/60 w-full mb-5"></div>
+
 
         {/* Comment Form */}
         {showCommentForm && (
@@ -368,7 +420,7 @@ export default function Product() {
                 hover:scrollbar-thumb-darkblue/70 transition-colors"
               rows={4}
             />
-            
+           
             <div className="flex gap-3">
               <button
                 type="button"
@@ -387,6 +439,7 @@ export default function Product() {
             </div>
           </form>
         )}
+
 
         {/* Comments List */}
         {comments.map((comment) => (
@@ -407,7 +460,7 @@ export default function Product() {
                   </p>
                 </div>
               </div>
-              
+             
               <div className="flex items-center gap-3">
                 <div className="flex flex-row">
                   {renderStars(comment.rating)}
@@ -429,6 +482,7 @@ export default function Product() {
           </div>
         ))}
 
+
         {comments.length === 0 && !showCommentForm && (
           <div className="text-center py-10">
             <p className="text-darkblue/60 mb-4">No hay comentarios todavía</p>
@@ -443,8 +497,10 @@ export default function Product() {
           </div>
         )}
 
+
       </div>
       <Footer />
     </div>
   );
 }
+

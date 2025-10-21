@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Star, Trophy } from 'lucide-react';
 import Header from '../components/Header';
@@ -9,6 +10,7 @@ import videoSrc from '../assets/video.mp4';
 import { Link } from 'react-router-dom';
 import RoutineLine from '../components/RoutineLine';
 
+
 type Product = {
   id: number;
   name: string;
@@ -18,6 +20,7 @@ type Product = {
   price: string | null;
   category: string;
 };
+
 
 const categoryDisplayNames: Record<string, string> = {
   SERUM: "Sérum",
@@ -30,18 +33,21 @@ const categoryDisplayNames: Record<string, string> = {
   TREATMENT: "Tratamiento",
 };
 
+
 export default function Home() {
     const [topProducts, setTopProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
         fetchTopProducts();
     }, []);
 
+
     const fetchTopProducts = async () => {
         try {
             const response = await fetch("http://localhost:8000/products");
-            
+           
             if (response.ok) {
                 const data = await response.json();
                 // Sort by rating and get top 3
@@ -58,14 +64,17 @@ export default function Home() {
         }
     };
 
+
     /* const renderStars = (rating: number) => {
         const stars = [];
         const fullStars = Math.floor(rating);
         const hasHalfStar = rating % 1 >= 0.5;
 
+
         for (let i = 0; i < fullStars; i++) {
             stars.push(<Star key={`full-${i}`} className="h-4 w-4 text-darkblue fill-current" />);
         }
+
 
         if (hasHalfStar) {
             stars.push(
@@ -78,17 +87,21 @@ export default function Home() {
             );
         }
 
+
         const emptyStars = 5 - Math.ceil(rating);
         for (let i = 0; i < emptyStars; i++) {
             stars.push(<Star key={`empty-${i}`} className="h-4 w-4 text-darkblue" />);
         }
 
+
         return stars;
     }; */
+
 
     return (
         <div className="flex flex-col items-center bg-background relative font-geist">
             <Header />
+
 
             <div className="w-[90%] pt-10 pb-5">
                 <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
@@ -100,11 +113,12 @@ export default function Home() {
                 </div>
             </div>
 
+
             {/* Top Rated Products Section */}
             {!loading && topProducts.length > 0 && (
                 <div className="w-[90%] bg-rectangles rounded-3xl my-5 p-10">
                     <div className="w-full flex flex-row justify-start items-center mb-5">
-                        <Trophy className="text-darkblue h-8 w-8 mr-2"/>
+                        <Trophy className="text-darkblue h-8 w-8 mr-3"/>
                         <h2 className="text-3xl font-bold text-darkblue">Productos Mejor Valorados</h2>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -119,11 +133,11 @@ export default function Home() {
                                     {index + 1}
                                 </div>
 
+
                                 <div className="absolute top-5 right-5 bg-darkblue/60 text-white font-semibold px-3 h-8 flex items-center rounded-2xl z-10">
                                     <p>{categoryDisplayNames[product.category] || product.category}</p>
                                 </div>
 
-                                
                                 <img
                                     src={product.imageUrl || "/placeholder.png"}
                                     alt={product.name}
@@ -133,10 +147,12 @@ export default function Home() {
                                     }}
                                 />
 
+
                                 <p className="text-center p-2 text-sm font-semibold text-darkblue group-hover:text-hovertext">
                                     {product.name}
                                 </p>
                                 <p className="text-sm text-darkblue/60">{product.brand}</p>
+
 
                                 <div className="flex flex-row justify-center items-center w-full mt-2">
                                     {product.rating && (
@@ -163,6 +179,7 @@ export default function Home() {
                 </div>
             )}
 
+
             <div className="flex w-[90%]  sm:h-[300px] md:h-[400px] lg:h-[450px] rounded-3xl my-5 overflow-hidden bg-transparent">
                 <video
                     src={videoSrc}
@@ -174,13 +191,15 @@ export default function Home() {
                 />
             </div>
 
+
             <div className="flex w-[90%] sm:h-[300px] md:h-[400px] lg:h-[450px] bg-rectangles rounded-3xl my-5">
                 <div className="w-1/2 p-14 flex flex-col justify-end">
                     <h2 className="text-2xl sm:text-xl font-bold text-darkblue font-geist">RECORRE LO DESTACADO</h2>
-                    <p className="mt-2 text-sm text-darkblue font-geist 
+                    <p className="mt-2 text-sm text-darkblue font-geist
                                     max-w-[90%] text-left">
                         Cada piel es única, y tu rutina también debería serlo. Nuestro sistema te ayuda a identificar tu tipo de piel y te recomienda productos específicos que se adaptan a tus necesidades.
                     </p>
+
 
                     <Link to="/products"
                         type="submit"
@@ -192,34 +211,36 @@ export default function Home() {
                     </Link>
                 </div>
 
+
                 <div className="flex-1 w-1/2 overflow-hidden rounded-3xl">
-                    <img 
+                    <img
                         src={img3}
-                        alt="Dior" 
+                        alt="Dior"
                         className="w-full h-full object-cover scale-105"
                     />
                 </div>
             </div>
 
+
             <div className="lg:flex md:flex sm:flex-none w-[90%] sm:h-auto md:h-[400px] lg:h-[450px] gap-6 bg-rectangles
                             rounded-3xl mb-5 mt-5">
                 <div className="w-1/2 overflow-hidden rounded-3xl">
-                    <img 
+                    <img
                         src={img2}
-                        alt="Cuidado diario" 
+                        alt="Cuidado diario"
                         className="w-full h-full object-cover scale-105"
                     />
                 </div>
                 <div className="w-1/2 p-14 flex flex-col bg-rectangles rounded-3xl
-                                lg:justify-end lg:items-end md:justify-end md:items-end 
+                                lg:justify-end lg:items-end md:justify-end md:items-end
                                 sm:justify-center sm:items-center">
                     <h2 className="text-2xl font-bold text-darkblue
                                 lg:text-right md:text-right sm:text-center font-geist">
                         PREGUNTAS FRECUENTES
                     </h2>
-                    <p className="mt-2 text-sm text-darkblue pl-5 font-geist 
+                    <p className="mt-2 text-sm text-darkblue pl-5 font-geist
                                 lg:text-right md:text-right sm:text-center lg:w-[75%] md:w-[100%] sm:w-[60%] xs:w-[40%]">
-                        Respondemos las dudas más comunes sobre el cuidado de la piel, 
+                        Respondemos las dudas más comunes sobre el cuidado de la piel,
                         el uso de nuestros productos y cómo sacarles el máximo provecho.  
                         Encontrá la respuesta que buscás en un solo lugar.
                     </p>
@@ -233,6 +254,7 @@ export default function Home() {
                     </Link>
                 </div>
             </div>
+
 
             <div className="flex flex-col items-center justify-center w-[90%] my-10">
                 <div className="flex flex-row items-center justify-center w-full mb-6">
@@ -248,11 +270,13 @@ export default function Home() {
                 <RoutineLine />
             </div>
 
-            {/* <div 
+
+            {/* <div
                 className="relative flex p-6 flex-col justify-center items-center w-[90%] sm:h-auto md:h-[400px] lg:h-[450px] rounded-3xl mb-5 mt-5 bg-cover bg-center overflow-hidden"
                 style={{ backgroundImage: `url(${img4})` }}
             >
                 <div className="absolute inset-0 bg-black/20"></div>
+
 
                 <h2 className="text-2xl font-bold text-white mb-2 z-10 font-geist">SÉ TU MEJOR VERSIÓN</h2>
                 <p className="mt-2 text-sm text-white text-center lg:w-[35%] md:w-[50%] sm:w-[70%] z-10 font-geist">
@@ -268,6 +292,7 @@ export default function Home() {
                     PERFIL
                 </button>
             </div> */}
+
 
             <Footer />
         </div>

@@ -2,6 +2,7 @@ import { Link, useNavigate  } from "react-router-dom";
 import { useState, useEffect  } from "react";
 import { Menu, X, UserRoundIcon, LogOut } from "lucide-react";
 
+
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
@@ -9,9 +10,11 @@ export default function Header() {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const navigate = useNavigate();
 
+
     useEffect(() => {
         checkAuth();
     }, []);
+
 
     const checkAuth = () => {
         const token = localStorage.getItem("accessToken");
@@ -19,6 +22,7 @@ export default function Header() {
             setIsAuthenticated(false);
             return;
         }
+
 
         try {
             const payload = JSON.parse(atob(token.split('.')[1]));
@@ -29,14 +33,17 @@ export default function Header() {
         }
     };
 
+
     const handleLogout = () => {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         setIsAuthenticated(false);
         setIsOptionSignOutOpen(false);
         setIsOptionsOpen(false);
-        navigate("/home");
+        navigate("/register");
     };
+
+
 
 
     return (
@@ -49,8 +56,9 @@ export default function Header() {
                 <Menu size={28} />
             </button>
 
+
             <div
-            className={`fixed top-0 left-0 h-full bg-background text-darkblue w-64 p-6 flex flex-col gap-6 
+            className={`fixed top-0 left-0 h-full bg-background text-darkblue w-64 p-6 flex flex-col gap-6
                         transition-transform duration-300 z-50 rounded-r-3xl ${
                 isMenuOpen ? "translate-x-0" : "-translate-x-full"
             }`}>
@@ -64,6 +72,7 @@ export default function Header() {
                     </button>
                 </div>
 
+
                 {isAuthenticated && (
                     <Link
                         to={"/recommendations"}
@@ -73,6 +82,7 @@ export default function Header() {
                         Recomendaciones
                     </Link>
                 )}
+
 
                 <Link
                     to={"/products"}
@@ -90,10 +100,12 @@ export default function Header() {
                 </Link>
             </div>
 
+
             {isMenuOpen && (
             <div
                 className="fixed inset-0 bg-black bg-opacity-50 z-40"
             ></div>)}
+
 
             </div>
             <Link
@@ -103,14 +115,16 @@ export default function Header() {
             GLOW STUDIO
             </Link>
 
+
             <nav className="flex gap-8 flex-1 justify-end text-sm font-semibold text-white tracking-wide items-center">
                 {isAuthenticated ? (
                     <div className="relative">
                         <button
                             onClick={() => setIsOptionsOpen(!isOptionsOpen)}
-                            className="flex items-center justify-center border-2 h-10 w-10 border-white rounded-full hover:border-darkblue hover:bg-transparent hover:text-darkblue hover:scale-105 transition-transform z-30">
+                            className="flex items-center justify-center border-2 h-10 w-10 border-white rounded-full hover:scale-105 transition-transform z-30">
                             <UserRoundIcon className="scale-150" strokeWidth={1.5}/>
                         </button>
+
 
                         {isOptionsOpen && (
                             <div className="absolute top-full right-0 mt-2 w-48 bg-background rounded-2xl shadow-lg flex flex-col text-start z-30
@@ -153,6 +167,7 @@ export default function Header() {
             </nav>
         </div>
 
+
         {isOptionSignOutOpen && (
             <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
                 <div className="bg-white rounded-3xl p-8 max-w-md w-[90%] relative">
@@ -183,3 +198,6 @@ export default function Header() {
         </header>
     );
 }
+
+
+
