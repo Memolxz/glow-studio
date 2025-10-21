@@ -407,9 +407,9 @@ export default function Product() {
                   setShowCommentForm(!showCommentForm);
                 }
               }}
-            className="relative bg-darkblue hover:bg-hovertext h-10 w-10 flex justify-center items-center">
-              <MessageCircle className="absolute top-0 left-0 text-white h-8 w-8" />
-              <Plus className="absolute top-0 left-0 text-white h-5 w-5" />
+            className="relative flex h-10 w-10 items-center justify-center">
+              <MessageCircle className="absolute top-1 left-1 text-darkblue hover:text-hovertext h-8 w-8 transition" />
+              <Plus className="absolute top-2.5 left-2.5 text-darkblue hover:text-hovertext h-5 w-5 transition" />
             </button>
           </div>
         </div>
@@ -528,4 +528,3 @@ export default function Product() {
     </div>
   );
 }
-
