@@ -50,7 +50,7 @@ const categoryDisplayNames: Record<string, string> = {
     TREATMENT: "Tratamiento",
     EYE_CREAM: "Crema de Ojos",
     FACIAL_OIL: "Aceite Facial",
-    MIST: "Bruma",
+    MIST: "Mist",
     ESSENCE: "Esencia",
 };
 
