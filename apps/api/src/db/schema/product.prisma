@@ -21,7 +21,7 @@ model ProductIngredient {
   productId    Int
   ingredientId Int
   ingredient   Ingredients @relation(fields: [ingredientId], references: [id], onDelete: Cascade)
-  product      Product     @relation(fields: [productId], references: [id])
+  product      Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
 
   @@id([productId, ingredientId])
   @@index([ingredientId])
