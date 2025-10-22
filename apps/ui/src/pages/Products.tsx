@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import img1 from "../assets/modelo3.png";
+import img1 from "../assets/modelo13.jpg";
 import { SlidersHorizontal, Star, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 

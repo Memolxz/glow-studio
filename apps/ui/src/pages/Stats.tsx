@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Star, Trophy } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import img1 from '../assets/modelo13.jpg';
+import img1 from '../assets/modelo19.jpg';
 import { Link } from 'react-router-dom';
 
 
