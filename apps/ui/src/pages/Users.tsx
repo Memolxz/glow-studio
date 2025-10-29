@@ -237,16 +237,12 @@ export default function Users() {
   return (
     <div className="bg-background flex flex-col justify-between items-center relative font-geist min-h-screen">
       <Header />
-      
-            <div className="w-[90%] pt-10 pb-5">
-                <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
-                    <img
-                        src={img1}
-                        alt="Rhode"
-                        className="w-full object-cover"
-                    />
-                </div>
-            </div>
+      <div className="w-[90%] pt-10 pb-10">
+        <div className="w-full h-24 overflow-hidden rounded-3xl relative">
+          <img src={img1} alt="Agua Header" className="w-full object-cover" />
+          <div className="absolute inset-0 bg-black/20"></div>
+        </div>
+      </div>
 
       <div className="flex flex-col items-center justify-center w-full">
         <div className="w-[90%]">
