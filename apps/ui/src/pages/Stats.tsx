@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Star, Trophy } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import img1 from '../assets/modelo19.jpg';
+import img1 from '../assets/modelo20.jpg';
 import { Link } from 'react-router-dom';
 
 
@@ -220,20 +220,6 @@ export default function Stats() {
                             </Link>
                         ))}
                     </div>
-            </div>
-
-            <div className="w-[90%] bg-rectangles rounded-3xl my-5 p-10">
-                <div className="w-full flex flex-row justify-start items-center mb-5">
-                    <Trophy className="text-darkblue h-8 w-8 mr-3"/>
-                    <h2 className="text-3xl font-bold text-darkblue">Tipos de Piel Más Usados</h2>
-                </div>
-            </div>
-
-            <div className="w-[90%] bg-rectangles rounded-3xl my-5 p-10">
-                <div className="w-full flex flex-row justify-start items-center mb-5">
-                    <Trophy className="text-darkblue h-8 w-8 mr-3"/>
-                    <h2 className="text-3xl font-bold text-darkblue">Productos Más Recomendados</h2>
-                </div>
             </div>
 
             <Footer />

@@ -2,7 +2,7 @@ import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 import { useState, useEffect } from "react";
 import Header from "../components/Header"
 import Footer from "../components/Footer"
-import img from "../assets/modelo11.jpg"
+import img from "../assets/modelo22.jpg"
 import { Link } from "react-router-dom";
 
 // Types

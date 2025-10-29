@@ -1,4 +1,4 @@
-import img from '../assets/modelo.png';
+import img from '../assets/modelo20.jpg';
 
 export default function ImgSlider() {
     return (
