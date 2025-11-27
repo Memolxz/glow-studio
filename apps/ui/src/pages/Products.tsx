@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import img1 from "../assets/modelo13.jpg";
 import { SlidersHorizontal, Star, X, ChevronLeft, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
+import { API_ENDPOINTS } from '../utils/api';
 
 
 function Title() {
@@ -24,7 +25,6 @@ function Title() {
     );
 }
 
-
 type Product = {
     id: number;
     name: string;
@@ -37,7 +37,6 @@ type Product = {
     category: string;
     bodyPart: string;
 };
-
 
 const categoryDisplayNames: Record<string, string> = {
     SERUM: "Sérum",
@@ -62,14 +61,11 @@ const bodyPartDisplayNames: Record<string, string> = {
 };
 
 export default function Products() {
-
-
     const [products, setProducts] = useState<Product[]>([]);
     const [filteredProducts, setFilteredProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [showFilters, setShowFilters] = useState(false);
-
 
     // Filtros
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -79,15 +75,13 @@ export default function Products() {
     const [minPrice, setMinPrice] = useState<string>("0");
     const [maxPrice, setMaxPrice] = useState<string>("150");
 
-
     useEffect(() => {
         fetchProducts();
     }, []);
 
-
     const fetchProducts = async () => {
         try {
-        const response = await fetch("http://localhost:8000/products");
+        const response = await fetch(API_ENDPOINTS.products);
         if (!response.ok) throw new Error("Error al cargar productos");
         const data = await response.json();
         setProducts(data);
@@ -100,7 +94,6 @@ export default function Products() {
         }
     };
 
-
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 24;
     const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
@@ -108,13 +101,11 @@ export default function Products() {
     const endIndex = startIndex + itemsPerPage;
     const currentProducts = filteredProducts.slice(startIndex, endIndex);
 
-
     const applyFilters = async () => {
         try {
             setShowFilters(false);
             setLoading(true);
             setCurrentPage(1);
-
 
             const params = new URLSearchParams();
             if (selectedCategories.length > 0)
@@ -128,9 +119,8 @@ export default function Products() {
             if (minPrice) params.append("minPrice", minPrice);
             if (maxPrice) params.append("maxPrice", maxPrice);
 
-
             const response = await fetch(
-            `http://localhost:8000/products/filter?${params.toString()}`
+            `${API_ENDPOINTS.productsFilter}?${params.toString()}`
             );
 
 
@@ -143,7 +133,6 @@ export default function Products() {
         }
 };
 
-
     const clearFilters = () => {
         setSelectedCategories([]);
         setSelectedBodyParts([]);
@@ -153,7 +142,6 @@ export default function Products() {
         setMaxPrice("150");
         setFilteredProducts(products);
     };
-
 
     const toggleCategory = (category: string) => {
         setSelectedCategories((prev) =>
@@ -194,7 +182,6 @@ export default function Products() {
         setTimeout(() => applyFilters(), 0);
     };
 
-
     // Estado de carga
     if (loading) {
         return (
@@ -218,7 +205,6 @@ export default function Products() {
         </div>
         );
     }
-
 
     // Estado de error
     if (error) {
@@ -250,7 +236,6 @@ export default function Products() {
         </div>
         );
     }
-
 
     // Vista principal
     return (
@@ -567,6 +552,3 @@ export default function Products() {
         </div>
     );
 }
-
-
-

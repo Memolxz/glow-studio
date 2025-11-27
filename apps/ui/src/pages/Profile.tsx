@@ -4,6 +4,7 @@ import { UserRound, X, Mail, Droplet, Trash2 } from 'lucide-react';
 import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import img1 from '../assets/fondo.png'
+import { API_ENDPOINTS } from '../utils/api';
 
 // Types
 type User = {
@@ -49,7 +50,6 @@ const categoryDisplayNames: Record<string, string> = {
     TREATMENT: "Tratamiento",
 };
 
-
 export default function Home() {
     const [user, setUser] = useState<User | null>(null);
     const [userSkinTypes, setUserSkinTypes] = useState<UserSkinType[]>([]);
@@ -78,7 +78,6 @@ export default function Home() {
         }
     };
 
-
     useEffect(() => {
         const fetchUserData = async () => {
         try {
@@ -91,21 +90,15 @@ export default function Home() {
             return;
             }
 
-
             setUser(userData);
 
-
             // Fetch user's skin types
-            const skinTypesResponse = await fetch(
-            `http://localhost:8000/users/skintype/${userData.id}`,
-            {
+            const skinTypesResponse = await fetch(API_ENDPOINTS.userSkinType(userData.id),{
                 headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
                 },
-            }
-            );
-
+            });
 
             if (skinTypesResponse.ok) {
             const skinTypesData = await skinTypesResponse.json();
@@ -114,16 +107,12 @@ export default function Home() {
 
 
             // Fetch recommendations
-            const recsResponse = await fetch(
-            "http://localhost:8000/products/recommendations",
-            {
+            const recsResponse = await fetch(API_ENDPOINTS.productsRecommendations,{
                 headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${token}`,
                 },
-            }
-            );
-
+            });
 
             if (recsResponse.ok) {
             const recsData = await recsResponse.json();
@@ -134,31 +123,25 @@ export default function Home() {
             setError("Error al cargar datos del perfil");
         } finally {
             setLoading(false);
-        }
-        };
-
+        }};
 
         fetchUserData();
     }, []);
 
-
     const handleDeleteAccount = async () => {
         if (!user) return;
-
 
         setDeleting(true);
         try {
         const token = localStorage.getItem("accessToken");
 
-
-        const response = await fetch(`http://localhost:8000/users/${user.id}`, {
+        const response = await fetch(API_ENDPOINTS.userById(user.id), {
             method: "DELETE",
             headers: {
             "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
             },
         });
-
 
         if (response.ok) {
             localStorage.removeItem("accessToken");
@@ -175,7 +158,6 @@ export default function Home() {
         setShowDeleteConfirm(false)
     };
 
-
     if (loading) {
         return (
         <div className="min-h-screen flex items-center justify-center bg-defaultbg">
@@ -188,7 +170,6 @@ export default function Home() {
         </div>
         );
     }
-
 
     if (error && !user) {
         return (
@@ -205,9 +186,6 @@ export default function Home() {
         </div>
         );
     }
-
-
-
 
     return (
         <div className="flex flex-col items-center bg-background relative font-geist">
@@ -393,4 +371,3 @@ export default function Home() {
         </div>
     );
 }
-

@@ -9,6 +9,7 @@ import img3 from '../assets/foto-producto.jpg';
 import videoSrc from '../assets/video.mp4';
 import { Link } from 'react-router-dom';
 import RoutineLine from '../components/RoutineLine';
+import { API_ENDPOINTS } from '../utils/api';
 
 
 type Product = {
@@ -46,7 +47,7 @@ export default function Home() {
 
     const fetchTopProducts = async () => {
         try {
-            const response = await fetch("http://localhost:8000/products");
+            const response = await fetch(API_ENDPOINTS.products);
             if (response.ok) {
                 const data = await response.json();
                 // Sort by rating and get top 3

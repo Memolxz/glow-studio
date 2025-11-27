@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import img1 from "../assets/fondo.png";
 import { UserRound, Mail, ChevronDown, ChevronUp, Droplet, Trash2, X, RotateCcw } from "lucide-react";
+import { API_ENDPOINTS } from '../utils/api';
 
 type SkinType = {
   id: number;
@@ -56,7 +57,7 @@ export default function Users() {
         return;
       }
 
-      const response = await fetch("http://localhost:8000/users", {
+      const response = await fetch(API_ENDPOINTS.users, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -68,7 +69,7 @@ export default function Users() {
       if (!result.ok) throw new Error("Error en la respuesta del servidor");
       setUsers(result.data.filter((u: User) => !u.deletedAt));
 
-      const response2 = await fetch("http://localhost:8000/users/deleted", {
+      const response2 = await fetch(API_ENDPOINTS.usersDeleted, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -97,7 +98,7 @@ export default function Users() {
         return;
       }
 
-      const response = await fetch(`http://localhost:8000/users/skintype/${userId}`, {
+      const response = await fetch(API_ENDPOINTS.userSkinType(userId), {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -119,7 +120,7 @@ export default function Users() {
 
     try {
       const token = localStorage.getItem("accessToken");
-      const response = await fetch(`http://localhost:8000/users/${selectedUserId}`, {
+      const response = await fetch(API_ENDPOINTS.userById(selectedUserId), {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -153,7 +154,7 @@ export default function Users() {
 
     try {
       const token = localStorage.getItem("accessToken");
-      const response = await fetch(`http://localhost:8000/users/restore/${selectedUserId}`, {
+      const response = await fetch(API_ENDPOINTS.userRestore(selectedUserId), {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

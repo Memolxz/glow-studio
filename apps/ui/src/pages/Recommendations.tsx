@@ -4,6 +4,7 @@ import Header from "../components/Header"
 import Footer from "../components/Footer"
 import img from "../assets/modelo22.jpg"
 import { Link } from "react-router-dom";
+import { API_ENDPOINTS } from '../utils/api';
 
 // Types
 type Product = {
@@ -161,7 +162,7 @@ export default function RecommendationsPage() {
           return;
         }
 
-        const response = await fetch("http://localhost:8000/products/recommendations", {
+        const response = await fetch(API_ENDPOINTS.productsRecommendations, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",

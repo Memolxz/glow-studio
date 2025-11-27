@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { API_ENDPOINTS } from '../utils/api';
 
 interface RegisterResponse {
   ok: boolean;
@@ -34,7 +35,7 @@ export default function RegisterForm({ onToggle }: { onToggle: () => void }) {
         setError("");
 
         try {
-            const response = await fetch("http://localhost:8000/register", {
+            const response = await fetch(API_ENDPOINTS.register, {
                 method: "POST",
                 headers: {
                 "Content-Type": "application/json",

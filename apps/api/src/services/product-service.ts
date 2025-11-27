@@ -286,4 +286,40 @@ export class ProductService {
       throw new Error("Error al obtener los productos mejor valorados");
     }
   }
+
+  async createProductComment(data: any, userId: number, productId: number) {
+    try {
+      const newComment = await db.productComment.create({
+        data: {
+          productId : productId,
+          userId: userId,
+          content: data.content,
+          rating: data.rating,
+        },
+        include: {
+          user: {
+            select: { id: true, name: true, email: true }
+          }
+        }
+      });
+
+      // Update product average rating
+      const comments = await db.productComment.findMany({
+        where: { productId },
+        select: { rating: true }
+      });
+
+      const avgRating = comments.reduce((sum, c) => sum + c.rating, 0) / comments.length;
+      
+      await db.product.update({
+        where: { id: productId },
+        data: { rating: avgRating }
+      });
+
+      return newComment;
+    } catch (error) {
+      console.error(error);
+      throw new Error("Error al crear comentario");
+    }
+  }
 }

@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import img1 from "../assets/modelo14.jpg"
 import Footer from "../components/Footer";
+import { API_ENDPOINTS } from '../utils/api';
 
 interface SkinType {
     id: number;
@@ -48,7 +49,7 @@ export default function SkinSelection() {
     useEffect(() => {
         const fetchSkinTypes = async () => {
         try {
-            const response = await fetch("http://localhost:8000/skintype", {
+            const response = await fetch(API_ENDPOINTS.skinTypes, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -94,7 +95,7 @@ export default function SkinSelection() {
 
         try {
             const promises = selected.map(async (skinTypeId) => {
-                const response = await fetch(`http://localhost:8000/users/skintype/${userId}`, {
+                const response = await fetch(API_ENDPOINTS.userSkinType(userId), {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -142,6 +143,10 @@ export default function SkinSelection() {
             </div>
         </div>
         );
+    }
+
+    if (error) {
+        console.log("roarrrrr");
     }
 
     return (

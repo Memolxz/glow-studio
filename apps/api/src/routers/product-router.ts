@@ -175,32 +175,7 @@ productRouter.post('/:id/comments', jwtAuthMiddleware, async (req, res) => {
       return res.status(400).json({ error: 'Rating must be between 1 and 5' });
     }
 
-    const comment = await db.productComment.create({
-      data: {
-        productId,
-        userId: req.user.id,
-        content,
-        rating,
-      },
-      include: {
-        user: {
-          select: { id: true, name: true, email: true }
-        }
-      }
-    });
-
-    // Update product average rating
-    const comments = await db.productComment.findMany({
-      where: { productId },
-      select: { rating: true }
-    });
-
-    const avgRating = comments.reduce((sum, c) => sum + c.rating, 0) / comments.length;
-    
-    await db.product.update({
-      where: { id: productId },
-      data: { rating: avgRating }
-    });
+    const comment = await productService.createProductComment(req.body, req.user.id, productId);
 
     res.status(201).json({ ok: true, data: comment });
   } catch (error) {

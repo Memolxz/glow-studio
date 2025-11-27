@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Routes, Route, Navigate } from 'react-router-dom';
 import { RequireAuth, IsAdminUser } from './components/ProtectedRoute';
 import RecommendationsPage from "./pages/Recommendations"
 import SkinSelection from "./pages/Selection"

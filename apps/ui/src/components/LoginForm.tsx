@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { API_ENDPOINTS } from '../utils/api';
 
 interface LoginResponse {
   ok: boolean;
@@ -32,7 +33,7 @@ export default function LoginForm({ onToggle }: { onToggle: () => void }) {
         setLoading(true);
         setError("");
         try {
-            const response = await fetch("http://localhost:8000/login", {
+            const response = await fetch(API_ENDPOINTS.login, {
                 method: "POST",
                 headers: {
                 "Content-Type": "application/json",

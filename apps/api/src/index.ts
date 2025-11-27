@@ -14,7 +14,7 @@ const app = express()
 
 // CORS configuration
 app.use(cors({
-  origin: 'http://localhost:5173', // React app URL
+  origin: process.env.VERCEL_UI_URL || 'http://localhost:5173', // React app URL
   credentials: true
 }));
 

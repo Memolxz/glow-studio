@@ -4,6 +4,7 @@ import { useParams, Link, useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import img1 from '../assets/fondo.png'
+import { API_ENDPOINTS } from '../utils/api';
 
 
 type Ingredient = {
@@ -109,7 +110,7 @@ export default function Product() {
 
   const fetchProduct = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/products/${id}`);
+      const response = await fetch(API_ENDPOINTS.productById(Number(id)));
     
       if (!response.ok) {
         throw new Error("Producto no encontrado");
@@ -129,7 +130,7 @@ export default function Product() {
 
   const fetchComments = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/products/${id}/comments`);
+      const response = await fetch(API_ENDPOINTS.productComments(Number(id)));
      
       if (response.ok) {
         const data = await response.json();
@@ -153,7 +154,7 @@ export default function Product() {
 
     setSubmitting(true);
     try {
-      const response = await fetch(`http://localhost:8000/products/${id}/comments`, {
+      const response = await fetch(API_ENDPOINTS.productComments(Number(id)), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -194,7 +195,7 @@ export default function Product() {
 
 
     try {
-      const response = await fetch(`http://localhost:8000/products/comments/${commentId}`, {
+      const response = await fetch(API_ENDPOINTS.deleteComment(commentId), {
         method: "DELETE",
         headers: {
           "Authorization": `Bearer ${token}`,

@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import img1 from '../assets/modelo20.jpg';
 import { Link } from 'react-router-dom';
+import { API_ENDPOINTS } from '../utils/api';
 
 
 type Product = {
@@ -43,7 +44,7 @@ export default function Stats() {
 
     const fetchTopProducts = async () => {
         try {
-            const response = await fetch("http://localhost:8000/products");
+            const response = await fetch(API_ENDPOINTS.products);
             if (response.ok) {
                 const data = await response.json();
                 // Sort by rating and get top 3
@@ -62,7 +63,7 @@ export default function Stats() {
 
     const fetchBottomProducts = async () => {
         try {
-            const response = await fetch("http://localhost:8000/products");
+            const response = await fetch(API_ENDPOINTS.products);
             if (response.ok) {
                 const data = await response.json();
                 // Sort by rating and get top 3
