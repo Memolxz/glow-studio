@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Star, Trophy } from 'lucide-react';
 import Header from '../components/Header';

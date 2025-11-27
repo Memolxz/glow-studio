@@ -235,30 +235,6 @@ export default function Home() {
                 <RoutineLine />
             </div>
 
-
-            {/* <div
-                className="relative flex p-6 flex-col justify-center items-center w-[90%] sm:h-auto md:h-[400px] lg:h-[450px] rounded-3xl mb-5 mt-5 bg-cover bg-center overflow-hidden"
-                style={{ backgroundImage: `url(${img4})` }}
-            >
-                <div className="absolute inset-0 bg-black/20"></div>
-
-
-                <h2 className="text-2xl font-bold text-white mb-2 z-10 font-geist">SÉ TU MEJOR VERSIÓN</h2>
-                <p className="mt-2 text-sm text-white text-center lg:w-[35%] md:w-[50%] sm:w-[70%] z-10 font-geist">
-                    Tu piel habla de vos, y dedicarte un momento para conocerla es el primer paso para cuidarte. En tu perfil vas a poder guardar tus preferencias, seguir tu progreso y tener siempre a mano los productos y rutinas.
-                </p>
-                <button
-                    type="submit"
-                    className="w-24 mt-6 rounded-full bg-transparent px-6 py-2 border border-white
-                            font-semibold text-white text-sm font-geist
-                            hover:bg-defaultbg hover:text-[#676161] transition-colors
-                            focus:outline-none focus:ring-2 focus:ring-white z-10"
-                >
-                    PERFIL
-                </button>
-            </div> */}
-
-
             <Footer />
         </div>
     );
