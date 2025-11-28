@@ -20,6 +20,23 @@ app.use(cors({
 
 app.use(express.json());
 
+app.get('/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'ok', 
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
+app.get('/', (req, res) => {
+  res.status(200).json({ 
+    message: 'Glow Studio API',
+    version: '1.0.0',
+    status: 'running'
+  });
+});
+
 app.use('/users', userRouter);
 app.use('/skintype', skinTypeRouter);
 app.use('/register', registerRouter);
