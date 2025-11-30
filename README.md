@@ -41,6 +41,7 @@
 ### Hosting y Deployment
 - **Vercel** - Hosting del frontend (https://glow-studio-sand.vercel.app/)
 - **Render** - Hosting del backend (https://glow-studio.onrender.com/)
+> **Disclaimer**: La aplicación aun no es responsive. En caso de que quiera verlo desde el celular/tablet se recomienda configurar a la ventana en desktop mode
 
 ## Consideraciones de Rendimiento
 
@@ -110,4 +111,5 @@ Integrantes:
 ---
 
 Nota: Este proyecto fue desarrollado como parte de un trabajo académico y no está destinado para uso comercial.
+
 
