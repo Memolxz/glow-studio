@@ -33,45 +33,59 @@ const RoutineData = [
 
 export default function RoutineLine() {
   return (
-    <section className="relative w-full flex justify-center bg-background">
-      <div className="w-full max-w-4xl relative">
-        {/* Línea vertical */}
-        <div className="absolute left-1/2 top-0 h-full w-[2px] bg-darkblue transform -translate-x-1/2"></div>
+    <section className="relative w-full flex justify-center bg-background mt-5">
+      <div className="w-full max-w-4xl relative px-4 md:px-0">
 
-        <div className="flex flex-col gap-16">
+        {/* Línea vertical SIEMPRE en el medio */}
+        <div className="absolute left-1/2 top-0 h-full w-[2px] bg-darkblue -translate-x-1/2"></div>
+
+        <div className="flex flex-col gap-12 md:gap-16">
           {RoutineData.map((item, index) => {
             const isLeft = index % 2 === 0;
+
             return (
               <div
                 key={index}
-                className={`flex items-center relative ${
-                  isLeft ? "justify-start" : "justify-end"
-                }`}
+                className={`
+                  flex items-center relative
+                  justify-center
+                  md:${isLeft ? "justify-start" : "justify-end"}
+                `}
               >
-                {/* Punto central */}
-                <div className="absolute left-1/2 w-4 h-4 bg-darkblue rounded-full transform -translate-x-1/2 z-10"></div>
 
-                {/* Barra Horizontal */}
+                {/* PUNTO (solo desktop) */}
+                <div className="hidden md:block absolute left-1/2 w-4 h-4 bg-darkblue rounded-full transform -translate-x-1/2 z-10"></div>
+
+                {/* BARRA (solo desktop) */}
                 <div
-                  className={`absolute top-18 h-[2px] bg-darkblue ${
-                    isLeft
-                      ? "right-1/2 w-[25%] origin-left"
-                      : "left-1/2 w-[25%] origin-right"
-                  }`}
-                  style={{
-                    transform: isLeft
-                      ? "translateX(0)" 
-                      : "translateX(0)",
-                  }}
+                  className={`
+                    hidden md:block absolute top-18 h-[2px] bg-darkblue
+                    ${isLeft ? "right-1/2 w-[25%]" : "left-1/2 w-[25%]"}
+                  `}
                 ></div>
+                
 
-                {/* Caja de contenido */}
+
+                {/* CARD */}
                 <div
-                  className={`bg-[#d7eaea] shadow-lg border border-gray-200 rounded-xl p-6 w-72 transition-transform hover:scale-105 text-center z-10`}
+                  className={`
+                    bg-[#d7eaea] shadow-lg border border-gray-200 rounded-xl
+                    p-5 md:p-6
+                    w-full max-w-sm md:w-72
+                    text-center z-10
+                    transition-transform hover:scale-105
+
+                    ${isLeft ? "md:mr-auto" : "md:ml-auto"}
+                  `}
                 >
-                  <h3 className="text-lg font-bold text-darkblue">{item.title}</h3>
-                  <p className="text-gray-600 text-sm mt-2">{item.description}</p>
+                  <h3 className="text-base md:text-lg font-bold text-darkblue">
+                    {item.title}
+                  </h3>
+                  <p className="text-gray-600 text-xs md:text-sm mt-2">
+                    {item.description}
+                  </p>
                 </div>
+
               </div>
             );
           })}
@@ -80,4 +94,3 @@ export default function RoutineLine() {
     </section>
   );
 }
-

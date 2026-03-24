@@ -6,23 +6,40 @@ import { SlidersHorizontal, Star, X, ChevronLeft, ChevronRight } from "lucide-re
 import { Link } from "react-router-dom";
 import { API_ENDPOINTS } from '../utils/api';
 
+function Banner() {
+    return (
+    <div className="w-[90%] py-6 md:py-10">
+        <div className="w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl">
+            <img
+            src={img1}
+            alt="Products Banner"
+            className="w-full h-full object-cover"
+            />
+        </div>
+    </div>
+    );
+}
 
 function Title() {
-    return (
-        <div className="items-start justify-start w-full mb-10">
-            <div className="flex flex-row items-center justify-between w-full mb-6">
-                <div className="flex flex-col items-start justify-start">
-                <h1 className="text-4xl font-bold text-start text-darkblue">
-                    Productos
-                </h1>
-                <p className="text-xl font-normal text-start text-darkblue/60">
-                    Descubre los productos que ofrecemos
-                </p>
-                </div>
-            </div>
-            <div className="border-b border-darkblue/60 my-5 w-full"></div>
+  return (
+    <div className="w-full mb-8 md:mb-10">
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between w-full mb-4 md:mb-6">
+        
+        <div className="flex flex-col items-start">
+          <h1 className="text-2xl md:text-4xl font-bold text-darkblue">
+            Productos
+          </h1>
+
+          <p className="text-sm md:text-xl text-darkblue/60">
+            Descubre los productos que ofrecemos
+          </p>
         </div>
-    );
+
+      </div>
+
+      <div className="border-b border-darkblue/60 my-4 md:my-5 w-full"></div>
+    </div>
+  );
 }
 
 type Product = {
@@ -185,22 +202,24 @@ export default function Products() {
     // Estado de carga
     if (loading) {
         return (
-        <div className="bg-background relative font-geist flex flex-col justify-center items-center">
+        <div className="bg-background relative font-geist flex flex-col items-center min-h-screen">
             <Header />
-                <div className="w-[90%] py-10 mt-22">
-                        <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
-                            <img src={img1} alt="Products Banner" className="w-full h-full object-cover" />
-                        </div>
-                    </div>
-            <div className="w-[90%]">
-                <Title />
-                <div className="flex flex-col items-center justify-center py-10">
-                    <div className="text-xl font-semibold text-darkblue mb-4">
-                    Cargando productos...
-                    </div>
-                    <div className="w-8 h-8 border-4 border-darkblue border-t-transparent rounded-full animate-spin"></div>
+
+            <Banner />
+
+            {/* Contenido */}
+            <div className="w-[90%] flex flex-col items-center">
+            <Title />
+
+            <div className="flex flex-col items-center justify-center py-10">
+                <div className="text-base md:text-xl font-semibold text-darkblue mb-4 text-center">
+                Cargando productos...
                 </div>
+
+                <div className="w-8 h-8 border-4 border-darkblue border-t-transparent rounded-full animate-spin"></div>
             </div>
+            </div>
+
             <Footer />
         </div>
         );
@@ -209,346 +228,296 @@ export default function Products() {
     // Estado de error
     if (error) {
         return (
-        <div className="bg-background relative font-geist min-h-screen">
+        <div className="bg-background relative font-geist min-h-screen flex flex-col items-center">
             <Header />
-            <div className="flex flex-col items-center justify-center">
-                <div className="w-[90%] py-10 mt-22">
-                <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
-                    <img src={img1} alt="Products Banner" className="w-full h-full object-cover" />
-                </div>
+
+            <Banner />
+
+            {/* Contenido */}
+            <div className="w-[90%] flex flex-col items-center">
+            <Title />
+
+            <div className="flex flex-col items-center justify-center py-10 text-center">
+                <div className="text-base md:text-xl font-semibold text-red-600 mb-4">
+                {error}
                 </div>
 
-
-                <div className="w-[90%]">
-                    <Title />
-                    <div className="flex flex-col items-center justify-center py-10">
-                        <div className="text-xl font-semibold text-red-600 mb-4">{error}</div>
-                        <button
-                        onClick={fetchProducts}
-                        className="px-6 py-2 bg-darkblue text-white rounded-full hover:bg-hovertext transition"
-                        >
-                        Reintentar
-                        </button>
-                    </div>
-                </div>
-                <Footer />
+                <button
+                onClick={fetchProducts}
+                className="px-5 md:px-6 py-2 text-sm md:text-base bg-darkblue text-white rounded-full hover:bg-hovertext transition"
+                >
+                Reintentar
+                </button>
             </div>
+            </div>
+
+            <Footer />
         </div>
         );
     }
+return (
+  <div className="bg-background relative font-geist min-h-screen flex flex-col items-center">
+    <Header />
 
-    // Vista principal
-    return (
-        <div className="bg-background relative font-geist min-h-screen">
-        <Header />
-        <div className="flex flex-col items-center justify-center">
-            <div className="w-[90%] py-10 mt-22">
-            <div className="w-full sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
-                <img src={img1} alt="Products Banner" className="w-full h-full object-cover" />
-            </div>
-            </div>
+    <Banner />
 
+    <div className="w-[90%] mb-10">
+      {/* Header + botón */}
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between w-full mb-6 gap-4">
+        
+        <div className="flex flex-col">
+          <h1 className="text-2xl md:text-4xl font-bold text-darkblue">
+            Productos
+          </h1>
+          <p className="text-sm md:text-xl text-darkblue/60">
+            Descubre los productos que ofrecemos ({filteredProducts.length})
+          </p>
+        </div>
 
-            <div className="items-start justify-start w-[90%] mb-10">
-            <div className="flex flex-row items-center justify-between w-full mb-6">
-                <div className="flex flex-col items-start justify-start">
-                <h1 className="text-4xl font-bold text-start text-darkblue">
-                    Productos
-                </h1>
-                <p className="text-xl font-normal text-start text-darkblue/60">
-                    Descubre los productos que ofrecemos ({filteredProducts.length})
-                </p>
-                </div>
-                <button
-                onClick={() => setShowFilters(!showFilters)}
-                className="flex flex-row items-center justify-center w-48 h-10 bg-darkblue hover:bg-hovertext text-white rounded-full"
-                >
-                <h1 className="text-lg font-semibold text-start mr-2">
-                    Mostrar Filtros
-                </h1>
-                <SlidersHorizontal className="h-6 w-6" />
-                </button>
-            </div>
+        <button
+          onClick={() => setShowFilters(!showFilters)}
+          className="flex items-center justify-center w-full md:w-48 h-10 bg-darkblue hover:bg-hovertext text-white rounded-full"
+        >
+          <span className="text-sm md:text-lg font-semibold mr-2">
+            Filtros
+          </span>
+          <SlidersHorizontal className="h-5 w-5 md:h-6 md:w-6" />
+        </button>
+      </div>
 
+      {/* Modal de filtros */}
+      {showFilters && (
+        <div
+          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4"
+          onClick={() => setShowFilters(false)}
+        >
+          <div
+            className="bg-rectangles rounded-2xl p-6 md:p-8 max-w-2xl w-full max-h-[85vh] overflow-y-auto relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setShowFilters(false)}
+              className="absolute top-4 right-4 text-darkblue hover:text-hovertext"
+            >
+              <X size={26} />
+            </button>
 
-            {/* Modal de filtros */}
-            {showFilters && (
-                <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50" onClick={() => setShowFilters(false)}>
-                    <div className="bg-rectangles rounded-s-2xl p-8 max-w-2xl w-[90%] overflow-y-auto relative max-h-[550px]" onClick={(e) => e.stopPropagation()}>
-                        <button
-                        onClick={() => setShowFilters(false)}
-                        className="absolute top-8 right-8 text-darkblue hover:text-hovertext"
-                        >
-                        <X size={30} />
-                        </button>
-                        <h2 className="text-2xl font-bold text-darkblue mb-4">
-                        Filtros
-                        </h2>
+            <h2 className="text-xl md:text-2xl font-bold text-darkblue mb-4">
+              Filtros
+            </h2>
 
-                        {/* Categorías */}
-                        <div className="mb-6">
-                        <h3 className="text-xl font-semibold text-darkblue mb-3">
-                            Categorías
-                        </h3>
-                        <div className="grid grid-cols-2 gap-3">
-                            {Object.entries(categoryDisplayNames).map(([key, value]) => (
-                            <label
-                                key={key}
-                                className="flex items-center space-x-2 cursor-pointer"
-                            >
-                                <input
-                                type="checkbox"
-                                checked={selectedCategories.includes(key)}
-                                onChange={() => toggleCategory(key)}
-                                className="w-4 h-4 text-darkblue rounded"
-                                />
-                                <span className="text-darkblue">{value}</span>
-                            </label>
-                            ))}
-                        </div>
-                        </div>
-
-                        {/* Partes del cuerpo */}
-                        <div className="mb-6">
-                        <h3 className="text-xl font-semibold text-darkblue mb-3">
-                            Partes del cuerpo
-                        </h3>
-                        <div className="grid grid-cols-2 gap-3">
-                            {Object.entries(bodyPartDisplayNames).map(([key, value]) => (
-                            <label
-                                key={key}
-                                className="flex items-center space-x-2 cursor-pointer"
-                            >
-                                <input
-                                type="checkbox"
-                                checked={selectedBodyParts.includes(key)}
-                                onChange={() => toggleBodyPart(key)}
-                                className="w-4 h-4 text-darkblue rounded"
-                                />
-                                <span className="text-darkblue">{value}</span>
-                            </label>
-                            ))}
-                        </div>
-                        </div>
-
-
-                        {/* Calificación */}
-                        <div className="mb-6">
-                        <h3 className="text-xl font-semibold text-darkblue mb-3">
-                            Calificación
-                        </h3>
-                        <div className="flex gap-4">
-                            <input
-                            type="number"
-                            placeholder="Min"
-                            min="0"
-                            max="5"
-                            step="0.5"
-                            value={minRating ?? ""}
-                            onChange={(e) =>
-                                setMinRating(e.target.value ? Number(e.target.value) : undefined)
-                            }
-                            className="flex-1 px-4 py-2 rounded-full border border-darkblue focus:outline-none focus:ring-2 focus:ring-darkblue"
-                            />
-                            <input
-                            type="number"
-                            placeholder="Max"
-                            min="0"
-                            max="5"
-                            step="0.5"
-                            value={maxRating ?? ""}
-                            onChange={(e) =>
-                                setMaxRating(e.target.value ? Number(e.target.value) : undefined)
-                            }
-                            className="flex-1 px-4 py-2 rounded-full border border-darkblue focus:outline-none focus:ring-2 focus:ring-darkblue"
-                            />
-                        </div>
-                        </div>
-
-
-                        {/* Precio */}
-                        <div className="mb-6">
-                            <h3 className="text-xl font-semibold text-darkblue mb-3">
-                                Precio
-                            </h3>
-                            <div className="flex flex-col items-center justify-center">
-                                <div className="flex items-center justify-between w-[90%]">
-                                    <span className="text-md font-semibold text-darkblue">$0</span>
-                                    <input
-                                        type="range"
-                                        min={0}
-                                        max={150}
-                                        step={10}
-                                        value={Number(maxPrice)}
-                                        onChange={(e) => setMaxPrice(e.target.value)}
-                                        className="w-9/12 accent-darkblue cursor-pointer"/>
-                                    <span className="text-md font-semibold text-darkblue">
-                                        ${Number(maxPrice).toLocaleString()}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        {/* Botones */}
-                        <div className="flex gap-4">
-                        <button
-                            onClick={clearFilters}
-                            className="flex-1 py-2 px-4 font-semibold bg-gray-200 text-lg text-darkblue rounded-full hover:bg-gray-300 transition"
-                        >
-                            Limpiar
-                        </button>
-                        <button
-                            onClick={applyFilters}
-                            className="flex-1 py-2 px-4 font-medium bg-darkblue text-lg text-white rounded-full hover:bg-hovertext transition"
-                        >
-                            Aplicar
-                        </button>
-                    </div>
-                </div>
-                </div>
-            )}
-
-
-            {/* Grid de productos */}
-            <div className="border-b border-darkblue/60 w-full my-5"></div>
-            {/* Filtros activos (chips) */}
-            {(selectedCategories.length > 0 || minRating || maxRating || maxPrice !== "150") && (
-                <div className="flex flex-wrap gap-3 my-5">
-                    {/* Categorías */}
-                    {selectedCategories.map((cat) => (
-                    <div
-                        key={cat}
-                        className="flex items-center gap-2 bg-darkblue/10 text-darkblue px-3 py-1 rounded-full cursor-pointer hover:bg-darkblue/20 transition"
-                    >
-                        <span>{categoryDisplayNames[cat]}</span>
-                        <X
-                        size={16}
-                        className="hover:text-hovertext"
-                        onClick={() => removeFilter("category", cat)}
-                        />
-                    </div>
-                    ))}
-
-
-                    {/* Calificación */}
-                    {minRating !== undefined && maxRating !== undefined && (
-                    <div className="flex flex-row items-center gap-2 bg-darkblue/10 text-darkblue px-3 py-1 rounded-full cursor-pointer hover:bg-darkblue/20 transition">
-                        <Star className="fill-current h-4 w-4 text-darkblue"/><span>{minRating} - {maxRating}</span>
-                        <X size={16} onClick={() => removeFilter("minRating")} className="hover:text-hovertext" />
-                    </div>
-                    )}
-
-
-                    {/* Precio máximo (solo si no es el valor por defecto) */}
-                    {maxPrice !== "150" && (
-                    <div className="flex items-center gap-2 bg-darkblue/10 text-darkblue px-3 py-1 rounded-full cursor-pointer hover:bg-darkblue/20 transition">
-                        <span>Hasta ${maxPrice}</span>
-                        <X size={16} onClick={() => removeFilter("maxPrice")} className="hover:text-hovertext" />
-                    </div>
-                    )}
-                </div>)}
-
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                {currentProducts.map((product) => (
-                <Link
-                    key={product.id}
-                    to={`/product/${product.id}`}
-                    className="relative flex flex-col group justify-between items-center h-96 p-6 rounded-2xl bg-[#E2EFEF] shadow-sm hover:shadow-lg transition group"
-                >
-                    <img
-                    src={product.imageUrl || "/placeholder.png"}
-                    alt={product.name}
-                    className="w-auto h-[60%] object-contain rounded-t-xl group-hover:scale-105 transition-transform duration-300"
-                    onError={(e) => {
-                        e.currentTarget.src = "/placeholder.png";
-                    }}
+            {/* Categorías */}
+            <div className="mb-6">
+              <h3 className="text-lg md:text-xl font-semibold text-darkblue mb-3">
+                Categorías
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {Object.entries(categoryDisplayNames).map(([key, value]) => (
+                  <label key={key} className="flex items-center space-x-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={selectedCategories.includes(key)}
+                      onChange={() => toggleCategory(key)}
+                      className="w-4 h-4"
                     />
-                    <p className="text-center p-2 text-sm font-semibold text-darkblue group-hover:text-hovertext">
-                    {product.name}
-                    </p>
-                    <p className="text-sm text-darkblue/60">{product.brand}</p>
-                    <div className="flex flex-row justify-center items-center w-full mt-2">
-                        {product.rating && (
-                            <div className="flex flex-row justify-center items-center">
-                            <Star className="h-4 w-4 text-darkblue fill-current mr-1" strokeWidth={1} />
-                            <p className="text-darkblue font-semibold text-md">
-                                {product.rating.toFixed(1)}
-                            </p>
-                            </div>
-                        )}
-                        <div className="h-1 w-1 bg-darkblue rounded-full mx-2"></div>
-                        {product.price && (
-                            <p className="text-darkblue font-semibold text-md">
-                            $ {parseFloat(product.price).toLocaleString("es-AR")}
-                            </p>
-                        )}
-                        <div className="absolute top-5 right-5 bg-darkblue/60 text-white font-semibold px-3 h-8 flex items-center rounded-2xl">
-                            <p>{categoryDisplayNames[product.category] || product.category}</p>
-                        </div>
-                    </div>
-                </Link>
+                    <span className="text-darkblue text-sm md:text-base">{value}</span>
+                  </label>
                 ))}
+              </div>
             </div>
 
+            {/* Body parts */}
+            <div className="mb-6">
+              <h3 className="text-lg md:text-xl font-semibold text-darkblue mb-3">
+                Partes del cuerpo
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {Object.entries(bodyPartDisplayNames).map(([key, value]) => (
+                  <label key={key} className="flex items-center space-x-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={selectedBodyParts.includes(key)}
+                      onChange={() => toggleBodyPart(key)}
+                      className="w-4 h-4"
+                    />
+                    <span className="text-darkblue text-sm md:text-base">{value}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
 
-            {filteredProducts.length === 0 && (
-                <div className="text-center py-10">
-                <p className="text-xl text-darkblue/60">
-                    No se encontraron productos con estos filtros
-                </p>
+            {/* Rating */}
+            <div className="mb-6">
+              <h3 className="text-lg md:text-xl font-semibold text-darkblue mb-3">
+                Calificación
+              </h3>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <input
+                  type="number"
+                  placeholder="Min"
+                  value={minRating ?? ""}
+                  onChange={(e) =>
+                    setMinRating(e.target.value ? Number(e.target.value) : undefined)
+                  }
+                  className="flex-1 px-4 py-2 rounded-full border border-darkblue"
+                />
+                <input
+                  type="number"
+                  placeholder="Max"
+                  value={maxRating ?? ""}
+                  onChange={(e) =>
+                    setMaxRating(e.target.value ? Number(e.target.value) : undefined)
+                  }
+                  className="flex-1 px-4 py-2 rounded-full border border-darkblue"
+                />
+              </div>
+            </div>
+
+            {/* Precio */}
+            <div className="mb-6">
+              <h3 className="text-lg md:text-xl font-semibold text-darkblue mb-3">
+                Precio
+              </h3>
+              <div className="flex flex-col items-center">
+                <div className="flex items-center justify-between w-full">
+                  <span className="text-sm md:text-md font-semibold text-darkblue">$0</span>
+                  <input
+                    type="range"
+                    min={0}
+                    max={150}
+                    step={10}
+                    value={Number(maxPrice)}
+                    onChange={(e) => setMaxPrice(e.target.value)}
+                    className="w-2/3 accent-darkblue"
+                  />
+                  <span className="text-sm md:text-md font-semibold text-darkblue">
+                    ${Number(maxPrice)}
+                  </span>
                 </div>
-            )}
-            {/* Paginación */}
-            {filteredProducts.length > 0 && (
-                <div className="flex justify-center items-center mt-10 gap-4 text-darkblue">
-                    <button
-                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                    disabled={currentPage === 1}
-                    className={`p-2 rounded-full border border-darkblue transition ${
-                        currentPage === 1
-                        ? "opacity-40 cursor-not-allowed"
-                        : "hover:bg-darkblue hover:text-white"
-                    }`}
-                    >
-                    <ChevronLeft size={24} />
-                    </button>
+              </div>
+            </div>
 
+            {/* Botones */}
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button
+                onClick={clearFilters}
+                className="flex-1 py-2 bg-gray-200 text-darkblue rounded-full"
+              >
+                Limpiar
+              </button>
+              <button
+                onClick={applyFilters}
+                className="flex-1 py-2 bg-darkblue text-white rounded-full"
+              >
+                Aplicar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
-                    <div className="flex items-center gap-2">
-                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                        <button
-                        key={page}
-                        onClick={() => setCurrentPage(page)}
-                        className={`px-3 py-1 rounded-full font-semibold transition ${
-                            currentPage === page
-                            ? "bg-darkblue text-white"
-                            : "hover:bg-darkblue/10 text-darkblue"
-                        }`}
-                        >
-                        {page}
-                        </button>
-                    ))}
-                    </div>
+      {/* Divider */}
+      <div className="border-b border-darkblue/60 w-full my-5"></div>
 
+      {/* Chips */}
+      {(selectedCategories.length > 0 || minRating || maxRating || maxPrice !== "150") && (
+        <div className="flex flex-wrap gap-2 md:gap-3 my-5">
+          {selectedCategories.map((cat) => (
+            <div key={cat} className="flex items-center gap-2 bg-darkblue/10 px-3 py-1 rounded-full text-sm">
+              <span>{categoryDisplayNames[cat]}</span>
+              <X size={14} onClick={() => removeFilter("category", cat)} />
+            </div>
+          ))}
+        </div>
+      )}
 
-                    <button
-                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-                    disabled={currentPage === totalPages}
-                    className={`p-2 rounded-full border border-darkblue transition ${
-                        currentPage === totalPages
-                        ? "opacity-40 cursor-not-allowed"
-                        : "hover:bg-darkblue hover:text-white"
-                    }`}
-                    >
-                    <ChevronRight size={24} />
-                    </button>
+      {/* Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        {currentProducts.map((product) => (
+          <Link
+            key={product.id}
+            to={`/product/${product.id}`}
+            className="relative flex flex-col items-center h-[340px] md:h-96 p-4 md:p-6 rounded-2xl bg-[#E2EFEF] hover:shadow-lg transition"
+          >
+            <img
+              src={product.imageUrl || "/placeholder.png"}
+              className="h-[55%] object-contain"
+            />
+            <div className="flex flex-col items-center w-full mt-2 text-center">
+  
+            <p className="text-xs md:text-sm font-semibold text-darkblue">
+                {product.name}
+            </p>
+
+            <p className="text-xs text-darkblue/60">
+                {product.brand}
+            </p>
+
+            <div className="flex items-center justify-center gap-2 mt-1">
+                
+                {product.rating && (
+                <div className="flex items-center">
+                    <Star className="h-3 w-3 md:h-4 md:w-4 text-darkblue fill-current mr-1" />
+                    <span className="text-xs md:text-sm text-darkblue font-semibold">
+                    {product.rating.toFixed(1)}
+                    </span>
                 </div>
                 )}
+
+                {product.price && (
+                <span className="text-xs md:text-sm text-darkblue font-semibold">
+                    $ {parseFloat(product.price).toLocaleString("es-AR")}
+                </span>
+                )}
             </div>
-            <Footer />
+
+            </div>
+          </Link>
+        ))}
+      </div>
+
+      {/* Empty */}
+      {filteredProducts.length === 0 && (
+        <div className="text-center py-10">
+          <p className="text-base md:text-xl text-darkblue/60">
+            No se encontraron productos
+          </p>
         </div>
+      )}
+
+      {/* Pagination */}
+      {filteredProducts.length > 0 && (
+        <div className="flex flex-wrap justify-center items-center mt-10 gap-2 md:gap-4 text-darkblue">
+          <button
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            className="p-2 border rounded-full"
+          >
+            <ChevronLeft size={20} />
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+            <button
+              key={page}
+              onClick={() => setCurrentPage(page)}
+              className={`px-3 py-1 rounded-full text-sm ${
+                currentPage === page ? "bg-darkblue text-white" : ""
+              }`}
+            >
+              {page}
+            </button>
+          ))}
+
+          <button
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            className="p-2 border rounded-full"
+          >
+            <ChevronRight size={20} />
+          </button>
         </div>
-    );
+      )}
+    </div>
+
+    <Footer />
+  </div>
+);
 }
