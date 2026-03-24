@@ -437,7 +437,7 @@ return (
           <Link
             key={product.id}
             to={`/product/${product.id}`}
-            className="relative flex flex-col items-center h-[340px] md:h-96 p-4 md:p-6 rounded-2xl bg-[#E2EFEF] hover:shadow-lg transition"
+            className="relative flex flex-col items-justify h-[340px] md:h-96 p-4 md:p-6 rounded-2xl bg-[#E2EFEF] hover:shadow-lg transition"
           >
             <img
               src={product.imageUrl || "/placeholder.png"}

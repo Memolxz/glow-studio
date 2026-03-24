@@ -57,71 +57,74 @@ const questions = [
 
 
     return (
-        <div className="flex flex-col items-center bg-background relative font-geist">
+    <div className="flex flex-col items-center bg-background relative font-geist min-h-screen">
         <Header />
 
-
-        {/* Header visual superior */}
-            <div className="w-[90%] pt-10 pb-10">
-                <div className="w-full h-24 overflow-hidden rounded-3xl relative">
-                    <img
-                        src={img1}
-                        alt="Rhode"
-                        className="w-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/20"></div>
-                </div>
-            </div>
-
-
-        {/* Título principal */}
-        <div className="flex flex-col w-1/2 bg-background justify-center items-center text-center mb-10">
-            <h1 className="text-5xl font-bold text-darkblue leading-tight">
-            Tenés Preguntas.<br />Nosotros Respuestas.
-            </h1>
-            <p className="text-xl font-normal text-darkblue/60 my-2">
-            Si estás perdido y no sabés por dónde empezar, no te preocupes.  
-            Este es el sector pensado para vos, donde reunimos las dudas más comunes.
-            </p>
+        {/* Banner */}
+        <div className="w-[90%] pt-6 md:pt-10 pb-6 md:pb-10">
+        <div className="w-full h-20 md:h-24 overflow-hidden rounded-3xl relative">
+            <img
+            src={img1}
+            alt="FAQ Banner"
+            className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/20"></div>
+        </div>
         </div>
 
+        {/* Título */}
+        <div className="flex flex-col w-[90%] md:w-1/2 items-center text-center mb-8 md:mb-10 px-2">
+        <h1 className="text-2xl md:text-5xl font-bold text-darkblue leading-tight">
+            Tenés Preguntas.<br />Nosotros Respuestas.
+        </h1>
 
-        {/* Contenedor de preguntas */}
-        <div className="flex flex-col items-center w-full mb-10 gap-4">
-            {questions.map((item, index) => (
+        <p className="text-sm md:text-xl text-darkblue/60 mt-2">
+            Si estás perdido y no sabés por dónde empezar, no te preocupes.
+            Este es el sector pensado para vos, donde reunimos las dudas más comunes.
+        </p>
+        </div>
+
+        {/* Preguntas */}
+        <div className="flex flex-col items-center w-full mb-10 gap-3 md:gap-4">
+        {questions.map((item, index) => (
             <div
-                key={index}
-                className={`w-[70%] bg-rectangles rounded-3xl text-darkblue transition-all duration-300 overflow-hidden ${
-                openIndex === index ? "max-h-[500px] p-6" : "max-h-[80px] p-6"
-                }`}
+            key={index}
+            className={`w-[90%] md:w-[70%] bg-rectangles rounded-2xl md:rounded-3xl text-darkblue transition-all duration-300 overflow-hidden ${
+                openIndex === index
+                ? "max-h-[500px] p-4 md:p-6"
+                : "max-h-[70px] md:max-h-[80px] p-4 md:p-6"
+            }`}
             >
-                <button
+            <button
                 onClick={() => toggleQuestion(index)}
                 className="w-full flex justify-between items-center text-left"
-                >
-                <h2 className="text-xl font-semibold">{item.question}</h2>
+            >
+                <h2 className="text-sm md:text-xl font-semibold pr-2">
+                {item.question}
+                </h2>
+
                 {openIndex === index ? (
-                    <Minus className="w-6 h-6 text-darkblue" />
+                <Minus className="w-5 h-5 md:w-6 md:h-6" />
                 ) : (
-                    <Plus className="w-6 h-6 text-darkblue" />
+                <Plus className="w-5 h-5 md:w-6 md:h-6" />
                 )}
-                </button>
+            </button>
 
-
-                <div
-                className={`text-darkblue/80 text-xl mt-3 transition-all duration-300 ${
-                    openIndex === index ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-2"
+            <div
+                className={`text-darkblue/80 text-sm md:text-xl mt-3 transition-all duration-300 ${
+                openIndex === index
+                    ? "opacity-100 translate-y-0"
+                    : "opacity-0 -translate-y-2"
                 }`}
-                >
+            >
                 {openIndex === index && <p>{item.answer}</p>}
-                </div>
             </div>
-            ))}
+            </div>
+        ))}
         </div>
-
 
         <Footer />
-        </div>
+    </div>
     );
 }
 
