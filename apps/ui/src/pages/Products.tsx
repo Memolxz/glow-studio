@@ -443,7 +443,7 @@ return (
               src={product.imageUrl || "/placeholder.png"}
               className="h-[55%] object-contain"
             />
-            <div className="flex flex-col items-center w-full mt-2 text-center">
+            <div className="flex flex-col items-center w-full mt-3 text-center gap-2">
   
             <p className="text-xs md:text-sm font-semibold text-darkblue">
                 {product.name}
