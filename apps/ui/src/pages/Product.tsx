@@ -425,8 +425,10 @@ export default function Product() {
         </div>
       )}
 
+      
+
       {/* Comments Section */}
-      <div className="flex flex-col justify-center items-center bg-rectangles w-[90%] rounded-3xl h-full mt-10 mb-5 p-5 md:p-10">
+      <div className="flex flex-row justify-center items-center bg-rectangles w-[90%] rounded-3xl h-full mt-10 mb-5 p-5 md:p-10">
         
         <div className="flex flex-col justify-between items-start md:items-center w-full pb-5 gap-3 md:gap-0">
           
