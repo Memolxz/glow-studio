@@ -453,7 +453,7 @@ export default function Product() {
             title={user ? "Agregar comentario" : "Inicia sesión para comentar"}
           >
             <MessageCircle className="absolute top-1 left-1 text-darkblue group-hover:text-hovertext h-7 w-7 md:h-8 md:w-8 transition" />
-            <Plus className="absolute top-2 text-semibold left-2 md:top-2.5 md:left-2.5 text-darkblue group-hover:text-hovertext h-4 w-4 md:h-5 md:w-5 transition" />
+            <Plus className="absolute top-2 text-bold left-2 md:top-2.5 md:left-2.5 text-darkblue group-hover:text-hovertext h-4 w-4 md:h-5 md:w-5 transition" />
           </button>
         </div>
 

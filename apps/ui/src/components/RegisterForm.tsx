@@ -62,15 +62,15 @@ export default function RegisterForm({ onToggle }: { onToggle: () => void }) {
     };
 
     return (
-        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8 bg-transparent">
+        <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-5 sm:py-12 lg:px-8 bg-transparent">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                <h2 className="text-center text-3xl font-bold font-geist text-darkblue">
+                <h2 className="text-center text-2xl sm:text-3xl font-bold font-geist text-darkblue">
                     Registrarse
                 </h2>
             </div>
 
-            <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form className="space-y-6" onSubmit={handleSubmit}>
+            <div className="mt-3 sm:mt-6 sm:mx-auto sm:w-full sm:max-w-sm">
+                <form className="space-y-4 sm:space-y-6" onSubmit={handleSubmit}>
                     <div>
                         <input
                             id="name"
@@ -81,13 +81,14 @@ export default function RegisterForm({ onToggle }: { onToggle: () => void }) {
                             placeholder="Nombre Completo"
                             value={formData.name}
                             onChange={handleInputChange}
-                            className="block w-full rounded-full bg-white px-10 py-3
-                            text-base text-darkblue font-geist
+                            className="block w-full rounded-full bg-white px-8 sm:px-10 py-2 sm:py-3
+                            text-sm sm:text-base text-darkblue font-geist
                             border-0
                             placeholder:text-darkblue
                             focus:outline-none focus:ring-2 focus:ring-darkblue"
                         />
                     </div>
+
                     <div>
                         <input
                             id="email"
@@ -98,13 +99,14 @@ export default function RegisterForm({ onToggle }: { onToggle: () => void }) {
                             placeholder="Email"
                             value={formData.email}
                             onChange={handleInputChange}
-                            className="block w-full rounded-full bg-white px-10 py-3
-                            text-base text-darkblue font-geist
+                            className="block w-full rounded-full bg-white px-8 sm:px-10 py-2 sm:py-3
+                            text-sm sm:text-base text-darkblue font-geist
                             border-0
                             placeholder:text-darkblue
                             focus:outline-none focus:ring-2 focus:ring-darkblue"
                         />
                     </div>
+
                     <div>
                         <input
                             id="password"
@@ -115,8 +117,8 @@ export default function RegisterForm({ onToggle }: { onToggle: () => void }) {
                             placeholder="Contraseña"
                             value={formData.password}
                             onChange={handleInputChange}
-                            className="block w-full rounded-full bg-white px-10 py-3
-                            text-base text-darkblue font-geist
+                            className="block w-full rounded-full bg-white px-8 sm:px-10 py-2 sm:py-3
+                            text-sm sm:text-base text-darkblue font-geist
                             border-0
                             placeholder:text-darkblue
                             focus:outline-none focus:ring-2 focus:ring-darkblue"
@@ -124,7 +126,7 @@ export default function RegisterForm({ onToggle }: { onToggle: () => void }) {
                     </div>
 
                     {error && (
-                        <div className="text-red-600 text-sm text-center">
+                        <div className="text-red-600 text-xs sm:text-sm text-center">
                         {error}
                         </div>
                     )}
@@ -133,8 +135,8 @@ export default function RegisterForm({ onToggle }: { onToggle: () => void }) {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-1/2 rounded-full bg-transparent px-4 py-2 border-2 border-darkblue
-                            text font-semibold text-darkblue font-geist
+                            className="w-full sm:w-1/2 rounded-full bg-transparent px-3 sm:px-4 py-1.5 sm:py-2 border-2 border-darkblue
+                            text-sm sm:text-base font-semibold text-darkblue font-geist
                             hover:bg-darkblue hover:text-white transition
                             focus:outline-none focus:ring-2 focus:ring-darkblue"
                         >
@@ -143,7 +145,7 @@ export default function RegisterForm({ onToggle }: { onToggle: () => void }) {
                     </div>
                 </form>
 
-                <p className="mt-6 text-center text-sm font-geist text-darkblue">
+                <p className="mt-3 sm:mt-6 text-center text-xs sm:text-sm font-geist text-darkblue">
                     ¿Ya tenés una cuenta?{' '}
                     <button onClick={onToggle} className="font-bold font-geist text-darkblue hover:text-hovertext">
                         ¡Iniciá Sesión!
