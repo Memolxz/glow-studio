@@ -430,7 +430,7 @@ export default function Product() {
       {/* Comments Section */}
       <div className="flex flex-row justify-center items-center bg-rectangles w-[90%] rounded-3xl h-full mt-10 mb-5 p-5 md:p-10">
         
-        <div className="flex flex-row justify-between items-center w-full pb-5">
+        <div className="flex flex-col justify-between items-center w-full pb-5">
   
         {/* Título */}
         <div className="w-auto">
@@ -456,7 +456,7 @@ export default function Product() {
             <Plus className="absolute top-2 left-2 md:top-2.5 md:left-2.5 text-darkblue group-hover:text-hovertext h-4 w-4 md:h-5 md:w-5 transition" />
           </button>
         </div>
-        
+
       </div>
 
         <div className="border-b border-darkblue/60 w-full mb-5"></div>
