@@ -430,7 +430,7 @@ export default function Product() {
       {/* Comments Section */}
       <div className="flex flex-col justify-center items-center bg-rectangles w-[90%] rounded-3xl h-full mt-10 mb-5 p-5 md:p-10">
         
-        <div className="flex flex-col justify-between items-center w-full pb-5">
+        <div className="flex flex-row justify-between items-center w-full pb-5">
   
         {/* Título */}
         <div className="w-auto">
@@ -457,7 +457,7 @@ export default function Product() {
           </button>
         </div>
 
-      </div>
+        </div>
 
         <div className="border-b border-darkblue/60 w-full mb-5"></div>
 
