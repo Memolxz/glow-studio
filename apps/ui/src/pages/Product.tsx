@@ -325,7 +325,7 @@ export default function Product() {
       <div className="relative flex flex-col md:flex-row justify-between items-between bg-rectangles w-[90%] rounded-3xl h-full mb-10 border border-rectangles">
         
         {/* Imagen */}
-        <div className="flex flex-col justify-center items-center bg-white w-full md:w-1/2 rounded-3xl p-6 md:p-10 relative order-2 md:order-1">
+        <div className="flex flex-col justify-center items-center bg-white w-full md:w-1/2 rounded-3xl p-6 md:p-10 relative order-1 md:order-1">
           <Link to="/products">
             <ChevronLeft className="absolute top-5 left-5 text-darkblue h-8 w-8 md:h-10 md:w-10 z-10" />
           </Link>
@@ -349,7 +349,7 @@ export default function Product() {
         </div>
 
         {/* Info */}
-        <div className="flex flex-col items-start bg-transparent w-full md:w-1/2 p-6 md:p-10 order-1 md:order-2">
+        <div className="flex flex-col items-start bg-transparent w-full md:w-1/2 p-6 md:p-10 order-2 md:order-2">
           <h1 className="text-start font-bold text-darkblue text-2xl md:text-3xl">
             {product.name}
           </h1>
@@ -440,7 +440,7 @@ export default function Product() {
           </div>
 
           {/* Botón */}
-          <div className="w-full md:w-1/2 flex justify-start md:justify-end">
+          <div className="w-full md:w-1/2 flex flex-row justify-start md:justify-end">
             <button
               onClick={() => {
                 if (!user) {
