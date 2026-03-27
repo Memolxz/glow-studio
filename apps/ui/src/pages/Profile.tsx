@@ -6,6 +6,22 @@ import { Link } from 'react-router-dom';
 import img1 from '../assets/fondo.png'
 import { API_ENDPOINTS } from '../utils/api';
 
+
+function Banner () {
+  return (
+    <div className="w-[90%] pt-6 md:pt-10 pb-6 md:pb-10">
+          <div className="w-full h-20 md:h-24 overflow-hidden rounded-3xl relative">
+              <img
+                  src={img1}
+                  alt="Agua Header"
+                  className="w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/20"></div>
+          </div>
+      </div>
+    );
+}
+
 // Types
 type User = {
     id: number;
@@ -162,7 +178,7 @@ export default function Home() {
         return (
         <div className="min-h-screen flex items-center justify-center bg-defaultbg">
             <div className="text-center">
-            <div className="text-xl font-semibold text-darkblue mb-4">
+            <div className="text-base sm:text-xl font-semibold text-darkblue mb-4">
                 Cargando perfil...
             </div>
             <div className="w-8 h-8 border-4 border-darkblue border-t-transparent rounded-full animate-spin mx-auto"></div>
@@ -175,7 +191,7 @@ export default function Home() {
         return (
         <div className="min-h-screen flex items-center justify-center bg-defaultbg">
             <div className="text-center">
-            <div className="text-xl font-semibold text-red-600 mb-4">{error}</div>
+            <div className="text-base sm:text-xl font-semibold text-red-600 mb-4">{error}</div>
             <button
                 onClick={() => window.location.reload()}
                 className="px-6 py-2 border-darkblue text-darkblue hover:bg-darkblue hover:text-white cursor-pointer transition"
@@ -190,16 +206,8 @@ export default function Home() {
     return (
         <div className="flex flex-col items-center bg-background relative font-geist">
             <Header />
-            <div className="w-[90%] pt-10 pb-10">
-                <div className="w-full h-24 overflow-hidden rounded-3xl relative">
-                    <img
-                        src={img1}
-                        alt="Agua Header"
-                        className="w-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/20"></div>
-                </div>
-            </div>
+            
+            <Banner />
 
 
         {/* Delete Confirmation Modal */}
@@ -211,7 +219,7 @@ export default function Home() {
                     className="absolute top-4 right-4">
                     <X size={30} className="absolute top-4 right-4 text-darkblue hover:hovertext"/>
                     </button>
-                    <h3 className="text-2xl font-bold text-darkblue mb-2">
+                    <h3 className="text-lg sm:text-2xl font-bold text-darkblue mb-2">
                     ¿Eliminar Cuenta?
                     </h3>
                     <p className="text-darkblue/60 mb-6">
@@ -246,7 +254,7 @@ export default function Home() {
                             <UserRound className='h-9 w-9' strokeWidth={1.5}/>
                         </div>
                         <div className='flex flex-col'>
-                            <h2 className="text-4xl font-bold text-darkblue font-geist">{user?.name}</h2>
+                            <h2 className="text-2xl sm:text-4xl font-bold text-darkblue font-geist">{user?.name}</h2>
                             <div className='w-full flex flex-row justify-start items-center'>
                                 <Mail className="h-4 w-4 text-darkblue/60 mr-1" />
                                 <p className="text-md text-darkblue/60 font-geist">{user?.email}</p>
@@ -258,7 +266,7 @@ export default function Home() {
                     <div className='bg-[#E2EFEF] w-full rounded-2xl p-7 pl-9'>
                         <div className='w-full flex flex-row justify-start items-center mb-5'>
                             <Droplet className="text-darkblue h-7 w-7" strokeWidth={1.5}/>
-                            <h3 className="text-2xl text-darkblue font-geist font-bold text-left">
+                            <h3 className="text-lg sm:text-2xl text-darkblue font-geist font-bold text-left">
                                 Tipos de Piel
                             </h3>
                         </div>
@@ -299,7 +307,7 @@ export default function Home() {
                 <div className="flex flex-col">
                     <div className="flex-1 flex-col py-12 flex justify-end">
                         <div className='flex justify-between items-center w-full'>
-                            <h2 className="text-4xl text-darkblue font-geist font-bold text-left">Productos Recomendados</h2>
+                            <h2 className="text-2xl sm:text-4xl text-darkblue font-geist font-bold text-left">Productos Recomendados</h2>
                             <Link to={"/recommendations"} className="rounded-full bg-darkblue px-4 py-2
                                 font-semibold text-white text-md font-geist text-center
                                 hover:bg-hovertext transition w-36">Ver Más</Link>
@@ -356,8 +364,8 @@ export default function Home() {
                     <div className='bg-red-200 rounded-full h-16 w-16 flex justify-center items-center'>
                         <Trash2 className="text-red-900 h-9 w-9" strokeWidth={1.5}/>
                     </div>
-                    <h3 className="text-4xl text-red-900 font-geist font-bold text-start mt-2">Zona de Peligro</h3>
-                    <p className="text-xl text-red-900/60 font-geist text-start mt-2">Al eliminar tu cuenta tenés 30 días para recuperarla en caso de que te arrepientas.</p>
+                    <h3 className="text-2xl sm:text-4xl text-red-900 font-geist font-bold text-start mt-2">Zona de Peligro</h3>
+                    <p className="text-base sm:text-xl text-red-900/60 font-geist text-start mt-2">Al eliminar tu cuenta tenés 30 días para recuperarla en caso de que te arrepientas.</p>
                 </div>
                 <button
                     onClick={() => setShowDeleteConfirm(true)}

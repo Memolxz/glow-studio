@@ -122,7 +122,7 @@ export default function Header() {
                 <button
                     onClick={() => setIsOptionsOpen(!isOptionsOpen)}
                     className="flex items-center justify-center border-2 border-white rounded-full
-                            h-9 w-9 md:h-10 md:w-10 hover:scale-105 transition-transform"
+                            h-9 w-9 md:h-10 md:w-10 hover:scale-105 transition-transform text-white"
                 >
                     <UserRoundIcon className="scale-125 md:scale-150" strokeWidth={1.5}/>
                 </button>

@@ -5,6 +5,21 @@ import { Plus, Minus } from "lucide-react";
 import img1 from '../assets/fondo.png'
 
 
+function Banner () {
+  return (
+    <div className="w-[90%] pt-6 md:pt-10 pb-6 md:pb-10">
+          <div className="w-full h-20 md:h-24 overflow-hidden rounded-3xl relative">
+              <img
+                  src={img1}
+                  alt="Agua Header"
+                  className="w-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/20"></div>
+          </div>
+      </div>
+    );
+}
+
 export default function FAQ() {
 const questions = [
     {
@@ -59,18 +74,8 @@ const questions = [
     return (
     <div className="flex flex-col items-center bg-background relative font-geist min-h-screen">
         <Header />
-
-        {/* Banner */}
-        <div className="w-[90%] pt-6 md:pt-10 pb-6 md:pb-10">
-        <div className="w-full h-20 md:h-24 overflow-hidden rounded-3xl relative">
-            <img
-            src={img1}
-            alt="FAQ Banner"
-            className="w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-black/20"></div>
-        </div>
-        </div>
+        
+        <Banner />
 
         {/* Título */}
         <div className="flex flex-col w-[90%] md:w-1/2 items-center text-center mb-8 md:mb-10 px-2">
