@@ -430,34 +430,34 @@ export default function Product() {
       {/* Comments Section */}
       <div className="flex flex-row justify-center items-center bg-rectangles w-[90%] rounded-3xl h-full mt-10 mb-5 p-5 md:p-10">
         
-        <div className="flex flex-col justify-between items-start md:items-center w-full pb-5 gap-3 md:gap-0">
-          
-          {/* Título */}
-          <div className="w-full md:w-1/2">
-            <h1 className="text-darkblue font-semibold text-start text-lg md:text-2xl">
-              Comentarios ({comments.length})
-            </h1>
-          </div>
-
-          {/* Botón */}
-          <div className="w-full md:w-1/2 flex flex-row justify-start md:justify-end">
-            <button
-              onClick={() => {
-                if (!user) {
-                  navigate("/register");
-                } else {
-                  setShowCommentForm(!showCommentForm);
-                }
-              }}
-              className="relative group flex h-9 w-9 md:h-10 md:w-10 items-center justify-center"
-              title={user ? "Agregar comentario" : "Inicia sesión para comentar"}
-            >
-              <MessageCircle className="absolute top-1 left-1 text-darkblue group-hover:text-hovertext h-7 w-7 md:h-8 md:w-8 transition" />
-              <Plus className="absolute top-2 left-2 md:top-2.5 md:left-2.5 text-darkblue group-hover:text-hovertext h-4 w-4 md:h-5 md:w-5 transition" />
-            </button>
-          </div>
-
+        <div className="flex flex-row justify-between items-center w-full pb-5">
+  
+        {/* Título */}
+        <div className="w-auto">
+          <h1 className="text-darkblue font-semibold text-start text-lg md:text-2xl">
+            Comentarios ({comments.length})
+          </h1>
         </div>
+
+        {/* Botón */}
+        <div className="flex justify-end">
+          <button
+            onClick={() => {
+              if (!user) {
+                navigate("/register");
+              } else {
+                setShowCommentForm(!showCommentForm);
+              }
+            }}
+            className="relative group flex h-9 w-9 md:h-10 md:w-10 items-center justify-center"
+            title={user ? "Agregar comentario" : "Inicia sesión para comentar"}
+          >
+            <MessageCircle className="absolute top-1 left-1 text-darkblue group-hover:text-hovertext h-7 w-7 md:h-8 md:w-8 transition" />
+            <Plus className="absolute top-2 left-2 md:top-2.5 md:left-2.5 text-darkblue group-hover:text-hovertext h-4 w-4 md:h-5 md:w-5 transition" />
+          </button>
+        </div>
+        
+      </div>
 
         <div className="border-b border-darkblue/60 w-full mb-5"></div>
 
