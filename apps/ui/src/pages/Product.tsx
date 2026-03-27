@@ -430,7 +430,7 @@ export default function Product() {
       {/* Comments Section */}
       <div className="flex flex-col justify-center items-center bg-rectangles w-[90%] rounded-3xl h-full mt-10 mb-5 p-5 md:p-10">
         
-        <div className="flex flex-row justify-between items-center w-full pb-5">
+        <div className="flex justify-between items-between w-full pb-5">
   
         {/* Título */}
         <div className="w-auto">
@@ -453,7 +453,7 @@ export default function Product() {
             title={user ? "Agregar comentario" : "Inicia sesión para comentar"}
           >
             <MessageCircle className="absolute top-1 left-1 text-darkblue group-hover:text-hovertext h-7 w-7 md:h-8 md:w-8 transition" />
-            <Plus className="absolute top-2 left-2 md:top-2.5 md:left-2.5 text-darkblue group-hover:text-hovertext h-4 w-4 md:h-5 md:w-5 transition" />
+            <Plus className="absolute top-2 text-semibold left-2 md:top-2.5 md:left-2.5 text-darkblue group-hover:text-hovertext h-4 w-4 md:h-5 md:w-5 transition" />
           </button>
         </div>
 
