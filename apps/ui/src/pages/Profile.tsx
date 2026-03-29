@@ -273,7 +273,7 @@ export default function Home() {
                         <div className='w-full flex flex-row justify-start items-center mb-5'>
                             {userSkinTypes.length > 0 ? (
                                 userSkinTypes.map((ust) => (
-                                    <div className='mr-4 bg-darkblue rounded-full text-white flex justify-center items-center'>
+                                    <div className='mr-4 bg-darkblue rounded-full text-white flex sm:flex-row flex-col justify-center items-center'>
                                         <p
                                             key={ust.skinTypeId}
                                             className="text-md font-geist font-bold p-2 mx-2"
