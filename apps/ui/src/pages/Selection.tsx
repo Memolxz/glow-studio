@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Check } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
-import img1 from "../assets/modelo14.jpg";
+import img1 from "../assets/modelo1.jpg";
 import Footer from "../components/Footer";
 import { API_ENDPOINTS } from "../utils/api";
 
