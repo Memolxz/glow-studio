@@ -302,7 +302,7 @@ export default function Home() {
         </div>
 
 
-        <div className="flex flex-col w-[90%] bg-rectangles rounded-3xl mb-5 sm:px-10 px:5">
+        <div className="flex flex-col w-[90%] bg-rectangles rounded-3xl mb-5 sm:px-10 px-5">
                 {/* Recommended Products */}        
                 <div className="flex flex-col">
                     <div className="flex-1 flex-col py-12 flex justify-end">
@@ -359,7 +359,7 @@ export default function Home() {
             </div>
 
 
-            <div className='bg-red-100 w-[90%] rounded-2xl sm:px-10 px:5 py-7 my-5'>
+            <div className='bg-red-100 w-[90%] rounded-2xl sm:px-10 px-5 py-7 my-5'>
                 <div className='w-full flex flex-col justify-start items-start mb-5 ml-2'>
                     <div className='bg-red-200 rounded-full sm:h-16 sm:w-16 h-8 w-8 flex justify-center items-center'>
                         <Trash2 className="text-red-900 sm:h-9 sm:w-9 h-4 w-4" strokeWidth={1.5}/>

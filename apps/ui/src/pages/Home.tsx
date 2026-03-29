@@ -11,6 +11,19 @@ import { Link } from 'react-router-dom';
 import RoutineLine from '../components/RoutineLine';
 import { API_ENDPOINTS } from '../utils/api';
 
+function Banner() {
+    return (
+        <div className="w-[90%] pt-6 md:pt-10 pb-5">
+            <div className="w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
+                <img
+                    src={img1}
+                    alt="Rhode"
+                    className="w-full h-full object-cover"
+                />
+            </div>
+        </div>
+    );
+}
 
 type Product = {
   id: number;
@@ -68,16 +81,8 @@ export default function Home() {
     <div className="flex flex-col items-center bg-background relative font-geist">
         <Header />
 
-        {/* Banner */}
-        <div className="w-[90%] pt-6 md:pt-10 pb-5">
-            <div className="w-full h-[200px] sm:h-[300px] md:h-[400px] lg:h-[450px] overflow-hidden rounded-3xl relative">
-                <img
-                    src={img1}
-                    alt="Rhode"
-                    className="w-full h-full object-cover"
-                />
-            </div>
-        </div>
+        <Banner />
+        
 
         {/* TOP PRODUCTS */}
         {!loading && topProducts.length > 0 && (
